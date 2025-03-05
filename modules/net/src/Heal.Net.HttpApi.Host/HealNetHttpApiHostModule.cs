@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Heal.Net.Application;
 using Heal.Net.Application.Contracts;
+using Heal.Net.Domain;
 using Heal.Net.Domain.Shared;
 using Heal.Net.Domain.Shared.MultiTenancy;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore;

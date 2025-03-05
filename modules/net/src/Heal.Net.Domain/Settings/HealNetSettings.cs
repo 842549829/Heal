@@ -1,4 +1,4 @@
-﻿namespace Heal.Settings;
+﻿namespace Heal.Net.Domain.Settings;
 
 public static class HealNetSettings
 {

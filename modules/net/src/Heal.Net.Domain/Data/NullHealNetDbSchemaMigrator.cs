@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 
-namespace Heal.Data;
+namespace Heal.Net.Domain.Data;
 
 /* This is used if database provider does't define
  * IHealDbSchemaMigrator implementation.

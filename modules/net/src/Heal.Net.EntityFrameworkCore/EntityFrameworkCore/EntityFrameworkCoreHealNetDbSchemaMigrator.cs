@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Heal.Data;
+using Heal.Net.Domain.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.DependencyInjection;

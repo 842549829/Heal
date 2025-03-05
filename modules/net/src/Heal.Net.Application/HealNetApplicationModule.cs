@@ -1,4 +1,5 @@
 ﻿using Heal.Net.Application.Contracts;
+using Heal.Net.Domain;
 using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;

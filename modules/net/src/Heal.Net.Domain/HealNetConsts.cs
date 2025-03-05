@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.Identity;
 
-namespace Heal;
+namespace Heal.Net.Domain;
 
 public static class HealNetConsts
 {

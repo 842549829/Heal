@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Heal.Data;
+namespace Heal.Net.Domain.Data;
 
 public interface IHealNetDbSchemaMigrator
 {

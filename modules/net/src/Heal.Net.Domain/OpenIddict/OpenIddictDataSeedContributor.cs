@@ -16,7 +16,7 @@ using Volo.Abp.OpenIddict.Scopes;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
 
-namespace Heal.OpenIddict;
+namespace Heal.Net.Domain.OpenIddict;
 
 /* Creates initial data that is needed to property run the application
  * and make client-to-server communication possible.

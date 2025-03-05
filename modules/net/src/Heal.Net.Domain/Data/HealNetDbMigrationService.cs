@@ -13,7 +13,7 @@ using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.TenantManagement;
 
-namespace Heal.Data;
+namespace Heal.Net.Domain.Data;
 
 public class HealNetDbMigrationService : ITransientDependency
 {

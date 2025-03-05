@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.Settings;
 
-namespace Heal.Settings;
+namespace Heal.Net.Domain.Settings;
 
 public class HealNetSettingDefinitionProvider : SettingDefinitionProvider
 {
