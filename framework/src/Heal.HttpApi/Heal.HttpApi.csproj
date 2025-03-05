@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>$(MicrosoftTargetFramework)</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" />
+  </ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Heal.Application.Contracts\Heal.Application.Contracts.csproj" />
+	</ItemGroup>
+</Project>

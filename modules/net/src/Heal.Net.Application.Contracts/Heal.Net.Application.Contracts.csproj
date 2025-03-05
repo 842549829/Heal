@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\src\Heal.Application.Contracts\Heal.Application.Contracts.csproj" />
     <ProjectReference Include="..\Heal.Net.Domain.Shared\Heal.Net.Domain.Shared.csproj" />
   </ItemGroup>
   

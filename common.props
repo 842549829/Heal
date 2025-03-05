@@ -6,6 +6,7 @@
 		<NoWarn>$(NoWarn);CS1591</NoWarn>
 		<AbpProjectType>app</AbpProjectType>
 		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
 	<Target Name="NoWarnOnRazorViewImportedTypeConflicts" BeforeTargets="RazorCoreCompile">

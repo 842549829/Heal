@@ -33,4 +33,8 @@
     <Content Remove="Localization\Heal\*.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\src\Heal.Domain.Shared\Heal.Domain.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>$(MicrosoftTargetFramework)</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
+  </ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Heal.Domain\Heal.Domain.csproj" />
+	</ItemGroup>
+</Project>

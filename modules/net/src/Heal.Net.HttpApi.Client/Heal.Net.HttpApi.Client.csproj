@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\src\Heal.HttpApi.Client\Heal.HttpApi.Client.csproj" />
     <ProjectReference Include="..\Heal.Net.Application.Contracts\Heal.Net.Application.Contracts.csproj" />
   </ItemGroup>
 

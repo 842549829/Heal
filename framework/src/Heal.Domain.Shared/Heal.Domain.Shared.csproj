@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>$(MicrosoftTargetFramework)</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" />
+	</ItemGroup>
+
+</Project>
