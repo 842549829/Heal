@@ -3,7 +3,7 @@ using Microsoft.Extensions.Localization;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Ui.Branding;
 
-namespace Heal.Net.HttpApi.Host;
+namespace Heal.Net.AuthServer;
 
 [Dependency(ReplaceServices = true)]
 public class HealNetBrandingProvider : DefaultBrandingProvider

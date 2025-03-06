@@ -1,20 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Heal.Net.Application;
+﻿using Heal.Net.Application;
 using Heal.Net.Application.Contracts;
+using Heal.Net.AuthServer.HealthChecks;
 using Heal.Net.Domain;
 using Heal.Net.Domain.Shared;
 using Heal.Net.Domain.Shared.MultiTenancy;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
-using Heal.Net.HttpApi.Host.HealthChecks;
-using Microsoft.AspNetCore.Builder;
+using Heal.Net.HttpApi;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Server.AspNetCore;
 using OpenIddict.Validation.AspNetCore;
@@ -36,7 +30,7 @@ using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Heal.Net.HttpApi.Host;
+namespace Heal.Net.AuthServer;
 
 [DependsOn(
     typeof(HealNetHttpApiModule),
@@ -50,7 +44,7 @@ namespace Heal.Net.HttpApi.Host;
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreSerilogModule)
     )]
-public class HealNetHttpApiHostModule : AbpModule
+public class HealNetAuthServerModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
@@ -159,10 +153,10 @@ public class HealNetHttpApiHostModule : AbpModule
         {
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                options.FileSets.ReplaceEmbeddedByPhysical<HealNetDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Heal.Domain.Shared"));
-                options.FileSets.ReplaceEmbeddedByPhysical<HealNetDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Heal.Domain"));
-                options.FileSets.ReplaceEmbeddedByPhysical<HealNetApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Heal.Application.Contracts"));
-                options.FileSets.ReplaceEmbeddedByPhysical<HealNetApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Heal.Application"));
+                options.FileSets.ReplaceEmbeddedByPhysical<HealNetDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Heal.Net.Domain.Shared"));
+                options.FileSets.ReplaceEmbeddedByPhysical<HealNetDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Heal.Net.Domain"));
+                options.FileSets.ReplaceEmbeddedByPhysical<HealNetApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Heal.Net.Application.Contracts"));
+                options.FileSets.ReplaceEmbeddedByPhysical<HealNetApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Heal.Net.Application"));
             });
         }
     }

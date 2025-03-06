@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
 using Volo.Abp.Localization;
 using Volo.Abp.OpenIddict.Applications;
 
-namespace Heal.Net.HttpApi.Host.Pages;
+namespace Heal.Net.AuthServer.Pages;
 
 public class IndexModel : AbpPageModel
 {

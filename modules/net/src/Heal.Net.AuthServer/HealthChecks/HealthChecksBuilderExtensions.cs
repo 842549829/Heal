@@ -1,12 +1,7 @@
-﻿using System;
-using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Builder;
+﻿using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Heal.Net.HttpApi.Host.HealthChecks;
+namespace Heal.Net.AuthServer.HealthChecks;
 
 public static class HealthChecksBuilderExtensions
 {

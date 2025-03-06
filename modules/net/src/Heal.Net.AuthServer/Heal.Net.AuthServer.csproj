@@ -5,7 +5,7 @@
   <PropertyGroup>
     <TargetFramework>$(MicrosoftTargetFramework)</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <RootNamespace>Heal.Net.HttpApi.Host</RootNamespace>
+    <RootNamespace>Heal.Net.AuthServer</RootNamespace>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
   </PropertyGroup>
 
@@ -37,8 +37,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Heal.Net.Application\Heal.Net.Application.csproj" />
-    <ProjectReference Include="..\Heal.Net.HttpApi\Heal.Net.HttpApi.csproj" />
     <ProjectReference Include="..\Heal.Net.EntityFrameworkCore\Heal.Net.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Heal.Net.HttpApi\Heal.Net.HttpApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>
