@@ -38,7 +38,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Heal.Net.Application\Heal.Net.Application.csproj" />
     <ProjectReference Include="..\Heal.Net.EntityFrameworkCore\Heal.Net.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\Heal.Net.HttpApi\Heal.Net.HttpApi.csproj" />
+    <ProjectReference Include="..\Heal.Net.AuthServer.HttpApi\Heal.Net.AuthServer.HttpApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -33,7 +33,7 @@ using Volo.Abp.VirtualFileSystem;
 namespace Heal.Net.AuthServer;
 
 [DependsOn(
-    typeof(HealNetHttpApiModule),
+    typeof(HealNetAuthServerHttpApiModule),
     typeof(AbpStudioClientAspNetCoreModule),
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpAutofacModule),

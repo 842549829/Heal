@@ -21,7 +21,7 @@ namespace Heal.Net.HttpApi;
     typeof(AbpTenantManagementHttpApiModule),
     typeof(AbpFeatureManagementHttpApiModule)
     )]
-public class HealNetHttpApiModule : AbpModule
+public class HealNetAuthServerHttpApiModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

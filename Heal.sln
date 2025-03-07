@@ -32,7 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heal.Net.Domain.Shared", "m
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heal.Net.Application.Contracts", "modules\net\src\Heal.Net.Application.Contracts\Heal.Net.Application.Contracts.csproj", "{520659C8-C734-4298-A3DA-B539DB9DFC0B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heal.Net.HttpApi", "modules\net\src\Heal.Net.HttpApi\Heal.Net.HttpApi.csproj", "{4164BDF7-F527-4E85-9CE6-E3C2D7426A27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heal.Net.AuthServer.HttpApi", "modules\net\src\Heal.Net.AuthServer.HttpApi\Heal.Net.AuthServer.HttpApi.csproj", "{4164BDF7-F527-4E85-9CE6-E3C2D7426A27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heal.Net.HttpApi.Client", "modules\net\src\Heal.Net.HttpApi.Client\Heal.Net.HttpApi.Client.csproj", "{3B5A0094-670D-4BB1-BFDD-61B88A8773DC}"
 EndProject
