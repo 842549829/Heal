@@ -9,6 +9,6 @@ public abstract class HealNetAuthServerController : AbpControllerBase
 {
     protected HealNetAuthServerController()
     {
-        LocalizationResource = typeof(HealResource);
+        LocalizationResource = typeof(HealNetResource);
     }
 }

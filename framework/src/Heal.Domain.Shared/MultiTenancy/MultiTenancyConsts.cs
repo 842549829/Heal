@@ -1,4 +1,4 @@
-﻿namespace Heal.Net.Domain.Shared.MultiTenancy;
+﻿namespace Heal.Domain.Shared.MultiTenancy;
 
 public static class MultiTenancyConsts
 {

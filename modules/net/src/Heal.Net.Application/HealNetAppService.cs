@@ -9,6 +9,6 @@ public abstract class HealNetAppService : ApplicationService
 {
     protected HealNetAppService()
     {
-        LocalizationResource = typeof(HealResource);
+        LocalizationResource = typeof(HealNetResource);
     }
 }

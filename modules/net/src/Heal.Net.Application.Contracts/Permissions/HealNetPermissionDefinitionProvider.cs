@@ -16,6 +16,6 @@ public class HealNetPermissionDefinitionProvider : PermissionDefinitionProvider
 
     private static LocalizableString L(string name)
     {
-        return LocalizableString.Create<HealResource>(name);
+        return LocalizableString.Create<HealNetResource>(name);
     }
 }

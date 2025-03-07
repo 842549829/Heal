@@ -1,19 +1,19 @@
 ﻿using Volo.Abp.Threading;
 
-namespace Heal.Net.Domain.Shared;
+namespace Heal.Domain.Shared;
 
 /// <summary>
-/// Configures global features of the Heal.Net.Domain.Shared module.
+/// 模块扩展配置
 /// </summary>
-public static class HealNetModuleExtensionConfigurator
+public class HealModuleExtensionConfigurator
 {
     /// <summary>
-    /// Configures the Heal.Net.Domain.Shared module.
+    /// 包装模块扩展配置只执行一次
     /// </summary>
     private static readonly OneTimeRunner OneTimeRunner = new();
 
     /// <summary>
-    /// Configures the Heal.Net.Domain.Shared module.
+    /// 模块扩展配置
     /// </summary>
     public static void Configure()
     {
@@ -25,7 +25,7 @@ public static class HealNetModuleExtensionConfigurator
     }
 
     /// <summary>
-    /// Configures the existing properties of the Heal.Net.Domain.Shared module.
+    /// 配置已存在的属性
     /// </summary>
     private static void ConfigureExistingProperties()
     {
@@ -45,7 +45,7 @@ public static class HealNetModuleExtensionConfigurator
     }
 
     /// <summary>
-    /// Configures extra properties of the Heal.Net.Domain.Shared module.
+    /// 配置额外的属性
     /// </summary>
     private static void ConfigureExtraProperties()
     {

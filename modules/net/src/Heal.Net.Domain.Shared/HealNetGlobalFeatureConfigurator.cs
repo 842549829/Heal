@@ -2,10 +2,19 @@
 
 namespace Heal.Net.Domain.Shared;
 
+/// <summary>
+/// Configures global features of the Heal.Net.Domain.Shared module.
+/// </summary>
 public static class HealNetGlobalFeatureConfigurator
 {
-    private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
+    /// <summary>
+    /// Configures the global features of the Heal.Net.Domain.Shared module.
+    /// </summary>
+    private static readonly OneTimeRunner OneTimeRunner = new();
 
+    /// <summary>
+    /// Configures the global features of the Heal.Net.Domain.Shared module.
+    /// </summary>
     public static void Configure()
     {
         OneTimeRunner.Run(() =>

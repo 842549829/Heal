@@ -33,7 +33,7 @@ public class HealNetAuthServerHttpApiModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Get<HealResource>()
+                .Get<HealNetResource>()
                 .AddBaseTypes(
                     typeof(AbpUiResource)
                 );

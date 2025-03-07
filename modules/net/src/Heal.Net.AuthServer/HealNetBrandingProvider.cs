@@ -8,9 +8,9 @@ namespace Heal.Net.AuthServer;
 [Dependency(ReplaceServices = true)]
 public class HealNetBrandingProvider : DefaultBrandingProvider
 {
-    private IStringLocalizer<HealResource> _localizer;
+    private IStringLocalizer<HealNetResource> _localizer;
 
-    public HealNetBrandingProvider(IStringLocalizer<HealResource> localizer)
+    public HealNetBrandingProvider(IStringLocalizer<HealNetResource> localizer)
     {
         _localizer = localizer;
     }
