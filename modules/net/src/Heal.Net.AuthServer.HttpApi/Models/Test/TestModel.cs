@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Heal.Net.HttpApi.Models.Test;
+﻿namespace Heal.Net.AuthServer.HttpApi.Models.Test;
 
 public class TestModel
 {

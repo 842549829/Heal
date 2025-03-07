@@ -1,13 +1,13 @@
 ﻿using Heal.Net.Domain.Shared.Localization;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Heal.Net.HttpApi.Controllers;
+namespace Heal.Net.AuthServer.HttpApi.Controllers;
 
 /* Inherit your controllers from this class.
  */
-public abstract class HealNetController : AbpControllerBase
+public abstract class HealNetAuthServerController : AbpControllerBase
 {
-    protected HealNetController()
+    protected HealNetAuthServerController()
     {
         LocalizationResource = typeof(HealResource);
     }

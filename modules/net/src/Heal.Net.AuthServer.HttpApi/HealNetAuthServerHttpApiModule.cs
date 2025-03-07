@@ -10,7 +10,7 @@ using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 
-namespace Heal.Net.HttpApi;
+namespace Heal.Net.AuthServer.HttpApi;
 
  [DependsOn(
     typeof(HealNetApplicationContractsModule),
