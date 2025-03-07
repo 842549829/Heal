@@ -1,10 +1,10 @@
-﻿using Heal.Net.Application;
+﻿using Heal.Domain.Shared.MultiTenancy;
+using Heal.Net.Application;
 using Heal.Net.Application.Contracts;
 using Heal.Net.AuthServer.HealthChecks;
 using Heal.Net.AuthServer.HttpApi;
 using Heal.Net.Domain;
 using Heal.Net.Domain.Shared;
-using Heal.Net.Domain.Shared.MultiTenancy;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;

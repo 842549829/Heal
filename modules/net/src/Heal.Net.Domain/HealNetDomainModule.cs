@@ -1,5 +1,5 @@
-﻿using Heal.Net.Domain.Shared;
-using Heal.Net.Domain.Shared.MultiTenancy;
+﻿using Heal.Domain.Shared.MultiTenancy;
+using Heal.Net.Domain.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Volo.Abp.AuditLogging;

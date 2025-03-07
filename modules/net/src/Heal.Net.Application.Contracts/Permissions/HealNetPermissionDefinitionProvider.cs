@@ -1,4 +1,4 @@
-﻿using Heal.Net.Domain.Shared.Localization;
+﻿using Heal.Domain.Shared.Localization;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Localization;
 
@@ -16,6 +16,6 @@ public class HealNetPermissionDefinitionProvider : PermissionDefinitionProvider
 
     private static LocalizableString L(string name)
     {
-        return LocalizableString.Create<HealNetResource>(name);
+        return LocalizableString.Create<HealResource>(name);
     }
 }

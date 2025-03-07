@@ -1,4 +1,4 @@
-﻿using Heal.Net.Domain.Shared.Localization;
+﻿using Heal.Domain.Shared.Localization;
 using Microsoft.Extensions.Localization;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Ui.Branding;
@@ -8,9 +8,9 @@ namespace Heal.Net.AuthServer;
 [Dependency(ReplaceServices = true)]
 public class HealNetBrandingProvider : DefaultBrandingProvider
 {
-    private IStringLocalizer<HealNetResource> _localizer;
+    private IStringLocalizer<HealResource> _localizer;
 
-    public HealNetBrandingProvider(IStringLocalizer<HealNetResource> localizer)
+    public HealNetBrandingProvider(IStringLocalizer<HealResource> localizer)
     {
         _localizer = localizer;
     }

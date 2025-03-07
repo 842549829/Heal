@@ -1,5 +1,5 @@
-﻿using Heal.Net.Application.Contracts;
-using Heal.Net.Domain.Shared.Localization;
+﻿using Heal.Domain.Shared.Localization;
+using Heal.Net.Application.Contracts;
 using Localization.Resources.AbpUi;
 using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
@@ -33,7 +33,7 @@ public class HealNetAuthServerHttpApiModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Get<HealNetResource>()
+                .Get<HealResource>()
                 .AddBaseTypes(
                     typeof(AbpUiResource)
                 );
