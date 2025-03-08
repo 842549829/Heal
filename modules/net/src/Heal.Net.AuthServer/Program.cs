@@ -3,6 +3,10 @@ using Serilog.Events;
 
 namespace Heal.Net.AuthServer;
 
+/// <summary>
+/// 程序启动入口
+/// 前端还原 abp install-libs
+/// </summary>
 public class Program
 {
     public static async Task<int> Main(string[] args)
