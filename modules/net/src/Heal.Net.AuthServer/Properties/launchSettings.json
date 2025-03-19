@@ -22,6 +22,14 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "Heal.HttpApi.Host.Home": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:44364",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Home"
+      }
     }
   }
 }
