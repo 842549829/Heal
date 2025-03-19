@@ -22,7 +22,7 @@ namespace Heal.Net.HttpApi.Client;
 )]
 public class HealNetHttpApiClientModule : AbpModule
 {
-    public const string RemoteServiceName = "Default";
+    public const string RemoteServiceName = "HealNet";
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

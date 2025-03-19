@@ -1,14 +1,9 @@
-﻿using Heal.Domain.Shared.Localization;
-using Volo.Abp.Application.Services;
+﻿using Heal.Application;
 
 namespace Heal.Net.Application;
 
 /* Inherit your application services from this class.
  */
-public abstract class HealNetAppService : ApplicationService
+public abstract class HealNetAppService : HealAppService
 {
-    protected HealNetAppService()
-    {
-        LocalizationResource = typeof(HealResource);
-    }
 }

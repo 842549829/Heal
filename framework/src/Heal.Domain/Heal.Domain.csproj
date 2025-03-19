@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.PermissionManagement.Domain" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" />
 	</ItemGroup>
 
   <ItemGroup>

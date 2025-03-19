@@ -6,6 +6,11 @@
   </PropertyGroup>
 
 	<ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" />
+    <PackageReference Include="Volo.Abp.Identity.Application" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\Heal.Application.Contracts\Heal.Application.Contracts.csproj" />
 	  <ProjectReference Include="..\Heal.Domain\Heal.Domain.csproj" />
 	</ItemGroup>

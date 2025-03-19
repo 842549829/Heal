@@ -1,4 +1,5 @@
 ﻿using Heal.Domain.Shared.Localization;
+using Volo.Abp.Identity;
 using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
@@ -12,7 +13,8 @@ namespace Heal.Domain.Shared;
 /// HealDomainSharedModule
 /// </summary>
 [DependsOn(
-    typeof(AbpPermissionManagementDomainSharedModule)
+    typeof(AbpPermissionManagementDomainSharedModule),
+    typeof(AbpIdentityDomainSharedModule)
 )]
 public class HealDomainSharedModule : AbpModule
 {

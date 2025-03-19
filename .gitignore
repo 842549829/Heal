@@ -272,3 +272,4 @@ src/Heal.Blazor.Server.Tiered/Logs/*
 # IdentityServer temp files
 tempkey.rsa
 tempkey.jwk
+/modules/net/src/Heal.Net.AuthServer/Logs/logs.txt
