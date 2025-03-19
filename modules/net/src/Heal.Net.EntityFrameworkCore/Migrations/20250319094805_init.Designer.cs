@@ -10,11 +10,11 @@ using Volo.Abp.EntityFrameworkCore;
 
 #nullable disable
 
-namespace Heal.Migrations
+namespace Heal.Net.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HealNetDbContext))]
-    [Migration("20250305010533_Initial")]
-    partial class Initial
+    [Migration("20250319094805_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -560,6 +560,10 @@ namespace Heal.Migrations
                         .HasColumnType("varchar(40)")
                         .HasColumnName("ConcurrencyStamp");
 
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
                     b.Property<string>("Description")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
@@ -632,6 +636,10 @@ namespace Heal.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("varchar(40)")
                         .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
 
                     b.Property<int>("EntityVersion")
                         .HasColumnType("int");

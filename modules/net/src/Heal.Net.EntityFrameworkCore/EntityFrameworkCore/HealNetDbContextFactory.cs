@@ -24,7 +24,7 @@ public class HealNetDbContextFactory : IDesignTimeDbContextFactory<HealNetDbCont
     private static IConfigurationRoot BuildConfiguration()
     {
         var builder = new ConfigurationBuilder()
-            .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../Heal.DbMigrator/"))
+            .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../Heal.Net.DbMigrator/"))
             .AddJsonFile("appsettings.json", optional: false);
 
         return builder.Build();
