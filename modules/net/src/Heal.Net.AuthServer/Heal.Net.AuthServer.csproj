@@ -9,8 +9,6 @@
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Heal.HttpApi.Host' " />
-
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.UI" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" />

@@ -1,4 +1,5 @@
 ﻿using Heal.Domain.Shared;
+using Heal.Domain.Shared.Constant;
 using Heal.Domain.Shared.MultiTenancy;
 using Heal.Net.Application;
 using Heal.Net.Application.Contracts;
@@ -70,7 +71,7 @@ public class HealNetAuthServerModule : AbpModule
         {
             serverBuilder.Configure(options =>
             {
-                options.GrantTypes.Add("HealNetApp");
+                options.GrantTypes.Add(ApplicationProgramConst.ApplicationName);
             });
 
             serverBuilder.AddProductionEncryptionAndSigningCertificate("openiddict.pfx", configuration["AuthServer:CertificatePassPhrase"]!);

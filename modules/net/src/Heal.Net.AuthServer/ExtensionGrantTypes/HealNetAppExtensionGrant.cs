@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Heal.Domain.Shared.Constant;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -430,5 +431,5 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
         return await HandlePasswordAsync(request);
     }
 
-    public string Name  => "HealNetApp";
+    public string Name  => ApplicationProgramConst.ApplicationName;
 }
