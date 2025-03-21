@@ -1,7 +1,14 @@
-﻿using Volo.Abp.Modularity;
+﻿using Heal.Domain.Shared;
+using Volo.Abp.Identity;
+using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
 
 namespace Heal.Domain;
 
-public class HealDomainModule : AbpModule
-{
-}
+
+[DependsOn(
+    typeof(AbpPermissionManagementDomainModule),
+    typeof(AbpIdentityDomainModule),
+    typeof(HealDomainSharedModule)
+)]
+public class HealDomainModule : AbpModule;

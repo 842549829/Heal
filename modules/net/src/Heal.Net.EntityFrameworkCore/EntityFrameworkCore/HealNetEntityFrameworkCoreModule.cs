@@ -1,15 +1,13 @@
-﻿using Heal.Net.Domain;
+﻿using Heal.EntityFrameworkCore;
+using Heal.Net.Domain;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
-using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
-using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.Studio;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
@@ -18,16 +16,14 @@ namespace Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
 
 [DependsOn(
     typeof(HealNetDomainModule),
-    typeof(AbpPermissionManagementEntityFrameworkCoreModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreMySQLModule),
     typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
     typeof(AbpAuditLoggingEntityFrameworkCoreModule),
     typeof(AbpFeatureManagementEntityFrameworkCoreModule),
-    typeof(AbpIdentityEntityFrameworkCoreModule),
     typeof(AbpOpenIddictEntityFrameworkCoreModule),
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
-    typeof(BlobStoringDatabaseEntityFrameworkCoreModule)
+    typeof(BlobStoringDatabaseEntityFrameworkCoreModule),
+    typeof(HealEntityFrameworkCoreModule)
     )]
 public class HealNetEntityFrameworkCoreModule : AbpModule
 {

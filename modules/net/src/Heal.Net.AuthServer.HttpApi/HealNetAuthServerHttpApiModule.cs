@@ -1,4 +1,5 @@
 ﻿using Heal.Domain.Shared.Localization;
+using Heal.HttpApi;
 using Heal.Net.Application.Contracts;
 using Localization.Resources.AbpUi;
 using Volo.Abp.Account;
@@ -6,15 +7,14 @@ using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
-using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 
 namespace Heal.Net.AuthServer.HttpApi;
 
  [DependsOn(
+     typeof(HealHttpApiModule),
     typeof(HealNetApplicationContractsModule),
-    typeof(AbpPermissionManagementHttpApiModule),
     typeof(AbpSettingManagementHttpApiModule),
     typeof(AbpAccountHttpApiModule),
     typeof(AbpIdentityHttpApiModule),

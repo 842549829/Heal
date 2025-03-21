@@ -1,7 +1,11 @@
-﻿using Volo.Abp.Modularity;
+﻿using Heal.Application.Contracts;
+using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement.HttpApi;
 
 namespace Heal.HttpApi;
 
-public class HealHttpApiModule : AbpModule
-{
-}
+[DependsOn(
+    typeof(HealApplicationContractsModule),
+    typeof(AbpPermissionManagementHttpApiModule)
+)]
+public class HealHttpApiModule : AbpModule;

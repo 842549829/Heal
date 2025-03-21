@@ -1,4 +1,5 @@
-﻿using Heal.Domain.Shared.MultiTenancy;
+﻿using Heal.Domain;
+using Heal.Domain.Shared.MultiTenancy;
 using Heal.Net.Domain.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -8,7 +9,6 @@ using Volo.Abp.BlobStoring.Database;
 using Volo.Abp.Caching;
 using Volo.Abp.Emailing;
 using Volo.Abp.FeatureManagement;
-using Volo.Abp.Identity;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
@@ -22,6 +22,7 @@ namespace Heal.Net.Domain;
 
 [DependsOn(
     typeof(HealNetDomainSharedModule),
+    typeof(HealDomainModule),
     typeof(AbpAuditLoggingDomainModule),
     typeof(AbpCachingModule),
     typeof(AbpBackgroundJobsDomainModule),
@@ -30,7 +31,6 @@ namespace Heal.Net.Domain;
     typeof(AbpPermissionManagementDomainOpenIddictModule),
     typeof(AbpSettingManagementDomainModule),
     typeof(AbpEmailingModule),
-    typeof(AbpIdentityDomainModule),
     typeof(AbpOpenIddictDomainModule),
     typeof(AbpTenantManagementDomainModule),
     typeof(BlobStoringDatabaseDomainModule)

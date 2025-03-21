@@ -14,9 +14,7 @@ namespace Heal.Domain.Shared;
 /// </summary>
 [DependsOn(
     typeof(AbpPermissionManagementDomainSharedModule),
-    typeof(AbpIdentityDomainSharedModule),
-    typeof(AbpLocalizationModule),
-    typeof(AbpVirtualFileSystemModule)
+    typeof(AbpIdentityDomainSharedModule)
 )]
 public class HealDomainSharedModule : AbpModule
 {

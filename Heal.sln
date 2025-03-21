@@ -64,6 +64,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heal.HttpApi.Client", "fram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heal.Net.HttpApi", "modules\net\src\Heal.Net.HttpApi\Heal.Net.HttpApi.csproj", "{E9B1B61D-6BA9-455B-8C41-2A5E4D7ED864}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heal.Net.HttpApi.Host", "modules\net\src\Heal.Net.HttpApi.Host\Heal.Net.HttpApi.Host.csproj", "{C9598320-9D3F-482C-9A30-93F1FFF1EB15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +140,10 @@ Global
 		{E9B1B61D-6BA9-455B-8C41-2A5E4D7ED864}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9B1B61D-6BA9-455B-8C41-2A5E4D7ED864}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9B1B61D-6BA9-455B-8C41-2A5E4D7ED864}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9598320-9D3F-482C-9A30-93F1FFF1EB15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9598320-9D3F-482C-9A30-93F1FFF1EB15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9598320-9D3F-482C-9A30-93F1FFF1EB15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9598320-9D3F-482C-9A30-93F1FFF1EB15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,6 +169,7 @@ Global
 		{C92A0BE6-3F39-4D32-9F9C-593733D42F0B} = {0A73766D-D452-45B4-A077-1A027ECB5620}
 		{1933EB1A-9DC0-4F25-80FA-521F46C1AEF4} = {0A73766D-D452-45B4-A077-1A027ECB5620}
 		{E9B1B61D-6BA9-455B-8C41-2A5E4D7ED864} = {33B6E626-D3E5-466E-8800-D3ED1FCD5744}
+		{C9598320-9D3F-482C-9A30-93F1FFF1EB15} = {33B6E626-D3E5-466E-8800-D3ED1FCD5744}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}
