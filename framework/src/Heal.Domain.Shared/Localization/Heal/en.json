@@ -1,10 +1,9 @@
 {
-  "culture": "en",
-  "texts": {
+  "Culture": "en",
+  "Texts": {
+    "AppName": "A121",
     "Menu:Home": "Home",
-    "Welcome": "Welcome",
-    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
-    "DisplayName:NoPath": "The upload project path is not maintained",
-    "DisplayName:NoFileType": "The type of the uploaded file is not supported"
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information visit",
+    "Welcome": "Welcome"
   }
 }

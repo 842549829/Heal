@@ -1,4 +1,5 @@
-﻿using Heal.Domain.Shared.MultiTenancy;
+﻿using Heal.Domain.Shared;
+using Heal.Domain.Shared.MultiTenancy;
 using Heal.Net.Application;
 using Heal.Net.Application.Contracts;
 using Heal.Net.AuthServer.HealthChecks;
@@ -48,7 +49,6 @@ public class HealNetAuthServerModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
-        var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
 
         PreConfigure<OpenIddictBuilder>(builder =>
@@ -61,25 +61,26 @@ public class HealNetAuthServerModule : AbpModule
             });
         });
 
-        if (!hostingEnvironment.IsDevelopment())
+        PreConfigure<AbpOpenIddictAspNetCoreOptions>(options =>
         {
-            PreConfigure<AbpOpenIddictAspNetCoreOptions>(options =>
+            options.AddDevelopmentEncryptionAndSigningCertificate = false;
+        });
+
+        PreConfigure<OpenIddictServerBuilder>(serverBuilder =>
+        {
+            serverBuilder.Configure(options =>
             {
-                options.AddDevelopmentEncryptionAndSigningCertificate = false;
+                options.GrantTypes.Add("HealNetApp");
             });
 
-            PreConfigure<OpenIddictServerBuilder>(serverBuilder =>
-            {
-                serverBuilder.AddProductionEncryptionAndSigningCertificate("openiddict.pfx", configuration["AuthServer:CertificatePassPhrase"]!);
-                serverBuilder.SetIssuer(new Uri(configuration["AuthServer:Authority"]!));
-            });
-        }
+            serverBuilder.AddProductionEncryptionAndSigningCertificate("openiddict.pfx", configuration["AuthServer:CertificatePassPhrase"]!);
+            serverBuilder.SetIssuer(new Uri(configuration["AuthServer:Authority"]!));
+        });
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
-        var hostingEnvironment = context.Services.GetHostingEnvironment();
 
         if (!configuration.GetValue<bool>("App:DisablePII"))
         {
@@ -179,7 +180,7 @@ public class HealNetAuthServerModule : AbpModule
             options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Heal API", Version = "v1" });
-                options.DocInclusionPredicate((docName, description) => true);
+                options.DocInclusionPredicate((_, _) => true);
                 options.CustomSchemaIds(type => type.FullName);
             });
     }
@@ -195,7 +196,7 @@ public class HealNetAuthServerModule : AbpModule
                         configuration["App:CorsOrigins"]?
                             .Split(",", StringSplitOptions.RemoveEmptyEntries)
                             .Select(o => o.Trim().RemovePostFix("/"))
-                            .ToArray() ?? Array.Empty<string>()
+                            .ToArray() ?? []
                     )
                     .WithAbpExposedHeaders()
                     .SetIsOriginAllowedToAllowWildcardSubdomains()
