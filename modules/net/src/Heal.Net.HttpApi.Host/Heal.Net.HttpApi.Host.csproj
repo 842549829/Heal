@@ -10,6 +10,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+		<PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" />
+		<PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" />
 		<PackageReference Include="Serilog.AspNetCore" />
 		<PackageReference Include="Serilog.Expressions" />
 		<PackageReference Include="Serilog.Sinks.Async" />
@@ -20,6 +24,12 @@
 		<PackageReference Include="Volo.Abp.Autofac" />
 		<PackageReference Include="Volo.Abp.AspNetCore.Serilog" />
 		<PackageReference Include="Volo.Abp.Swashbuckle" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Heal.Net.Application\Heal.Net.Application.csproj" />
+	  <ProjectReference Include="..\Heal.Net.EntityFrameworkCore\Heal.Net.EntityFrameworkCore.csproj" />
+	  <ProjectReference Include="..\Heal.Net.HttpApi\Heal.Net.HttpApi.csproj" />
 	</ItemGroup>
 
 </Project>

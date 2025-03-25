@@ -1,9 +1,11 @@
-﻿using Volo.Abp.Modularity;
+﻿using Heal.HttpApi;
+using Heal.Net.Application.Contracts;
+using Volo.Abp.Modularity;
 
 namespace Heal.Net.HttpApi;
 
-
-public class HealNetHttpApiModule : AbpModule
-{
-
-}
+[DependsOn(
+    typeof(HealHttpApiModule),
+    typeof(HealNetApplicationContractsModule)
+    )]
+public class HealNetHttpApiModule : AbpModule;
