@@ -26,9 +26,4 @@ public class LoginInputDto : EntityDto
     /// 租户Id
     /// </summary>
     public Guid? TenantId { get; set; }
-
-    ///// <summary>
-    ///// 验证码
-    ///// </summary>
-    //public string? Captcha { get; set; }
 }

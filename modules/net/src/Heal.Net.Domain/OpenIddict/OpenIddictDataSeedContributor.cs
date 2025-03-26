@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using OpenIddict.Abstractions;
+using System.Text.Json;
 using Volo.Abp;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
@@ -108,12 +104,6 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             );
         }
 
-        
-        
-
-
-
-
         // Swagger Client
         var swaggerClientId = configurationSection["Heal_Swagger:ClientId"];
         if (!swaggerClientId.IsNullOrWhiteSpace())
@@ -134,8 +124,6 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 logoUri: "/images/clients/swagger.svg"
             );
         }
-
-
     }
 
     private async Task CreateApplicationAsync(
