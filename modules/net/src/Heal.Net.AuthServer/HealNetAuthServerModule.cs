@@ -1,7 +1,7 @@
-﻿using Heal.Domain.Shared.Constant;
-using Heal.Domain.Shared.MultiTenancy;
+﻿using Heal.Domain.Shared.MultiTenancy;
 using Heal.Net.Application;
 using Heal.Net.Application.Contracts;
+using Heal.Net.AuthServer.ExtensionGrantTypes;
 using Heal.Net.AuthServer.HealthChecks;
 using Heal.Net.AuthServer.HttpApi;
 using Heal.Net.Domain;
@@ -25,6 +25,7 @@ using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict;
+using Volo.Abp.OpenIddict.ExtensionGrantTypes;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.Swashbuckle;
@@ -66,11 +67,13 @@ public class HealNetAuthServerModule : AbpModule
             options.AddDevelopmentEncryptionAndSigningCertificate = false;
         });
 
+       
         PreConfigure<OpenIddictServerBuilder>(serverBuilder =>
         {
             serverBuilder.Configure(options =>
             {
-                options.GrantTypes.Add(ApplicationProgramConst.ApplicationName);
+                options.GrantTypes.Add("heal_net_password");
+
             });
 
             serverBuilder.AddProductionEncryptionAndSigningCertificate("openiddict.pfx", configuration["AuthServer:CertificatePassPhrase"]!);
@@ -100,6 +103,13 @@ public class HealNetAuthServerModule : AbpModule
                 options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
             });
         }
+
+        context.Services.AddScoped<HealNetAppExtensionGrant>();
+        Configure<AbpOpenIddictExtensionGrantsOptions>(options =>
+        {
+            var tokenExtensionGrant = context.Services.GetRequiredService<HealNetAppExtensionGrant>();
+            options.Grants.Add("heal_net_password", tokenExtensionGrant);
+        });
 
         ConfigureAuthentication(context);
         ConfigureUrls(configuration);

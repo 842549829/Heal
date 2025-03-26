@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using Heal.Domain.Shared.Constant;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using OpenIddict.Abstractions;
@@ -60,6 +61,16 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 Name = "Heal", DisplayName = "Heal API", Resources = { "Heal" }
             });
         }
+
+        if (await _openIddictScopeRepository.FindByNameAsync(ApplicationProgramConst.ApplicationName) == null)
+        {
+            await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor
+            {
+                Name = ApplicationProgramConst.ApplicationName,
+                DisplayName = $"{ApplicationProgramConst.ApplicationName} API",
+                Resources = { ApplicationProgramConst.ApplicationName }
+            });
+        }
     }
 
     private async Task CreateApplicationsAsync()
@@ -70,11 +81,11 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             OpenIddictConstants.Permissions.Scopes.Phone,
             OpenIddictConstants.Permissions.Scopes.Profile,
             OpenIddictConstants.Permissions.Scopes.Roles,
-            "Heal"
+            "Heal",
+            ApplicationProgramConst.ApplicationName
         };
 
         var configurationSection = _configuration.GetSection("OpenIddict:Applications");
-
 
         //Console Test / Angular Client
         var consoleAndAngularClientId = configurationSection["Heal_App:ClientId"];
@@ -122,6 +133,38 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
                 clientUri: swaggerRootUrl?.EnsureEndsWith('/') + "swagger",
                 logoUri: "/images/clients/swagger.svg"
+            );
+        }
+
+        // 自定义HealNetApp
+        var healNetAppClientId = configurationSection["HealNetApp:ClientId"];
+        if (!healNetAppClientId.IsNullOrWhiteSpace())
+        {
+            var healNetAppClientRootUrl = configurationSection["HealNetApp:RootUrl"]!.EnsureEndsWith('/');
+            var healNetAppClientScopes = new List<string>();
+            healNetAppClientScopes.AddRange(commonScopes);
+            healNetAppClientScopes.Add(ApplicationProgramConst.ApplicationName);
+            await CreateApplicationAsync(
+                applicationType: OpenIddictConstants.ApplicationTypes.Web,
+                name: healNetAppClientId,
+                type: OpenIddictConstants.ClientTypes.Confidential,
+                consentType: OpenIddictConstants.ConsentTypes.Explicit,
+                displayName: "HealNetApp Application",
+                secret: configurationSection["HealNetApp:ClientSecret"] ?? "1q2w3e*",
+                grantTypes: new List<string>
+                {
+                    OpenIddictConstants.GrantTypes.AuthorizationCode,
+                    OpenIddictConstants.GrantTypes.AuthorizationCode,
+                    OpenIddictConstants.GrantTypes.Implicit,
+                    OpenIddictConstants.GrantTypes.Password,
+                    OpenIddictConstants.GrantTypes.ClientCredentials,
+                    OpenIddictConstants.GrantTypes.RefreshToken,
+                    OpenIddictConstants.GrantTypes.DeviceCode,
+                    "heal_net_password" // 添加net客户端
+                },
+                scopes: healNetAppClientScopes,
+                redirectUri: $"{healNetAppClientRootUrl}signin-oidc",
+                postLogoutRedirectUri: $"{healNetAppClientRootUrl}signout-callback-oidc"
             );
         }
     }

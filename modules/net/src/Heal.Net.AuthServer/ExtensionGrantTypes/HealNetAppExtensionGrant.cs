@@ -427,8 +427,7 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
 
     public async Task<IActionResult> HandleAsync(ExtensionGrantContext context)
     {
-        var request = await GetOpenIddictServerRequestAsync(HttpContext);
-        return await HandlePasswordAsync(request);
+        return await HandlePasswordAsync(context.Request);
     }
 
     public string Name  => ApplicationProgramConst.ApplicationName;
