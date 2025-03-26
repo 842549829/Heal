@@ -10,6 +10,9 @@ using Volo.Abp.VirtualFileSystem;
 
 namespace Heal.Net.HttpApi.Client;
 
+/// <summary>
+/// api/abp/api-definition  远程调用检查接口是否正确
+/// </summary>
 [DependsOn(
     typeof(HealHttpApiClientModule),
     typeof(HealNetApplicationContractsModule),
