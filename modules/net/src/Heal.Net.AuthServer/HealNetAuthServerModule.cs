@@ -62,6 +62,11 @@ public class HealNetAuthServerModule : AbpModule
             });
         });
 
+        Configure<OpenIddictServerAspNetCoreOptions>(options =>
+        {
+            options.DisableTransportSecurityRequirement = true;
+        });
+
         PreConfigure<AbpOpenIddictAspNetCoreOptions>(options =>
         {
             options.AddDevelopmentEncryptionAndSigningCertificate = false;
