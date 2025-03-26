@@ -1,0 +1,8 @@
+﻿{
+  "RemoteServices": {
+    "HealNet": {
+      "BaseUrl": "http://localhost:44388",
+      "UseCurrentAccessToken": "true"
+    }
+  }
+}
