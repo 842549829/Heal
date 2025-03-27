@@ -70,6 +70,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{49A1E938-B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp.Test", "modules\net\test\ConsoleApp.Test\ConsoleApp.Test.csproj", "{965B66C2-7807-4187-84F4-0BFB941E82BB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{71D28C1C-DD86-421A-8058-0240E2F8322F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharding.Core.Test", "framework\test\Sharding.Core.Test\Sharding.Core.Test.csproj", "{27613F70-0280-4080-A52E-BB1BAF70F786}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -152,6 +156,10 @@ Global
 		{965B66C2-7807-4187-84F4-0BFB941E82BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{965B66C2-7807-4187-84F4-0BFB941E82BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{965B66C2-7807-4187-84F4-0BFB941E82BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27613F70-0280-4080-A52E-BB1BAF70F786}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27613F70-0280-4080-A52E-BB1BAF70F786}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27613F70-0280-4080-A52E-BB1BAF70F786}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27613F70-0280-4080-A52E-BB1BAF70F786}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -180,6 +188,8 @@ Global
 		{C9598320-9D3F-482C-9A30-93F1FFF1EB15} = {33B6E626-D3E5-466E-8800-D3ED1FCD5744}
 		{49A1E938-BA67-4D33-B20A-A199159519BF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{965B66C2-7807-4187-84F4-0BFB941E82BB} = {49A1E938-BA67-4D33-B20A-A199159519BF}
+		{71D28C1C-DD86-421A-8058-0240E2F8322F} = {3C0F0FB5-5A95-4D34-8CE1-FAD7CBC49FEA}
+		{27613F70-0280-4080-A52E-BB1BAF70F786} = {71D28C1C-DD86-421A-8058-0240E2F8322F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}
