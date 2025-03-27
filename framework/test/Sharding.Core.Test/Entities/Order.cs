@@ -1,10 +1,16 @@
 ﻿namespace Sharding.Core.Test.Entities;
 
+/// <summary>
+/// Entity
+/// </summary>
 public interface IEntity
 {
     public string Id { get; set; }
 }
 
+/// <summary>
+/// Create
+/// </summary>
 public interface ICreate : IEntity
 {
     /// <summary>
@@ -48,10 +54,28 @@ public class Order : ICreate
     public DateTime CreationTime { get; set; }
 }
 
+/// <summary>
+/// order status
+/// </summary>
 public enum OrderStatusEnum
 {
+    /// <summary>
+    /// no pay
+    /// </summary>
     NoPay = 1,
+
+    /// <summary>
+    /// paying
+    /// </summary>
     Paying = 2,
+
+    /// <summary>
+    /// payed
+    /// </summary>
     Payed = 3,
+
+    /// <summary>
+    /// pay fail
+    /// </summary>
     PayFail = 4
 }

@@ -4,6 +4,9 @@ using Volo.Abp.PermissionManagement;
 
 namespace Heal.HttpApi.Client;
 
+/// <summary>
+/// HealHttpApiClientModule
+/// </summary>
 [DependsOn(
     typeof(HealApplicationContractsModule),
     typeof(AbpPermissionManagementHttpApiClientModule)

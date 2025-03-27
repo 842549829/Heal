@@ -6,7 +6,7 @@ using Volo.Abp.PermissionManagement;
 namespace Heal.Application;
 
 /// <summary>
-/// Application layer module
+/// HealApplicationModule
 /// </summary>
 [DependsOn(
     typeof(HealDomainModule),

@@ -20,6 +20,9 @@ using Volo.Abp.TenantManagement;
 
 namespace Heal.Net.Domain;
 
+/// <summary>
+/// HealNetDomainModule
+/// </summary>
 [DependsOn(
     typeof(HealNetDomainSharedModule),
     typeof(HealDomainModule),
@@ -37,13 +40,19 @@ namespace Heal.Net.Domain;
     )]
 public class HealNetDomainModule : AbpModule
 {
+    /// <summary>
+    /// ConfigureServices
+    /// </summary>
+    /// <param name="context">context</param>
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpMultiTenancyOptions>(options =>
         {
+            // 启用多租户
             options.IsEnabled = MultiTenancyConsts.IsEnabled;
         });
 
+        // 配置本地化
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));

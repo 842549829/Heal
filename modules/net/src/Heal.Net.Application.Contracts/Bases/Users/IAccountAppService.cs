@@ -2,6 +2,9 @@
 
 namespace Heal.Net.Application.Contracts.Bases.Users;
 
+/// <summary>
+/// 账号服务接口
+/// </summary>
 public interface IAccountAppService : IHealNetApplicationService
 {
     /// <summary>

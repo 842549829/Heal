@@ -3,8 +3,15 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace Heal.Net.AuthServer.HealthChecks;
 
+/// <summary>
+/// Adds Health Checks to the service collection.
+/// </summary>
 public static class HealthChecksBuilderExtensions
 {
+    /// <summary>
+    /// Adds Health Checks to the service collection.
+    /// </summary>
+    /// <param name="services">services</param>
     public static void AddHealHealthChecks(this IServiceCollection services)
     {
         // Add your health checks here
@@ -37,6 +44,12 @@ public static class HealthChecksBuilderExtensions
         });
     }
 
+    /// <summary>
+    /// Configures the Health Check endpoint.
+    /// </summary>
+    /// <param name="services">services</param>
+    /// <param name="path">path</param>
+    /// <returns>IServiceCollection</returns>
     private static IServiceCollection ConfigureHealthCheckEndpoint(this IServiceCollection services, string path)
     {
         services.Configure<AbpEndpointRouterOptions>(options =>
@@ -57,6 +70,12 @@ public static class HealthChecksBuilderExtensions
         return services;
     }
 
+    /// <summary>
+    /// Adds Health Checks UI to the service collection.
+    /// </summary>
+    /// <param name="services">services</param>
+    /// <param name="setupOption">setupOption</param>
+    /// <returns>IServiceCollection</returns>
     private static IServiceCollection MapHealthChecksUiEndpoints(this IServiceCollection services, Action<global::HealthChecks.UI.Configuration.Options>? setupOption = null)
     {
         services.Configure<AbpEndpointRouterOptions>(routerOptions =>

@@ -3,10 +3,19 @@ using Volo.Abp.Threading;
 
 namespace Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
 
+/// <summary>
+/// EntityFrameworkCore extension mappings for Heal.Net.
+/// </summary>
 public static class HealNetEfCoreEntityExtensionMappings
 {
-    private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
+    /// <summary>
+    /// Configures the entity extension mappings for Heal.Net.
+    /// </summary>
+    private static readonly OneTimeRunner OneTimeRunner = new();
 
+    /// <summary>
+    /// Configures the entity extension mappings for Heal.Net.
+    /// </summary>
     public static void Configure()
     {
         HealNetGlobalFeatureConfigurator.Configure();

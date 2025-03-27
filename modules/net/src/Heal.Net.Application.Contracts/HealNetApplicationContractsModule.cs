@@ -8,6 +8,9 @@ using Volo.Abp.TenantManagement;
 
 namespace Heal.Net.Application.Contracts;
 
+/// <summary>
+/// HealNetApplicationContractsModule
+/// </summary>
 [DependsOn(
     typeof(HealNetDomainSharedModule),
     typeof(HealApplicationContractsModule),
@@ -18,6 +21,10 @@ namespace Heal.Net.Application.Contracts;
 )]
 public class HealNetApplicationContractsModule : AbpModule
 {
+    /// <summary>
+    /// PreConfigureServices
+    /// </summary>
+    /// <param name="context">context</param>
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         HealNetDtoExtensions.Configure();

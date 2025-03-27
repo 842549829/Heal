@@ -20,21 +20,54 @@ using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Heal.Net.AuthServer.ExtensionGrantTypes;
 
+/// <summary>
+/// 自定义登录方式
+/// </summary>
 [IgnoreAntiforgeryToken]
 [ApiExplorerSettings(IgnoreApi = true)]
 public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExtensionGrant
 {
+    /// <summary>
+    /// 服务作用域
+    /// </summary>
     protected IServiceScopeFactory ServiceScopeFactory => LazyServiceProvider.LazyGetRequiredService<IServiceScopeFactory>();
+
+    /// <summary>
+    /// 租户配置提供者
+    /// </summary>
     protected ITenantConfigurationProvider TenantConfigurationProvider => LazyServiceProvider.LazyGetRequiredService<ITenantConfigurationProvider>();
+
+    /// <summary>
+    /// Abp身份验证配置
+    /// </summary>
     protected IOptions<AbpIdentityOptions> AbpIdentityOptions => LazyServiceProvider.LazyGetRequiredService<IOptions<AbpIdentityOptions>>();
+
+    /// <summary>
+    /// Identity身份验证配置
+    /// </summary>
     protected IOptions<IdentityOptions> IdentityOptions => LazyServiceProvider.LazyGetRequiredService<IOptions<IdentityOptions>>();
+
+    /// <summary>
+    /// 身份安全日志管理器
+    /// </summary>
     protected IdentitySecurityLogManager IdentitySecurityLogManager => LazyServiceProvider.LazyGetRequiredService<IdentitySecurityLogManager>();
 
+    /// <summary>
+    /// 设置提供者
+    /// </summary>
     protected ISettingProvider SettingProvider => LazyServiceProvider.LazyGetRequiredService<ISettingProvider>();
 
+    /// <summary>
+    /// 动态身份验证主键提供者缓存
+    /// </summary>
     protected IdentityDynamicClaimsPrincipalContributorCache IdentityDynamicClaimsPrincipalContributorCache => LazyServiceProvider.LazyGetRequiredService<IdentityDynamicClaimsPrincipalContributorCache>();
 
-    [UnitOfWork]
+    /// <summary>
+    /// 处理密码
+    /// </summary>
+    /// <param name="request">request</param>
+    /// <returns>IActionResult</returns>
+    [UnitOfWork] // UnitOfWork表示工单提交(事务)
     protected virtual async Task<IActionResult> HandlePasswordAsync(OpenIddictRequest request)
     {
         if (request.Username == null || request.Password == null)
@@ -175,6 +208,11 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
         }
     }
 
+    /// <summary>
+    /// Replace email to username of input if needs
+    /// </summary>
+    /// <param name="request">request</param>
+    /// <returns>Task</returns>
     protected virtual async Task ReplaceEmailToUsernameOfInputIfNeeds(OpenIddictRequest request)
     {
         if (!ValidationHelper.IsValidEmailAddress(request.Username!))
@@ -197,6 +235,12 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
         request.Username = userByEmail.UserName;
     }
 
+    /// <summary>
+    /// Handle two factor login
+    /// </summary>
+    /// <param name="request">request</param>
+    /// <param name="user">user</param>
+    /// <returns>IActionResult</returns>
     protected virtual async Task<IActionResult> HandleTwoFactorLoginAsync(OpenIddictRequest request, IdentityUser user)
     {
         var recoveryCode = request.GetParameter("RecoveryCode")?.ToString();
@@ -268,16 +312,38 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
         }
     }
 
+    /// <summary>
+    /// Should change password on next login
+    /// </summary>
+    /// <param name="request">request</param>
+    /// <param name="user">user</param>
+    /// <param name="currentPassword">currentPassword</param>
+    /// <returns>IActionResult</returns>
     protected virtual async Task<IActionResult> HandleShouldChangePasswordOnNextLoginAsync(OpenIddictRequest request, IdentityUser user, string currentPassword)
     {
         return await HandleChangePasswordAsync(request, user, currentPassword, ChangePasswordType.ShouldChangePasswordOnNextLogin);
     }
 
+    /// <summary>
+    /// Change password
+    /// </summary>
+    /// <param name="request">request</param>
+    /// <param name="user">user</param>
+    /// <param name="currentPassword">currentPassword</param>
+    /// <returns>IActionResult</returns>
     protected virtual async Task<IActionResult> HandlePeriodicallyChangePasswordAsync(OpenIddictRequest request, IdentityUser user, string currentPassword)
     {
         return await HandleChangePasswordAsync(request, user, currentPassword, ChangePasswordType.PeriodicallyChangePassword);
     }
 
+    /// <summary>
+    /// Change password
+    /// </summary>
+    /// <param name="request">request</param>
+    /// <param name="user">user</param>
+    /// <param name="currentPassword">currentPassword</param>
+    /// <param name="changePasswordType">changePasswordType</param>
+    /// <returns>IActionResult</returns>
     protected virtual async Task<IActionResult> HandleChangePasswordAsync(OpenIddictRequest request, IdentityUser user, string currentPassword, ChangePasswordType changePasswordType)
     {
         var changePasswordToken = request.GetParameter("ChangePasswordToken")?.ToString();
@@ -358,6 +424,12 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
         }
     }
 
+    /// <summary>
+    /// Confirm user
+    /// </summary>
+    /// <param name="request">request</param>
+    /// <param name="user">user</param>
+    /// <returns>IActionResult</returns>
     protected virtual Task<IActionResult> HandleConfirmUserAsync(OpenIddictRequest request, IdentityUser user)
     {
         Logger.LogInformation($"{request.Username} needs to confirm email/phone number");
@@ -378,6 +450,12 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
         return Task.FromResult<IActionResult>(Forbid(properties, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme));
     }
 
+    /// <summary>
+    /// Set success result
+    /// </summary>
+    /// <param name="request">request</param>
+    /// <param name="user">user</param>
+    /// <returns>IActionResult</returns>
     protected virtual async Task<IActionResult> SetSuccessResultAsync(OpenIddictRequest request, IdentityUser user)
     {
         // Clear the dynamic claims cache.
@@ -412,6 +490,11 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
         return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
     }
 
+    /// <summary>
+    /// 判断是否需要双因子认证
+    /// </summary>
+    /// <param name="user">用户信息</param>
+    /// <returns>结果</returns>
     protected virtual async Task<bool> IsTfaEnabledAsync(IdentityUser user)
     {
         return UserManager.SupportsUserTwoFactor &&
@@ -419,16 +502,34 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
                (await UserManager.GetValidTwoFactorProvidersAsync(user)).Count > 0;
     }
 
+    /// <summary>
+    /// 登录类型
+    /// </summary>
     public enum ChangePasswordType
     {
+        /// <summary>
+        /// 需要修改密码
+        /// </summary>
         ShouldChangePasswordOnNextLogin,
+
+        /// <summary>
+        /// 需要定期修改密码
+        /// </summary>
         PeriodicallyChangePassword
     }
 
+    /// <summary>
+    /// 自定义登录方式
+    /// </summary>
+    /// <param name="context">context</param>
+    /// <returns>IActionResult</returns>
     public async Task<IActionResult> HandleAsync(ExtensionGrantContext context)
     {
         return await HandlePasswordAsync(context.Request);
     }
 
+    /// <summary>
+    /// 自定义登录方式名称
+    /// </summary>
     public string Name  => ApplicationProgramConst.ApplicationName;
 }

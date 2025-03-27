@@ -13,6 +13,14 @@ namespace Sharding.Core.Test.EntityFrameworkCore;
 /// </summary>
 public class OrderVirtualTableRoute() : AbstractSimpleShardingModKeyStringVirtualTableRoute<Order>(2, 3)
 {
+    /// <summary>
+    /// 配置分表的一些信息
+    /// 1.ShardingProperty 哪个字段分表
+    /// 2.TableSeparator 分表的后缀和表名的连接符
+    /// 3.AutoCreateTable 启动时是否需要创建对应的分表信息
+    /// 3.ShardingExtraProperty 额外分片字段
+    /// </summary>
+    /// <param name="builder">分表对象元数据建造者</param>
     public override void Configure(EntityMetadataTableBuilder<Order> builder)
     {
         builder.ShardingProperty(o => o.Id);
@@ -34,7 +42,7 @@ public class OrderTimeShardingRule : AbstractSimpleShardingMonthKeyDateTimeVirtu
     /// 3.AutoCreateTable 启动时是否需要创建对应的分表信息
     /// 3.ShardingExtraProperty 额外分片字段
     /// </summary>
-    /// <param name="builder"></param>
+    /// <param name="builder">分表对象元数据建造者</param>
     public override void Configure(EntityMetadataTableBuilder<Order> builder)
     {
         // 指定分片字段
@@ -46,16 +54,21 @@ public class OrderTimeShardingRule : AbstractSimpleShardingMonthKeyDateTimeVirtu
         // 是否自动创建分表，默认是 true
         builder.AutoCreateTable(true);
 
+        // 额外分片字段
         builder.ShardingExtraProperty(o => o.Id);
     }
 
     /// <summary>是否需要自动创建按时间分表的路由</summary>
-    /// <returns></returns>
+    /// <returns>结果</returns>
     public override bool AutoCreateTableByTime()
     {
         return true;
     }
 
+    /// <summary>
+    /// 获取分表起始时间
+    /// </summary>
+    /// <returns>分表起始时间</returns>
     public override DateTime GetBeginTime()
     {
         return new DateTime(2025, 2, 01);
@@ -118,6 +131,14 @@ public class OrderTimeShardingRule : AbstractSimpleShardingMonthKeyDateTimeVirtu
 
     }
 
+    /// <summary>
+    /// 订单编号的路由过滤器
+    /// </summary>
+    /// <param name="shardingOperator">分表条件比较符</param>
+    /// <param name="shardingKey">分表key</param>
+    /// <param name="minTail">minTail</param>
+    /// <param name="maxTail">maxTail</param>
+    /// <returns>表达式</returns>
     private static Func<string, bool> DoOrderNoFilter(ShardingOperatorEnum shardingOperator, DateTime shardingKey, string minTail, string maxTail)
     {
         switch (shardingOperator)
@@ -162,6 +183,12 @@ public class OrderTimeShardingRule : AbstractSimpleShardingMonthKeyDateTimeVirtu
         }
     }
 
+    /// <summary>
+    /// 处理订单编号
+    /// </summary>
+    /// <param name="orderNo">订单编号</param>
+    /// <param name="orderTime">订单时间</param>
+    /// <returns>结果</returns>
     private static bool CheckOrderNo(string orderNo, out DateTime orderTime)
     {
         // ID 字段提取前 6 位

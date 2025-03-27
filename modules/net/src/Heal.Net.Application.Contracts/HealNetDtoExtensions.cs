@@ -2,10 +2,19 @@
 
 namespace Heal.Net.Application.Contracts;
 
+/// <summary>
+/// Defines extension methods for DTOs in the Heal.Net.Application.Contracts module.
+/// </summary>
 public static class HealNetDtoExtensions
 {
-    private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
+    /// <summary>
+    /// Configures the Heal.Net.Application.Contracts module.
+    /// </summary>
+    private static readonly OneTimeRunner OneTimeRunner = new();
 
+    /// <summary>
+    /// Configures the Heal.Net.Application.Contracts module.
+    /// </summary>
     public static void Configure()
     {
         OneTimeRunner.Run(() =>

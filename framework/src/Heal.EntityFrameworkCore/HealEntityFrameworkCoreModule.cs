@@ -6,7 +6,9 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 
 namespace Heal.EntityFrameworkCore;
 
-
+/// <summary>
+/// HealEntityFrameworkCoreModule
+/// </summary>
 [DependsOn(
     typeof(HealDomainModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),

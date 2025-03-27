@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Heal.Net.Domain.Data;
+﻿using Heal.Net.Domain.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,17 +8,27 @@ using Volo.Abp.Data;
 
 namespace Heal.Net.DbMigrator;
 
-public class DbMigratorHostedService : IHostedService
+/// <summary>
+/// Hosted service to run database migrations.
+/// </summary>
+public class DbMigratorHostedService(IHostApplicationLifetime hostApplicationLifetime, IConfiguration configuration)
+    : IHostedService
 {
-    private readonly IHostApplicationLifetime _hostApplicationLifetime;
-    private readonly IConfiguration _configuration;
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    private readonly IHostApplicationLifetime _hostApplicationLifetime = hostApplicationLifetime;
 
-    public DbMigratorHostedService(IHostApplicationLifetime hostApplicationLifetime, IConfiguration configuration)
-    {
-        _hostApplicationLifetime = hostApplicationLifetime;
-        _configuration = configuration;
-    }
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    private readonly IConfiguration _configuration = configuration;
 
+    /// <summary>
+    /// Starts the database migration.
+    /// </summary>
+    /// <param name="cancellationToken">cancellationToken</param>
+    /// <returns>Task</returns>
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         using (var application = await AbpApplicationFactory.CreateAsync<HealNetDbMigratorModule>(options =>
@@ -44,6 +52,11 @@ public class DbMigratorHostedService : IHostedService
         }
     }
 
+    /// <summary>
+    /// Stops the database migration.
+    /// </summary>
+    /// <param name="cancellationToken">cancellationToken</param>
+    /// <returns>Task</returns>
     public Task StopAsync(CancellationToken cancellationToken)
     {
         return Task.CompletedTask;

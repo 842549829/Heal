@@ -9,6 +9,11 @@ namespace Heal.Net.AuthServer;
 /// </summary>
 public class Program
 {
+    /// <summary>
+    /// 主程序入口
+    /// </summary>
+    /// <param name="args">args</param>
+    /// <returns>int</returns>
     public static async Task<int> Main(string[] args)
     {
         Log.Logger = new LoggerConfiguration()

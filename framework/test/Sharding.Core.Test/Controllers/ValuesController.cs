@@ -5,9 +5,17 @@ using Sharding.Core.Test.EntityFrameworkCore;
 
 namespace Sharding.Core.Test.Controllers;
 
+/// <summary>
+/// 测试控制器
+/// </summary>
+/// <param name="myDbContext">分表DbContext</param>
 [Route("api/[controller]")]
 public class ValuesController(ShardingDbContext myDbContext) : ControllerBase
 {
+    /// <summary>
+    /// 查询测试
+    /// </summary>
+    /// <returns>返回订单</returns>
     [HttpGet]
     public async Task<Order?> Get()
     {
@@ -15,7 +23,10 @@ public class ValuesController(ShardingDbContext myDbContext) : ControllerBase
         return order;
     }
 
-    // 添加订单
+    /// <summary>
+    /// 插入测试
+    /// </summary>
+    /// <returns>200</returns>
     [HttpGet("add")]
     public async Task<IActionResult> Post()
     {
@@ -50,5 +61,4 @@ public class ValuesController(ShardingDbContext myDbContext) : ControllerBase
         await myDbContext.SaveChangesAsync();
         return Ok();
     }
-
 }

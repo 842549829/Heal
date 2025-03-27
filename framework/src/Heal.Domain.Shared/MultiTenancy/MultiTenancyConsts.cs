@@ -1,5 +1,8 @@
 ﻿namespace Heal.Domain.Shared.MultiTenancy;
 
+/// <summary>
+/// Multi-tenancy related constants.
+/// </summary>
 public static class MultiTenancyConsts
 {
     /* Enable/disable multi-tenancy easily in a single point.

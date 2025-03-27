@@ -20,14 +20,51 @@ namespace Heal.Net.Domain.OpenIddict;
  */
 public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDependency
 {
+    /// <summary>
+    /// 配置
+    /// </summary>
     private readonly IConfiguration _configuration;
+
+    /// <summary>
+    /// OpenIddict应用仓储
+    /// </summary>
     private readonly IOpenIddictApplicationRepository _openIddictApplicationRepository;
+
+    /// <summary>
+    /// 应用管理
+    /// </summary>
     private readonly IAbpApplicationManager _applicationManager;
+
+    /// <summary>
+    /// OpenIddict权限仓储
+    /// </summary>
     private readonly IOpenIddictScopeRepository _openIddictScopeRepository;
+
+    /// <summary>
+    /// OpenIddict权限管理
+    /// </summary>
     private readonly IOpenIddictScopeManager _scopeManager;
+
+    /// <summary>
+    /// 权限数据种子
+    /// </summary>
     private readonly IPermissionDataSeeder _permissionDataSeeder;
+
+    /// <summary>
+    /// 语言
+    /// </summary>
     private readonly IStringLocalizer<OpenIddictResponse> L;
 
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    /// <param name="configuration">configuration</param>
+    /// <param name="openIddictApplicationRepository">openIddictApplicationRepository</param>
+    /// <param name="applicationManager">applicationManager</param>
+    /// <param name="openIddictScopeRepository">openIddictScopeRepository</param>
+    /// <param name="scopeManager">scopeManager</param>
+    /// <param name="permissionDataSeeder">permissionDataSeeder</param>
+    /// <param name="l">语言</param>
     public OpenIddictDataSeedContributor(
         IConfiguration configuration,
         IOpenIddictApplicationRepository openIddictApplicationRepository,
@@ -46,6 +83,11 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         L = l;
     }
 
+    /// <summary>
+    /// SeedAsync
+    /// </summary>
+    /// <param name="context">context</param>
+    /// <returns>Task</returns>
     [UnitOfWork]
     public virtual async Task SeedAsync(DataSeedContext context)
     {
@@ -53,6 +95,10 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         await CreateApplicationsAsync();
     }
 
+    /// <summary>
+    /// CreateScopesAsync
+    /// </summary>
+    /// <returns>Task</returns>
     private async Task CreateScopesAsync()
     {
         if (await _openIddictScopeRepository.FindByNameAsync("Heal") == null)
@@ -73,6 +119,10 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         }
     }
 
+    /// <summary>
+    /// CreateApplicationsAsync
+    /// </summary>
+    /// <returns>Task</returns>
     private async Task CreateApplicationsAsync()
     {
         var commonScopes = new List<string> {
@@ -169,6 +219,23 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         }
     }
 
+    /// <summary>
+    /// CreateApplicationAsync
+    /// </summary>
+    /// <param name="applicationType">applicationType</param>
+    /// <param name="name">name</param>
+    /// <param name="type">type</param>
+    /// <param name="consentType">consentType</param>
+    /// <param name="displayName">displayName</param>
+    /// <param name="secret">secret</param>
+    /// <param name="grantTypes">grantTypes</param>
+    /// <param name="scopes">scopes</param>
+    /// <param name="redirectUri">redirectUri</param>
+    /// <param name="postLogoutRedirectUri">postLogoutRedirectUri</param>
+    /// <param name="permissions">permissions</param>
+    /// <param name="clientUri">clientUri</param>
+    /// <param name="logoUri">logoUri</param>
+    /// <returns>Task</returns>
     private async Task CreateApplicationAsync(
         [NotNull] string applicationType,
         [NotNull] string name,
@@ -384,11 +451,23 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         }
     }
 
+    /// <summary>
+    /// 判断两个客户端的RedirectUris是否相同
+    /// </summary>
+    /// <param name="existingClient">existingClient</param>
+    /// <param name="application">application</param>
+    /// <returns>是否相同</returns>
     private bool HasSameRedirectUris(OpenIddictApplication existingClient, AbpApplicationDescriptor application)
     {
         return existingClient.RedirectUris == JsonSerializer.Serialize(application.RedirectUris.Select(q => q.ToString().RemovePostFix("/")));
     }
 
+    /// <summary>
+    /// 判断两个客户端的Scopes是否相同
+    /// </summary>
+    /// <param name="existingClient">existingClient</param>
+    /// <param name="application">application</param>
+    /// <returns>是否相同</returns>
     private bool HasSameScopes(OpenIddictApplication existingClient, AbpApplicationDescriptor application)
     {
         return existingClient.Permissions == JsonSerializer.Serialize(application.Permissions.Select(q => q.ToString().TrimEnd('/')));

@@ -14,6 +14,9 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
 
+/// <summary>
+/// HealNetEntityFrameworkCoreModule
+/// </summary>
 [DependsOn(
     typeof(HealNetDomainModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
@@ -27,12 +30,19 @@ namespace Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
     )]
 public class HealNetEntityFrameworkCoreModule : AbpModule
 {
+    /// <summary>
+    /// PreConfigureServices
+    /// </summary>
+    /// <param name="context">context</param>
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
-
         HealNetEfCoreEntityExtensionMappings.Configure();
     }
 
+    /// <summary>
+    /// ConfigureServices
+    /// </summary>
+    /// <param name="context">context</param>
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddAbpDbContext<HealNetDbContext>(options =>
@@ -58,6 +68,5 @@ public class HealNetEntityFrameworkCoreModule : AbpModule
             });
 
         });
-        
     }
 }

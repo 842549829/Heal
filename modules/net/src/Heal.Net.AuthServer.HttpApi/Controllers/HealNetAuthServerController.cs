@@ -7,6 +7,9 @@ namespace Heal.Net.AuthServer.HttpApi.Controllers;
  */
 public abstract class HealNetAuthServerController : AbpControllerBase
 {
+    /// <summary>
+    /// 构造函数
+    /// </summary>
     protected HealNetAuthServerController()
     {
         LocalizationResource = typeof(HealResource);

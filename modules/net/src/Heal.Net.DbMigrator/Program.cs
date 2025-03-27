@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -7,9 +6,17 @@ using Serilog.Events;
 
 namespace Heal.Net.DbMigrator;
 
-class Program
+/// <summary>
+/// 迁移数据库
+/// </summary>
+internal class Program
 {
-    static async Task Main(string[] args)
+    /// <summary>
+    /// 主程序
+    /// </summary>
+    /// <param name="args">args</param>
+    /// <returns>Task</returns>
+    private static async Task Main(string[] args)
     {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Information()

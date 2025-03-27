@@ -1,5 +1,8 @@
 ﻿namespace Heal.Net.Application.Contracts.Permissions;
 
+/// <summary>
+/// Defines application permissions.
+/// </summary>
 public static class HealNetPermissions
 {
     public const string GroupName = "Heal";

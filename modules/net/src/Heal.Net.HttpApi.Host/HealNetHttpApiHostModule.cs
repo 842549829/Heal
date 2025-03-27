@@ -18,6 +18,9 @@ using Volo.Abp.VirtualFileSystem;
 
 namespace Heal.Net.HttpApi.Host;
 
+/// <summary>
+/// HealNetHttpApiHostModule
+/// </summary>
 [DependsOn(
     typeof(HealNetHttpApiModule),
     typeof(AbpAutofacModule),
@@ -29,6 +32,10 @@ namespace Heal.Net.HttpApi.Host;
 )]
 public class HealNetHttpApiHostModule : AbpModule
 {
+    /// <summary>
+    /// ConfigureServices
+    /// </summary>
+    /// <param name="context">context</param>
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
@@ -39,6 +46,10 @@ public class HealNetHttpApiHostModule : AbpModule
         ConfigureAuthentication(context, configuration);
     }
 
+    /// <summary>
+    /// ConfigureVirtualFileSystem
+    /// </summary>
+    /// <param name="context">context</param>
     private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
@@ -55,6 +66,11 @@ public class HealNetHttpApiHostModule : AbpModule
         }
     }
 
+    /// <summary>
+    /// ConfigureSwagger
+    /// </summary>
+    /// <param name="context">context</param>
+    /// <param name="configuration">configuration</param>
     private static void ConfigureSwagger(ServiceConfigurationContext context, IConfiguration configuration)
     {
         context.Services.AddAbpSwaggerGenWithOidc(
@@ -70,6 +86,11 @@ public class HealNetHttpApiHostModule : AbpModule
             });
     }
 
+    /// <summary>
+    /// ConfigureCors
+    /// </summary>
+    /// <param name="context">context</param>
+    /// <param name="configuration">configuration</param>
     private static void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
     {
         context.Services.AddCors(options =>
@@ -92,6 +113,11 @@ public class HealNetHttpApiHostModule : AbpModule
         });
     }
 
+    /// <summary>
+    /// ConfigureAuthentication
+    /// </summary>
+    /// <param name="context">context</param>
+    /// <param name="configuration">configuration</param>
     private static void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
     {
         context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -121,6 +147,10 @@ public class HealNetHttpApiHostModule : AbpModule
             });
     }
 
+    /// <summary>
+    /// OnApplicationInitialization
+    /// </summary>
+    /// <param name="context">context</param>
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         var app = context.GetApplicationBuilder();

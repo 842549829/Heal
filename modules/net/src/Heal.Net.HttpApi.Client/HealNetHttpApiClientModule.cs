@@ -11,6 +11,7 @@ using Volo.Abp.VirtualFileSystem;
 namespace Heal.Net.HttpApi.Client;
 
 /// <summary>
+/// HealNetHttpApiClientModule
 /// api/abp/api-definition  远程调用检查接口是否正确
 /// </summary>
 [DependsOn(
@@ -23,8 +24,15 @@ namespace Heal.Net.HttpApi.Client;
 )]
 public class HealNetHttpApiClientModule : AbpModule
 {
+    /// <summary>
+    /// RemoteServiceName
+    /// </summary>
     public const string RemoteServiceName = "HealNet";
-    
+
+    /// <summary>
+    /// ConfigureServices
+    /// </summary>
+    /// <param name="context">context</param>
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddHttpClientProxies(

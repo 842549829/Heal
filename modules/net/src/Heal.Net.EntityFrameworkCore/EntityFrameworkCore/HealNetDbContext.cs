@@ -16,6 +16,9 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
 
+/// <summary>
+/// Entity Framework Core implementation of HealNetDbContext.
+/// </summary>
 [ReplaceDbContext(typeof(IIdentityDbContext))]
 [ReplaceDbContext(typeof(ITenantManagementDbContext))]
 [ConnectionStringName("Default")]
@@ -40,28 +43,72 @@ public class HealNetDbContext :
      * uses this DbContext on runtime. Otherwise, it will use its own DbContext class.
      */
 
-    // Identity
+    /// <summary>
+    /// IdentityUser
+    /// </summary>
     public DbSet<IdentityUser> Users { get; set; }
+
+    /// <summary>
+    /// IdentityRole
+    /// </summary>
     public DbSet<IdentityRole> Roles { get; set; }
+
+    /// <summary>
+    /// IdentityClaimType
+    /// </summary>
     public DbSet<IdentityClaimType> ClaimTypes { get; set; }
+
+    /// <summary>
+    /// OrganizationUnit
+    /// </summary>
     public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
+
+    /// <summary>
+    /// IdentitySecurityLog
+    /// </summary>
     public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
+
+    /// <summary>
+    /// IdentityLinkUser
+    /// </summary>
     public DbSet<IdentityLinkUser> LinkUsers { get; set; }
+
+    /// <summary>
+    /// IdentityUserDelegation
+    /// </summary>
     public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
+
+    /// <summary>
+    /// IdentitySession
+    /// </summary>
     public DbSet<IdentitySession> Sessions { get; set; }
 
-    // Tenant Management
+    /// <summary>
+    /// Tenant
+    /// </summary>
     public DbSet<Tenant> Tenants { get; set; }
+
+    /// <summary>
+    /// TenantConnectionString
+    /// </summary>
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
     #endregion
 
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="options">options</param>
     public HealNetDbContext(DbContextOptions<HealNetDbContext> options)
         : base(options)
     {
 
     }
 
+    /// <summary>
+    /// Configure the model here or remove if not needed.
+    /// </summary>
+    /// <param name="builder">builder</param>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

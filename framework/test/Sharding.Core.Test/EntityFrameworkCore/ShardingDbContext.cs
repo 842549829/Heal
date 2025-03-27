@@ -6,9 +6,17 @@ using ShardingCore.Sharding.Abstractions;
 
 namespace Sharding.Core.Test.EntityFrameworkCore
 {
+    /// <summary>
+    /// 分表DbContext
+    /// </summary>
+    /// <param name="options">配置</param>
     public class ShardingDbContext(DbContextOptions<ShardingDbContext> options)
         : AbstractShardingDbContext(options), IShardingTableDbContext
     {
+        /// <summary>
+        /// 配置实体
+        /// </summary>
+        /// <param name="modelBuilder">模型创建对象</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

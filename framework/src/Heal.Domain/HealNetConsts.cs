@@ -1,5 +1,8 @@
 ﻿namespace Heal.Domain;
 
+/// <summary>
+/// 模块级常量
+/// </summary>
 public static class HealConsts
 {
     public const string DbTablePrefix = "App";

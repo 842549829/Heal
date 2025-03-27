@@ -34,6 +34,9 @@ using Volo.Abp.VirtualFileSystem;
 
 namespace Heal.Net.AuthServer;
 
+/// <summary>
+/// HealNetAuthServerModule
+/// </summary>
 [DependsOn(
     typeof(HealNetAuthServerHttpApiModule),
     typeof(AbpStudioClientAspNetCoreModule),
@@ -48,6 +51,10 @@ namespace Heal.Net.AuthServer;
     )]
 public class HealNetAuthServerModule : AbpModule
 {
+    /// <summary>
+    /// PreConfigureServices
+    /// </summary>
+    /// <param name="context">context</param>
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
@@ -72,9 +79,10 @@ public class HealNetAuthServerModule : AbpModule
             options.AddDevelopmentEncryptionAndSigningCertificate = false;
         });
 
-       
+        // 配置OpenIddict证书
         PreConfigure<OpenIddictServerBuilder>(serverBuilder =>
         {
+            // 配置OpenIddict自定义认证方式
             serverBuilder.Configure(options =>
             {
                 options.GrantTypes.Add("heal_net_password");
@@ -86,6 +94,10 @@ public class HealNetAuthServerModule : AbpModule
         });
     }
 
+    /// <summary>
+    /// ConfigureServices
+    /// </summary>
+    /// <param name="context">context</param>
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
@@ -109,6 +121,7 @@ public class HealNetAuthServerModule : AbpModule
             });
         }
 
+        // 注入自定义认证方式
         context.Services.AddScoped<HealNetAppExtensionGrant>();
         Configure<AbpOpenIddictExtensionGrantsOptions>(options =>
         {
@@ -127,15 +140,24 @@ public class HealNetAuthServerModule : AbpModule
         context.Services.AddHealHealthChecks();
     }
 
-    private void ConfigureAuthentication(ServiceConfigurationContext context)
+    /// <summary>
+    /// ConfigureAuthentication
+    /// </summary>
+    /// <param name="context">context</param>
+    private static void ConfigureAuthentication(ServiceConfigurationContext context)
     {
         context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
         context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
         {
+            // 启用动态Claims
             options.IsDynamicClaimsEnabled = true;
         });
     }
 
+    /// <summary>
+    /// ConfigureUrls
+    /// </summary>
+    /// <param name="configuration">configuration</param>
     private void ConfigureUrls(IConfiguration configuration)
     {
         Configure<AppUrlOptions>(options =>
@@ -145,6 +167,9 @@ public class HealNetAuthServerModule : AbpModule
         });
     }
 
+    /// <summary>
+    /// ConfigureBundles
+    /// </summary>
     private void ConfigureBundles()
     {
         Configure<AbpBundlingOptions>(options =>
@@ -160,7 +185,10 @@ public class HealNetAuthServerModule : AbpModule
         });
     }
 
-
+    /// <summary>
+    /// 配置虚拟文件路径
+    /// </summary>
+    /// <param name="context">context</param>
     private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
@@ -177,6 +205,9 @@ public class HealNetAuthServerModule : AbpModule
         }
     }
 
+    /// <summary>
+    /// ConfigureConventionalControllers
+    /// </summary>
     private void ConfigureConventionalControllers()
     {
         Configure<AbpAspNetCoreMvcOptions>(options =>
@@ -185,6 +216,11 @@ public class HealNetAuthServerModule : AbpModule
         });
     }
 
+    /// <summary>
+    /// ConfigureSwagger
+    /// </summary>
+    /// <param name="context">context</param>
+    /// <param name="configuration">configuration</param>
     private static void ConfigureSwagger(ServiceConfigurationContext context, IConfiguration configuration)
     {
         context.Services.AddAbpSwaggerGenWithOidc(
@@ -200,7 +236,12 @@ public class HealNetAuthServerModule : AbpModule
             });
     }
 
-    private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
+    /// <summary>
+    /// ConfigureCors
+    /// </summary>
+    /// <param name="context">context</param>
+    /// <param name="configuration">configuration</param>
+    private static void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
     {
         context.Services.AddCors(options =>
         {
@@ -222,6 +263,10 @@ public class HealNetAuthServerModule : AbpModule
         });
     }
 
+    /// <summary>
+    /// OnApplicationInitialization
+    /// </summary>
+    /// <param name="context">context</param>
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         var app = context.GetApplicationBuilder();

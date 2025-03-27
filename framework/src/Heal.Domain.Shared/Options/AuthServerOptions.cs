@@ -31,7 +31,7 @@ public class AuthServerOptions
     public string Authority { get; set; } = null!;
 
     /// <summary>
-    /// is https
+    /// 是否需要https
     /// </summary>
     public bool RequireHttpsMetadata { get; set; }
 }

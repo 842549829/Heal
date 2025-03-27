@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
@@ -15,15 +10,43 @@ using Volo.Abp.TenantManagement;
 
 namespace Heal.Net.Domain.Data;
 
+/// <summary>
+/// Migrates the database and seed data.
+/// </summary>
 public class HealNetDbMigrationService : ITransientDependency
 {
+    /// <summary>
+    /// Logger
+    /// </summary>
     public ILogger<HealNetDbMigrationService> Logger { get; set; }
 
+    /// <summary>
+    /// Data seeder
+    /// </summary>
     private readonly IDataSeeder _dataSeeder;
+
+    /// <summary>
+    /// Database schema migrators
+    /// </summary>
     private readonly IEnumerable<IHealNetDbSchemaMigrator> _dbSchemaMigrators;
+
+    /// <summary>
+    /// Tenant repository
+    /// </summary>
     private readonly ITenantRepository _tenantRepository;
+
+    /// <summary>
+    /// Current tenant
+    /// </summary>
     private readonly ICurrentTenant _currentTenant;
 
+    /// <summary>
+    /// Tenant repository
+    /// </summary>
+    /// <param name="dataSeeder">dataSeeder</param>
+    /// <param name="tenantRepository">tenantRepository</param>
+    /// <param name="currentTenant">currentTenant</param>
+    /// <param name="dbSchemaMigrators">dbSchemaMigrators</param>
     public HealNetDbMigrationService(
         IDataSeeder dataSeeder,
         ITenantRepository tenantRepository,
@@ -38,6 +61,10 @@ public class HealNetDbMigrationService : ITransientDependency
         Logger = NullLogger<HealNetDbMigrationService>.Instance;
     }
 
+    /// <summary>
+    /// Migrate the database and seed data.
+    /// </summary>
+    /// <returns>Task</returns>
     public async Task MigrateAsync()
     {
         var initialMigrationAdded = AddInitialMigrationIfNotExist();
@@ -85,6 +112,11 @@ public class HealNetDbMigrationService : ITransientDependency
         Logger.LogInformation("You can safely end this process...");
     }
 
+    /// <summary>
+    /// Migrate the database schema.
+    /// </summary>
+    /// <param name="tenant">tenant</param>
+    /// <returns>Task</returns>
     private async Task MigrateDatabaseSchemaAsync(Tenant? tenant = null)
     {
         Logger.LogInformation(
@@ -96,6 +128,11 @@ public class HealNetDbMigrationService : ITransientDependency
         }
     }
 
+    /// <summary>
+    /// Seed data.
+    /// </summary>
+    /// <param name="tenant">tenant</param>
+    /// <returns>Task</returns>
     private async Task SeedDataAsync(Tenant? tenant = null)
     {
         Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
@@ -108,6 +145,10 @@ public class HealNetDbMigrationService : ITransientDependency
         );
     }
 
+    /// <summary>
+    /// Add initial migration if not exist.
+    /// </summary>
+    /// <returns>bool</returns>
     private bool AddInitialMigrationIfNotExist()
     {
         try
@@ -141,20 +182,31 @@ public class HealNetDbMigrationService : ITransientDependency
         }
     }
 
-    private bool DbMigrationsProjectExists()
+    /// <summary>
+    /// Check if db migrations project exists.
+    /// </summary>
+    /// <returns>bool</returns>
+    private static bool DbMigrationsProjectExists()
     {
         var dbMigrationsProjectFolder = GetEntityFrameworkCoreProjectFolderPath();
 
         return dbMigrationsProjectFolder != null;
     }
 
-    private bool MigrationsFolderExists()
+    /// <summary>
+    /// Check if migrations folder exists.
+    /// </summary>
+    /// <returns>bool</returns>
+    private static bool MigrationsFolderExists()
     {
         var dbMigrationsProjectFolder = GetEntityFrameworkCoreProjectFolderPath();
 
         return dbMigrationsProjectFolder != null && Directory.Exists(Path.Combine(dbMigrationsProjectFolder, "Migrations"));
     }
 
+    /// <summary>
+    /// Add initial migration.
+    /// </summary>
     private void AddInitialMigration()
     {
         Logger.LogInformation("Creating initial migration...");
@@ -187,7 +239,11 @@ public class HealNetDbMigrationService : ITransientDependency
         }
     }
 
-    private string? GetEntityFrameworkCoreProjectFolderPath()
+    /// <summary>
+    /// Get entity framework core project folder path.
+    /// </summary>
+    /// <returns>result</returns>
+    private static string? GetEntityFrameworkCoreProjectFolderPath()
     {
         var slnDirectoryPath = GetSolutionDirectoryPath();
 
@@ -202,7 +258,11 @@ public class HealNetDbMigrationService : ITransientDependency
             .FirstOrDefault(d => d.EndsWith(".EntityFrameworkCore"));
     }
 
-    private string? GetSolutionDirectoryPath()
+    /// <summary>
+    /// Get solution directory path.
+    /// </summary>
+    /// <returns>directory path</returns>
+    private static string? GetSolutionDirectoryPath()
     {
         var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
 

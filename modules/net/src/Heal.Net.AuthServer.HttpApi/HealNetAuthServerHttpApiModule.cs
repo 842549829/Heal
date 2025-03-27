@@ -12,7 +12,10 @@ using Volo.Abp.TenantManagement;
 
 namespace Heal.Net.AuthServer.HttpApi;
 
- [DependsOn(
+/// <summary>
+/// HealNetAuthServerHttpApiModule
+/// </summary>
+[DependsOn(
      typeof(HealHttpApiModule),
     typeof(HealNetApplicationContractsModule),
     typeof(AbpSettingManagementHttpApiModule),
@@ -23,11 +26,19 @@ namespace Heal.Net.AuthServer.HttpApi;
     )]
 public class HealNetAuthServerHttpApiModule : AbpModule
 {
+    /// <summary>
+    /// ConfigureServices
+    /// </summary>
+    /// <param name="context">context</param>
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        // 配置本地化
         ConfigureLocalization();
     }
 
+    /// <summary>
+    /// ConfigureLocalization
+    /// </summary>
     private void ConfigureLocalization()
     {
         Configure<AbpLocalizationOptions>(options =>

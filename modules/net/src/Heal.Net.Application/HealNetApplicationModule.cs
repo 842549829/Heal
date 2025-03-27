@@ -13,6 +13,9 @@ using Volo.Abp.TenantManagement;
 
 namespace Heal.Net.Application;
 
+/// <summary>
+/// HealNetApplicationModule
+/// </summary>
 [DependsOn(
     typeof(HealNetDomainModule),
     typeof(HealApplicationModule),
@@ -24,6 +27,10 @@ namespace Heal.Net.Application;
     )]
 public class HealNetApplicationModule : AbpModule
 {
+    /// <summary>
+    /// ConfigureServices
+    /// </summary>
+    /// <param name="context">context</param>
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();

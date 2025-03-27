@@ -8,6 +8,11 @@ namespace Heal.Net.HttpApi.Host;
 /// </summary>
 public class Program
 {
+    /// <summary>
+    /// 主程序
+    /// </summary>
+    /// <param name="args">args</param>
+    /// <returns>Task</returns>
     public static async Task<int> Main(string[] args)
     {
         Log.Logger = new LoggerConfiguration()

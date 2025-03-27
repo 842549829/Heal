@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Volo.Abp.DependencyInjection;
+﻿using Volo.Abp.DependencyInjection;
 
 namespace Heal.Net.Domain.Data;
 
@@ -8,6 +7,10 @@ namespace Heal.Net.Domain.Data;
  */
 public class NullHealNetDbSchemaMigrator : IHealNetDbSchemaMigrator, ITransientDependency
 {
+    /// <summary>
+    /// Migrate database schema.
+    /// </summary>
+    /// <returns>Task</returns>
     public Task MigrateAsync()
     {
         return Task.CompletedTask;
