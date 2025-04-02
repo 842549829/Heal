@@ -8,6 +8,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Bases\Permissions\NetRolePermissionAutoMapperProfile.cs~RF1fc165.TMP" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\framework\src\Heal.Application\Heal.Application.csproj" />
 		<ProjectReference Include="..\Heal.Net.Domain\Heal.Net.Domain.csproj" />
 		<ProjectReference Include="..\Heal.Net.Application.Contracts\Heal.Net.Application.Contracts.csproj" />

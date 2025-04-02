@@ -7,7 +7,7 @@ namespace Heal.Net.Domain.Bases.Permissions.Managers;
 /// <summary>
 /// 角色权限领域接口
 /// </summary>
-public interface INetRolePermissionManager : IPermissionManager
+public interface INetRolePermissionManager : IHealNetDomainManager
 {
     /// <summary>
     /// 设置角色权限

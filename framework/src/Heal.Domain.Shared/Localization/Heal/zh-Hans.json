@@ -1,4 +1,4 @@
-{
+﻿{
   "culture": "zh-Hans",
   "texts": {
     "AppName": "A121",
@@ -37,6 +37,11 @@
     "Unspecified": "System",
     "SeeAllUsers": "查看所有用户",
     "TakePhoto": "拍摄照片",
-    "ChoosePhoto": "选择照片"
+    "ChoosePhoto": "选择照片",
+    "F:Heal": "业务模块管理",
+    "L:AbpIdentity,Permission:IdentityManagement": "用户模块管理",
+    "L:AbpSettingManagement,Permission:SettingManagement": "配置模块管理",
+    "L:AbpFeatureManagement,Permission:FeatureManagement": "功能模块管理",
+    "L:AbpTenantManagement,Permission:TenantManagement": "租户模块管理"
   }
 }
