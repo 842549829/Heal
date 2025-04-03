@@ -37,8 +37,4 @@
 	  <ProjectReference Include="..\Heal.Net.HttpApi\Heal.Net.HttpApi.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Filters\" />
-	</ItemGroup>
-
 </Project>

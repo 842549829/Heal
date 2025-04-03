@@ -8,7 +8,10 @@ using Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
 using Heal.Net.HttpApi.Host.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Serilog;
@@ -45,24 +48,29 @@ public class HealNetHttpApiHostModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureAuthentication(context, configuration);
-        ConfigureCustomApiRoute(context);
+        ConfigureJsonOptions(context);
     }
 
     /// <summary>
-    /// 配置 ABP 默认的路由前缀为自定义路径。
+    /// 配置JsonOptions 
     /// </summary>
     /// <param name="context">服务配置上下文。</param>
-    /// <remarks>
-    /// 将 ABP 默认的路由前缀替换为指定的自定义路径。
-    /// 适用于需要全局调整 ABP 路由规则的场景。
-    /// </remarks>
-    public void ConfigureCustomApiRoute(ServiceConfigurationContext context)
+    public void ConfigureJsonOptions(ServiceConfigurationContext context)
     {
+        Configure<JsonOptions>(options =>
+        {
+            // 使用驼峰命名规则
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 
-        //Configure<MvcOptions>(options =>
-        //{
-        //    //options.UseCentralRoutePrefix(new RouteAttribute("wererersss"));
-        //});
+            // 忽略循环引用
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+
+            // 忽略空值
+            options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+
+            // 可选：允许注释
+            options.JsonSerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;
+        });
 
         //var customRootPath = "v1";
         //var assembly = typeof(HealNetHttpApiHostModule).Assembly;
@@ -237,6 +245,18 @@ public class HealNetHttpApiHostModule : AbpModule
 
             var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
             options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
+
+            //// Swagger文档样式跳转
+            //options.DefaultModelsExpandDepth(-1); // 默认全部不展开
+            //options.DefaultModelExpandDepth(99); // 子属性默认展开深度99
+
+            //options.DefaultModelRendering(ModelRendering.Model);
+            //options.DisplayOperationId();
+            //options.DisplayRequestDuration();
+            //options.DocExpansion(DocExpansion.List);
+            //options.EnableDeepLinking();
+            //options.EnableFilter();
+            //options.ShowExtensions();
         });
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
