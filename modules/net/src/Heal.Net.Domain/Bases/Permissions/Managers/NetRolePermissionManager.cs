@@ -8,6 +8,7 @@ using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
 using Volo.Abp.PermissionManagement;
+using Volo.Abp.PermissionManagement.Identity;
 
 namespace Heal.Net.Domain.Bases.Permissions.Managers;
 
@@ -21,7 +22,7 @@ namespace Heal.Net.Domain.Bases.Permissions.Managers;
 /// <param name="permissionRepository">权限仓储接口</param>
 /// <param name="userRepository">用户仓储接口</param>
 public class NetRolePermissionManager(IPermissionGrantRepository permissionGrantRepository,
-    IPermissionManagementProvider permissionManagementProvider,
+    RolePermissionManagementProvider permissionManagementProvider,
     IRepository<PermissionGroupDefinitionRecord> permissionGroupDefinitionRecordRepository,
     IRepository<PermissionDefinitionRecord> permissionDefinitionRecordRepository,
     IPermissionRepository permissionRepository,

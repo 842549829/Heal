@@ -20,6 +20,7 @@ public class RoleController(IRoleAppService roleAppService) : HealNetController
     /// <param name="input">查询条件</param>
     /// <returns>角色列表</returns>
     [HttpGet]
+    //[Authorize("AbpIdentity.Users")]
     public Task<PagedResultDto<IdentityRoleDto>> GetListAsync([FromQuery] GetIdentityRolesInput input)
     {
         return roleAppService.GetListAsync(input);
