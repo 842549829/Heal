@@ -1,9 +1,9 @@
-﻿using JetBrains.Annotations;
+﻿using Heal.Domain.Shared.Constants;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using OpenIddict.Abstractions;
 using System.Text.Json;
-using Heal.Domain.Shared.Constants;
 using Volo.Abp;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
@@ -132,7 +132,8 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             OpenIddictConstants.Permissions.Scopes.Profile,
             OpenIddictConstants.Permissions.Scopes.Roles,
             "Heal",
-            ApplicationProgramConst.ApplicationName
+            ApplicationProgramConst.ApplicationName,
+            "data_permission"
         };
 
         var configurationSection = _configuration.GetSection("OpenIddict:Applications");
