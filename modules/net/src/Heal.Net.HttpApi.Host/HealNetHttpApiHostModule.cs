@@ -1,4 +1,4 @@
-﻿using Heal.Domain.Shared.Constant;
+﻿using Heal.Domain.Shared.Constants;
 using Heal.Domain.Shared.MultiTenancy;
 using Heal.Net.Application;
 using Heal.Net.Application.Contracts;

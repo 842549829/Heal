@@ -1,4 +1,4 @@
-﻿using Heal.Domain.Shared.Constant;
+﻿using Heal.Domain.Shared.Constants;
 using Heal.Domain.Shared.Enums;
 using Heal.Net.Domain.Bases.Permissions.Modules;
 using Heal.Net.Domain.Bases.Permissions.Repositories;

@@ -1,9 +1,9 @@
-﻿using Heal.Domain.Shared.Constant;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using OpenIddict.Abstractions;
 using System.Text.Json;
+using Heal.Domain.Shared.Constants;
 using Volo.Abp;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;

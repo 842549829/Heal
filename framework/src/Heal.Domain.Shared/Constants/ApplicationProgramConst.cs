@@ -1,4 +1,4 @@
-﻿namespace Heal.Domain.Shared.Constant;
+﻿namespace Heal.Domain.Shared.Constants;
 
 /// <summary>
 /// 程序常量
