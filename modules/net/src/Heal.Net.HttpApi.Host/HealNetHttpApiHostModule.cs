@@ -5,6 +5,7 @@ using Heal.Net.Application.Contracts;
 using Heal.Net.Domain;
 using Heal.Net.Domain.Shared;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
+using Heal.Net.HttpApi.Host.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.OpenApi.Models;
@@ -44,6 +45,44 @@ public class HealNetHttpApiHostModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureAuthentication(context, configuration);
+        ConfigureCustomApiRoute(context);
+    }
+
+    /// <summary>
+    /// 配置 ABP 默认的路由前缀为自定义路径。
+    /// </summary>
+    /// <param name="context">服务配置上下文。</param>
+    /// <remarks>
+    /// 将 ABP 默认的路由前缀替换为指定的自定义路径。
+    /// 适用于需要全局调整 ABP 路由规则的场景。
+    /// </remarks>
+    public void ConfigureCustomApiRoute(ServiceConfigurationContext context)
+    {
+
+        //Configure<MvcOptions>(options =>
+        //{
+        //    //options.UseCentralRoutePrefix(new RouteAttribute("wererersss"));
+        //});
+
+        //var customRootPath = "v1";
+        //var assembly = typeof(HealNetHttpApiHostModule).Assembly;
+        //if (string.IsNullOrWhiteSpace(customRootPath))
+        //{
+        //    throw new ArgumentException("自定义根路径不能为空或仅包含空白字符。", nameof(customRootPath));
+        //}
+
+        //if (assembly == null)
+        //{
+        //    throw new ArgumentNullException(nameof(assembly), "程序集不能为 null。");
+        //}
+
+        //Configure<AbpAspNetCoreMvcOptions>(options =>
+        //{
+        //    options.ConventionalControllers.Create(assembly, settings =>
+        //    {
+        //        settings.RootPath = customRootPath.Trim('/');
+        //    });
+        //});
     }
 
     /// <summary>
@@ -83,6 +122,17 @@ public class HealNetHttpApiHostModule : AbpModule
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Heal API", Version = "v1" });
                 options.DocInclusionPredicate((_, _) => true);
                 options.CustomSchemaIds(type => type.FullName);
+
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                    .Where(assembly => !assembly.IsDynamic && !string.IsNullOrEmpty(assembly.Location))
+                    .ToList();
+
+                foreach (var xmlPath in assemblies.Select(assembly => $"{assembly.GetName().Name}.xml").Select(xmlFile => Path.Combine(AppContext.BaseDirectory, xmlFile)).Where(File.Exists))
+                {
+                    options.IncludeXmlComments(xmlPath);
+                    // 添加枚举字段描述的支持
+                    options.SchemaFilter<EnumSchemaFilter>(xmlPath);
+                }
             });
     }
 

@@ -7,7 +7,12 @@
 		<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
 		<RootNamespace>Heal.Net.HttpApi.Host</RootNamespace>
 		<PreserveCompilationReferences>true</PreserveCompilationReferences>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Include="..\..\..\..\shared\EnumSchemaFilter.cs" Link="Filters\EnumSchemaFilter.cs" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
@@ -30,6 +35,10 @@
 	  <ProjectReference Include="..\Heal.Net.Application\Heal.Net.Application.csproj" />
 	  <ProjectReference Include="..\Heal.Net.EntityFrameworkCore\Heal.Net.EntityFrameworkCore.csproj" />
 	  <ProjectReference Include="..\Heal.Net.HttpApi\Heal.Net.HttpApi.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Filters\" />
 	</ItemGroup>
 
 </Project>

@@ -1,11 +1,14 @@
 ﻿using Heal.Net.Application.Contracts.Bases.Permissions;
 using Heal.Net.Application.Contracts.Bases.Permissions.Dtos;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Heal.Net.HttpApi.Controllers.Bases;
 
-[Route("api/basics/permissions")]
+/// <summary>
+/// 权限控制器
+/// </summary>
+/// <param name="permissionAppService">权限管理</param>
+[Route("api/net/basics")]
 [ApiController]
 public class PermissionController(INetRolePermissionAppService permissionAppService) : HealNetController
 {
@@ -34,7 +37,6 @@ public class PermissionController(INetRolePermissionAppService permissionAppServ
     /// </summary>
     /// <returns>权限组</returns>
     [HttpGet("group")]
-    [AllowAnonymous]
     public Task<List<PermissionGroupDefinitionDto>> GetPermissionGroupDefinitionListAsync()
     {
         return permissionAppService.GetPermissionGroupDefinitionListAsync();

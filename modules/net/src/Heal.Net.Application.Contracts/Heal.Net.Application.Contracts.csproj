@@ -5,6 +5,7 @@
   <PropertyGroup>
     <TargetFramework>$(MicrosoftTargetFramework)</TargetFramework>
     <RootNamespace>Heal.Net.Application.Contracts</RootNamespace>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

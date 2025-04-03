@@ -4,6 +4,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>$(MicrosoftTargetFramework)</TargetFramework>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

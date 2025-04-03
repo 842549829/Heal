@@ -6,6 +6,7 @@
     <TargetFramework>$(MicrosoftTargetFramework)</TargetFramework>
     <RootNamespace>Heal.Net.Domain.Shared</RootNamespace>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

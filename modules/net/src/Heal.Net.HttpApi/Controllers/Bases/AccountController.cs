@@ -9,7 +9,7 @@ namespace Heal.Net.HttpApi.Controllers.Bases;
 /// 账户管理控制器
 /// </summary>
 /// <param name="accountAppService">账号服务接口</param>
-[Route("api/basics/accounts")]
+[Route("api/net/basics/accounts")]
 [ApiController]
 [AllowAnonymous]
 public class AccountController(IAccountAppService accountAppService) : HealNetController
