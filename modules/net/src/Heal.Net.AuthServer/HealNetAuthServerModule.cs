@@ -1,4 +1,5 @@
-﻿using Heal.Domain.Shared.MultiTenancy;
+﻿using Heal.Domain.Shared.Constants;
+using Heal.Domain.Shared.MultiTenancy;
 using Heal.Net.Application;
 using Heal.Net.Application.Contracts;
 using Heal.Net.AuthServer.ExtensionGrantTypes;
@@ -85,7 +86,7 @@ public class HealNetAuthServerModule : AbpModule
             // 配置OpenIddict自定义认证方式
             serverBuilder.Configure(options =>
             {
-                options.GrantTypes.Add("heal_net_password");
+                options.GrantTypes.Add(TokenRequestGrantTypeConsts.HealNetPassword);
 
             });
 
@@ -132,7 +133,7 @@ public class HealNetAuthServerModule : AbpModule
         Configure<AbpOpenIddictExtensionGrantsOptions>(options =>
         {
             var tokenExtensionGrant = context.Services.GetRequiredService<HealNetAppExtensionGrant>();
-            options.Grants.Add("heal_net_password", tokenExtensionGrant);
+            options.Grants.Add(TokenRequestGrantTypeConsts.HealNetPassword, tokenExtensionGrant);
         });
 
         ConfigureAuthentication(context);

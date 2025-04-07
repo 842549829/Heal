@@ -36,4 +36,9 @@ public class LoginInputDto : EntityDto
     /// 组织Code
     /// </summary>
     public string? OrganizationCode { get; set; }
+
+    /// <summary>
+    /// 授权类型
+    /// </summary>
+    public string? GrantType { get; set; } 
 }

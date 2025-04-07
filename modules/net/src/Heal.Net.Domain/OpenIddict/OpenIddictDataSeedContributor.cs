@@ -211,7 +211,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                     OpenIddictConstants.GrantTypes.ClientCredentials,
                     OpenIddictConstants.GrantTypes.RefreshToken,
                     OpenIddictConstants.GrantTypes.DeviceCode,
-                    "heal_net_password" // 添加net客户端
+                    TokenRequestGrantTypeConsts.HealNetPassword // 添加HealNetPassword客户端
                 },
                 scopes: healNetAppClientScopes,
                 redirectUri: $"{healNetAppClientRootUrl}signin-oidc",
