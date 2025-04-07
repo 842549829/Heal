@@ -26,4 +26,14 @@ public class LoginInputDto : EntityDto
     /// 租户Id
     /// </summary>
     public Guid? TenantId { get; set; }
+
+    /// <summary>
+    /// 登录时是否记住
+    /// </summary>
+    public bool? RememberMe { get; set; }
+
+    /// <summary>
+    /// 组织Code
+    /// </summary>
+    public string? OrganizationCode { get; set; }
 }

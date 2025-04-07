@@ -66,6 +66,12 @@ public static class HealNetEfCoreEntityExtensionMappings
                         propertyBuilder.HasMaxLength(IdentityUserExtensionConsts.MaxAvatarLength);
                         propertyBuilder.HasDefaultValue(string.Empty);
                         propertyBuilder.IsRequired();
+                    })
+                .MapEfCoreProperty<IdentityUser, int>(IdentityUserExtensionConsts.Identity,
+                    (_, propertyBuilder) =>
+                    {
+                        propertyBuilder.HasDefaultValue(1);
+                        propertyBuilder.IsRequired();
                     });
 
             ObjectExtensionManager

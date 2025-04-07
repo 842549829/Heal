@@ -38,14 +38,13 @@ public static class HealNetDtoExtensions
              */
 
             ObjectExtensionManager.Instance
-                .AddOrUpdateProperty<string>(new[]
-                    {
+                .AddOrUpdateProperty<string>([
                         typeof(IdentityUserDto),
                         typeof(IdentityUserCreateDto),
                         typeof(IdentityUserUpdateDto),
                         typeof(ProfileDto),
                         typeof(UpdateProfileDto)
-                    },
+                    ],
                     IdentityUserExtensionConsts.OpenId)
                 .AddOrUpdateProperty<string>([
                         typeof(IdentityUserDto),
@@ -55,7 +54,14 @@ public static class HealNetDtoExtensions
                         typeof(UpdateProfileDto),
                         typeof(UserAvatarUpdateDto)
                     ],
-                    IdentityUserExtensionConsts.Avatar);
+                    IdentityUserExtensionConsts.Avatar)
+                .AddOrUpdateProperty<int>([
+                    typeof(IdentityUserDto),
+                    typeof(IdentityUserCreateDto),
+                    typeof(IdentityUserUpdateDto),
+                    typeof(ProfileDto),
+                    typeof(UpdateProfileDto)
+                ], IdentityUserExtensionConsts.Identity);
 
             ObjectExtensionManager.Instance
                 .AddOrUpdateProperty<int>([

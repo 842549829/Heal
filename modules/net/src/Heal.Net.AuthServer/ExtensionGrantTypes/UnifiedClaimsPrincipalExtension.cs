@@ -1,33 +1,36 @@
-﻿using System.Security.Claims;
-using System.Security.Principal;
+﻿using Heal.Domain.Shared.Constants;
+using OpenIddict.Abstractions;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
-using Volo.Abp.Security.Claims;
+using Volo.Abp.OpenIddict;
 
-namespace Heal.Net.AuthServer.ExtensionGrantTypes;
-
-/// <summary>
-/// DataPermissionClaimsPrincipalContributor
-/// </summary>
-public class DataPermissionClaimsPrincipalContributor : IAbpClaimsPrincipalContributor, ITransientDependency
+namespace Heal.Net.AuthServer.ExtensionGrantTypes
 {
     /// <summary>
-    /// ContributeAsync
+    /// 自定义Claims
     /// </summary>
-    /// <param name="context">context</param>
-    /// <returns>Task</returns>
-    public async Task ContributeAsync(AbpClaimsPrincipalContributorContext context)
+    public class UnifiedClaimsPrincipalExtension : IAbpOpenIddictClaimsPrincipalHandler, ITransientDependency
     {
-        var identity = context.ClaimsPrincipal.Identities.FirstOrDefault();
-        var userId = identity?.FindUserId();
-        var userManager = context.ServiceProvider.GetRequiredService<IdentityUserManager>();
-        var user = await userManager.GetUserAsync(context.ClaimsPrincipal);
-        if (user != null && identity != null && userId.HasValue)
+        /// <summary>
+        /// 自定义Claims
+        /// </summary>
+        /// <param name="context">context</param>
+        /// <returns>Task</returns>
+        public Task HandleAsync(AbpOpenIddictClaimsPrincipalHandlerContext context)
         {
-            // TODO 获取用户数据权限待实现
-            identity.AddClaim(new Claim("data_permission", "socialSecurityNumber"));
-            identity.AddClaim(new Claim("data_permission1", "socialSecurityNumber1"));
-            identity.AddClaim(new Claim("socialSecurityNumber", "socialSecurityNumber1"));
+            foreach (var claim in context.Principal.Claims)
+            {
+                if (claim.Type == HealClaimTypesConsts.DataPermission)
+                {
+                    claim.SetDestinations(OpenIddictConstants.Destinations.AccessToken, OpenIddictConstants.Destinations.IdentityToken);
+                }
+
+                if (claim.Type == HealClaimTypesConsts.CustomDataPermission)
+                {
+                    claim.SetDestinations(OpenIddictConstants.Destinations.AccessToken, OpenIddictConstants.Destinations.IdentityToken);
+                }
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

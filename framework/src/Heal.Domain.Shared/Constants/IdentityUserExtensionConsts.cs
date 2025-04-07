@@ -16,6 +16,11 @@ public static class IdentityUserExtensionConsts
     public const string Avatar = "Avatar";
 
     /// <summary>
+    /// 身份标识
+    /// </summary>
+    public const string Identity = "Identity";
+
+    /// <summary>
     /// MaxOpenIdLength
     /// </summary>
     public static int MaxOpenIdLength { get; set; } = 256;

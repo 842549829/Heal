@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Heal.Domain.Shared.Constants;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 using System.Security.Claims;
-using Heal.Domain.Shared.Constants;
 using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.OpenIddict;
@@ -465,10 +465,16 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
         // will be used to create an id_token, a token or a code.
         var principal = await SignInManager.CreateUserPrincipalAsync(user);
 
-        var rememberMe = request.GetParameter("RememberMe").ToString();
+        var rememberMe = request.GetParameter(LoginConsts.RememberMe).ToString();
         if (!rememberMe.IsNullOrWhiteSpace() && bool.TryParse(rememberMe, out var rememberMeValue) && rememberMeValue)
         {
             var claim = new Claim(AbpClaimTypes.RememberMe, true.ToString()).SetDestinations(OpenIddictConstants.Destinations.AccessToken);
+            principal.Identities.FirstOrDefault()?.AddClaim(claim);
+        }
+        var organizationCode = request.GetParameter(LoginConsts.Organization).ToString();
+        if (!organizationCode.IsNullOrWhiteSpace())
+        {
+            var claim = new Claim(HealClaimTypesConsts.OrganizationCode, organizationCode).SetDestinations(OpenIddictConstants.Destinations.AccessToken);
             principal.Identities.FirstOrDefault()?.AddClaim(claim);
         }
 
@@ -531,5 +537,5 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
     /// <summary>
     /// 自定义登录方式名称
     /// </summary>
-    public string Name  => ApplicationProgramConst.ApplicationName;
+    public string Name  => ApplicationProgramConsts.ApplicationName;
 }

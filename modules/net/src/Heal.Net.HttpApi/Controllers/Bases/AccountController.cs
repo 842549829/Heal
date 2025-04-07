@@ -18,21 +18,23 @@ public class AccountController(IAccountAppService accountAppService) : HealNetCo
     /// 登录
     /// </summary>
     /// <param name="input">登录信息</param>
+    /// <param name="cancellationToken">cancellationToken</param>
     /// <returns>登录结果</returns>
     [HttpPost("login")]
-    public async Task<ActionResult<LoginResultDto>> LoginAsync(LoginInputDto input)
+    public async Task<ActionResult<LoginResultDto>> LoginAsync(LoginInputDto input, CancellationToken cancellationToken = default)
     {
-        return await accountAppService.LoginAsync(input);
+        return await accountAppService.LoginAsync(input, cancellationToken);
     }
 
     /// <summary>
     /// 刷新token
     /// </summary>
     /// <param name="input">刷新token</param>
+    /// <param name="cancellationToken">cancellationToken</param>
     /// <returns>结果</returns>
     [HttpPost("refresh")]
-    public async Task<ActionResult<LoginResultDto>> RefreshAsync(RefreshTokenInputDto input)
+    public async Task<ActionResult<LoginResultDto>> RefreshAsync(RefreshTokenInputDto input, CancellationToken cancellationToken = default)
     {
-        return await accountAppService.RefreshAsync(input);
+        return await accountAppService.RefreshAsync(input, cancellationToken);
     }
 }

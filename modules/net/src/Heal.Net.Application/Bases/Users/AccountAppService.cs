@@ -1,6 +1,8 @@
-﻿using Heal.Domain.Shared.Options;
+﻿using Heal.Domain.Shared.Constants;
+using Heal.Domain.Shared.Options;
 using Heal.Net.Application.Contracts.Bases.Users;
 using Heal.Net.Application.Contracts.Bases.Users.Dtos;
+using IdentityModel;
 using IdentityModel.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -19,25 +21,38 @@ public class AccountAppService(IOptions<AuthServerOptions> authServerOption, IHt
     /// 登录
     /// </summary>
     /// <param name="input">登录参数</param>
+    /// <param name="cancellationToken">cancellationToken</param>
     /// <returns>登录结果</returns>
-    public async Task<LoginResultDto> LoginAsync(LoginInputDto input)
+    public async Task<LoginResultDto> LoginAsync(LoginInputDto input, CancellationToken cancellationToken = default)
     {
         var disco = await GetDiscoveryDocumentAsync();
-        var passwordTokenRequest = new PasswordTokenRequest
+        var request = new TokenRequest
         {
             Address = disco.TokenEndpoint,
             ClientId = _authServerOption.ClientId,
             ClientSecret = _authServerOption.ClientSecret,
-            UserName = input.UserName,
-            Password = input.Password,
-            Scope = _authServerOption.Scope,
             GrantType = _authServerOption.GrantType
         };
         if (input.TenantId.HasValue && input.TenantId.Value != Guid.Empty)
         {
-            passwordTokenRequest.Headers.Add("__tenant", input.TenantId.Value.ToString());
+            request.Headers.Add(LoginConsts.Tenant, input.TenantId.Value.ToString());
         }
-        var tokenResponse = await _client.RequestPasswordTokenAsync(passwordTokenRequest);
+        if (!input.OrganizationCode.IsNullOrWhiteSpace())
+        {
+            request.Parameters.Add(LoginConsts.Organization, input.OrganizationCode);
+        }
+        if (input.RememberMe.HasValue)
+        {
+            request.Parameters.Add(LoginConsts.RememberMe, input.RememberMe.Value.ToString());
+        }
+
+        request.Parameters.AddRequired(OidcConstants.TokenRequest.GrantType, "heal_net_password");
+        request.Parameters.AddRequired(OidcConstants.TokenRequest.UserName, input.UserName);
+        request.Parameters.AddRequired(OidcConstants.TokenRequest.Password, input.Password, allowEmptyValue: true);
+        request.Parameters.AddOptional(OidcConstants.TokenRequest.Scope, _authServerOption.Scope);
+
+      
+        var tokenResponse = await _client.RequestTokenAsync(request, cancellationToken: cancellationToken);
         TokenResponseHandle(tokenResponse);
         var token = CreateLoginResult(tokenResponse);
         return token;
@@ -47,8 +62,9 @@ public class AccountAppService(IOptions<AuthServerOptions> authServerOption, IHt
     /// 用refresh token获取新的access token
     /// </summary>
     /// <param name="input">refresh token</param>
+    /// <param name="cancellationToken">, CancellationToken cancellationToken = default</param>
     /// <returns>刷新结果</returns>
-    public async Task<LoginResultDto> RefreshAsync(RefreshTokenInputDto input)
+    public async Task<LoginResultDto> RefreshAsync(RefreshTokenInputDto input, CancellationToken cancellationToken = default)
     {
         var disco = await GetDiscoveryDocumentAsync();
         var tokenResponse = await _client.RequestRefreshTokenAsync(new RefreshTokenRequest
@@ -57,7 +73,7 @@ public class AccountAppService(IOptions<AuthServerOptions> authServerOption, IHt
             ClientId = _authServerOption.ClientId,
             ClientSecret = _authServerOption.ClientSecret,
             RefreshToken = input.RefreshToken
-        });
+        }, cancellationToken);
         TokenResponseHandle(tokenResponse);
         var token = CreateLoginResult(tokenResponse);
         return token;

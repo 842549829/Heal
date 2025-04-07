@@ -3,7 +3,7 @@
 /// <summary>
 /// 程序常量
 /// </summary>
-public class ApplicationProgramConst
+public class ApplicationProgramConsts
 {
     /// <summary>
     /// 应用程序名称

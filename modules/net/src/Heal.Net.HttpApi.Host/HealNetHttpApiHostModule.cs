@@ -183,7 +183,7 @@ public class HealNetHttpApiHostModule : AbpModule
             {
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                options.Audience = ApplicationProgramConst.ApplicationName;
+                options.Audience = ApplicationProgramConsts.ApplicationName;
 
                 options.Events = new JwtBearerEvents
                 {

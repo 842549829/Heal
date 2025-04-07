@@ -121,6 +121,12 @@ public class HealNetAuthServerModule : AbpModule
             });
         }
 
+        // 配置OpenIddict自定义Claims目的地
+        Configure<AbpOpenIddictClaimsPrincipalOptions>(options =>
+        {
+            options.ClaimsPrincipalHandlers.Add<UnifiedClaimsPrincipalExtension>();
+        });
+
         // 注入自定义认证方式
         context.Services.AddScoped<HealNetAppExtensionGrant>();
         Configure<AbpOpenIddictExtensionGrantsOptions>(options =>

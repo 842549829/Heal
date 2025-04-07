@@ -108,13 +108,13 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             });
         }
 
-        if (await _openIddictScopeRepository.FindByNameAsync(ApplicationProgramConst.ApplicationName) == null)
+        if (await _openIddictScopeRepository.FindByNameAsync(ApplicationProgramConsts.ApplicationName) == null)
         {
             await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor
             {
-                Name = ApplicationProgramConst.ApplicationName,
-                DisplayName = $"{ApplicationProgramConst.ApplicationName} API",
-                Resources = { ApplicationProgramConst.ApplicationName }
+                Name = ApplicationProgramConsts.ApplicationName,
+                DisplayName = $"{ApplicationProgramConsts.ApplicationName} API",
+                Resources = { ApplicationProgramConsts.ApplicationName }
             });
         }
     }
@@ -132,7 +132,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             OpenIddictConstants.Permissions.Scopes.Profile,
             OpenIddictConstants.Permissions.Scopes.Roles,
             "Heal",
-            ApplicationProgramConst.ApplicationName,
+            ApplicationProgramConsts.ApplicationName,
             "data_permission"
         };
 
@@ -194,7 +194,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             var healNetAppClientRootUrl = configurationSection["HealNetApp:RootUrl"]!.EnsureEndsWith('/');
             var healNetAppClientScopes = new List<string>();
             healNetAppClientScopes.AddRange(commonScopes);
-            healNetAppClientScopes.Add(ApplicationProgramConst.ApplicationName);
+            healNetAppClientScopes.Add(ApplicationProgramConsts.ApplicationName);
             await CreateApplicationAsync(
                 applicationType: OpenIddictConstants.ApplicationTypes.Web,
                 name: healNetAppClientId,
