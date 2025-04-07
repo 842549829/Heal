@@ -87,7 +87,8 @@ public class HealNetAuthServerModule : AbpModule
             serverBuilder.Configure(options =>
             {
                 options.GrantTypes.Add(TokenRequestGrantTypeConsts.HealNetPassword);
-
+                options.GrantTypes.Add(TokenRequestGrantTypeConsts.HealDocPassword);
+                options.GrantTypes.Add(TokenRequestGrantTypeConsts.HealPatPassword);
             });
 
             serverBuilder.AddProductionEncryptionAndSigningCertificate("openiddict.pfx", configuration["AuthServer:CertificatePassPhrase"]!);
@@ -132,8 +133,14 @@ public class HealNetAuthServerModule : AbpModule
         context.Services.AddScoped<HealNetAppExtensionGrant>();
         Configure<AbpOpenIddictExtensionGrantsOptions>(options =>
         {
-            var tokenExtensionGrant = context.Services.GetRequiredService<HealNetAppExtensionGrant>();
-            options.Grants.Add(TokenRequestGrantTypeConsts.HealNetPassword, tokenExtensionGrant);
+            var netTokenExtensionGrant = context.Services.GetRequiredService<HealNetAppExtensionGrant>();
+            options.Grants.Add(TokenRequestGrantTypeConsts.HealNetPassword, netTokenExtensionGrant);
+
+            var docTokenExtensionGrant = context.Services.GetRequiredService<HealDocAppExtensionGrant>();
+            options.Grants.Add(TokenRequestGrantTypeConsts.HealDocPassword, docTokenExtensionGrant);
+
+            var patTokenExtensionGrant = context.Services.GetRequiredService<HealPatAppExtensionGrant>();
+            options.Grants.Add(TokenRequestGrantTypeConsts.HealPatPassword, patTokenExtensionGrant);
         });
 
         ConfigureAuthentication(context);

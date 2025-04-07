@@ -21,11 +21,11 @@ using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 namespace Heal.Net.AuthServer.ExtensionGrantTypes;
 
 /// <summary>
-/// 自定义登录方式(Net)
+/// 自定义登录方式(Doc)
 /// </summary>
 [IgnoreAntiforgeryToken]
 [ApiExplorerSettings(IgnoreApi = true)]
-public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExtensionGrant
+public class HealDocAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExtensionGrant
 {
     /// <summary>
     /// 服务作用域
@@ -89,7 +89,7 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
         {
             await ReplaceEmailToUsernameOfInputIfNeeds(request);
 
-            IdentityUser? user ;
+            IdentityUser? user;
             if (AbpIdentityOptions.Value.ExternalLoginProviders.Any())
             {
                 foreach (var externalLoginProviderInfo in AbpIdentityOptions.Value.ExternalLoginProviders.Values)
@@ -537,5 +537,5 @@ public class HealNetAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
     /// <summary>
     /// 自定义登录方式名称
     /// </summary>
-    public string Name  => ApplicationProgramConsts.ApplicationName;
+    public string Name => ApplicationProgramConsts.ApplicationName;
 }

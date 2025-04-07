@@ -133,7 +133,9 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             OpenIddictConstants.Permissions.Scopes.Roles,
             "Heal",
             ApplicationProgramConsts.ApplicationName,
-            "data_permission"
+            HealClaimTypesConsts.DataPermission,
+            HealClaimTypesConsts.CustomDataPermission,
+            HealClaimTypesConsts.OrganizationCode
         };
 
         var configurationSection = _configuration.GetSection("OpenIddict:Applications");
@@ -211,7 +213,9 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                     OpenIddictConstants.GrantTypes.ClientCredentials,
                     OpenIddictConstants.GrantTypes.RefreshToken,
                     OpenIddictConstants.GrantTypes.DeviceCode,
-                    TokenRequestGrantTypeConsts.HealNetPassword // 添加HealNetPassword客户端
+                    TokenRequestGrantTypeConsts.HealNetPassword, // 添加HealNetPassword客户端
+                    TokenRequestGrantTypeConsts.HealPatPassword,
+                    TokenRequestGrantTypeConsts.HealDocPassword
                 },
                 scopes: healNetAppClientScopes,
                 redirectUri: $"{healNetAppClientRootUrl}signin-oidc",

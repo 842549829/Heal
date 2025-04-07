@@ -6,12 +6,17 @@
 public static class TokenRequestGrantTypeConsts
 {
     /// <summary>
-    /// 授权类型(医护人员)
+    /// 授权类型(Net)
     /// </summary>
     public const string HealNetPassword = "heal_net_password";
 
     /// <summary>
     /// 授权类型(患者)
     /// </summary>
-    public const string HealMovePassword = "heal_move_password";
+    public const string HealPatPassword = "heal_pat_password";
+
+    /// <summary>
+    /// 授权类型(医生)
+    /// </summary>
+    public const string HealDocPassword = "heal_doc_password";
 }
