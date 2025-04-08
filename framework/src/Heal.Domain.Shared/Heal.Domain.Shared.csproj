@@ -47,6 +47,7 @@
   </ItemGroup>
 
 	<ItemGroup>
+    <PackageReference Include="PinYin" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" />
     <PackageReference Include="Volo.Abp.Identity.Domain.Shared" />
 	</ItemGroup>
