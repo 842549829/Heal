@@ -3,7 +3,7 @@
 namespace Heal.Net.Application.Contracts.Bases.Users.Dtos;
 
 /// <summary>
-/// 用户更新
+/// 用户详情信息
 /// </summary>
 public class IdentityUserDetailDto : IdentityUserDto
 {

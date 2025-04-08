@@ -9,7 +9,7 @@ namespace Heal.Net.HttpApi.Controllers.Bases;
 /// 租户控制器
 /// </summary>
 /// <param name="tenantAppService">租户管理接口</param>
-[Route("api/basics/tenants")]
+[Route("api/net/basics/tenants")]
 [ApiController]
 public class TenantController(ITenantAppService tenantAppService) : HealNetController
 {
