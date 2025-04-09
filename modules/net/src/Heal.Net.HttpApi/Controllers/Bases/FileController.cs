@@ -5,7 +5,7 @@ namespace Heal.Net.HttpApi.Controllers.Bases;
 /// <summary>
 /// 文件控制器
 /// </summary>
-[Route("api/basics/files")]
+[Route("api/net/basics/files")]
 [ApiController]
 public class FileController : HealNetController
 {
