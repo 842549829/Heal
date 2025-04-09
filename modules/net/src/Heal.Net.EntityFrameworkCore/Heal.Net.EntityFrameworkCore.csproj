@@ -36,4 +36,9 @@
 		</PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="EntityFrameworkCore\Bases\Campuses\" />
+	  <Folder Include="EntityFrameworkCore\Bases\Departments\" />
+	</ItemGroup>
+
 </Project>

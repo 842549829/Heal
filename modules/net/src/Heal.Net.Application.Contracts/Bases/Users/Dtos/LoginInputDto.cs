@@ -32,13 +32,13 @@ public class LoginInputDto : EntityDto
     /// </summary>
     public bool? RememberMe { get; set; }
 
-    /// <summary>
-    /// 组织Code
-    /// </summary>
-    public string? OrganizationCode { get; set; }
+    ///// <summary>
+    ///// 组织Code
+    ///// </summary>
+    //public string? OrganizationCode { get; set; }
 
-    /// <summary>
-    /// 授权类型
-    /// </summary>
-    public string? GrantType { get; set; } 
+    ///// <summary>
+    ///// 授权类型
+    ///// </summary>
+    //public string? GrantType { get; set; } 
 }

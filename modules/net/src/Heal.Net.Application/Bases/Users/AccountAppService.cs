@@ -31,22 +31,22 @@ public class AccountAppService(IOptions<AuthServerOptions> authServerOption, IHt
             Address = disco.TokenEndpoint,
             ClientId = _authServerOption.ClientId,
             ClientSecret = _authServerOption.ClientSecret,
-            GrantType = input.GrantType ?? _authServerOption.GrantType
+            GrantType =  _authServerOption.GrantType
         };
         if (input.TenantId.HasValue && input.TenantId.Value != Guid.Empty)
         {
             request.Headers.Add(LoginConsts.Tenant, input.TenantId.Value.ToString());
         }
-        if (!input.OrganizationCode.IsNullOrWhiteSpace())
-        {
-            request.Parameters.Add(LoginConsts.Organization, input.OrganizationCode);
-        }
+        //if (!input.OrganizationCode.IsNullOrWhiteSpace())
+        //{
+        //    request.Parameters.Add(LoginConsts.Organization, input.OrganizationCode);
+        //}
         if (input.RememberMe.HasValue)
         {
             request.Parameters.Add(LoginConsts.RememberMe, input.RememberMe.Value.ToString());
         }
 
-        request.Parameters.AddRequired(OidcConstants.TokenRequest.GrantType, input.GrantType ?? _authServerOption.GrantType);
+        request.Parameters.AddRequired(OidcConstants.TokenRequest.GrantType, _authServerOption.GrantType);
         request.Parameters.AddRequired(OidcConstants.TokenRequest.UserName, input.UserName);
         request.Parameters.AddRequired(OidcConstants.TokenRequest.Password, input.Password, allowEmptyValue: true);
         request.Parameters.AddOptional(OidcConstants.TokenRequest.Scope, _authServerOption.Scope);
