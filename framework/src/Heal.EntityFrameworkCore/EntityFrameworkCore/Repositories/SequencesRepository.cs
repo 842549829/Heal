@@ -3,15 +3,14 @@ using Heal.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.Identity.EntityFrameworkCore;
 
 namespace Heal.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 
 /// <summary>
 /// Sequences仓储
 /// </summary>
-public class SequencesRepository(IDbContextProvider<IIdentityDbContext> dbContextProvider)
-    : EfCoreRepository<IIdentityDbContext, Sequences, string>(dbContextProvider), ISequencesRepository
+public class SequencesRepository(IDbContextProvider<IHealDbContext> dbContextProvider)
+    : EfCoreRepository<IHealDbContext, Sequences, string>(dbContextProvider), ISequencesRepository
 {
     /// <summary>
     /// 获取下一个序列
@@ -36,7 +35,7 @@ public class SequencesRepository(IDbContextProvider<IIdentityDbContext> dbContex
         var result = await dbContext.Database
             .SqlQueryRaw<long>(sqlQuery)
             .FirstOrDefaultAsync(cancellationToken);
-
+        
         return result;
     }
 }
