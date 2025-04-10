@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Heal.Net.Domain.Bases.Campuses.Entities;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Campuses;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
@@ -93,6 +95,11 @@ public class HealNetDbContext :
     /// </summary>
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
+    /// <summary>
+    /// Campus
+    /// </summary>
+    public DbSet<Campus> Campuses { get; set; }
+
     #endregion
 
     /// <summary>
@@ -124,7 +131,9 @@ public class HealNetDbContext :
         builder.ConfigureOpenIddict();
         builder.ConfigureTenantManagement();
         builder.ConfigureBlobStoring();
-        
+
+        // ConfigureCampuses
+        builder.ConfigureCampuses();
         /* Configure your own tables/entities inside here */
 
         //builder.Entity<YourEntity>(b =>
