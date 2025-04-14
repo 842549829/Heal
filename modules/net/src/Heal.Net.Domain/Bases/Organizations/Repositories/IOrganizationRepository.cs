@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Volo.Abp.Identity;
+﻿using Volo.Abp.Identity;
 
-namespace Panda.Net.Bases.Organizations.Repositories;
+namespace Heal.Net.Domain.Bases.Organizations.Repositories;
 
 public interface IOrganizationRepository : IOrganizationUnitRepository
 {

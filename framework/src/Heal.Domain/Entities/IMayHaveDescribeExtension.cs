@@ -3,7 +3,7 @@
 /// <summary>
 /// 可修描述信息
 /// </summary>
-public interface IMayHaveDescribeExtension: IMayHaveDescribe
+public interface IMayHaveDescribeExtension : IMayHaveDescribe
 {
     /// <summary>
     /// 设置描述信息

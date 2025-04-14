@@ -1,11 +1,9 @@
-﻿using Volo.Abp.DependencyInjection;
-
-namespace Heal.Domain.Repositories;
+﻿namespace Heal.Domain.Repositories;
 
 /// <summary>
 /// SequencesRepository
 /// </summary>
-public interface ISequencesRepository : ITransientDependency
+public interface ISequencesRepository : IHealRepository
 {
     /// <summary>
     /// 获取下一个序列

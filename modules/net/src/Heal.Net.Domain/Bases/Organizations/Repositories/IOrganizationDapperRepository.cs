@@ -1,5 +1,5 @@
-﻿using Heal.Net.Domain.Bases.Organizations.Models;
-using Volo.Abp.DependencyInjection;
+﻿using Heal.Domain.Repositories;
+using Heal.Net.Domain.Bases.Organizations.Models;
 using Volo.Abp.Identity;
 
 namespace Heal.Net.Domain.Bases.Organizations.Repositories;
@@ -7,7 +7,7 @@ namespace Heal.Net.Domain.Bases.Organizations.Repositories;
 /// <summary>
 /// 组织机构数据仓储(Dapper)
 /// </summary>
-public interface IOrganizationDapperRepository : ITransientDependency
+public interface IOrganizationDapperRepository : IHealRepository
 {
     /// <summary>
     /// 获取组织机构数量

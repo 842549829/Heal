@@ -32,7 +32,7 @@ public class Campus(Guid id, string name) : FullHealthcareAuditedAggregateRoot<G
     /// <summary>
     /// 所在详细地址
     /// </summary>
-    public string? Address { get; set; } = null!;
+    public string? Address { get; set; }
 
     /// <summary>
     /// 床位数/接待能力(该院区可容纳的最大病人数或接诊量)

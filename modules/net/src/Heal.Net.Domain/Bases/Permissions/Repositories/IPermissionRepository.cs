@@ -1,4 +1,4 @@
-﻿using Volo.Abp.DependencyInjection;
+﻿using Heal.Domain.Repositories;
 using Volo.Abp.PermissionManagement;
 
 namespace Heal.Net.Domain.Bases.Permissions.Repositories;
@@ -6,7 +6,7 @@ namespace Heal.Net.Domain.Bases.Permissions.Repositories;
 /// <summary>
 /// 权限仓库接口
 /// </summary>
-public interface IPermissionRepository : ITransientDependency
+public interface IPermissionRepository : IHealRepository
 {
     /// <summary>
     /// 获取权限列表

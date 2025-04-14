@@ -1,9 +1,9 @@
-﻿namespace Heal.Domain.Entities;
+﻿namespace Heal.Application.Contracts.Dtos;
 
 /// <summary>
-/// 编码
+/// 标识编码
 /// </summary>
-public interface IHasCode
+public interface IHasCodeDto
 {
     /// <summary>
     /// 编码
