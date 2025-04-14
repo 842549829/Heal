@@ -6,6 +6,16 @@
 public static class CampusConsts
 {
     /// <summary>
+    /// 院区标识
+    /// </summary>
+    public const string Code = "Campus";
+
+    /// <summary>
+    /// 院区标识默认长度
+    /// </summary>
+    public const int CodeDefaultLength = 5;
+
+    /// <summary>
     /// 院区简称最大长度
     /// </summary>
     public const int ShortNameMaxLength = 32;

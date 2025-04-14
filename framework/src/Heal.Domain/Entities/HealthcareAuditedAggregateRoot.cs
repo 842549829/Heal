@@ -106,6 +106,9 @@ public abstract class HealthcareAuditedAggregateRoot<TKey>(TKey id, string name,
         CreationTime = creatTime;
     }
 
+    /// <summary>
+    /// 最后修改人姓名
+    /// </summary>
     public string? LastModificationName { get; private set; }
 
     /// <summary>
@@ -122,6 +125,9 @@ public abstract class HealthcareAuditedAggregateRoot<TKey>(TKey id, string name,
         LastModificationTime = lastModificationTime;
     }
 
+    /// <summary>
+    /// 删除人姓名
+    /// </summary>
     public string? DeletionName { get; private set; }
 
     /// <summary>

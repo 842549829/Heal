@@ -23,11 +23,12 @@ namespace Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
 /// </summary>
 [ReplaceDbContext(typeof(IIdentityDbContext))]
 [ReplaceDbContext(typeof(ITenantManagementDbContext))]
+[ReplaceDbContext(typeof(IHealNetDbContext))]
 [ConnectionStringName("Default")]
 public class HealNetDbContext :
     AbpDbContext<HealNetDbContext>,
     ITenantManagementDbContext,
-    IIdentityDbContext
+    IHealNetDbContext
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
 
