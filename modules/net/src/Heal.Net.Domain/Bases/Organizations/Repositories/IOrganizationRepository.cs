@@ -2,18 +2,16 @@
 
 namespace Heal.Net.Domain.Bases.Organizations.Repositories;
 
+/// <summary>
+/// 组织机构仓储
+/// </summary>
 public interface IOrganizationRepository : IOrganizationUnitRepository
 {
-    Task<long> GetCountAsync(string? filter = null,
-        Guid? parentId = null,
-        CancellationToken cancellationToken = default);
-
-    Task<List<OrganizationUnit>> GetListAsync(
-        string sorting,
-        string? filter = null,
-        Guid? parentId = null,
-        int maxResultCount = int.MaxValue,
-        int skipCount = 0,
-        bool includeDetails = false,
-        CancellationToken cancellationToken = default);
+    /// <summary>
+    /// 根据组织机构代码获取组织机构Id
+    /// </summary>
+    /// <param name="organizationCode">组织机构代码</param>
+    /// <param name="cancellationToken">取消Token</param>
+    /// <returns>组织机构Id</returns>
+    Task<Guid> GetOrganizationIdAsync(string organizationCode, CancellationToken cancellationToken = default);
 }

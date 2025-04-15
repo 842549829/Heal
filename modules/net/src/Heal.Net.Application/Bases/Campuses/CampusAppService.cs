@@ -6,13 +6,16 @@ using Heal.Net.Application.Contracts.Bases.Campuses;
 using Heal.Net.Application.Contracts.Bases.Campuses.Dto;
 using Heal.Net.Domain.Bases.Campuses.Entities;
 using Heal.Net.Domain.Bases.Campuses.Repositories;
+using Heal.Net.Domain.Bases.Organizations.Managers;
 
 namespace Heal.Net.Application.Bases.Campuses;
 
 /// <summary>
 /// 院区服务
 /// </summary>
-public class CampusAppService(ISequenceManager sequenceManager, ICampusRepository campusRepository) : HealNetAppService, ICampusAppService
+public class CampusAppService(ISequenceManager sequenceManager,
+    IOrganizationManager organizationManager,
+    ICampusRepository campusRepository) : HealNetAppService, ICampusAppService
 {
     /// <summary>
     /// 创建用户
@@ -23,30 +26,30 @@ public class CampusAppService(ISequenceManager sequenceManager, ICampusRepositor
     {
         var clockNow = Clock.Now;
         var code = await sequenceManager.PadNumberWithZerosAsync(CampusConsts.Code);
+        var organizationId = await organizationManager.GetOrganizationIdAsync(input.OrganizationCode);
         var entity = new Campus(
             GuidGenerator.Create(),
-            input.Name
-        )
-        {
-            ShortName = input.ShortName,
-            Building = input.Building,
-            Floor = input.Floor,
-            RoomNumber = input.RoomNumber,
-            Address = input.Address,
-            Capacity = input.Capacity,
-            Phone = input.Phone,
-            Email = input.Email,
-            HeadOfCampus = input.HeadOfCampus,
-            HeadOfCampusPhone = input.HeadOfCampusPhone,
-            HeadOfCampusEmail = input.HeadOfCampusEmail,
-            Website = input.Website,
-            ServicesOffered = input.ServicesOffered,
-            EmergencyContact = input.EmergencyContact,
-            EmergencyPhone = input.EmergencyPhone
-        };
-        entity.SetCode(code);
+            input.Name,
+            code
+        );
+        entity.SetShortName(input.ShortName);
+        entity.SetBuilding(input.Building);
+        entity.SetFloor(input.Floor);
+        entity.SetRoomNumber(input.RoomNumber);
+        entity.SetAddress(input.Address);
+        entity.SetCapacity(input.Capacity);
+        entity.SetPhone(input.Phone);
+        entity.SetEmail(input.Email);
+        entity.SetHeadOfCampus(input.HeadOfCampus);
+        entity.SetHeadOfCampusPhone(input.HeadOfCampusPhone);
+        entity.SetHeadOfCampusEmail(input.HeadOfCampusEmail);
+        entity.SetWebsite(input.Website);
+        entity.SetServicesOffered(input.ServicesOffered);
+        entity.SetEmergencyContact(input.EmergencyContact);
+        entity.SetEmergencyPhone(input.EmergencyPhone);
+        entity.SetParent(input.ParentId);
         entity.SetTenant(CurrentUser.TenantId);
-        entity.SetOrganization(input.OrganizationId);
+        entity.SetOrganization(organizationId, input.OrganizationCode);
         entity.SetSort(input.Sort);
         entity.SetDescribe(input.Describe);
         entity.SetStatus(Enable.Enabled);

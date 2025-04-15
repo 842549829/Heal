@@ -35,6 +35,60 @@ public static class HealEntityTypeBuilderExtensions
     {
         b.ConfigureByConventionByHealthcareAuditedAggregateRoot();
         b.TryConfigureOrganizationId();
+        b.TryConfigureOrganizationCode();
+        b.TryConfigureParentId();
+    }
+
+    /// <summary>
+    /// 配置ParentId
+    /// </summary>
+    /// <typeparam name="T">T</typeparam>
+    /// <param name="b">EntityTypeBuilder</param>
+    public static void ConfigureParentId<T>(this EntityTypeBuilder<T> b)
+        where T : class, IMayHaveParentId
+    {
+        b.As<EntityTypeBuilder>().TryConfigureParentId();
+    }
+
+    /// <summary>
+    /// 配置ParentId
+    /// </summary>
+    /// <param name="b">EntityTypeBuilder</param>
+    public static void TryConfigureParentId(this EntityTypeBuilder b)
+    {
+        if (b.Metadata.ClrType.IsAssignableTo<IMayHaveParentId>())
+        {
+            b.Property(nameof(IMayHaveParentId.ParentId))
+                .IsConcurrencyToken()
+                .IsRequired(false)
+                .HasColumnName(nameof(IMayHaveParentId.ParentId));
+        }
+    }
+
+    /// <summary>
+    /// 配置组织Code
+    /// </summary>
+    /// <typeparam name="T">T</typeparam>
+    /// <param name="b">EntityTypeBuilder</param>
+    public static void ConfigureOrganizationCode<T>(this EntityTypeBuilder<T> b)
+        where T : class, IHasOrganizationCode
+    {
+        b.As<EntityTypeBuilder>().TryConfigureOrganizationId();
+    }
+
+    /// <summary>
+    /// 配置组织Code
+    /// </summary>
+    /// <param name="b">EntityTypeBuilder</param>
+    public static void TryConfigureOrganizationCode(this EntityTypeBuilder b)
+    {
+        if (b.Metadata.ClrType.IsAssignableTo<IHasOrganizationCode>())
+        {
+            b.Property(nameof(IHasOrganizationCode.OrganizationCode))
+                .IsConcurrencyToken()
+                .IsRequired()
+                .HasColumnName(nameof(IHasOrganizationCode.OrganizationCode));
+        }
     }
 
     /// <summary>
@@ -43,7 +97,7 @@ public static class HealEntityTypeBuilderExtensions
     /// <typeparam name="T">T</typeparam>
     /// <param name="b">EntityTypeBuilder</param>
     public static void ConfigureOrganizationId<T>(this EntityTypeBuilder<T> b)
-        where T : class, IMayHaveCreatorName
+        where T : class, IHasOrganization
     {
         b.As<EntityTypeBuilder>().TryConfigureOrganizationId();
     }
@@ -70,7 +124,7 @@ public static class HealEntityTypeBuilderExtensions
     /// <param name="maxLength">长度</param>
     /// <param name="b">EntityTypeBuilder</param>
     public static void ConfigureNamePinyinFirstLetters<T>(this EntityTypeBuilder<T> b, int? maxLength = null)
-        where T : class, IMayHaveCreatorName
+        where T : class, IHasNamePinyin
     {
         b.As<EntityTypeBuilder>().TryConfigureNamePinyinFirstLetters(maxLength ?? PinyinFirstLettersConsts.MaxLength);
     }
@@ -99,7 +153,7 @@ public static class HealEntityTypeBuilderExtensions
     /// <param name="maxLength">长度</param>
     /// <param name="b">EntityTypeBuilder</param>
     public static void ConfigureNamePinyin<T>(this EntityTypeBuilder<T> b, int? maxLength = null)
-        where T : class, IMayHaveCreatorName
+        where T : class, IHasNamePinyin
     {
         b.As<EntityTypeBuilder>().TryConfigureNamePinyin(maxLength ?? PinyinConsts.MaxLength);
     }
@@ -128,7 +182,7 @@ public static class HealEntityTypeBuilderExtensions
     /// <param name="maxLength">长度</param>
     /// <param name="b">EntityTypeBuilder</param>
     public static void ConfigureDescribe<T>(this EntityTypeBuilder<T> b, int? maxLength = null)
-        where T : class, IMayHaveCreatorName
+        where T : class, IMayHaveDescribe
     {
 
         b.As<EntityTypeBuilder>().TryConfigureDescribe(maxLength ?? DescribeConsts.MaxLength);
@@ -158,7 +212,7 @@ public static class HealEntityTypeBuilderExtensions
     /// <param name="maxLength">长度</param>
     /// <param name="b">EntityTypeBuilder</param>
     public static void ConfigureName<T>(this EntityTypeBuilder<T> b, int? maxLength = null)
-        where T : class, IMayHaveCreatorName
+        where T : class, IHasName
     {
 
         b.As<EntityTypeBuilder>().TryConfigureName(maxLength ?? NameConsts.MaxLength);
@@ -214,7 +268,7 @@ public static class HealEntityTypeBuilderExtensions
     /// <typeparam name="T">T</typeparam>
     /// <param name="b">EntityTypeBuilder</param>
     public static void ConfigureModificationName<T>(this EntityTypeBuilder<T> b)
-        where T : class, IMayHaveCreatorName
+        where T : class, IMayHaveModificationName
     {
         b.As<EntityTypeBuilder>().TryConfigureModificationName();
     }
@@ -241,7 +295,7 @@ public static class HealEntityTypeBuilderExtensions
     /// <typeparam name="T">T</typeparam>
     /// <param name="b">EntityTypeBuilder</param>
     public static void ConfigureDeletionName<T>(this EntityTypeBuilder<T> b)
-        where T : class, IMayHaveCreatorName
+        where T : class, IMayHaveDeletionName
     {
         b.As<EntityTypeBuilder>().TryConfigureDeletionName();
     }
@@ -268,7 +322,7 @@ public static class HealEntityTypeBuilderExtensions
     /// <typeparam name="T">T</typeparam>
     /// <param name="b">EntityTypeBuilder</param>
     public static void ConfigureEnable<T>(this EntityTypeBuilder<T> b)
-        where T : class, IMayHaveCreatorName
+        where T : class, IHasEnable
     {
         b.As<EntityTypeBuilder>().TryConfigureEnable();
     }
@@ -294,7 +348,7 @@ public static class HealEntityTypeBuilderExtensions
     /// <typeparam name="T">T</typeparam>
     /// <param name="b">EntityTypeBuilder</param>
     public static void ConfigureSort<T>(this EntityTypeBuilder<T> b)
-        where T : class, IMayHaveCreatorName
+        where T : class, IHasSort
     {
         b.As<EntityTypeBuilder>().TryConfigureSort();
     }

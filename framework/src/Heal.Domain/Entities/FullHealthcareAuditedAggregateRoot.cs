@@ -1,4 +1,6 @@
-﻿namespace Heal.Domain.Entities;
+﻿using Volo.Abp;
+
+namespace Heal.Domain.Entities;
 
 /// <summary>
 /// 带组织信息的聚合根
@@ -25,11 +27,20 @@ public abstract class FullHealthcareAuditedAggregateRoot<TKey>(TKey id, string n
     public Guid OrganizationId { get; private set; }
 
     /// <summary>
-    /// 设置组织id
+    /// 组织编码
+    /// </summary>
+    public string OrganizationCode { get; private set; } = null!;
+
+    /// <summary>
+    /// 设置组织信息
     /// </summary>
     /// <param name="organizationId">组织Id</param>
-    public void SetOrganization(Guid organizationId)
+    /// <param name="organizationCode">组织编码</param>
+    public void SetOrganization(Guid organizationId, string organizationCode)
     {
+        Check.NotNull(organizationId, nameof(organizationId));
+        Check.NotNull(organizationCode, nameof(organizationCode));
         OrganizationId = organizationId;
+        OrganizationCode = organizationCode;
     }
 }

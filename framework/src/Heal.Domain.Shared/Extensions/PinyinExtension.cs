@@ -1,9 +1,10 @@
-﻿using Microsoft.International.Converters.PinYinConverter;
+﻿using TinyPinyin;
 
 namespace Heal.Domain.Shared.Extensions;
 
 /// <summary>
 /// 汉字转拼音
+/// https://github.com/hstarorg/TinyPinyin.Net
 /// </summary>
 public static class PinyinExtension
 {
@@ -14,21 +15,7 @@ public static class PinyinExtension
     /// <returns>全拼</returns> 
     public static string GetPinyin(string str)
     {
-        var r = string.Empty;
-        foreach (var obj in str)
-        {
-            try
-            {
-                var chineseChar = new ChineseChar(obj);
-                var t = chineseChar.Pinyins[0];
-                r += t[..^1];
-            }
-            catch
-            {
-                r += obj.ToString();
-            }
-        }
-        return r;
+        return PinyinHelper.GetPinyin(str).ToLower();
     }
 
     /// <summary> 
@@ -38,20 +25,6 @@ public static class PinyinExtension
     /// <returns>首字母</returns> 
     public static string GetFirstPinyin(string str)
     {
-        var r = string.Empty;
-        foreach (var obj in str)
-        {
-            try
-            {
-                var chineseChar = new ChineseChar(obj);
-                var t = chineseChar.Pinyins[0];
-                r += t[..1];
-            }
-            catch
-            {
-                r += obj.ToString();
-            }
-        }
-        return r;
+        return PinyinHelper.GetPinyinInitials(str).ToLower();
     }
 }

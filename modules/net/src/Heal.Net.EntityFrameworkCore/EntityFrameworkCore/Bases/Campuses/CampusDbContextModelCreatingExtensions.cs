@@ -92,6 +92,7 @@ public static class CampusDbContextModelCreatingExtensions
             b.Property(x => x.EmergencyPhone)
                 .IsRequired(false)
                 .HasMaxLength(CampusConsts.EmergencyPhoneMaxLength);
+
             b.ApplyObjectExtensionMappings();
         });
         builder.TryConfigureObjectExtensions<BackgroundJobsDbContext>();

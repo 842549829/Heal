@@ -13,9 +13,9 @@ public class CampusDto : AuditedEntityExtensionDto<Guid>, IHasCodeDto, IHasNameD
     public required string Name { get; init; }
 
     /// <summary>
-    /// 组织Id
+    /// 组织Code
     /// </summary>
-    public required Guid OrganizationId { get; init; }
+    public required string OrganizationCode { get; init; }
 
     /// <summary>
     /// 排序
