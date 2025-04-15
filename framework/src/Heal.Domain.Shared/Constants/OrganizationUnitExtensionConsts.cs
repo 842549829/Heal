@@ -165,5 +165,8 @@ public static class OrganizationUnitExtensionConsts
     /// </summary>
     public static int MaxFacilitiesLength { get; set; } = 1024;
 
-
+    /// <summary>
+    /// 组织默认长度
+    /// </summary>
+    public const int CodeDefaultLength = 5;
 }

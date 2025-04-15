@@ -11,77 +11,72 @@ public static class CampusConsts
     public const string Code = "Campus";
 
     /// <summary>
-    /// 院区标识默认长度
-    /// </summary>
-    public const int CodeDefaultLength = 5;
-
-    /// <summary>
     /// 院区简称最大长度
     /// </summary>
-    public const int ShortNameMaxLength = 32;
+    public static int MaxShortNameLength { get; set; } = 32;
 
     /// <summary>
     /// 所在大楼最大长度
     /// </summary>
-    public const int BuildingMaxLength = 64;
+    public static int MaxBuildingLength { get; set; } = 64;
 
     /// <summary>
     /// 所在楼层最大长度
     /// </summary>
-    public const int FloorMaxLength = 16;
+    public static int MaxFloorLength { get; set; } = 16;
 
     /// <summary>
     /// 房间号最大长度
     /// </summary>
-    public const int RoomNumberMaxLength = 16;
+    public static int MaxRoomNumberLength { get; set; } = 16;
 
     /// <summary>
     /// 所在详细地址最大长度
     /// </summary>
-    public const int AddressMaxLength = 256;
+    public static int MaxAddressLength { get; set; } = 256;
 
     /// <summary>
     /// 联系电话最大长度
     /// </summary>
-    public const int PhoneMaxLength = 32;
+    public static int MaxPhoneLength { get; set; } = 32;
 
     /// <summary>
     /// 电子邮箱最大长度
     /// </summary>
-    public const int EmailMaxLength = 128;
+    public static int MaxEmailLength { get; set; } = 128;
 
     /// <summary>
     /// 院区负责人最大长度
     /// </summary>
-    public const int HeadOfCampusMaxLength = 64;
+    public static int MaxHeadOfCampusLength { get; set; } = 64;
 
     /// <summary>
     /// 负责人电话最大长度
     /// </summary>
-    public const int HeadOfCampusPhoneMaxLength = 32;
+    public static int MaxHeadOfCampusPhoneLength { get; set; } = 32;
 
     /// <summary>
     /// 负责人电子邮箱最大长度
     /// </summary>
-    public const int HeadOfCampusEmailMaxLength = 128;
+    public static int MaxHeadOfCampusEmailLength { get; set; } = 128;
 
     /// <summary>
     /// 院区网站最大长度
     /// </summary>
-    public const int WebsiteMaxLength = 256;
+    public static int MaxWebsiteLength { get; set; } = 256;
 
     /// <summary>
     /// 提供的服务最大长度
     /// </summary>
-    public const int ServicesOfferedMaxLength = 512;
+    public static int MaxServicesOfferedLength { get; set; } = 512;
 
     /// <summary>
     /// 紧急联系人最大长度
     /// </summary>
-    public const int EmergencyContactMaxLength = 64;
+    public static int MaxEmergencyContactLength { get; set; } = 64;
 
     /// <summary>
     /// 紧急联系电话最大长度
     /// </summary>
-    public const int EmergencyPhoneMaxLength = 32;
+    public static int MaxEmergencyPhoneLength { get; set; } = 32;
 }

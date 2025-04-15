@@ -20,7 +20,7 @@ public interface ISequenceManager : IHealDomainManager
     /// <param name="length">目标字符串的最小长度</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns>补零后的字符串</returns>
-    public async Task<string> PadNumberWithZerosAsync(string name, int length = 5, CancellationToken cancellationToken = default)
+    public async Task<string> PadNumberWithZerosAsync(string name, int length = 6, CancellationToken cancellationToken = default)
     {
         var number = await GetNextSequenceAsync(name, cancellationToken);
         return PadNumberWithZeros(number, length);
@@ -32,7 +32,7 @@ public interface ISequenceManager : IHealDomainManager
     /// <param name="number">输入的数字</param>
     /// <param name="length">目标字符串的最小长度</param>
     /// <returns>补零后的字符串</returns>
-    public string PadNumberWithZeros(long number, int length = 5)
+    public string PadNumberWithZeros(long number, int length = 6)
     {
         if (length <= 0)
         {

@@ -25,7 +25,7 @@ public class CampusAppService(ISequenceManager sequenceManager,
     public async Task<CampusDto> CreateAsync(CampusCreateDto input)
     {
         var clockNow = Clock.Now;
-        var code = await sequenceManager.PadNumberWithZerosAsync(CampusConsts.Code);
+        var code = await sequenceManager.PadNumberWithZerosAsync(CampusConsts.Code, OrganizationUnitExtensionConsts.CodeDefaultLength);
         var organizationId = await organizationManager.GetOrganizationIdAsync(input.OrganizationCode);
         var entity = new Campus(
             GuidGenerator.Create(),

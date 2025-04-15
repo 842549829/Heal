@@ -2,6 +2,7 @@
 using Heal.Domain.Shared.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Volo.Abp.Identity;
 
 namespace Heal.EntityFrameworkCore.EntityFrameworkCore;
 
@@ -70,24 +71,27 @@ public static class HealEntityTypeBuilderExtensions
     /// </summary>
     /// <typeparam name="T">T</typeparam>
     /// <param name="b">EntityTypeBuilder</param>
-    public static void ConfigureOrganizationCode<T>(this EntityTypeBuilder<T> b)
+    /// <param name="maxLength">maxLength</param>
+    public static void ConfigureOrganizationCode<T>(this EntityTypeBuilder<T> b, int? maxLength = null)
         where T : class, IHasOrganizationCode
     {
-        b.As<EntityTypeBuilder>().TryConfigureOrganizationId();
+        b.As<EntityTypeBuilder>().TryConfigureOrganizationCode(maxLength);
     }
 
     /// <summary>
     /// 配置组织Code
     /// </summary>
     /// <param name="b">EntityTypeBuilder</param>
-    public static void TryConfigureOrganizationCode(this EntityTypeBuilder b)
+    /// <param name="maxLength">maxLength</param>
+    public static void TryConfigureOrganizationCode(this EntityTypeBuilder b, int? maxLength = null)
     {
         if (b.Metadata.ClrType.IsAssignableTo<IHasOrganizationCode>())
         {
             b.Property(nameof(IHasOrganizationCode.OrganizationCode))
                 .IsConcurrencyToken()
                 .IsRequired()
-                .HasColumnName(nameof(IHasOrganizationCode.OrganizationCode));
+                .HasColumnName(nameof(IHasOrganizationCode.OrganizationCode))
+                .HasMaxLength(maxLength ?? OrganizationUnitConsts.MaxCodeLength);
         }
     }
 

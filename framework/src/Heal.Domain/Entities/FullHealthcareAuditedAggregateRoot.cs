@@ -1,4 +1,7 @@
-﻿using Volo.Abp;
+﻿using Heal.Domain.Shared.Constants;
+using Heal.Domain.Shared.Extensions;
+using Volo.Abp;
+using Volo.Abp.Identity;
 
 namespace Heal.Domain.Entities;
 
@@ -19,6 +22,7 @@ public abstract class FullHealthcareAuditedAggregateRoot<TKey>(TKey id, string n
     /// <param name="name">名称</param>
     protected FullHealthcareAuditedAggregateRoot(TKey id, string name) : this(id, name, string.Empty)
     {
+        FieldValidatorExtension.ValidateFieldLength(name, "名称", 1, NameConsts.MaxLength);
     }
 
     /// <summary>
@@ -40,6 +44,7 @@ public abstract class FullHealthcareAuditedAggregateRoot<TKey>(TKey id, string n
     {
         Check.NotNull(organizationId, nameof(organizationId));
         Check.NotNull(organizationCode, nameof(organizationCode));
+        FieldValidatorExtension.ValidateFieldLength(organizationCode, "组织编码", OrganizationUnitExtensionConsts.CodeDefaultLength, OrganizationUnitConsts.MaxCodeLength);
         OrganizationId = organizationId;
         OrganizationCode = organizationCode;
     }

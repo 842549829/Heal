@@ -35,63 +35,63 @@ public static class CampusDbContextModelCreatingExtensions
 
             b.Property(x => x.ShortName)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.ShortNameMaxLength);
+                .HasMaxLength(CampusConsts.MaxShortNameLength);
 
             b.Property(x => x.ShortName)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.ShortNameMaxLength);
+                .HasMaxLength(CampusConsts.MaxShortNameLength);
 
             b.Property(x => x.Building)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.BuildingMaxLength);
+                .HasMaxLength(CampusConsts.MaxBuildingLength);
 
             b.Property(x => x.Floor)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.FloorMaxLength);
+                .HasMaxLength(CampusConsts.MaxFloorLength);
 
             b.Property(x => x.RoomNumber)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.RoomNumberMaxLength);
+                .HasMaxLength(CampusConsts.MaxRoomNumberLength);
 
             b.Property(x => x.Address)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.AddressMaxLength);
+                .HasMaxLength(CampusConsts.MaxAddressLength);
 
             b.Property(x => x.Phone)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.PhoneMaxLength);
+                .HasMaxLength(CampusConsts.MaxPhoneLength);
 
             b.Property(x => x.Email)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.EmailMaxLength);
+                .HasMaxLength(CampusConsts.MaxEmailLength);
 
             b.Property(x => x.HeadOfCampus)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.HeadOfCampusMaxLength);
+                .HasMaxLength(CampusConsts.MaxHeadOfCampusLength);
 
             b.Property(x => x.HeadOfCampusPhone)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.HeadOfCampusPhoneMaxLength);
+                .HasMaxLength(CampusConsts.MaxHeadOfCampusPhoneLength);
 
             b.Property(x => x.HeadOfCampusEmail)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.HeadOfCampusEmailMaxLength);
+                .HasMaxLength(CampusConsts.MaxHeadOfCampusEmailLength);
 
             b.Property(x => x.Website)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.WebsiteMaxLength);
+                .HasMaxLength(CampusConsts.MaxWebsiteLength);
 
             b.Property(x => x.ServicesOffered)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.ServicesOfferedMaxLength);
+                .HasMaxLength(CampusConsts.MaxServicesOfferedLength);
 
             b.Property(x => x.EmergencyContact)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.EmergencyContactMaxLength);
+                .HasMaxLength(CampusConsts.MaxEmergencyContactLength);
 
             b.Property(x => x.EmergencyPhone)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.EmergencyPhoneMaxLength);
+                .HasMaxLength(CampusConsts.MaxEmergencyPhoneLength);
 
             b.ApplyObjectExtensionMappings();
         });
