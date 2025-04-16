@@ -166,6 +166,11 @@ public static class OrganizationUnitExtensionConsts
     public static int MaxFacilitiesLength { get; set; } = 1024;
 
     /// <summary>
+    /// 电话
+    /// </summary>
+    public static int MaxPhoneLength { get; set; } = 32;
+
+    /// <summary>
     /// 组织默认长度
     /// </summary>
     public const int CodeDefaultLength = 5;

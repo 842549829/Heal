@@ -1,18 +1,21 @@
 ﻿using Heal.Net.Domain.Bases.Campuses.Entities;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.AuditLoggings;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.BackgroundJobs;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.BlobStorings;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Campuses;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Departments;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Features;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Identities;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.OpenIddicts;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Permissions;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Settings;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Tenants;
 using Microsoft.EntityFrameworkCore;
-using Volo.Abp.AuditLogging.EntityFrameworkCore;
-using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
-using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
-using Volo.Abp.OpenIddict.EntityFrameworkCore;
-using Volo.Abp.PermissionManagement.EntityFrameworkCore;
-using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
@@ -121,27 +124,16 @@ public class HealNetDbContext :
     {
         base.OnModelCreating(builder);
 
-        /* Include modules to your migration db context */
-
-        builder.ConfigurePermissionManagement();
-        builder.ConfigureSettingManagement();
-        builder.ConfigureBackgroundJobs();
-        builder.ConfigureAuditLogging();
-        builder.ConfigureFeatureManagement();
-        builder.ConfigureIdentity();
-        builder.ConfigureOpenIddict();
-        builder.ConfigureTenantManagement();
-        builder.ConfigureBlobStoring();
-
-        // ConfigureCampuses
-        builder.ConfigureCampuses();
-        /* Configure your own tables/entities inside here */
-
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(HealConsts.DbTablePrefix + "YourEntities", HealConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.ConfigureHealPermissionManagement();
+        builder.ConfigureHealSettingManagement();
+        builder.ConfigureHealBackgroundJobs();
+        builder.ConfigureHealAuditLogging();
+        builder.ConfigureHealFeatureManagement();
+        builder.ConfigureHealIdentity();
+        builder.ConfigureHealOpenIddict();
+        builder.ConfigureHealTenantManagement();
+        builder.ConfigureHealBlobStoring();
+        builder.ConfigureHealCampuses();
+        builder.ConfigureHealDepartment();
     }
 }

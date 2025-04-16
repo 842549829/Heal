@@ -4,9 +4,7 @@ using Heal.Net.Domain.Bases.Campuses.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Volo.Abp;
-using Volo.Abp.BackgroundJobs;
-using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.Modeling;
+using Volo.Abp.Data;
 
 namespace Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Campuses;
 
@@ -19,7 +17,7 @@ public static class CampusDbContextModelCreatingExtensions
     /// 院区的模型创建扩展方法
     /// </summary>
     /// <param name="builder">ModelBuilder</param>
-    public static void ConfigureCampuses(this ModelBuilder builder)
+    public static void ConfigureHealCampuses(this ModelBuilder builder)
     {
         Check.NotNull(builder, nameof(builder));
         if (builder.IsTenantOnlyDatabase())
@@ -29,72 +27,101 @@ public static class CampusDbContextModelCreatingExtensions
 
         builder.Entity(delegate (EntityTypeBuilder<Campus> b)
         {
-            b.ToTable(AbpBackgroundJobsDbProperties.DbTablePrefix + "Campus", AbpBackgroundJobsDbProperties.DbSchema);
-            b.ConfigureByConvention();
-            b.ConfigureByConventionByFullHealthcareAuditedAggregateRoot();
+            b.ToTable(AbpCommonDbProperties.DbTablePrefix + nameof(Campus), AbpCommonDbProperties.DbSchema, x =>
+            {
+                x.HasComment("院区");
+            });
+
+            b.ConfigureByConventionByFullHealthcareAuditedAggregateRoot<Guid>();
 
             b.Property(x => x.ShortName)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxShortNameLength);
-
-            b.Property(x => x.ShortName)
-                .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxShortNameLength);
+                .HasColumnName(nameof(Campus.ShortName))
+                .HasMaxLength(CampusConsts.MaxShortNameLength)
+                .HasComment("简称");
 
             b.Property(x => x.Building)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxBuildingLength);
+                .HasColumnName(nameof(Campus.Building))
+                .HasMaxLength(CampusConsts.MaxBuildingLength)
+                .HasComment("所在大楼");
 
             b.Property(x => x.Floor)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxFloorLength);
+                .HasColumnName(nameof(Campus.Floor))
+                .HasMaxLength(CampusConsts.MaxFloorLength)
+                .HasComment("所在楼层");
 
             b.Property(x => x.RoomNumber)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxRoomNumberLength);
+                .HasColumnName(nameof(Campus.RoomNumber))
+                .HasMaxLength(CampusConsts.MaxRoomNumberLength)
+                .HasComment("所在房间");
 
             b.Property(x => x.Address)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxAddressLength);
+                .HasColumnName(nameof(Campus.Address))
+                .HasMaxLength(CampusConsts.MaxAddressLength)
+                .HasComment("所在详细地址");
+
+            b.Property(x => x.Capacity)
+                .IsRequired()
+                .HasColumnName(nameof(Campus.Capacity))
+                .HasComment("院区容量");
 
             b.Property(x => x.Phone)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxPhoneLength);
+                .HasColumnName(nameof(Campus.Phone))
+                .HasMaxLength(CampusConsts.MaxPhoneLength)
+                .HasComment("联系电话");
 
             b.Property(x => x.Email)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxEmailLength);
+                .HasColumnName(nameof(Campus.Email))
+                .HasMaxLength(CampusConsts.MaxEmailLength)
+                .HasComment("联系邮箱");
 
             b.Property(x => x.HeadOfCampus)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxHeadOfCampusLength);
+                .HasColumnName(nameof(Campus.HeadOfCampus))
+                .HasMaxLength(CampusConsts.MaxHeadOfCampusLength)
+                .HasComment("院区负责人");
 
             b.Property(x => x.HeadOfCampusPhone)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxHeadOfCampusPhoneLength);
+                .HasColumnName(nameof(Campus.HeadOfCampusPhone))
+                .HasMaxLength(CampusConsts.MaxHeadOfCampusPhoneLength)
+                .HasComment("院区负责人电话");
 
             b.Property(x => x.HeadOfCampusEmail)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxHeadOfCampusEmailLength);
+                .HasColumnName(nameof(Campus.HeadOfCampusEmail))
+                .HasMaxLength(CampusConsts.MaxHeadOfCampusEmailLength)
+                .HasComment("院区负责人邮箱");
 
             b.Property(x => x.Website)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxWebsiteLength);
+                .HasColumnName(nameof(Campus.Website))
+                .HasMaxLength(CampusConsts.MaxWebsiteLength)
+                .HasComment("院区网站");
 
             b.Property(x => x.ServicesOffered)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxServicesOfferedLength);
+                .HasColumnName(nameof(Campus.ServicesOffered))
+                .HasMaxLength(CampusConsts.MaxServicesOfferedLength)
+                .HasComment("院区提供的服务");
 
             b.Property(x => x.EmergencyContact)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxEmergencyContactLength);
+                .HasColumnName(nameof(Campus.EmergencyContact))
+                .HasMaxLength(CampusConsts.MaxEmergencyContactLength)
+                .HasComment("紧急联系人名称");
 
             b.Property(x => x.EmergencyPhone)
                 .IsRequired(false)
-                .HasMaxLength(CampusConsts.MaxEmergencyPhoneLength);
-
-            b.ApplyObjectExtensionMappings();
+                .HasColumnName(nameof(Campus.EmergencyPhone))
+                .HasMaxLength(CampusConsts.MaxEmergencyPhoneLength)
+                .HasComment("紧急联系人电话");
         });
-        builder.TryConfigureObjectExtensions<BackgroundJobsDbContext>();
     }
 }

@@ -30,11 +30,14 @@ public static class SequencesHealDbContextModelBuilderExtensions
 
             b.Property(x => x.Id)
                 .HasColumnName("seq_name")
+                .HasMaxLength(50)
+                .HasComment("序列名称")
                 .IsRequired();
 
             b.Property(x => x.Value)
                 .HasColumnName("seq_value")
                 .HasMaxLength(50)
+                .HasComment("序列值")
                 .IsRequired();
 
             b.ApplyObjectExtensionMappings();
