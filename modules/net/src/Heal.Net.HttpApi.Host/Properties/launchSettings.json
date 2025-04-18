@@ -7,6 +7,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "https://localhost:62513;http://localhost:62514"
+    },
+    "Heal.Net.HttpApi.Host.Home": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Home"
+      },
+      "applicationUrl": "https://localhost:62513;http://localhost:62514"
     }
   }
 }

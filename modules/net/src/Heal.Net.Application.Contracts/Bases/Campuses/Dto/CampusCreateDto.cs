@@ -83,7 +83,7 @@ public class CampusCreateDto : IHasNameDto, IHasOrganizationDto, IHasSortDto, IM
     public string? HeadOfCampusPhone { get; init; }
 
     /// <summary>
-    /// 负责人电话
+    /// 负责人邮箱
     /// </summary>
     public string? HeadOfCampusEmail { get; init; }
 

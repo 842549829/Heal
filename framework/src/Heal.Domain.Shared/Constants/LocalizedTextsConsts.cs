@@ -244,4 +244,69 @@ public static class LocalizedTextsConsts
     /// 简称
     /// </summary>
     public const string ShortName = "ShortName";
+
+    /// <summary>
+    /// 所在大楼
+    /// </summary>
+    public const string Building = "Building";
+
+    /// <summary>
+    /// 所在楼层
+    /// </summary>
+    public const string Floor = "Floor";
+
+    /// <summary>
+    /// 所在房间号
+    /// </summary>
+    public const string RoomNumber = "RoomNumber";
+
+    /// <summary>
+    /// 所在详细地址
+    /// </summary>
+    public const string Address = "Address";
+
+    /// <summary>
+    /// 联系电话
+    /// </summary>
+    public const string Phone = "Phone";
+
+    /// <summary>
+    /// 电子邮箱
+    /// </summary>
+    public const string Email = "Email";
+
+    /// <summary>
+    /// 院区负责人
+    /// </summary>
+    public const string HeadOfCampus = "HeadOfCampus";
+
+    /// <summary>
+    /// 院区负责人电话
+    /// </summary>
+    public const string HeadOfCampusPhone = "HeadOfCampusPhone";
+
+    /// <summary>
+    /// 院区负责人邮箱
+    /// </summary>
+    public const string HeadOfCampusEmail = "HeadOfCampusEmail";
+
+    /// <summary>
+    /// 院区网站
+    /// </summary>
+    public const string Website = "Website";
+
+    /// <summary>
+    /// 提供的服务
+    /// </summary>
+    public const string ServicesOffered = "ServicesOffered";
+
+    /// <summary>
+    /// 紧急联系人
+    /// </summary>
+    public const string EmergencyContact = "EmergencyContact";
+
+    /// <summary>
+    /// 紧急联系电话
+    /// </summary>
+    public const string EmergencyPhone = "EmergencyPhone";
 }
