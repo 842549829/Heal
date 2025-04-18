@@ -1,7 +1,11 @@
 ﻿using FluentValidation;
 using Heal.Domain.Shared.Constants;
 using Heal.Domain.Shared.Extensions;
+using Heal.Domain.Shared.Localization;
 using Microsoft.Extensions.Localization;
+using Volo.Abp;
+using Volo.Abp.DependencyInjection;
+using Volo.Abp.Localization;
 
 namespace Heal.Application;
 
@@ -11,6 +15,57 @@ namespace Heal.Application;
 /// <typeparam name="T">类型</typeparam>
 public class ValidationBase<T> : AbstractValidator<T>
 {
+    public ValidationBase(IAbpLazyServiceProvider lazyServiceProvider)
+    {
+        LazyServiceProvider = lazyServiceProvider;
+        LocalizationResource = typeof(HealResource);
+    }
+
+    public IAbpLazyServiceProvider LazyServiceProvider { get; set; }
+
+    protected IStringLocalizerFactory StringLocalizerFactory => LazyServiceProvider.LazyGetRequiredService<IStringLocalizerFactory>();
+
+    protected IStringLocalizer L
+    {
+        get
+        {
+            if (_localizer == null)
+            {
+                _localizer = CreateLocalizer();
+            }
+
+            return _localizer;
+        }
+    }
+    private IStringLocalizer? _localizer;
+
+    protected Type? LocalizationResource
+    {
+        get => _localizationResource;
+        set
+        {
+            _localizationResource = value;
+            _localizer = null;
+        }
+    }
+    private Type? _localizationResource = typeof(DefaultResource);
+
+    protected virtual IStringLocalizer CreateLocalizer()
+    {
+        if (LocalizationResource != null)
+        {
+            return StringLocalizerFactory.Create(LocalizationResource);
+        }
+
+        var localizer = StringLocalizerFactory.CreateDefaultOrNull();
+        if (localizer == null)
+        {
+            throw new AbpException($"Set {nameof(LocalizationResource)} or define the default localization resource type (by configuring the {nameof(AbpLocalizationOptions)}.{nameof(AbpLocalizationOptions.DefaultResourceType)}) to be able to use the {nameof(L)} object!");
+        }
+
+        return localizer;
+    }
+
     /// <summary>
     /// 字段长度安全地格式化本地化字符串。
     /// </summary>
@@ -18,19 +73,18 @@ public class ValidationBase<T> : AbstractValidator<T>
     /// <param name="key">本地化键。</param>
     /// <param name="args">格式化参数。</param>
     /// <returns>格式化后的字符串。</returns>
-    protected static string FieldLengthFormatLocalized(
-        IStringLocalizer localizer,
+    protected string FieldLengthFormatLocalized(
         string key,
         params object[] args)
     {
         const string defaultFormat = "The length of field '{0}' is not within the allowed range. The allowed range is {1}-{2}.";
 
         // 获取本地化值
-        var localizedValue = localizer[LocalizedTextsConsts.FieldLengthValidation].Value;
+        var localizedValue = L[LocalizedTextsConsts.FieldLengthValidation].Value;
 
         // 如果本地化值为空或无效，则使用默认值
         var format = string.IsNullOrEmpty(localizedValue) || localizedValue == LocalizedTextsConsts.FieldLengthValidation ? defaultFormat : localizedValue;
-        var keyValue = localizer[key].Value;
+        var keyValue = L[key].Value;
 
         // 格式化字符串
         return string.Format(format, keyValue, args);
@@ -42,18 +96,17 @@ public class ValidationBase<T> : AbstractValidator<T>
     /// <param name="localizer">IStringLocalizer 实例。</param>
     /// <param name="key">本地化键</param>
     /// <returns>格式化后的字符串</returns>
-    protected static string FieldIsRequiredFormatLocalized(
-        IStringLocalizer localizer,
+    protected string FieldIsRequiredFormatLocalized(
         string key)
     {
         const string defaultFormat = "The field '{0}' is required.";
 
         // 获取本地化值
-        var localizedValue = localizer[LocalizedTextsConsts.FieldIsRequired].Value;
+        var localizedValue = L[LocalizedTextsConsts.FieldIsRequired].Value;
 
         // 如果本地化值为空或无效，则使用默认值
         var format = string.IsNullOrEmpty(localizedValue) || localizedValue == LocalizedTextsConsts.FieldIsRequired ? defaultFormat : localizedValue;
-        var keyValue = localizer[key].Value;
+        var keyValue = L[key].Value;
 
         // 格式化字符串
         return string.Format(format, keyValue);
