@@ -159,7 +159,7 @@ public abstract class HealthcareAuditedAggregateRoot<TKey>(TKey id, string name,
     /// <param name="describe">描述</param>
     public void SetDescribe(string? describe)
     {
-        FieldValidatorExtension.ValidateFieldLength(name, "描述", 1, DescribeConsts.MaxLength);
+        FieldValidatorExtension.ValidateFieldLength(describe, "描述", 1, DescribeConsts.MaxLength);
         Describe = describe;
     }
 

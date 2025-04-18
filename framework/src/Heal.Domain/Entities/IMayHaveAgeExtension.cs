@@ -11,5 +11,5 @@ public interface IMayHaveAgeExtension : IMayHaveAge
     /// <param name="year">年</param>
     /// <param name="month">月</param>
     /// <param name="day">天</param>
-    public void SetAge(int? year, int? month, int? day);
+    public void SetAge(int year, int month, int day);
 }

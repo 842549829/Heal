@@ -81,6 +81,134 @@ public static class HealEntityTypeBuilderExtensions
         b.TryConfigureOrganizationId();
         b.TryConfigureOrganizationCode();
         b.TryConfigureParentId();
+        b.TryConfigureIdCard();
+        b.TryConfigureAge();
+        b.TryConfigureAddress();
+        b.TryConfigureUserBaseInfo();
+    }
+
+    /// <summary>
+    /// 配置用户信息实体
+    /// </summary>
+    /// <param name="b">EntityTypeBuilder</param>
+    public static void TryConfigureUserBaseInfo(this EntityTypeBuilder b)
+    {
+        if (!b.Metadata.ClrType.IsAssignableTo<IHasUserBaseInfo>())
+        {
+            return;
+        }
+
+        b.Property(nameof(IHasUserBaseInfo.Name))
+            .IsRequired()
+            .HasMaxLength(UserConsts.MaxUserNameLength)
+            .HasComment("名称");
+
+        b.Property(nameof(IHasUserBaseInfo.Gender))
+            .IsRequired(false)
+            .HasMaxLength(UserConsts.MaxGenderLength)
+            .HasComment("性别");
+
+        b.Property(nameof(IHasUserBaseInfo.Birthday))
+            .IsRequired()
+            .HasComment("生日");
+
+        b.Property(nameof(IHasUserBaseInfo.Phone))
+            .IsRequired()
+            .HasMaxLength(UserConsts.MaxPhoneLength)
+            .HasComment("手机");
+
+        b.Property(nameof(IHasUserBaseInfo.Email))
+            .IsRequired()
+            .HasMaxLength(UserConsts.MaxEmailLength)
+            .HasComment("邮箱");
+    }
+
+    /// <summary>
+    /// 配置地址实体
+    /// </summary>
+    /// <param name="b">EntityTypeBuilder</param>
+    public static void TryConfigureAddress(this EntityTypeBuilder b)
+    {
+        if (!b.Metadata.ClrType.IsAssignableTo<IMayHaveAddress>())
+        {
+            return;
+        }
+
+        b.Property(nameof(IMayHaveAddress.NationCode))
+            .IsRequired(false)
+            .HasMaxLength(AddressConsts.MaxNationCodeLength)
+            .HasComment("国家代码");
+
+        b.Property(nameof(IMayHaveAddress.ProvinceCode))
+            .IsRequired(false)
+            .HasMaxLength(AddressConsts.MaxProvinceCodeLength)
+            .HasComment("省份代码");
+
+        b.Property(nameof(IMayHaveAddress.CityCode))
+            .IsRequired(false)
+            .HasMaxLength(AddressConsts.MaxCityCodeLength)
+            .HasComment("城市代码");
+
+        b.Property(nameof(IMayHaveAddress.DistrictCode))
+            .IsRequired(false)
+            .HasMaxLength(AddressConsts.MaxDistrictCodeLength)
+            .HasComment("区县代码");
+
+        b.Property(nameof(IMayHaveAddress.Street))
+            .IsRequired(false)
+            .HasMaxLength(AddressConsts.MaxStreetLength)
+            .HasComment("街道");
+
+        b.Property(nameof(IMayHaveAddress.AddressLine))
+            .IsRequired(false)
+            .HasMaxLength(AddressConsts.MaxAddressLineLength)
+            .HasComment("详细地址");
+    }
+
+    /// <summary>
+    /// 配置年龄实体
+    /// </summary>
+    /// <param name="b">EntityTypeBuilder</param>
+    public static void TryConfigureAge(this EntityTypeBuilder b)
+    {
+        if (!b.Metadata.ClrType.IsAssignableTo<IMayHaveAge>())
+        {
+            return;
+        }
+
+        b.Property(nameof(IMayHaveAge.Year))
+            .IsRequired()
+            .HasComment(AgeConsts.Year);
+
+        b.Property(nameof(IMayHaveAge.Month))
+            .IsRequired()
+            .HasComment(AgeConsts.Month);
+
+        b.Property(nameof(IMayHaveAge.Day))
+            .IsRequired()
+            .HasComment(AgeConsts.Day);
+    }
+
+    /// <summary>
+    /// 配置证件实体
+    /// </summary>
+    /// <param name="b">EntityTypeBuilder</param>
+    public static void TryConfigureIdCard(this EntityTypeBuilder b)
+    {
+        if (!b.Metadata.ClrType.IsAssignableTo<IHasIdCard>())
+        {
+            return;
+        }
+
+        b.Property(nameof(IHasIdCard.IdCardNo))
+            .IsRequired()
+            .HasMaxLength(IdCardConsts.MaxIdCardNoLength)
+            .HasComment("证件号");
+
+        b.Property(nameof(IHasIdCard.IdCardType))
+            .IsRequired()
+            .HasMaxLength(IdCardConsts.MaxIdCardTypeLength)
+            .HasComment("证件类型");
     }
 
     /// <summary>

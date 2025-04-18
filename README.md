@@ -12,5 +12,5 @@ dotnet ef database update -c HealNetDbContext
 # 生成迁移脚本 ( 用于生成环境 )
 dotnet ef migrations script --verbose -i --project "./" -c HealNetDbContext -o "./Migrations/Script/20250416064948_init.sql"
 # 生成某一次迭代更新的脚本, 从这个迭代 20240329102615_file1 到 20240408082719_announcement 迭代版本之间的差异脚本
-dotnet ef migrations script --verbose -i --project "./" -c HealNetDbContext -o "./Migrations/Script/20250416064948_init.sql"  20250416064948_init 20250416015013_init4
+dotnet ef migrations script --verbose -i --project "./" -c HealNetDbContext -o "./Migrations/Script/20250418013255_init1.sql"  20250416064948_init 20250418013255_init1
 ```

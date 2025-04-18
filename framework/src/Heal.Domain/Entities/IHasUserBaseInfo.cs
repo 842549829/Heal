@@ -18,7 +18,7 @@ public interface IHasUserBaseInfo : IMayHaveAddressExtension, IMayHaveAgeExtensi
     /// <summary>
     /// 生日
     /// </summary>
-    public DateTime? Birthday { get; }
+    public DateTime Birthday { get; }
 
     /// <summary>
     /// 电话号码

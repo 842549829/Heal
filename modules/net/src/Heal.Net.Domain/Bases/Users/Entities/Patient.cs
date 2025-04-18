@@ -394,20 +394,6 @@ public class Patient(Guid id, string name, string code, string idCardType, strin
     }
 
     /// <summary>
-    /// 监护人
-    /// </summary>
-    public string? Guardian { get; private set; }
-
-    /// <summary>
-    /// 设置监护人
-    /// </summary>
-    /// <param name="guardian">监护人</param>
-    public void SetGuardian(string? guardian)
-    {
-        Guardian = guardian;
-    }
-
-    /// <summary>
     /// 监护人关系
     /// </summary>
     public string? GuardianRelationship { get; private set; }

@@ -8,15 +8,15 @@ public interface IMayHaveAge
     /// <summary>
     /// 岁
     /// </summary>
-    int? Year { get; }
+    int Year { get; }
 
     /// <summary>
     /// 月
     /// </summary>
-    int? Month { get; }
+    int Month { get; }
 
     /// <summary>
     /// 天
     /// </summary>
-    int? Day { get; }
+    int Day { get; }
 }

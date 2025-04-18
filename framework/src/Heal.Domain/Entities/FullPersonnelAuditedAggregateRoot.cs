@@ -1,4 +1,7 @@
-﻿namespace Heal.Domain.Entities;
+﻿using Heal.Domain.Shared.Constants;
+using Heal.Domain.Shared.Extensions;
+
+namespace Heal.Domain.Entities;
 
 /// <summary>
 /// 完整人员审计聚合根
@@ -47,17 +50,17 @@ public abstract class FullPersonnelAuditedAggregateRoot<TKey>(TKey id, string na
     /// <summary>
     /// 岁
     /// </summary>
-    public int? Year { get; private set; }
+    public int Year { get; private set; }
 
     /// <summary>
     /// 月
     /// </summary>
-    public int? Month { get; private set; }
+    public int Month { get; private set; }
 
     /// <summary>
     /// 天
     /// </summary>
-    public int? Day { get; private set; }
+    public int Day { get; private set; }
 
     /// <summary>
     /// 证件类型
@@ -77,7 +80,7 @@ public abstract class FullPersonnelAuditedAggregateRoot<TKey>(TKey id, string na
     /// <summary>
     /// 生日
     /// </summary>
-    public DateTime? Birthday { get; private set; }
+    public DateTime Birthday { get; private set; }
 
     /// <summary>
     /// 电话
@@ -98,23 +101,31 @@ public abstract class FullPersonnelAuditedAggregateRoot<TKey>(TKey id, string na
     {
         IdCardType = idCardType;
         IdCardNo = idCardNo;
+
+        if (IdCardType != IdCardConsts.IdCardType01)
+        {
+            return;
+        }
+
+        var birthday = IdCardExtension.GetBirthdayFromIdCard(idCardNo);
+        if (birthday == null)
+        {
+            throw new ArgumentException("身份证号码错误");
+        }
+        SetBirthday(birthday.Value);
     }
 
     /// <summary>
     /// 设置生日
     /// </summary>
     /// <param name="birthday">生日</param>
-    public void SetBirthday(DateTime? birthday)
+    public void SetBirthday(DateTime birthday)
     {
         Birthday = birthday;
-        if (!birthday.HasValue)
-        {
-            return;
-        }
-        var (years, months, days) = CalculateAge(birthday.Value);
-        Year ??= years;
-        Month ??= months;
-        Day ??= days;
+        var (years, months, days) = CalculateAge(birthday);
+        Year = years;
+        Month = months;
+        Day = days;
     }
 
     /// <summary>
@@ -132,16 +143,13 @@ public abstract class FullPersonnelAuditedAggregateRoot<TKey>(TKey id, string na
     /// <param name="year">年</param>
     /// <param name="month">月</param>
     /// <param name="day">天</param>
-    public void SetAge(int? year, int? month, int? day)
+    public void SetAge(int year, int month, int day)
     {
         Year = year;
         Month = month;
         Day = day;
 
-        if (year.HasValue && month.HasValue && day.HasValue && !Birthday.HasValue)
-        {
-            Birthday = new DateTime(year.Value, month.Value, day.Value);
-        }
+        Birthday = new DateTime(year, month, day);
     }
 
     /// <summary>

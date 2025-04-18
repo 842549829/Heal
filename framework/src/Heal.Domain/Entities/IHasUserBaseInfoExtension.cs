@@ -9,7 +9,7 @@ public interface IHasUserBaseInfoExtension : IHasUserBaseInfo
     /// 设置生日
     /// </summary>
     /// <param name="birthday">生日</param>
-    public void SetBirthday(DateTime? birthday);
+    public void SetBirthday(DateTime birthday);
 
     /// <summary>
     /// 设置邮箱

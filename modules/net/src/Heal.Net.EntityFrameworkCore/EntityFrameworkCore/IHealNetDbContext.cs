@@ -1,4 +1,5 @@
 ﻿using Heal.Net.Domain.Bases.Campuses.Entities;
+using Heal.Net.Domain.Bases.Users.Entities;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 
@@ -13,4 +14,14 @@ public interface IHealNetDbContext : IIdentityDbContext
     /// Campus
     /// </summary>
     public DbSet<Campus> Campuses { get; set; }
+
+    /// <summary>
+    /// Doctor
+    /// </summary>
+    public DbSet<Doctor> Doctors { get; set;}
+
+    /// <summary>
+    /// Patient
+    /// </summary>
+    public DbSet<Patient> Patients { get; set; }
 }

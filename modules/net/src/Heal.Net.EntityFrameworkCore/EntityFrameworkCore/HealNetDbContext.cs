@@ -1,4 +1,5 @@
 ﻿using Heal.Net.Domain.Bases.Campuses.Entities;
+using Heal.Net.Domain.Bases.Users.Entities;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.AuditLoggings;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.BackgroundJobs;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.BlobStorings;
@@ -10,6 +11,7 @@ using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.OpenIddicts;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Permissions;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Settings;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Tenants;
+using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Users;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
@@ -104,6 +106,16 @@ public class HealNetDbContext :
     /// </summary>
     public DbSet<Campus> Campuses { get; set; }
 
+    /// <summary>
+    /// Doctor
+    /// </summary>
+    public DbSet<Doctor> Doctors { get; set; }
+
+    /// <summary>
+    /// Patient
+    /// </summary>
+    public DbSet<Patient> Patients { get; set; }
+
     #endregion
 
     /// <summary>
@@ -135,5 +147,7 @@ public class HealNetDbContext :
         builder.ConfigureHealBlobStoring();
         builder.ConfigureHealCampuses();
         builder.ConfigureHealDepartment();
+        builder.ConfigureHealPatientManagement();
+        builder.ConfigureHealDoctor();
     }
 }

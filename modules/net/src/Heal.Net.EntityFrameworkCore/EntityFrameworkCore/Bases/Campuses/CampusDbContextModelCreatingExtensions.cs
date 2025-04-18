@@ -2,7 +2,6 @@
 using Heal.EntityFrameworkCore.EntityFrameworkCore;
 using Heal.Net.Domain.Bases.Campuses.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Volo.Abp;
 using Volo.Abp.Data;
 
@@ -25,7 +24,7 @@ public static class CampusDbContextModelCreatingExtensions
             return;
         }
 
-        builder.Entity(delegate (EntityTypeBuilder<Campus> b)
+        builder.Entity<Campus>(b =>
         {
             b.ToTable(AbpCommonDbProperties.DbTablePrefix + nameof(Campus), AbpCommonDbProperties.DbSchema, x =>
             {
