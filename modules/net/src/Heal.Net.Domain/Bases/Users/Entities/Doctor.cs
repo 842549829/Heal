@@ -1,6 +1,4 @@
 ﻿using Heal.Domain.Entities;
-using Heal.Domain.Shared.Constants;
-using Heal.Domain.Shared.Extensions;
 using Volo.Abp;
 
 namespace Heal.Net.Domain.Bases.Users.Entities;
@@ -46,9 +44,6 @@ public class Doctor(Guid id, string name, string code, string idCardType, string
     /// <param name="graduationDate">毕业时间</param>
     public void SetEducationalBackground(string? education, string? medicalSchool, string? major, DateTime? graduationDate)
     {
-        FieldValidatorExtension.ValidateFieldLength(education, "学历", 1, DoctorConsts.MaxEducationLength);
-        FieldValidatorExtension.ValidateFieldLength(medicalSchool, "毕业学校", 1, DoctorConsts.MaxMedicalSchoolLength);
-        FieldValidatorExtension.ValidateFieldLength(major, "专业", 1, DoctorConsts.MaxMajorLength);
         Education = education;
         MedicalSchool = medicalSchool;
         Major = major;
@@ -113,12 +108,6 @@ public class Doctor(Guid id, string name, string code, string idCardType, string
         string? specialization,
         string? researchResult)
     {
-        FieldValidatorExtension.ValidateFieldLength(practiceLicenseNumber, "执业证书编号", 1, DoctorConsts.MaxPracticeLicenseNumberLength);
-        FieldValidatorExtension.ValidateFieldLength(practiceScope, "执业范围", 1, DoctorConsts.MaxPracticeScopeLength);
-        FieldValidatorExtension.ValidateFieldLength(practiceExperience, "执业有效期", 1, DoctorConsts.MaxPracticeExperienceLength);
-        FieldValidatorExtension.ValidateFieldLength(specialization, "专业领域", 1, DoctorConsts.MaxSpecializationLength);
-        FieldValidatorExtension.ValidateFieldLength(researchResult, "研究成果", 1, DoctorConsts.MaxResearchResultLength);
-
         PracticeLicenseNumber = practiceLicenseNumber;
         PracticeScope = practiceScope;
         PracticeValidityDate = practiceValidityDate;
@@ -136,7 +125,6 @@ public class Doctor(Guid id, string name, string code, string idCardType, string
     public void SetWorkAgeLimit(string? workAgeLimit)
     {
         Check.NotNull(workAgeLimit, nameof(workAgeLimit));
-        FieldValidatorExtension.ValidateFieldLength(workAgeLimit, "工作年限", 1, DoctorConsts.MaxWorkAgeLimitLength);
         WorkAgeLimit = workAgeLimit;
     }
 
@@ -239,14 +227,6 @@ public class Doctor(Guid id, string name, string code, string idCardType, string
         string? scopeClassify,
         string? occupationClassify)
     {
-        FieldValidatorExtension.ValidateFieldLength(professionalClassify, "按医疗专业分类", 1, DoctorConsts.MaxProfessionalClassifyLength);
-        FieldValidatorExtension.ValidateFieldLength(evaluateClassify, "按医生的类型和评价", 1, DoctorConsts.MaxEvaluateClassifyLength);
-        FieldValidatorExtension.ValidateFieldLength(workClassify, "按工作内容和职责分类", 1, DoctorConsts.MaxWorkClassifyLength);
-        FieldValidatorExtension.ValidateFieldLength(practiceClassify, "按执业类别分类", 1, DoctorConsts.MaxPracticeClassifyLength);
-        FieldValidatorExtension.ValidateFieldLength(peculiarityClassify, "按特质类型分类", 1, DoctorConsts.MaxPeculiarityClassifyLength);
-        FieldValidatorExtension.ValidateFieldLength(scopeClassify, "按执业范围分类", 1, DoctorConsts.MaxScopeClassifyLength);
-        FieldValidatorExtension.ValidateFieldLength(occupationClassify, "按职业发展阶段分类", 1, DoctorConsts.MaxOccupationClassifyLength);
-
         ProfessionalClassify = professionalClassify;
         EvaluateClassify = evaluateClassify;
         WorkClassify = workClassify;
@@ -262,7 +242,6 @@ public class Doctor(Guid id, string name, string code, string idCardType, string
     /// <param name="avatar">avatar</param>
     public void SetAvatar(string? avatar)
     {
-        FieldValidatorExtension.ValidateFieldLength(avatar, "头像", 1, DoctorConsts.MaxAvatarLength);
         Avatar = avatar;
     }
 
@@ -272,7 +251,6 @@ public class Doctor(Guid id, string name, string code, string idCardType, string
     /// <param name="occupationClassify">类型(按职业发展阶段分类)</param>
     public void SetOccupationClassify(string? occupationClassify)
     {
-        FieldValidatorExtension.ValidateFieldLength(occupationClassify, "职业类型", 1, DoctorConsts.MaxOccupationClassifyLength);
         OccupationClassify = occupationClassify;
     }
 

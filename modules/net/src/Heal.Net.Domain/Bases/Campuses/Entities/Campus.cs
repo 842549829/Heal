@@ -1,6 +1,4 @@
 ﻿using Heal.Domain.Entities;
-using Heal.Domain.Shared.Constants;
-using Heal.Domain.Shared.Extensions;
 
 namespace Heal.Net.Domain.Bases.Campuses.Entities;
 
@@ -22,7 +20,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="shortName">简称</param>
     public void SetShortName(string? shortName)
     {
-        FieldValidatorExtension.ValidateFieldLength(shortName, "简称", 1, CampusConsts.MaxShortNameLength);
         ShortName = shortName;
     }
 
@@ -37,7 +34,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="building">所在大楼</param>
     public void SetBuilding(string? building)
     {
-        FieldValidatorExtension.ValidateFieldLength(building, "所在大楼", 1, CampusConsts.MaxBuildingLength);
         Building = building;
     }
 
@@ -52,7 +48,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="floor">所在楼层</param>
     public void SetFloor(string? floor)
     {
-        FieldValidatorExtension.ValidateFieldLength(floor, "所在楼层", 1, CampusConsts.MaxFloorLength);
         Floor = floor;
     }
 
@@ -67,7 +62,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="roomNumber">房间号</param>
     public void SetRoomNumber(string? roomNumber)
     {
-        FieldValidatorExtension.ValidateFieldLength(roomNumber, "房间号", 1, CampusConsts.MaxRoomNumberLength);
         RoomNumber = roomNumber;
     }
 
@@ -82,7 +76,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="address">所在详细地址</param>
     public void SetAddress(string? address)
     {
-        FieldValidatorExtension.ValidateFieldLength(address, "所在详细地址", 1, CampusConsts.MaxAddressLength);
         Address = address;
     }
 
@@ -97,7 +90,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="capacity">床位数/接待能力</param>
     public void SetCapacity(int capacity)
     {
-        FieldValidatorExtension.ValidateNonNegativeInt(capacity, "床位数/接待能力");
         Capacity = capacity;
     }
 
@@ -112,7 +104,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="phone">联系电话</param>
     public void SetPhone(string? phone)
     {
-        FieldValidatorExtension.ValidateFieldLength(phone, "联系电话", 1, CampusConsts.MaxPhoneLength);
         Phone = phone;
     }
 
@@ -127,7 +118,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="email">电子邮箱</param>
     public void SetEmail(string? email)
     {
-        FieldValidatorExtension.ValidateFieldLength(email, "电子邮箱", 1, CampusConsts.MaxEmailLength);
         Email = email;
     }
 
@@ -142,7 +132,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="headOfCampus">院区负责人</param>
     public void SetHeadOfCampus(string? headOfCampus)
     {
-        FieldValidatorExtension.ValidateFieldLength(headOfCampus, "院区负责人", 1, CampusConsts.MaxHeadOfCampusLength);
         HeadOfCampus = headOfCampus;
     }
 
@@ -157,7 +146,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="headOfCampusPhone">负责人电话</param>
     public void SetHeadOfCampusPhone(string? headOfCampusPhone)
     {
-        FieldValidatorExtension.ValidateFieldLength(headOfCampusPhone, "负责人电话", 1, CampusConsts.MaxHeadOfCampusPhoneLength);
         HeadOfCampusPhone = headOfCampusPhone;
     }
 
@@ -172,7 +160,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="headOfCampusEmail">负责人邮箱</param>
     public void SetHeadOfCampusEmail(string? headOfCampusEmail)
     {
-        FieldValidatorExtension.ValidateFieldLength(headOfCampusEmail, "负责人邮箱", 1, CampusConsts.MaxHeadOfCampusEmailLength);
         HeadOfCampusEmail = headOfCampusEmail;
     }
 
@@ -187,7 +174,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="website">院区网站</param>
     public void SetWebsite(string? website)
     {
-        FieldValidatorExtension.ValidateFieldLength(website, "院区网站", 1, CampusConsts.MaxWebsiteLength);
         Website = website;
     }
 
@@ -202,7 +188,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="servicesOffered">提供的服务</param>
     public void SetServicesOffered(string? servicesOffered)
     {
-        FieldValidatorExtension.ValidateFieldLength(servicesOffered, "提供的服务", 1, CampusConsts.MaxServicesOfferedLength);
         ServicesOffered = servicesOffered;
     }
 
@@ -217,7 +202,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="emergencyContact">紧急联系人</param>
     public void SetEmergencyContact(string? emergencyContact)
     {
-        FieldValidatorExtension.ValidateFieldLength(emergencyContact, "紧急联系人", 1, CampusConsts.MaxEmergencyContactLength);
         EmergencyContact = emergencyContact;
     }
 
@@ -232,7 +216,6 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     /// <param name="emergencyPhone">紧急联系电话</param>
     public void SetEmergencyPhone(string? emergencyPhone)
     {
-        FieldValidatorExtension.ValidateFieldLength(emergencyPhone, "紧急联系电话", 1, CampusConsts.MaxEmergencyPhoneLength);
         EmergencyPhone = emergencyPhone;
     }
 }

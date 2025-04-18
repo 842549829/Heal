@@ -1,9 +1,7 @@
-﻿using Heal.Domain.Shared.Constants;
-using Heal.Domain.Shared.Enums;
+﻿using Heal.Domain.Shared.Enums;
 using Heal.Domain.Shared.Extensions;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
-using Volo.Abp.Identity;
 
 namespace Heal.Domain.Entities;
 
@@ -34,7 +32,6 @@ public abstract class HealthcareAuditedAggregateRoot<TKey>(TKey id, string name,
     /// <param name="name">名称</param>
     protected HealthcareAuditedAggregateRoot(TKey id, string name) : this(id, name, string.Empty)
     {
-        FieldValidatorExtension.ValidateFieldLength(name, "名称", 1, NameConsts.MaxLength);
     }
 
     /// <summary>
@@ -67,7 +64,6 @@ public abstract class HealthcareAuditedAggregateRoot<TKey>(TKey id, string name,
     /// <param name="code">编码</param>
     public void SetCode(string code)
     {
-        FieldValidatorExtension.ValidateFieldLength(code, "编码", OrganizationUnitExtensionConsts.CodeDefaultLength, OrganizationUnitConsts.MaxCodeLength);
         Code = code;
     }
 
@@ -159,7 +155,6 @@ public abstract class HealthcareAuditedAggregateRoot<TKey>(TKey id, string name,
     /// <param name="describe">描述</param>
     public void SetDescribe(string? describe)
     {
-        FieldValidatorExtension.ValidateFieldLength(describe, "描述", 1, DescribeConsts.MaxLength);
         Describe = describe;
     }
 
@@ -188,7 +183,6 @@ public abstract class HealthcareAuditedAggregateRoot<TKey>(TKey id, string name,
     public void SetName(string name)
     {
         Check.NotNull(name, nameof(name));
-        FieldValidatorExtension.ValidateFieldLength(name, "名称", 1, NameConsts.MaxLength);
         Name = name;
         Pinyin = PinyinExtension.GetPinyin(name);
         PinyinFirstLetters = PinyinExtension.GetFirstPinyin(name);

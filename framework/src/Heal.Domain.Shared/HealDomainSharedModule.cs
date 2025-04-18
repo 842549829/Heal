@@ -1,4 +1,5 @@
 ﻿using Heal.Domain.Shared.Localization;
+using Volo.Abp.FluentValidation;
 using Volo.Abp.Identity;
 using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
@@ -14,7 +15,8 @@ namespace Heal.Domain.Shared;
 /// </summary>
 [DependsOn(
     typeof(AbpPermissionManagementDomainSharedModule),
-    typeof(AbpIdentityDomainSharedModule)
+    typeof(AbpIdentityDomainSharedModule),
+    typeof(AbpFluentValidationModule)
 )]
 public class HealDomainSharedModule : AbpModule
 {

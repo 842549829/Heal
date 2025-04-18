@@ -7,42 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Localization\Heal\ar.json" />
-    <None Remove="Localization\Heal\de-DE.json" />
     <None Remove="Localization\Heal\en.json" />
-    <None Remove="Localization\Heal\es.json" />
-    <None Remove="Localization\Heal\fi.json" />
-    <None Remove="Localization\Heal\fr.json" />
-    <None Remove="Localization\Heal\hi.json" />
-    <None Remove="Localization\Heal\hr.json" />
-    <None Remove="Localization\Heal\hu.json" />
-    <None Remove="Localization\Heal\it.json" />
-    <None Remove="Localization\Heal\pt-BR.json" />
-    <None Remove="Localization\Heal\ru.json" />
-    <None Remove="Localization\Heal\sk.json" />
-    <None Remove="Localization\Heal\sl.json" />
-    <None Remove="Localization\Heal\sv.json" />
-    <None Remove="Localization\Heal\tr.json" />
     <None Remove="Localization\Heal\zh-Hans.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Localization\Heal\ar.json" />
-    <EmbeddedResource Include="Localization\Heal\de-DE.json" />
     <EmbeddedResource Include="Localization\Heal\en.json" />
-    <EmbeddedResource Include="Localization\Heal\es.json" />
-    <EmbeddedResource Include="Localization\Heal\fi.json" />
-    <EmbeddedResource Include="Localization\Heal\fr.json" />
-    <EmbeddedResource Include="Localization\Heal\hi.json" />
-    <EmbeddedResource Include="Localization\Heal\hr.json" />
-    <EmbeddedResource Include="Localization\Heal\hu.json" />
-    <EmbeddedResource Include="Localization\Heal\it.json" />
-    <EmbeddedResource Include="Localization\Heal\pt-BR.json" />
-    <EmbeddedResource Include="Localization\Heal\ru.json" />
-    <EmbeddedResource Include="Localization\Heal\sk.json" />
-    <EmbeddedResource Include="Localization\Heal\sl.json" />
-    <EmbeddedResource Include="Localization\Heal\sv.json" />
-    <EmbeddedResource Include="Localization\Heal\tr.json" />
     <EmbeddedResource Include="Localization\Heal\zh-Hans.json" />
   </ItemGroup>
 
@@ -50,6 +20,7 @@
     <PackageReference Include="TinyPinyin" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" />
     <PackageReference Include="Volo.Abp.Identity.Domain.Shared" />
+    <PackageReference Include="Volo.Abp.FluentValidation" />
 	</ItemGroup>
 
 </Project>

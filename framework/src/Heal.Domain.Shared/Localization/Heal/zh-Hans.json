@@ -42,6 +42,9 @@
     "L:AbpIdentity,Permission:IdentityManagement": "用户模块管理",
     "L:AbpSettingManagement,Permission:SettingManagement": "配置模块管理",
     "L:AbpFeatureManagement,Permission:FeatureManagement": "功能模块管理",
-    "L:AbpTenantManagement,Permission:TenantManagement": "租户模块管理"
+    "L:AbpTenantManagement,Permission:TenantManagement": "租户模块管理",
+    "Name": "名称",
+    "FieldLengthValidation": "字段 '{0}' 的长度不在允许范围内，允许范围为 {1}-{2}。",
+    "FieldIsRequired": "字段 '{0}' 不能为空"
   }
 }
