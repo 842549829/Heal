@@ -1,17 +1,12 @@
 ﻿using Heal.Application.Contracts.Dtos;
+using Volo.Abp.Application.Dtos;
 
 namespace Heal.Net.Application.Contracts.Bases.Campuses.Dto;
 
 /// <summary>
-/// 院区信息
+/// 院区创建或修改
 /// </summary>
-public class CampusDto : AuditedEntityExtensionDto<Guid>, 
-    IHasCodeDto, 
-    IHasNameDto, 
-    IHasOrganizationDto, 
-    IHasSortDto,
-    IMayHaveDescribeDto,
-    IHasConcurrencyStampDto
+public class CampusCreateOrUpdateDto : EntityDto, IHasNameDto, IHasOrganizationDto, IHasSortDto, IMayHaveDescribeDto
 {
     /// <summary>
     /// 名称
@@ -22,6 +17,11 @@ public class CampusDto : AuditedEntityExtensionDto<Guid>,
     /// 组织Code
     /// </summary>
     public required string OrganizationCode { get; init; }
+
+    /// <summary>
+    /// 父级id
+    /// </summary>
+    public Guid? ParentId { get; init; }
 
     /// <summary>
     /// 排序
@@ -84,7 +84,7 @@ public class CampusDto : AuditedEntityExtensionDto<Guid>,
     public string? HeadOfCampusPhone { get; init; }
 
     /// <summary>
-    /// 负责人电话
+    /// 负责人邮箱
     /// </summary>
     public string? HeadOfCampusEmail { get; init; }
 
@@ -107,14 +107,4 @@ public class CampusDto : AuditedEntityExtensionDto<Guid>,
     /// 紧急联系电话
     /// </summary>
     public string? EmergencyPhone { get; init; }
-
-    /// <summary>
-    /// 编码
-    /// </summary>
-    public required string Code { get; init; }
-    
-    /// <summary>
-    /// 迸发标记
-    /// </summary>
-    public required string ConcurrencyStamp { get; init; }
 }

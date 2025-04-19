@@ -15,5 +15,6 @@ public class CampusAutoMapperProfile : Profile
     public CampusAutoMapperProfile()
     {
         CreateMap<Campus, CampusDto>();
+        CreateMap<Campus, CampusListDto>();
     }
 }

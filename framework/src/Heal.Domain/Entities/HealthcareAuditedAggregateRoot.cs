@@ -187,4 +187,13 @@ public abstract class HealthcareAuditedAggregateRoot<TKey>(TKey id, string name,
         Pinyin = PinyinExtension.GetPinyin(name);
         PinyinFirstLetters = PinyinExtension.GetFirstPinyin(name);
     }
+
+    /// <summary>
+    /// 设置并发版本
+    /// </summary>
+    /// <param name="concurrencyStamp">并发版本</param>
+    public void SetConcurrencyStamp(string concurrencyStamp)
+    {
+        ConcurrencyStamp = concurrencyStamp;
+    }
 }

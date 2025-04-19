@@ -15,7 +15,7 @@ public class HealNetPermissionDefinitionProvider : PermissionDefinitionProvider
     /// <param name="context"></param>
     public override void Define(IPermissionDefinitionContext context)
     {
-        var myGroup = context.AddGroup(HealNetPermissions.GroupName);
+        //var myGroup = context.AddGroup(HealNetPermissions.GroupName);
 
         //Define your own permissions here. Example:
         //myGroup.AddPermission(HealPermissions.MyPermission1, L("Permission:MyPermission1"));
