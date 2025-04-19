@@ -11,6 +11,7 @@ public interface ICampusAppService : IHealNetApplicationService
     /// 创建用户
     /// </summary>
     /// <param name="input">用户创建信息</param>
+    /// <param name="cancellationToken">取消令牌</param>
     /// <returns>用户</returns>
-    Task<CampusDto> CreateAsync(CampusCreateDto input);
+    Task<CampusDto> CreateAsync(CampusCreateDto input, CancellationToken cancellationToken = default);
 }

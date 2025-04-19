@@ -21,12 +21,13 @@ public class CampusAppService(ISequenceManager sequenceManager,
     /// 创建用户
     /// </summary>
     /// <param name="input">用户创建信息</param>
+    /// <param name="cancellationToken"></param>
     /// <returns>用户</returns>
-    public async Task<CampusDto> CreateAsync(CampusCreateDto input)
+    public async Task<CampusDto> CreateAsync(CampusCreateDto input, CancellationToken cancellationToken= default)
     {
         var clockNow = Clock.Now;
-        var code = await sequenceManager.PadNumberWithZerosAsync(CampusConsts.Code, OrganizationUnitExtensionConsts.CodeDefaultLength);
-        var organizationId = await organizationManager.GetOrganizationIdAsync(input.OrganizationCode);
+        var code = await sequenceManager.PadNumberWithZerosAsync(CampusConsts.Code, OrganizationUnitExtensionConsts.CodeDefaultLength, cancellationToken);
+        var organizationId = await organizationManager.GetOrganizationIdAsync(input.OrganizationCode, cancellationToken);
         var entity = new Campus(
             GuidGenerator.Create(),
             input.Name,

@@ -17,11 +17,12 @@ public class CampusController(ICampusAppService campusAppService) : HealNetContr
     /// 创建
     /// </summary>
     /// <param name="input">创建信息</param>
+    /// <param name="cancellationToken">取消令牌</param>
     /// <returns>院区</returns>
     [HttpPost]
     [AllowAnonymous]
-    public Task<CampusDto> CreateAsync([FromBody] CampusCreateDto input)
+    public Task<CampusDto> CreateAsync([FromBody] CampusCreateDto input, CancellationToken cancellationToken)
     {
-        return campusAppService.CreateAsync(input);
+        return campusAppService.CreateAsync(input, cancellationToken);
     }
 }
