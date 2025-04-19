@@ -57,7 +57,7 @@ public class CampusAppService(ISequenceManager sequenceManager,
         entity.SetCreator(CurrentUser.Id, CurrentUser.GetCurrentUserName(), clockNow);
         entity.SetModification(CurrentUser.Id, CurrentUser.GetCurrentUserName(), clockNow);
 
-        var campus = await campusRepository.InsertAsync(entity);
+        var campus = await campusRepository.InsertAsync(entity, cancellationToken: cancellationToken);
 
         return ObjectMapper.Map<Campus, CampusDto>(campus);
     }
