@@ -2,7 +2,6 @@
 using Heal.Net.Application.Contracts.Bases.Permissions.Dtos;
 using Heal.Net.Domain.Bases.Permissions.Managers;
 using Heal.Net.Domain.Bases.Permissions.Modules;
-using Volo.Abp.PermissionManagement;
 
 namespace Heal.Net.Application.Bases.Permissions;
 
@@ -13,45 +12,23 @@ namespace Heal.Net.Application.Bases.Permissions;
 public class NetRolePermissionAppService(INetRolePermissionManager netRolePermissionManager) : HealNetAppService, INetRolePermissionAppService
 {
     /// <summary>
-    /// 获取所有权限
+    /// 获取模块(当前登录用户有权限的)
     /// </summary>
-    /// <returns>所有权限</returns>
-    public async Task<List<PermissionTreeDto>> GetAllPermissionsAsync()
+    /// <returns>模块</returns>
+    public async Task<List<ModuleDto>> GetCurrenModuleListAsync()
     {
-        var permissionTree = await netRolePermissionManager.GetAllPermissionTreeListAsync();
-        return ObjectMapper.Map<List<PermissionTree>, List<PermissionTreeDto>>(permissionTree);
+        var moduleList = await netRolePermissionManager.GetModuleListAsync(CurrentUser.Id.GetValueOrDefault());
+        return ObjectMapper.Map<List<Module>, List<ModuleDto>>(moduleList);
     }
 
     /// <summary>
-    /// 获取当前用户的权限
+    /// 根据模块名称获取权限(当前登录用户有权限的)
     /// </summary>
-    /// <returns>当前用户的权限</returns>
-    public async Task<List<PermissionTreeDto>> GetCurrentPermissionsAsync()
+    /// <param name="moduleName">模块名称</param>
+    /// <returns>权限</returns>
+    public async Task<List<PermissionDto>> GetCurrentPermissionsByModuleNameAsync(string moduleName)
     {
-        var permissionTree = await netRolePermissionManager.GetPermissionTreeListAsync(CurrentUser.Id.GetValueOrDefault());
-        return ObjectMapper.Map<List<PermissionTree>, List<PermissionTreeDto>>(permissionTree);
-    }
-
-    /// <summary>
-    /// 获取权限组定义
-    /// </summary>
-    /// <returns>权限组定义</returns>
-    public async Task<List<PermissionGroupDefinitionDto>> GetPermissionGroupDefinitionListAsync()
-    {
-        var permissionGroupDefinitionRecords = await netRolePermissionManager.GetPermissionGroupDefinitionListAsync();
-        var permissionGroupDefinitionList = ObjectMapper.Map<List<PermissionGroupDefinitionRecord>, List<PermissionGroupDefinitionDto>>(permissionGroupDefinitionRecords);
-        return permissionGroupDefinitionList;
-    }
-
-    /// <summary>
-    /// 获取权限定义
-    /// </summary>
-    /// <param name="groupName">分组名称</param>
-    /// <returns>权限定义</returns>
-    public async Task<List<PermissionDefinitionDto>> GetPermissionDefinitionListAsync(string groupName)
-    {
-        var permissionDefinitionRecords = await netRolePermissionManager.GetPermissionDefinitionListAsync(groupName);
-        var permissionDefinitionList = ObjectMapper.Map<List<PermissionDefinitionRecord>, List<PermissionDefinitionDto>>(permissionDefinitionRecords);
-        return permissionDefinitionList;
+        var permissions = await netRolePermissionManager.GetPermissionsAsync(moduleName, CurrentUser.Id.GetValueOrDefault());
+        return ObjectMapper.Map<List<Permission>, List<PermissionDto>>(permissions);
     }
 }

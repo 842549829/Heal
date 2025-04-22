@@ -8,27 +8,17 @@ namespace Heal.Net.Application.Contracts.Bases.Permissions;
 public interface INetRolePermissionAppService : IHealNetApplicationService
 {
     /// <summary>
-    /// 获取所有权限
+    /// 获取模块(当前登录用户有权限的)
     /// </summary>
-    /// <returns>所有权限</returns>
-    Task<List<PermissionTreeDto>> GetAllPermissionsAsync();
-
+    /// <returns>模块</returns>
+    Task<List<ModuleDto>> GetCurrenModuleListAsync();
+    
     /// <summary>
-    /// 获取当前用户的权限
+    /// 根据模块名称获取权限(当前登录用户有权限的)
     /// </summary>
-    /// <returns>当前用户的权限</returns>
-    Task<List<PermissionTreeDto>> GetCurrentPermissionsAsync();
-
-    /// <summary>
-    /// 获取权限组定义
-    /// </summary>
-    /// <returns>权限组定义</returns>
-    Task<List<PermissionGroupDefinitionDto>> GetPermissionGroupDefinitionListAsync();
-
-    /// <summary>
-    /// 获取权限定义
-    /// </summary>
-    /// <param name="groupName">分组名称</param>
-    /// <returns>权限定义</returns>
-    Task<List<PermissionDefinitionDto>> GetPermissionDefinitionListAsync(string groupName);
+    /// <param name="moduleName">模块名称</param>
+    /// <returns>权限</returns>
+    Task<List<PermissionDto>> GetCurrentPermissionsByModuleNameAsync(string moduleName);
+    
+    // 获取模块和权限组合树(当前用户的)
 }

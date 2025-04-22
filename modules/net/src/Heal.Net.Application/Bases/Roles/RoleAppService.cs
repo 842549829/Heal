@@ -3,6 +3,7 @@ using Heal.Net.Application.Contracts.Bases.Roles.Dtos;
 using Heal.Net.Domain.Bases.Permissions.Managers;
 using Heal.Net.Domain.Bases.Permissions.Modules;
 using Microsoft.AspNetCore.Identity;
+using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
@@ -114,24 +115,31 @@ public class RoleAppService(
     }
 
     /// <summary>
-    /// 获取角色
+    /// 根据指定的角色ID异步获取角色及其权限信息。
     /// </summary>
-    /// <param name="id">id</param>
-    /// <returns>角色</returns>
+    /// <param name="id">角色的唯一标识符。</param>
+    /// <returns>包含角色及其权限信息的数据传输对象。</returns>
     public async Task<RoleDto> GetAsync(Guid id)
     {
+        // 获取角色信息
         var identityRole = await roleManager.GetByIdAsync(id);
+        
+        // 映射角色信息到DTO
         var dto = ObjectMapper.Map<IdentityRole, RoleDto>(identityRole);
-        var permissionGrants =
-            await netPermissionManager.GetPermissionGrantListAsync(RolePermissionValueProvider.ProviderName, dto.Name);
-        permissionGrants.ForEach(x =>
+
+        // 获取该角色的所有权限授权信息
+        var permissionGrants = await netPermissionManager.GetPermissionGrantListAsync(
+            RolePermissionValueProvider.ProviderName,
+            identityRole.Name
+        );
+
+        // 将权限授权信息转换为UpdatePermissionDto对象，并添加到DTO的Permissions集合中
+        dto.Permissions.AddRange(permissionGrants.Select(x => new UpdatePermissionDto
         {
-            dto.Permissions.Add(new UpdatePermissionDto
-            {
-                Name = x.Name,
-                IsGranted = true
-            });
-        });
+            Name = x.Name,
+            IsGranted = true
+        }));
+
         return dto;
     }
 
@@ -144,7 +152,7 @@ public class RoleAppService(
     private async Task SetPermissionAsync(IdentityRole role, List<UpdatePermissionDto> permissions)
     {
         var updatePermissions = ObjectMapper.Map<List<UpdatePermissionDto>, List<UpdatePermission>>(permissions);
-        await netPermissionManager.SetPermissionAsync(role, updatePermissions);
+        await netPermissionManager.SetPermissionAsync(role.NormalizedName, updatePermissions);
     }
 
     /// <summary>

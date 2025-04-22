@@ -11,5 +11,5 @@ public class RoleDto : IdentityRoleDto
     /// <summary>
     /// 权限信息
     /// </summary>
-    public List<UpdatePermissionDto> Permissions { get; set; } = [];
+    public List<UpdatePermissionDto> Permissions { get; init; } = [];
 }

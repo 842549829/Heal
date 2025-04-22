@@ -15,7 +15,9 @@ public class NetRolePermissionAutoMapperProfile : Profile
     /// </summary>
     public NetRolePermissionAutoMapperProfile()
     {
-        CreateMap<PermissionTree, PermissionTreeDto>();
+        CreateMap<Permission, PermissionDto>();
+
+        CreateMap<Module, ModuleDto>();
 
         CreateMap<PermissionGroupDefinitionRecord, PermissionGroupDefinitionDto>();
 

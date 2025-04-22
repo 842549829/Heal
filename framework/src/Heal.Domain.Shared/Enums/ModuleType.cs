@@ -3,19 +3,19 @@
 namespace Heal.Domain.Shared.Enums;
 
 /// <summary>
-/// 权限类型
+/// 模块类型
 /// </summary>
-public enum PermissionType
+public enum ModuleType
 {
     /// <summary>
-    /// 菜单
+    /// 系统
     /// </summary>
-    [Description("菜单")]
-    Menu,
-
+    [Description("系统")]
+    System,
+    
     /// <summary>
-    /// 按钮
+    /// 模块
     /// </summary>
-    [Description("按钮")]
-    Button
+    [Description("模块")]
+    Module
 }

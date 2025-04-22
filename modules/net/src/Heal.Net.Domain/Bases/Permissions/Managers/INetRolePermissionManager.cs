@@ -1,5 +1,4 @@
 ﻿using Heal.Net.Domain.Bases.Permissions.Modules;
-using Volo.Abp.Identity;
 using Volo.Abp.PermissionManagement;
 
 namespace Heal.Net.Domain.Bases.Permissions.Managers;
@@ -12,11 +11,11 @@ public interface INetRolePermissionManager : IHealNetDomainManager
     /// <summary>
     /// 设置角色权限
     /// </summary>
-    /// <param name="entity">角色</param>
+    /// <param name="name">角色名称</param>
     /// <param name="updatePermissions">更新权限</param>
     /// <returns>角色</returns>
-    Task<IdentityRole> SetPermissionAsync(
-        IdentityRole entity,
+    Task SetPermissionAsync(
+        string name,
         List<UpdatePermission> updatePermissions);
 
     /// <summary>
@@ -33,28 +32,17 @@ public interface INetRolePermissionManager : IHealNetDomainManager
         );
 
     /// <summary>
-    /// 异步获取所有权限树列表
+    /// 获取模块(当前登录用户有权限的)
     /// </summary>
-    /// <returns>返回权限树列表</returns>
-    Task<List<PermissionTree>> GetAllPermissionTreeListAsync();
+    /// <param name="userId">当前登录用户ID</param>
+    /// <returns>模块</returns>
+    Task<List<Module>> GetModuleListAsync(Guid userId);
 
     /// <summary>
-    /// 异步获取指定用户的权限树列表
+    /// 获取当前模块下对应用户的权限
     /// </summary>
-    /// <param name="userId">用户ID</param>
-    /// <returns>返回权限树列表</returns>
-    Task<List<PermissionTree>> GetPermissionTreeListAsync(Guid userId);
-
-    /// <summary>
-    /// 异步获取权限组定义列表
-    /// </summary>
-    /// <returns>返回权限组定义列表</returns>
-    Task<List<PermissionGroupDefinitionRecord>> GetPermissionGroupDefinitionListAsync();
-
-    /// <summary>
-    /// 异步获取权限定义列表
-    /// </summary>
-    /// <param name="groupName">权限组名称</param>
-    /// <returns>返回权限定义列表</returns>
-    Task<List<PermissionDefinitionRecord>> GetPermissionDefinitionListAsync(string groupName);
+    /// <param name="moduleName">模块名称</param>
+    /// <param name="userId">用户Id</param>
+    /// <returns>权限</returns>
+    Task<List<Permission>> GetPermissionsAsync(string moduleName, Guid userId);
 }
