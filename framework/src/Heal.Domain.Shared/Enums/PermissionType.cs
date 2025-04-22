@@ -8,6 +8,18 @@ namespace Heal.Domain.Shared.Enums;
 public enum PermissionType
 {
     /// <summary>
+    /// 系统
+    /// </summary>
+    [Description("系统")]
+    System,
+
+    /// <summary>
+    /// 模块
+    /// </summary>
+    [Description("模块")]
+    Module,
+
+    /// <summary>
     /// 菜单
     /// </summary>
     [Description("菜单")]

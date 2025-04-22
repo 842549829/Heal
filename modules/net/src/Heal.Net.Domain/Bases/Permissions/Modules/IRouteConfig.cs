@@ -1,4 +1,4 @@
-﻿namespace Heal.Net.Domain.Bases.Permissions.Modules.Vue3;
+﻿namespace Heal.Net.Domain.Bases.Permissions.Modules;
 
 /// <summary>
 /// 路由配置

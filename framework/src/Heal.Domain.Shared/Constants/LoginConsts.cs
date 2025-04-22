@@ -8,7 +8,7 @@ public static class LoginConsts
     /// <summary>
     /// 登录时是否记住用户名
     /// </summary>
-    public const string RememberMe = "RememberMe";
+    public const string RememberMe = "remember";
 
     /// <summary>
     /// Tenant

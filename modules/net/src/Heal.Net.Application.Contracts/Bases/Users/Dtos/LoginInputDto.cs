@@ -30,7 +30,7 @@ public class LoginInputDto : EntityDto
     /// <summary>
     /// 登录时是否记住
     /// </summary>
-    public bool? RememberMe { get; set; }
+    public bool? Remember { get; set; }
 
     ///// <summary>
     ///// 组织Code

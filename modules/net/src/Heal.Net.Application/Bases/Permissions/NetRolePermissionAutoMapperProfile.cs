@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Heal.Net.Application.Contracts.Bases.Permissions.Dtos;
-using Heal.Net.Domain.Bases.Permissions.Modules;
 using Volo.Abp.PermissionManagement;
 
 namespace Heal.Net.Application.Bases.Permissions;
@@ -15,10 +14,6 @@ public class NetRolePermissionAutoMapperProfile : Profile
     /// </summary>
     public NetRolePermissionAutoMapperProfile()
     {
-        CreateMap<Permission, PermissionDto>();
-
-        CreateMap<Module, ModuleDto>();
-
         CreateMap<PermissionGroupDefinitionRecord, PermissionGroupDefinitionDto>();
 
         CreateMap<PermissionDefinitionRecord, PermissionDefinitionDto>();

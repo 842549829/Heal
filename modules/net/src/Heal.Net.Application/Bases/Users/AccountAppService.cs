@@ -41,9 +41,9 @@ public class AccountAppService(IOptions<AuthServerOptions> authServerOption, IHt
         //{
         //    request.Parameters.Add(LoginConsts.Organization, input.OrganizationCode);
         //}
-        if (input.RememberMe.HasValue)
+        if (input.Remember.HasValue)
         {
-            request.Parameters.Add(LoginConsts.RememberMe, input.RememberMe.Value.ToString());
+            request.Parameters.Add(LoginConsts.RememberMe, input.Remember.Value.ToString());
         }
 
         request.Parameters.AddRequired(OidcConstants.TokenRequest.GrantType, _authServerOption.GrantType);
