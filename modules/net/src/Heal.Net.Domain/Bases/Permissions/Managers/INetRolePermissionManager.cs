@@ -32,9 +32,25 @@ public interface INetRolePermissionManager : IHealNetDomainManager
         );
 
     /// <summary>
-    /// 异步获取指定用户的权限树列表
+    /// 获取模块和权限树列表
     /// </summary>
     /// <param name="userId">用户ID</param>
+    /// <param name="groupName">组名称</param>
     /// <returns>返回权限树列表</returns>
-    Task<List<PermissionTree>> GetPermissionTreeListAsync(Guid userId);
+    Task<List<PermissionTree>> GetModuleAndPermissionTreeListAsync(Guid? userId = null, string? groupName = null);
+
+    /// <summary>
+    /// 获取权限树列表
+    /// </summary>
+    /// <param name="userId">用户ID</param>
+    /// <param name="groupName">组名称</param>
+    /// <returns>返回权限树列表</returns>
+    Task<List<PermissionTree>> GetPermissionTreeListAsync(Guid? userId = null, string? groupName = null);
+
+    /// <summary>
+    /// 获取模块列表
+    /// </summary>
+    /// <param name="userId">用户Id</param>
+    /// <returns>权限</returns>
+    Task<List<Permission>> GetModuleListAsync(Guid? userId = null);
 }

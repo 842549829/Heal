@@ -26,6 +26,11 @@ public static class PermissionDefinitionConsts
     public const string Type = "type";
 
     /// <summary>
+    /// 标记
+    /// </summary>
+    public const string Tag = "tag";
+
+    /// <summary>
     /// 子权限
     /// </summary>
     public const string ChildPermissions = "childPermissions";

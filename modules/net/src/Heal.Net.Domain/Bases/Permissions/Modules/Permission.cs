@@ -3,12 +3,12 @@
 namespace Heal.Net.Domain.Bases.Permissions.Modules;
 
 /// <summary>
-/// 权限树
+/// 权限
 /// </summary>
-public class PermissionTree : PermissionBase
+public class Permission : PermissionBase
 {
     /// <summary>
-    /// 初始化 <see cref="PermissionTree"/> 类的新实例。
+    /// 初始化 <see cref="Permission"/> 类的新实例。
     /// </summary>
     /// <param name="permissionName">权限名称。</param>
     /// <param name="displayName">权限显示名称（可选）。</param>
@@ -28,66 +28,7 @@ public class PermissionTree : PermissionBase
     /// <param name="activeMenu">当前路由激活时需要高亮的菜单项路径（可选）。</param>
     /// <param name="noTagsView">是否禁用标签页视图（可选）。如果为 true，则该路由不会显示在标签页中。</param>
     /// <param name="canTo">是否允许跳转到该路由（可选）。如果为 false，则无法通过编程式导航跳转到该路由。</param>
-    public PermissionTree(string permissionName,
-        string displayName,
-        string path,
-        string component,
-        string? parentName = null,
-        PermissionType? type = PermissionType.Menu,
-        string? name = null,
-        string? redirect = null,
-        string? alias = null,
-        bool? hidden = false,
-        bool? alwaysShow = false,
-        string? icon = null,
-        bool? noCache = null,
-        bool? breadcrumb = null,
-        bool? affix = null,
-        string? activeMenu = null,
-        bool? noTagsView = false,
-        bool? canTo = false) : base(permissionName, displayName, path, component, parentName, type, name, redirect, alias, hidden, alwaysShow, icon, noCache, breadcrumb, affix, activeMenu, noTagsView, canTo)
+    public Permission(string permissionName, string displayName, string path, string component, string? parentName = null, PermissionType? type, string? name = null, string? redirect = null, string? alias = null, bool? hidden, bool? alwaysShow, string? icon = null, bool? noCache = null, bool? breadcrumb = null, bool? affix = null, string? activeMenu = null, bool? noTagsView, bool? canTo) : base(permissionName, displayName, path, component, parentName, type, name, redirect, alias, hidden, alwaysShow, icon, noCache, breadcrumb, affix, activeMenu, noTagsView, canTo)
     {
-    }
-
-    /// <summary>
-    /// 子权限
-    /// </summary>
-    public List<PermissionTree>? ChildPermissions { get; private set; }
-
-    /// <summary>
-    /// 添加子权限
-    /// </summary>
-    /// <param name="childPermission">子权限</param>
-    public void AddChildPermission(PermissionTree childPermission)
-    {
-        ChildPermissions ??= [];
-        ChildPermissions.Add(childPermission);
-    }
-
-    /// <summary>
-    /// 克隆
-    /// </summary>
-    /// <returns>权限树</returns>
-    public PermissionTree Clone()
-    {
-        var permissionTree = this;
-        return new PermissionTree(permissionTree.PermissionName,
-            permissionTree.Title,
-            permissionTree.Path,
-            permissionTree.Component,
-            permissionTree.ParentName,
-            permissionTree.Type,
-            permissionTree.Name,
-            permissionTree.Redirect,
-            permissionTree.Alias,
-            permissionTree.Hidden,
-            permissionTree.AlwaysShow,
-            permissionTree.Icon,
-            permissionTree.NoCache,
-            permissionTree.Breadcrumb,
-            permissionTree.Affix,
-            permissionTree.ActiveMenu,
-            permissionTree.NoTagsView,
-            permissionTree.CanTo);
     }
 }

@@ -18,7 +18,7 @@ public interface IMeta
     /// <summary>
     /// 路由标题，通常用于菜单或标签页显示。
     /// </summary>
-    public string? Title { get; }
+    public string Title { get; }
 
     /// <summary>
     /// 菜单图标，通常是一个图标的名称或路径。

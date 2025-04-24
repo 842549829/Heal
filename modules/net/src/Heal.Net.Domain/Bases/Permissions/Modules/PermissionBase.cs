@@ -21,7 +21,6 @@ public abstract class PermissionBase : IRouteConfig
     /// <param name="alias">别名（可选）。访问别名路径时会匹配原始路径的路由。</param>
     /// <param name="hidden">是否隐藏该路由（可选）。如果为 true，则该路由不会显示在菜单中。</param>
     /// <param name="alwaysShow">是否始终显示根菜单（可选）。如果为 true，即使只有一个子路由，也会显示父级菜单。</param>
-    /// <param name="title">路由标题（可选）。通常用于菜单或标签页显示。</param>
     /// <param name="icon">权限前端图标（可选）。指定菜单项的图标。</param>
     /// <param name="noCache">是否禁用页面缓存（可选）。如果为 true，则该页面不会被缓存。</param>
     /// <param name="breadcrumb">是否显示面包屑导航（可选）。如果为 false，则该路由不会出现在面包屑中。</param>
@@ -40,7 +39,6 @@ public abstract class PermissionBase : IRouteConfig
         string? alias = null,
         bool? hidden = false,
         bool? alwaysShow = false,
-        string? title = null,
         string? icon = null,
         bool? noCache = null,
         bool? breadcrumb = null,
@@ -51,7 +49,6 @@ public abstract class PermissionBase : IRouteConfig
     {
         PermissionName = permissionName;
         ParentName = parentName;
-        DisplayName = displayName;
         Type = type;
         Path = path;
         Name = name;
@@ -60,7 +57,7 @@ public abstract class PermissionBase : IRouteConfig
         Alias = alias;
         Hidden = hidden;
         AlwaysShow = alwaysShow;
-        Title = title;
+        Title = displayName;
         Icon = icon;
         NoCache = noCache;
         Breadcrumb = breadcrumb;
@@ -81,14 +78,23 @@ public abstract class PermissionBase : IRouteConfig
     public string? ParentName { get; private set; }
 
     /// <summary>
-    /// 权限显示名称
-    /// </summary>
-    public string DisplayName { get; private set; }
-
-    /// <summary>
     /// 权限类型
     /// </summary>
     public PermissionType? Type { get; private set; }
+
+    /// <summary>
+    /// 标签[特殊标记;不如1标记是跳转第三方的]
+    /// </summary>
+    public int Tag { get; private set; }
+
+    /// <summary>
+    /// 设置标签
+    /// </summary>
+    /// <param name="tag">tag</param>
+    public void SetTag(int tag)
+    {
+        Tag = tag;
+    }
 
     /// <summary>
     /// 权限前端路由
@@ -128,7 +134,7 @@ public abstract class PermissionBase : IRouteConfig
     /// <summary>
     /// 路由标题，通常用于菜单或标签页显示。
     /// </summary>
-    public string? Title { get; private set; }
+    public string Title { get; private set; }
 
     /// <summary>
     /// 权限前端图标

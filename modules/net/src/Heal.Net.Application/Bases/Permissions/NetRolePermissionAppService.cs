@@ -13,12 +13,23 @@ namespace Heal.Net.Application.Bases.Permissions;
 public class NetRolePermissionAppService(INetRolePermissionManager netRolePermissionManager) : HealNetAppService, INetRolePermissionAppService
 {
     /// <summary>
-    /// 异步获取指定用户的权限树列表
+    /// 获取模块列表
     /// </summary>
-    /// <returns>返回权限树列表</returns>
-    public async Task<List<RouteConfigDto>> GetPermissionTreeListAsync()
+    /// <returns>返回模块列表</returns>
+    public async Task<List<ModuleDto>> GetModuleListAsync()
     {
-        var permissions = await netRolePermissionManager.GetPermissionTreeListAsync(CurrentUser.Id.GetValueOrDefault());
+        var permissions = await netRolePermissionManager.GetModuleListAsync(CurrentUser.Id.GetValueOrDefault());
+        return MapToDtoList(permissions);
+    }
+
+    /// <summary>
+    /// 获取权限树列表
+    /// </summary>
+    /// <param name="moduleName">模块名称</param>
+    /// <returns>返回权限树列表</returns>
+    public async Task<List<RouteConfigDto>> GetPermissionTreeListAsync(string moduleName)
+    {
+        var permissions = await netRolePermissionManager.GetPermissionTreeListAsync(CurrentUser.Id.GetValueOrDefault(), moduleName);
         return MapToDtoList(permissions);
     }
 
@@ -101,4 +112,22 @@ public class NetRolePermissionAppService(INetRolePermissionManager netRolePermis
         return !treeNodes.Any() ? [] : treeNodes.Select(MapToDto).ToList();
     }
 
+    /// <summary>
+    /// 转换
+    /// </summary>
+    /// <param name="permissions">权限</param>
+    /// <returns>模块</returns>
+    public static List<ModuleDto> MapToDtoList(List<Permission> permissions)
+    {
+        return permissions.Select(d => new ModuleDto
+        {
+            Name = d.Name,
+            Component = d.Component,
+            Path = d.Path,
+            Title = d.Title,
+            Icon = d.Icon,
+            Alias = d.Alias,
+            Redirect = d.Redirect
+        }).ToList();
+    }
 }

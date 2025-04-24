@@ -3,6 +3,7 @@ using Heal.Domain.Shared.Enums;
 using Heal.Net.Domain.Bases.Permissions.Modules;
 using Heal.Net.Domain.Bases.Permissions.Repositories;
 using Microsoft.Extensions.Localization;
+using System.Linq.Expressions;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
@@ -67,21 +68,118 @@ public class NetRolePermissionManager(
     /// 异步获取指定用户的权限树列表
     /// </summary>
     /// <param name="userId">用户ID</param>
+    /// <param name="groupName">组名称</param>
     /// <returns>返回权限树列表</returns>
-    public async Task<List<PermissionTree>> GetPermissionTreeListAsync(Guid userId)
+    public async Task<List<PermissionTree>> GetModuleAndPermissionTreeListAsync(Guid? userId = null, string? groupName = null)
     {
-        // 获取当前用户的角色
-        var roles = await userRepository.GetRolesAsync(userId);
-        var providerKey = roles.Select(a => a.Name).ToArray();
-        var rolePermission = await permissionRepository.GetPermissionListAsync(RolePermissionValueProvider.ProviderName, providerKey);
-        var user = await GetPermissionGrantListAsync(UserPermissionValueProvider.ProviderName, userId.ToString());
-        var permissionGrants = rolePermission.Union(user).Select(a => a.Name).Distinct();
-        var permissionDefinitionRecords = await permissionDefinitionRecordRepository.GetListAsync(d => permissionGrants.Contains(d.Name));
-        var groupNames = permissionDefinitionRecords.Select(a => a.GroupName).Distinct().ToArray();
-        var permissionGroupDefinitionRecords = await permissionGroupDefinitionRecordRepository.GetListAsync(d => groupNames.Contains(d.Name));
-        var permissions = CreatePermissionTree(permissionGroupDefinitionRecords, permissionDefinitionRecords);
-        var result = ConvertToTree(permissions);
-        return result;
+        // 获取模块列表
+        async Task<List<PermissionGroupDefinitionRecord>> GetModuleDataAsync(string[] modules)
+        {
+            var permissionGroupDefinitionRecords = await permissionGroupDefinitionRecordRepository.GetListAsync(d => modules.Contains(d.Name));
+            return permissionGroupDefinitionRecords;
+        }
+
+        string[] GetGroupNames(List<PermissionDefinitionRecord> permissionDefinitionRecords)
+        {
+            var groupNames = groupName.IsNullOrEmpty() ? permissionDefinitionRecords.Select(a => a.GroupName).Distinct().ToArray() : [groupName];
+            return groupNames;
+        }
+
+        // 构建权限树
+        List<PermissionTree> BuildPermissionTree(List<PermissionGroupDefinitionRecord> permissionGroupDefinitionRecords, List<PermissionDefinitionRecord> permissionDefinitionRecords)
+        {
+            var permissions = CreatePermissionTree(permissionGroupDefinitionRecords, permissionDefinitionRecords);
+            return ConvertToTree(permissions);
+        }
+
+        if (!userId.HasValue)
+        {
+            // 未提供用户 ID 的情况
+            var permissionDefinitionRecords = await GetPermissionDataAsync(module: groupName);
+            var groupNames = GetGroupNames(permissionDefinitionRecords);
+            var permissionGroupDefinitionRecords = await GetModuleDataAsync(groupNames);
+            return BuildPermissionTree(permissionGroupDefinitionRecords, permissionDefinitionRecords);
+        }
+        else
+        {
+            // 提供了用户 ID 的情况
+            var roles = await userRepository.GetRolesAsync(userId.Value);
+            var providerKey = roles.Select(a => a.Name).ToArray();
+            var rolePermission = await permissionRepository.GetPermissionListAsync(RolePermissionValueProvider.ProviderName, providerKey);
+            var user = await GetPermissionGrantListAsync(UserPermissionValueProvider.ProviderName, userId.Value.ToString());
+            var permissionGrants = rolePermission.Union(user).Select(a => a.Name).Distinct().ToList();
+            var permissionDefinitionRecords = await GetPermissionDataAsync(permissionGrants, groupName);
+            var groupNames = GetGroupNames(permissionDefinitionRecords);
+            var permissionGroupDefinitionRecords = await GetModuleDataAsync(groupNames);
+            return BuildPermissionTree(permissionGroupDefinitionRecords, permissionDefinitionRecords);
+        }
+    }
+
+    /// <summary>
+    /// 获取权限树列表
+    /// </summary>
+    /// <param name="userId">用户ID</param>
+    /// <param name="groupName">组名称</param>
+    /// <returns>返回权限树列表</returns>
+    public async Task<List<PermissionTree>> GetPermissionTreeListAsync(Guid? userId = null, string? groupName = null)
+    {
+        if (!userId.HasValue)
+        {
+            // 未提供用户 ID 的情况
+            var permissionDefinitionRecords = await GetPermissionDataAsync(module: groupName);
+            return BuildPermissionTree(permissionDefinitionRecords);
+        }
+        else
+        {
+            // 提供了用户 ID 的情况
+            var roles = await userRepository.GetRolesAsync(userId.Value);
+            var providerKey = roles.Select(a => a.Name).ToArray();
+            var rolePermission = await permissionRepository.GetPermissionListAsync(RolePermissionValueProvider.ProviderName, providerKey);
+            var user = await GetPermissionGrantListAsync(UserPermissionValueProvider.ProviderName, userId.Value.ToString());
+            var permissionGrants = rolePermission.Union(user).Select(a => a.Name).Distinct().ToList();
+            var permissionDefinitionRecords = await GetPermissionDataAsync(permissionGrants, groupName);
+            return BuildPermissionTree(permissionDefinitionRecords);
+        }
+
+        // 构建权限树
+        List<PermissionTree> BuildPermissionTree(List<PermissionDefinitionRecord> permissionDefinitionRecords)
+        {
+            var permissions = new List<PermissionTree>();
+            permissions.AddRange(permissionDefinitionRecords.Select(menu => CreatePermissionTree(menu.Name, menu.DisplayName, menu)));
+            return ConvertToTree(permissions);
+        }
+    }
+
+    /// <summary>
+    /// 获取模块列表
+    /// </summary>
+    /// <param name="userId">用户Id</param>
+    /// <returns>权限</returns>
+    public async Task<List<Permission>> GetModuleListAsync(Guid? userId = null)
+    {
+        var permissionGroupDefinitionRecordList = await GetModuleDataAsync();
+        return CreatePermission(permissionGroupDefinitionRecordList);
+
+        // 获取模块列表
+        async Task<List<PermissionGroupDefinitionRecord>> GetModuleDataAsync()
+        {
+            // 提供了用户 ID 的情况
+            if (!userId.HasValue)
+            {
+                return await permissionGroupDefinitionRecordRepository.GetListAsync();
+            }
+
+            var roles = await userRepository.GetRolesAsync(userId.Value);
+            var providerKey = roles.Select(a => a.Name).ToArray();
+            var rolePermission = await permissionRepository.GetPermissionListAsync(RolePermissionValueProvider.ProviderName, providerKey);
+            var user = await GetPermissionGrantListAsync(UserPermissionValueProvider.ProviderName, userId.Value.ToString());
+            var permissionGrants = rolePermission.Union(user).Select(a => a.Name).Distinct().ToList();
+            var permissionDefinitionRecords = await GetPermissionDataAsync(permissionGrants);
+            var modules = permissionDefinitionRecords.Select(a => a.GroupName).Distinct().ToArray();
+            var permissionGroupDefinitionRecords = await permissionGroupDefinitionRecordRepository.GetListAsync(d => modules.Contains(d.Name));
+            return permissionGroupDefinitionRecords;
+
+        }
     }
 
     /// <summary>
@@ -99,12 +197,45 @@ public class NetRolePermissionManager(
         {
             var modulePermission = CreatePermissionTree(permissionGroupDefinitionRecord.Name, permissionGroupDefinitionRecord.DisplayName, permissionGroupDefinitionRecord);
             var menuList = permissionDefinitionRecords.Where(d => d.GroupName == modulePermission.Name);
-            permissions.AddRange(menuList.Select(menu =>
-                CreatePermissionTree(menu.Name, menu.DisplayName, menu)));
+            permissions.AddRange(menuList.Select(menu => CreatePermissionTree(menu.Name, menu.DisplayName, menu)));
             permissions.Add(modulePermission);
         }
 
         return permissions;
+    }
+
+    /// <summary>
+    /// 创建权限
+    /// </summary>
+    /// <param name="permissionGroupDefinitionRecords">权限分组</param>
+    /// <returns>权限</returns>
+    private List<Permission> CreatePermission(
+        List<PermissionGroupDefinitionRecord> permissionGroupDefinitionRecords)
+    {
+        return permissionGroupDefinitionRecords.Select(permissionGroupDefinitionRecord => CreatePermission(permissionGroupDefinitionRecord.Name, permissionGroupDefinitionRecord.DisplayName, permissionGroupDefinitionRecord)).ToList();
+    }
+
+    /// <summary>
+    /// 获权限模块列表
+    /// </summary>
+    /// <param name="name">权限名称</param>
+    /// <param name="module">模块名称</param>
+    /// <returns>权限定义</returns>
+    private async Task<List<PermissionDefinitionRecord>> GetPermissionDataAsync(List<string>? name = null, string? module = null)
+    {
+        // 构建查询条件
+        Expression<Func<PermissionDefinitionRecord, bool>> predicate = d => true; // 默认条件
+        if (!string.IsNullOrEmpty(module))
+        {
+            predicate = predicate.And(d => d.GroupName == module);
+        }
+
+        if (name != null && name.Any())
+        {
+            predicate = predicate.And(d => name.Contains(d.Name));
+        }
+        var permissionDefinitionRecords = await permissionDefinitionRecordRepository.GetListAsync(predicate);
+        return permissionDefinitionRecords;
     }
 
     /// <summary>
@@ -149,6 +280,59 @@ public class NetRolePermissionManager(
     /// <param name="displayName">显示信息</param>
     /// <param name="extra">权限扩展信息</param>
     /// <returns>结果</returns>
+    private Permission CreatePermission(string permissionName, string displayName, IHasExtraProperties extra)
+    {
+        var (
+            Path,
+            Component,
+            ParentName,
+            PermissionType,
+            Name,
+            Redirect,
+            Alias,
+            Hidden,
+            AlwaysShow,
+            Icon,
+            NoCache,
+            Breadcrumb,
+            Affix,
+            ActiveMenu,
+            NoTagsView,
+            CanTo
+            ) = ExtractPermissionProperties(permissionName, extra);
+
+        var permission = new Permission(
+            permissionName,
+            Deserialize(displayName),
+            Path,
+            Component,
+            ParentName,
+            PermissionType,
+            Name,
+            Redirect,
+            Alias,
+            Hidden,
+            AlwaysShow,
+            Icon,
+            NoCache,
+            Breadcrumb,
+            Affix,
+            ActiveMenu,
+            NoTagsView,
+            CanTo
+        );
+        var path = extra.GetProperty<int?>(PermissionDefinitionConsts.Tag) ?? 0;
+        permission.SetTag(path);
+        return permission;
+    }
+
+    /// <summary>
+    /// 创建权限数据对象
+    /// </summary>
+    /// <param name="permissionName">权限名称</param>
+    /// <param name="displayName">显示信息</param>
+    /// <param name="extra">权限扩展信息</param>
+    /// <returns>结果</returns>
     private PermissionTree CreatePermissionTree(string permissionName, string displayName, IHasExtraProperties extra)
     {
         var (
@@ -161,7 +345,6 @@ public class NetRolePermissionManager(
             Alias,
             Hidden,
             AlwaysShow,
-            Title,
             Icon,
             NoCache,
             Breadcrumb,
@@ -171,7 +354,7 @@ public class NetRolePermissionManager(
             CanTo
             ) = ExtractPermissionProperties(permissionName, extra);
 
-        return new PermissionTree(
+        var permissionTree = new PermissionTree(
             permissionName,
             Deserialize(displayName),
             Path,
@@ -183,7 +366,6 @@ public class NetRolePermissionManager(
             Alias,
             Hidden,
             AlwaysShow,
-            Title,
             Icon,
             NoCache,
             Breadcrumb,
@@ -192,6 +374,9 @@ public class NetRolePermissionManager(
             NoTagsView,
             CanTo
         );
+        var path = extra.GetProperty<int?>(PermissionDefinitionConsts.Tag) ?? 0;
+        permissionTree.SetTag(path);
+        return permissionTree;
     }
 
     /// <summary>
@@ -210,7 +395,6 @@ public class NetRolePermissionManager(
         string? Alias,
         bool? Hidden,
         bool? AlwaysShow,
-        string? Title,
         string? Icon,
         bool? NoCache,
         bool? Breadcrumb,
@@ -229,7 +413,6 @@ public class NetRolePermissionManager(
         var alias = extra.GetProperty<string?>(PermissionDefinitionConsts.Alias);
         var hidden = extra.GetProperty<bool?>(PermissionDefinitionConsts.Hidden);
         var alwaysShow = extra.GetProperty<bool?>(PermissionDefinitionConsts.AlwaysShow);
-        var title = extra.GetProperty<string?>(PermissionDefinitionConsts.Title);
         var icon = extra.GetProperty<string?>(PermissionDefinitionConsts.Icon);
         var noCache = extra.GetProperty<bool?>(PermissionDefinitionConsts.NoCache);
         var breadcrumb = extra.GetProperty<bool?>(PermissionDefinitionConsts.Breadcrumb);
@@ -248,7 +431,6 @@ public class NetRolePermissionManager(
             Alias: alias,
             Hidden: hidden,
             AlwaysShow: alwaysShow,
-            Title: title,
             Icon: icon,
             NoCache: noCache,
             Breadcrumb: breadcrumb,

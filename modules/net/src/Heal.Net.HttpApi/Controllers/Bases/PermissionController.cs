@@ -13,12 +13,13 @@ namespace Heal.Net.HttpApi.Controllers.Bases;
 public class PermissionController(INetRolePermissionAppService permissionAppService) : HealNetController
 {
     /// <summary>
-    /// 获取当前用户路由配置
+    /// 获取权限树列表
     /// </summary>
+    /// <param name="moduleName">模块名称</param>
     /// <returns>路由</returns>
     [HttpGet("routes")]
-    public Task<List<RouteConfigDto>> GetPermissionTreeListAsync()
+    public Task<List<RouteConfigDto>> GetPermissionTreeListAsync(string moduleName)
     {
-        return permissionAppService.GetPermissionTreeListAsync();
+        return permissionAppService.GetPermissionTreeListAsync(moduleName);
     }
 }
