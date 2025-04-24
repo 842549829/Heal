@@ -28,7 +28,7 @@ public class Permission : PermissionBase
     /// <param name="activeMenu">当前路由激活时需要高亮的菜单项路径（可选）。</param>
     /// <param name="noTagsView">是否禁用标签页视图（可选）。如果为 true，则该路由不会显示在标签页中。</param>
     /// <param name="canTo">是否允许跳转到该路由（可选）。如果为 false，则无法通过编程式导航跳转到该路由。</param>
-    public Permission(string permissionName, string displayName, string path, string component, string? parentName = null, PermissionType? type, string? name = null, string? redirect = null, string? alias = null, bool? hidden, bool? alwaysShow, string? icon = null, bool? noCache = null, bool? breadcrumb = null, bool? affix = null, string? activeMenu = null, bool? noTagsView, bool? canTo) : base(permissionName, displayName, path, component, parentName, type, name, redirect, alias, hidden, alwaysShow, icon, noCache, breadcrumb, affix, activeMenu, noTagsView, canTo)
+    public Permission(string permissionName, string displayName, string path, string component, string? parentName = null, PermissionType? type = null, string? name = null, string? redirect = null, string? alias = null, bool? hidden = null, bool? alwaysShow = null, string? icon = null, bool? noCache = null, bool? breadcrumb = null, bool? affix = null, string? activeMenu = null, bool? noTagsView = null, bool? canTo = null) : base(permissionName, displayName, path, component, parentName, type, name, redirect, alias, hidden, alwaysShow, icon, noCache, breadcrumb, affix, activeMenu, noTagsView, canTo)
     {
     }
 }

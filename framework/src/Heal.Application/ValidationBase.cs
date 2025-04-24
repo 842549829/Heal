@@ -95,7 +95,6 @@ public class ValidationBase<T> : AbstractValidator<T>
     /// <summary>
     /// 字段非空安全地格式化本地化字符串
     /// </summary>
-    /// <param name="localizer">IStringLocalizer 实例。</param>
     /// <param name="key">本地化键</param>
     /// <returns>格式化后的字符串</returns>
     protected string FieldIsRequiredFormatLocalized(

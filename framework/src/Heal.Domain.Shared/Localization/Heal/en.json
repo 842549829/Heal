@@ -61,6 +61,7 @@
     "EmergencyContact": "Emergency Contact",
     "EmergencyPhone": "Emergency Phone",
     "FieldLengthValidation": "The length of field '{0}' is not within the allowed range. The allowed range is {1}-{2}.",
-    "FieldIsRequired": "The field '{0}' cannot be empty."
+    "FieldIsRequired": "The field '{0}' cannot be empty.",
+    "ModuleAlreadyExists": "Module already exists."
   }
 }

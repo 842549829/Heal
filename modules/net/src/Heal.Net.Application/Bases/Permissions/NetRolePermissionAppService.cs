@@ -16,7 +16,7 @@ public class NetRolePermissionAppService(INetRolePermissionManager netRolePermis
     /// 获取模块列表
     /// </summary>
     /// <returns>返回模块列表</returns>
-    public async Task<List<ModuleDto>> GetModuleListAsync()
+    public async Task<List<ModuleHomeListDto>> GetModuleListAsync()
     {
         var permissions = await netRolePermissionManager.GetModuleListAsync(CurrentUser.Id.GetValueOrDefault());
         return MapToDtoList(permissions);
@@ -117,9 +117,9 @@ public class NetRolePermissionAppService(INetRolePermissionManager netRolePermis
     /// </summary>
     /// <param name="permissions">权限</param>
     /// <returns>模块</returns>
-    public static List<ModuleDto> MapToDtoList(List<Permission> permissions)
+    public static List<ModuleHomeListDto> MapToDtoList(List<Permission> permissions)
     {
-        return permissions.Select(d => new ModuleDto
+        return permissions.Select(d => new ModuleHomeListDto
         {
             Name = d.Name,
             Component = d.Component,

@@ -224,6 +224,11 @@ public static class LocalizedTextsConsts
     /// 字段必填验证
     /// </summary>
     public const string FieldIsRequired = "FieldIsRequired";
+ 
+    /// <summary>
+    /// 字段已存在验证
+    /// </summary>
+    public const string ModuleAlreadyExists = "ModuleAlreadyExists";
 
     /// <summary>
     /// 名称

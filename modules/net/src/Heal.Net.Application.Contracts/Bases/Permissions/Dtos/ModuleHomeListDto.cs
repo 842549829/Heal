@@ -1,9 +1,9 @@
 ﻿namespace Heal.Net.Application.Contracts.Bases.Permissions.Dtos;
 
 /// <summary>
-/// 模块信息
+/// 模块首页列表信息
 /// </summary>
-public class ModuleDto
+public class ModuleHomeListDto
 {
     /// <summary>
     /// 路由标题，通常用于菜单或标签页显示。

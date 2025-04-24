@@ -11,7 +11,7 @@ public interface INetRolePermissionAppService : IHealNetApplicationService
     /// 获取模块列表
     /// </summary>
     /// <returns>返回模块列表</returns>
-    Task<List<ModuleDto>> GetModuleListAsync();
+    Task<List<ModuleHomeListDto>> GetModuleListAsync();
 
     /// <summary>
     /// 获取权限树列表

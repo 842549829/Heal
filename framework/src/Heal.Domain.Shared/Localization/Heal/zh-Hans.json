@@ -61,6 +61,7 @@
     "EmergencyContact": "紧急联系人",
     "EmergencyPhone": "紧急联系电话",
     "FieldLengthValidation": "字段 '{0}' 的长度不在允许范围内，允许范围为 {1}-{2}。",
-    "FieldIsRequired": "字段 '{0}' 不能为空"
+    "FieldIsRequired": "字段 '{0}' 不能为空",
+    "ModuleAlreadyExists": "模块已经存在"
   }
 }

@@ -6,5 +6,6 @@ namespace Heal.Net.HttpApi.Controllers;
 /// <summary>
 /// HeaNet基础控制器
 /// </summary>
-[Authorize]
+//[Authorize]
+[AllowAnonymous]
 public abstract class HealNetController : HealController;
