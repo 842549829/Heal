@@ -17,7 +17,7 @@ public class PermissionController(INetRolePermissionAppService permissionAppServ
     /// </summary>
     /// <param name="moduleName">模块名称</param>
     /// <returns>路由</returns>
-    [HttpGet("routes")]
+    [HttpGet("routes/{moduleName}")]
     public Task<List<RouteConfigDto>> GetPermissionTreeListAsync(string moduleName)
     {
         return permissionAppService.GetPermissionTreeListAsync(moduleName);

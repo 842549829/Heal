@@ -35,4 +35,15 @@ public class ModuleController(IModuleAppService moduleAppService) : HealNetContr
         await moduleAppService.UpdateAsync(id, input);
         return Ok();
     }
+
+    ///// <summary>
+    ///// 模块列表(分页查询)
+    ///// </summary>
+    ///// <param name="input">查询条件</param>
+    ///// <returns>结果</returns>
+    //[HttpGet]
+    //public async Task<PagedResultDto<ModuleDto>> GetListAsync([FromQuery] PagedAndSortedResultRequestDto input)
+    //{
+    //    return await moduleAppService.GetListAsync(input);
+    //}
 }
