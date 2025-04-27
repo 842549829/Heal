@@ -22,4 +22,14 @@ public class PermissionController(INetRolePermissionAppService permissionAppServ
     {
         return permissionAppService.GetPermissionTreeListAsync(moduleName);
     }
+
+    /// <summary>
+    /// 获取模块列表
+    /// </summary>
+    /// <returns>模块列表</returns>
+    [HttpGet("module-list")]
+    public Task<List<ModuleHomeListDto>> GetModuleListAsync()
+    {
+        return permissionAppService.GetModuleListAsync();
+    }
 }

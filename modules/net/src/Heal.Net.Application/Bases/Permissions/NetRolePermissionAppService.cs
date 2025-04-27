@@ -121,6 +121,7 @@ public class NetRolePermissionAppService(INetRolePermissionManager netRolePermis
     {
         return permissions.Select(d => new ModuleHomeListDto
         {
+            ModuleName = d.PermissionName,
             Name = d.Name,
             Component = d.Component,
             Path = d.Path,

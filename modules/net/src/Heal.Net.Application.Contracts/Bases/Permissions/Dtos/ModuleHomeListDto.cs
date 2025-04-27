@@ -6,6 +6,11 @@
 public class ModuleHomeListDto
 {
     /// <summary>
+    /// 模块名称
+    /// </summary>
+    public required string ModuleName { get; init; }
+
+    /// <summary>
     /// 路由标题，通常用于菜单或标签页显示。
     /// </summary>
     public required string Title { get; init; }
