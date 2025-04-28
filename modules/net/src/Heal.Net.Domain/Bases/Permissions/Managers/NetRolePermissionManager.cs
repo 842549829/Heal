@@ -145,7 +145,7 @@ public class NetRolePermissionManager(
         List<PermissionTree> BuildPermissionTree(List<PermissionDefinitionRecord> permissionDefinitionRecords)
         {
             var permissions = new List<PermissionTree>();
-            permissions.AddRange(permissionDefinitionRecords.Select(menu => CreatePermissionTree(menu.Name, menu.DisplayName, menu)));
+            permissions.AddRange(permissionDefinitionRecords.Select(menu => CreatePermissionTree(menu.Name, menu.ParentName, menu.DisplayName, menu)));
             return ConvertToTree(permissions);
         }
     }
@@ -195,9 +195,9 @@ public class NetRolePermissionManager(
         var permissions = new List<PermissionTree>();
         foreach (var permissionGroupDefinitionRecord in permissionGroupDefinitionRecords)
         {
-            var modulePermission = CreatePermissionTree(permissionGroupDefinitionRecord.Name, permissionGroupDefinitionRecord.DisplayName, permissionGroupDefinitionRecord);
+            var modulePermission = CreatePermissionTree(permissionGroupDefinitionRecord.Name, null, permissionGroupDefinitionRecord.DisplayName, permissionGroupDefinitionRecord);
             var menuList = permissionDefinitionRecords.Where(d => d.GroupName == modulePermission.Name);
-            permissions.AddRange(menuList.Select(menu => CreatePermissionTree(menu.Name, menu.DisplayName, menu)));
+            permissions.AddRange(menuList.Select(menu => CreatePermissionTree(menu.Name, menu.ParentName, menu.DisplayName, menu)));
             permissions.Add(modulePermission);
         }
 
@@ -212,7 +212,7 @@ public class NetRolePermissionManager(
     private List<Permission> CreatePermission(
         List<PermissionGroupDefinitionRecord> permissionGroupDefinitionRecords)
     {
-        return permissionGroupDefinitionRecords.Select(permissionGroupDefinitionRecord => CreatePermission(permissionGroupDefinitionRecord.Name, permissionGroupDefinitionRecord.DisplayName, permissionGroupDefinitionRecord)).ToList();
+        return permissionGroupDefinitionRecords.Select(permissionGroupDefinitionRecord => CreatePermission(permissionGroupDefinitionRecord.Name, null, permissionGroupDefinitionRecord.DisplayName, permissionGroupDefinitionRecord)).ToList();
     }
 
     /// <summary>
@@ -246,21 +246,32 @@ public class NetRolePermissionManager(
     /// <returns>权限树</returns>
     private static List<PermissionTree> ConvertToTree(List<PermissionTree> permissions, string? parentName = null)
     {
-        var permissionsList = permissions.Where(d => d.ParentName == parentName);
-        var list = new List<PermissionTree>();
-        foreach (var item in permissionsList)
+        // 参数有效性检查
+        if (!permissions.Any())
         {
-            var permissionTree = item.Clone();
-            var children = ConvertToTree(permissions, item.Name);
-            foreach (var child in children)
-            {
-                permissionTree.AddChildPermission(child);
-            }
-
-            list.Add(permissionTree);
+            return [];
         }
 
-        return list;
+        // 获取当前层级的权限节点
+        var currentLevelPermissions = permissions.Where(d => d.ParentName == parentName);
+
+        // 构建树形结构
+        return currentLevelPermissions
+            .Select(item =>
+            {
+                // 克隆当前节点
+                var permissionTree = item.Clone();
+
+                // 递归获取子节点并添加到当前节点
+                var children = ConvertToTree(permissions, item.PermissionName);
+                foreach (var child in children)
+                {
+                    permissionTree.AddChildPermission(child);
+                }
+
+                return permissionTree;
+            })
+            .ToList();
     }
 
     /// <summary>
@@ -277,16 +288,17 @@ public class NetRolePermissionManager(
     /// 创建权限数据对象
     /// </summary>
     /// <param name="permissionName">权限名称</param>
+    /// <param name="parentName">上级名称</param>
     /// <param name="displayName">显示信息</param>
     /// <param name="extra">权限扩展信息</param>
     /// <returns>结果</returns>
-    private Permission CreatePermission(string permissionName, string displayName, IHasExtraProperties extra)
+    private Permission CreatePermission(string permissionName, string? parentName, string displayName, IHasExtraProperties extra)
     {
         var (
             Path,
             Component,
-            ParentName,
             PermissionType,
+            Title,
             Name,
             Redirect,
             Alias,
@@ -299,14 +311,14 @@ public class NetRolePermissionManager(
             ActiveMenu,
             NoTagsView,
             CanTo
-            ) = ExtractPermissionProperties(permissionName, extra);
+            ) = ExtractPermissionProperties(permissionName, displayName,extra);
 
         var permission = new Permission(
             permissionName,
-            Deserialize(displayName),
+            Title,
             Path,
             Component,
-            ParentName,
+            parentName,
             PermissionType,
             Name,
             Redirect,
@@ -330,16 +342,17 @@ public class NetRolePermissionManager(
     /// 创建权限数据对象
     /// </summary>
     /// <param name="permissionName">权限名称</param>
+    /// <param name="parentName">上级名称</param>
     /// <param name="displayName">显示信息</param>
     /// <param name="extra">权限扩展信息</param>
     /// <returns>结果</returns>
-    private PermissionTree CreatePermissionTree(string permissionName, string displayName, IHasExtraProperties extra)
+    private PermissionTree CreatePermissionTree(string permissionName, string? parentName, string displayName, IHasExtraProperties extra)
     {
         var (
             Path,
             Component,
-            ParentName,
             PermissionType,
+            Title,
             Name,
             Redirect,
             Alias,
@@ -352,14 +365,14 @@ public class NetRolePermissionManager(
             ActiveMenu,
             NoTagsView,
             CanTo
-            ) = ExtractPermissionProperties(permissionName, extra);
+            ) = ExtractPermissionProperties(permissionName,displayName, extra);
 
         var permissionTree = new PermissionTree(
             permissionName,
-            Deserialize(displayName),
+            Title,
             Path,
             Component,
-            ParentName,
+            parentName,
             PermissionType,
             Name,
             Redirect,
@@ -383,13 +396,14 @@ public class NetRolePermissionManager(
     /// 从扩展属性中提取权限相关参数。
     /// </summary>
     /// <param name="permissionName">权限名称</param>
+    /// <param name="displayName">显示名称</param>
     /// <param name="extra">扩展属性</param>
     /// <returns>权限相关参数的元组</returns>
-    private static (
+    private (
         string Path,
         string Component,
-        string? ParentName,
         PermissionType PermissionType,
+        string Title,
         string? Name,
         string? Redirect,
         string? Alias,
@@ -402,11 +416,11 @@ public class NetRolePermissionManager(
         string? ActiveMenu,
         bool? NoTagsView,
         bool? CanTo
-    ) ExtractPermissionProperties(string permissionName, IHasExtraProperties extra)
+    ) ExtractPermissionProperties(string permissionName,string displayName, IHasExtraProperties extra)
     {
         var path = extra.GetProperty<string?>(PermissionDefinitionConsts.Path) ?? permissionName;
         var component = extra.GetProperty<string?>(PermissionDefinitionConsts.Component) ?? path;
-        var parentName = extra.GetProperty<string?>(PermissionDefinitionConsts.ParentName);
+
         var permissionType = (PermissionType?)extra.GetProperty<int?>(PermissionDefinitionConsts.Type) ?? PermissionType.Menu;
         var name = extra.GetProperty<string?>(PermissionDefinitionConsts.Name);
         var redirect = extra.GetProperty<string?>(PermissionDefinitionConsts.Redirect);
@@ -420,12 +434,13 @@ public class NetRolePermissionManager(
         var activeMenu = extra.GetProperty<string?>(PermissionDefinitionConsts.ActiveMenu);
         var noTagsView = extra.GetProperty<bool?>(PermissionDefinitionConsts.NoTagsView);
         var canTo = extra.GetProperty<bool?>(PermissionDefinitionConsts.CanTo);
+        var title = extra.GetProperty<string?>(PermissionDefinitionConsts.Title) ?? Deserialize(displayName);
 
         return (
             Path: path,
             Component: component,
-            ParentName: parentName,
             PermissionType: permissionType,
+            Title: title,
             Name: name,
             Redirect: redirect,
             Alias: alias,

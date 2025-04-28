@@ -39,6 +39,7 @@
     "TakePhoto": "拍摄照片",
     "ChoosePhoto": "选择照片",
     "F:Heal": "业务模块管理",
+    "L:Heal,F:Net": "基础业务模块",
     "L:AbpIdentity,Permission:IdentityManagement": "用户模块管理",
     "L:AbpSettingManagement,Permission:SettingManagement": "配置模块管理",
     "L:AbpFeatureManagement,Permission:FeatureManagement": "功能模块管理",
@@ -62,6 +63,23 @@
     "EmergencyPhone": "紧急联系电话",
     "FieldLengthValidation": "字段 '{0}' 的长度不在允许范围内，允许范围为 {1}-{2}。",
     "FieldIsRequired": "字段 '{0}' 不能为空",
-    "ModuleAlreadyExists": "模块已经存在"
+    "ModuleAlreadyExists": "模块已经存在",
+    "DisplayName:Authorization": "权限管理",
+    "DisplayName:RoleManagement": "角色管理",
+    "DisplayName:UserManagement": "用户管理",
+    "DisplayName:MenuManagement": "菜单管理",
+    "DisplayName:OrganizationManagement": "组织管理",
+    "DisplayName:TenantManagement": "租户管理",
+    "DisplayName:AnnouncementManagement": "公告管理",
+    "DisplayName:WorkFlowListManagement": "工作流管理",
+    "DisplayName:WorkFlowCreateManagement": "创建工作流",
+    "DisplayName:AgentManagement": "代理商管理",
+    "DisplayName:MerchantManagement": "商户管理",
+    "DisplayName:Create": "创建",
+    "DisplayName:Edit": "编辑",
+    "DisplayName:Start": "发起",
+    "DisplayName:Delete": "删除",
+    "DisplayName:NoPath": "上传项目路径未维护",
+    "DisplayName:NoFileType": "上传文件类型不支持"
   }
 }

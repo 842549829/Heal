@@ -22,7 +22,7 @@ public class CampusController(ICampusAppService campusAppService) : HealNetContr
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns>院区</returns>
     [HttpPost]
-    [Authorize(HealNetPermissions.Campuses.Create)]
+    [Authorize(HealNetPermissions.Basics.Campuses.Create)]
     public Task<CampusDto> CreateAsync([FromBody] CampusCreateDto input, CancellationToken cancellationToken)
     {
         return campusAppService.CreateAsync(input, cancellationToken);
@@ -36,7 +36,7 @@ public class CampusController(ICampusAppService campusAppService) : HealNetContr
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns>院区</returns>
     [HttpPut("{id:guid}")]
-    [Authorize(HealNetPermissions.Campuses.Update)]
+    [Authorize(HealNetPermissions.Basics.Campuses.Update)]
     public Task<CampusDto> UpdateAsync(Guid id, [FromBody] CampusUpdateDto input,
         CancellationToken cancellationToken = default)
     {
@@ -50,7 +50,7 @@ public class CampusController(ICampusAppService campusAppService) : HealNetContr
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns>院区列表</returns>
     [HttpGet]
-    [Authorize(HealNetPermissions.Campuses.Default)]
+    [Authorize(HealNetPermissions.Basics.Campuses.Default)]
     public Task<PagedResultDto<CampusListDto>> GetListAsync([FromQuery] CampusInput input,
         CancellationToken cancellationToken = default)
     {

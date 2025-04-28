@@ -39,6 +39,7 @@
     "TakePhoto": "Take Photo",
     "ChoosePhoto": "Choose Photo",
     "F:Heal": "Business Module Management",
+    "L:Heal,F:Net": "Base Business Module Management",
     "L:AbpIdentity,Permission:IdentityManagement": "User Module Management",
     "L:AbpSettingManagement,Permission:SettingManagement": "Configuration Module Management",
     "L:AbpFeatureManagement,Permission:FeatureManagement": "Feature Module Management",
@@ -62,6 +63,23 @@
     "EmergencyPhone": "Emergency Phone",
     "FieldLengthValidation": "The length of field '{0}' is not within the allowed range. The allowed range is {1}-{2}.",
     "FieldIsRequired": "The field '{0}' cannot be empty.",
-    "ModuleAlreadyExists": "Module already exists."
+    "ModuleAlreadyExists": "Module already exists.",
+    "DisplayName:Authorization": "Permission Management",
+    "DisplayName:RoleManagement": "Role Management",
+    "DisplayName:UserManagement": "User Management",
+    "DisplayName:MenuManagement": "Menu Management",
+    "DisplayName:OrganizationManagement": "Organization Management",
+    "DisplayName:TenantManagement": "Tenant Management",
+    "DisplayName:AnnouncementManagement": "Announcement Management",
+    "DisplayName:WorkFlowListManagement": "Workflow List Management",
+    "DisplayName:WorkFlowCreateManagement": "Create Workflow",
+    "DisplayName:AgentManagement": "Agent Management",
+    "DisplayName:MerchantManagement": "Merchant Management",
+    "DisplayName:Create": "Create",
+    "DisplayName:Edit": "Edit",
+    "DisplayName:Start": "Start",
+    "DisplayName:Delete": "Delete",
+    "DisplayName:NoPath": "Project path is not maintained",
+    "DisplayName:NoFileType": "Uploaded file type is not supported"
   }
 }
