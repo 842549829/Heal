@@ -176,7 +176,7 @@ public class NetRolePermissionManager(
             var permissionGrants = rolePermission.Union(user).Select(a => a.Name).Distinct().ToList();
             var permissionDefinitionRecords = await GetPermissionDataAsync(permissionGrants);
             var modules = permissionDefinitionRecords.Select(a => a.GroupName).Distinct().ToArray();
-            var permissionGroupDefinitionRecords = await permissionGroupDefinitionRecordRepository.GetListAsync(d => modules.Contains(d.Name));
+            var permissionGroupDefinitionRecords = await permissionGroupDefinitionRecordRepository.GetListAsync(d => modules.Contains(d.Name) || permissionGrants.Contains(d.Name));
             return permissionGroupDefinitionRecords;
 
         }
