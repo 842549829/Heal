@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Bases\Permissions\IMenuAppService.cs~RF16d1609.TMP" />
     <None Remove="Bases\Users\IAccountAppService.cs~RF1a30e5.TMP" />
   </ItemGroup>
 

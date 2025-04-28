@@ -4,10 +4,15 @@ using Volo.Abp.Application.Dtos;
 namespace Heal.Net.Application.Contracts.Bases.Permissions.Dtos;
 
 /// <summary>
-/// 模块更新
+/// 模块信息
 /// </summary>
-public class ModuleUpdateDto : EntityDto, IModuleCreateOrUpdateDto
+public class ModuleDto : EntityDto<Guid>, IModuleCreateOrUpdateDto
 {
+    /// <summary>
+    /// 权限名称
+    /// </summary>
+    public required string Name { get; init; }
+
     /// <summary>
     /// 显示名称
     /// </summary>

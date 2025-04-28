@@ -1,14 +1,8 @@
-﻿using Volo.Abp.Application.Dtos;
+﻿using Heal.Application.Contracts.Dtos;
 
 namespace Heal.Net.Application.Contracts.Bases.Campuses.Dto;
 
 /// <summary>
-/// 获取校区列表
+/// 获取院区列表
 /// </summary>
-public class CampusInput : ExtensiblePagedAndSortedResultRequestDto
-{
-    /// <summary>
-    /// 过滤条件
-    /// </summary>
-    public string? Filter { get; set; }
-}
+public class CampusInput : FilterInput;

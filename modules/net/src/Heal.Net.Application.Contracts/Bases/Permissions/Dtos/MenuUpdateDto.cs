@@ -1,12 +1,11 @@
-﻿using Heal.Domain.Shared.Enums;
-using Volo.Abp.Application.Dtos;
+﻿using Volo.Abp.Application.Dtos;
 
 namespace Heal.Net.Application.Contracts.Bases.Permissions.Dtos;
 
 /// <summary>
-/// 模块更新
+/// 菜单更新
 /// </summary>
-public class ModuleUpdateDto : EntityDto, IModuleCreateOrUpdateDto
+public class MenuUpdateDto : EntityDto, IMenuCreateOrUpdateDto
 {
     /// <summary>
     /// 显示名称
@@ -14,14 +13,24 @@ public class ModuleUpdateDto : EntityDto, IModuleCreateOrUpdateDto
     public required string DisplayName { get; init; }
 
     /// <summary>
-    /// 标签[特殊标记;不如1标记是跳转第三方的]
+    /// 是否启用
     /// </summary>
-    public required ModuleTag Tag { get; init; }
+    public bool IsEnabled { get; init; } = true;
+
+    /// <summary>
+    /// 标签[特殊标记]
+    /// </summary>
+    public int Tag { get; init; }
 
     /// <summary>
     /// 权限前端路由
     /// </summary>
     public required string Path { get; init; }
+
+    /// <summary>
+    /// 可选。路由名称，用于编程式导航（如 router.push({ name: 'Home' })）。
+    /// </summary>
+    public string? Name { get; init; }
 
     /// <summary>
     /// 必填。与该路由对应的组件。
@@ -47,6 +56,11 @@ public class ModuleUpdateDto : EntityDto, IModuleCreateOrUpdateDto
     /// 是否始终显示根菜单。如果为 true，即使只有一个子路由，也会显示父级菜单。
     /// </summary>
     public bool? AlwaysShow { get; init; }
+
+    /// <summary>
+    /// 路由标题，通常用于菜单或标签页显示。
+    /// </summary>
+    public required string Title { get; init; }
 
     /// <summary>
     /// 权限前端图标

@@ -1,4 +1,5 @@
-﻿using Volo.Abp.Application.Dtos;
+﻿using Heal.Domain.Shared.Enums;
+using Volo.Abp.Application.Dtos;
 
 namespace Heal.Net.Application.Contracts.Bases.Permissions.Dtos;
 
@@ -15,12 +16,12 @@ public class ModuleCreateDto : EntityDto, IModuleCreateOrUpdateDto
     /// <summary>
     /// 显示名称
     /// </summary>
-    public required string DislayName { get; init; }
+    public required string DisplayName { get; init; }
 
     /// <summary>
     /// 标签[特殊标记;不如1标记是跳转第三方的]
     /// </summary>
-    public required int Tag { get; init; }
+    public required ModuleTag Tag { get; init; }
 
     /// <summary>
     /// 权限前端路由

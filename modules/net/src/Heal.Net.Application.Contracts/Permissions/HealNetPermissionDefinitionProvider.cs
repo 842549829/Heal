@@ -19,6 +19,8 @@ public class HealNetPermissionDefinitionProvider : PermissionDefinitionProvider
     {
         var basicsGroup = context.AddGroup(HealNetPermissions.GroupName, L("F:Net"));
         basicsGroup[PermissionDefinitionConsts.Type] = PermissionType.Module;
+        basicsGroup[PermissionDefinitionConsts.Hidden] = false;
+        basicsGroup[PermissionDefinitionConsts.Tag] = ModuleTag.NormalSystem;
 
         var authorizations = basicsGroup.AddPermission(HealNetPermissions.Authorizations.Defaults, L("DisplayName:Authorization"))
             .WithProviders(RolePermissionValueProvider.ProviderName)

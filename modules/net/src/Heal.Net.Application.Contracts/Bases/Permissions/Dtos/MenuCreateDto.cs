@@ -1,27 +1,80 @@
 ﻿using Heal.Domain.Shared.Enums;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Authorization.Permissions;
+using Volo.Abp.MultiTenancy;
 
 namespace Heal.Net.Application.Contracts.Bases.Permissions.Dtos;
 
 /// <summary>
-/// 模块更新
+/// 菜单创建
 /// </summary>
-public class ModuleUpdateDto : EntityDto, IModuleCreateOrUpdateDto
+public class MenuCreateDto : EntityDto, IMenuCreateOrUpdateDto
 {
+    /// <summary>
+    /// 权限名称
+    /// </summary>
+    public required string PermissionName { get; init; }
+
+    /// <summary>
+    /// 所属模块名称
+    /// </summary>
+    public required string GroupName { get; init; }
+
     /// <summary>
     /// 显示名称
     /// </summary>
     public required string DisplayName { get; init; }
 
     /// <summary>
-    /// 标签[特殊标记;不如1标记是跳转第三方的]
+    /// 父级菜单
     /// </summary>
-    public required ModuleTag Tag { get; init; }
+    public string? ParentName { get; init; }
+
+    /// <summary>
+    /// 是否启用
+    /// </summary>
+    public bool IsEnabled { get; init; } = true;
+
+    /// <summary>
+    /// 多租户
+    /// Tenant = 1：
+    /// 表示租户侧（Tenant Side）。在多租户应用中，租户是实际使用系统的用户或组织。
+    /// Host = 2：
+    /// 表示主机侧（Host Side）。主机是管理多个租户的超级管理员或系统本身。
+    /// Both = 3：
+    /// 表示同时适用于租户侧和主机侧。这里的值是 1 | 2 的结果（即 3），表示两个标志的组合。
+    /// </summary>
+    public MultiTenancySides MultiTenancySide { get; init; } = MultiTenancySides.Tenant;
+
+    /// <summary>
+    /// Comma separated list of provider names.
+    /// </summary>
+    public string Providers { get; init; } = UserPermissionValueProvider.ProviderName;
+
+    /// <summary>
+    /// Serialized string to store info about the state checkers.
+    /// </summary>
+    public string? StateCheckers { get; init; }
+
+    /// <summary>
+    /// 权限类型
+    /// </summary>
+    public PermissionType? Type { get; init; }
+
+    /// <summary>
+    /// 标签[特殊标记]
+    /// </summary>
+    public int Tag { get; init; }
 
     /// <summary>
     /// 权限前端路由
     /// </summary>
     public required string Path { get; init; }
+
+    /// <summary>
+    /// 可选。路由名称，用于编程式导航（如 router.push({ name: 'Home' })）。
+    /// </summary>
+    public string? Name { get; init; }
 
     /// <summary>
     /// 必填。与该路由对应的组件。
@@ -47,6 +100,11 @@ public class ModuleUpdateDto : EntityDto, IModuleCreateOrUpdateDto
     /// 是否始终显示根菜单。如果为 true，即使只有一个子路由，也会显示父级菜单。
     /// </summary>
     public bool? AlwaysShow { get; init; }
+
+    /// <summary>
+    /// 路由标题，通常用于菜单或标签页显示。
+    /// </summary>
+    public required string Title { get; init; }
 
     /// <summary>
     /// 权限前端图标

@@ -119,7 +119,7 @@ public class NetRolePermissionAppService(INetRolePermissionManager netRolePermis
     /// <returns>模块</returns>
     public static List<ModuleHomeListDto> MapToDtoList(List<Permission> permissions)
     {
-        return permissions.Select(d => new ModuleHomeListDto
+        return permissions.Where(a => a.Hidden == false).Select(d => new ModuleHomeListDto
         {
             ModuleName = d.PermissionName,
             Name = d.Name,
@@ -128,7 +128,7 @@ public class NetRolePermissionAppService(INetRolePermissionManager netRolePermis
             Title = d.Title,
             Icon = d.Icon,
             Alias = d.Alias,
-            Redirect = d.Redirect
+            Redirect = d.Redirect,
         }).ToList();
     }
 }

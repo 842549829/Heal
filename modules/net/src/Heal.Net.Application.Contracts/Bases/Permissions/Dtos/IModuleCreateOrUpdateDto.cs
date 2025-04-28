@@ -1,4 +1,6 @@
-﻿namespace Heal.Net.Application.Contracts.Bases.Permissions.Dtos;
+﻿using Heal.Domain.Shared.Enums;
+
+namespace Heal.Net.Application.Contracts.Bases.Permissions.Dtos;
 
 /// <summary>
 /// 模块创建或更新Dto
@@ -8,12 +10,12 @@ public interface IModuleCreateOrUpdateDto
     /// <summary>
     /// 显示名称
     /// </summary>
-    public string DislayName { get; init; }
+    public string DisplayName { get; init; }
 
     /// <summary>
     /// 标签[特殊标记;不如1标记是跳转第三方的]
     /// </summary>
-    public int Tag { get; init; }
+    public ModuleTag Tag { get; init; }
 
     /// <summary>
     /// 权限前端路由
