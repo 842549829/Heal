@@ -65,6 +65,7 @@
     "FieldIsRequired": "字段 '{0}' 不能为空",
     "ModuleAlreadyExists": "模块已经存在",
     "DisplayName:Authorization": "权限管理",
+    "DisplayName:ModuleManagement": "模块管理",
     "DisplayName:RoleManagement": "角色管理",
     "DisplayName:UserManagement": "用户管理",
     "DisplayName:MenuManagement": "菜单管理",
