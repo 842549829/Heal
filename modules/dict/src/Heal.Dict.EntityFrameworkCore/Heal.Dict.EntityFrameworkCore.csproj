@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>$(MicrosoftTargetFramework)</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\src\Heal.EntityFrameworkCore\Heal.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Heal.Dict.Domain\Heal.Dict.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
