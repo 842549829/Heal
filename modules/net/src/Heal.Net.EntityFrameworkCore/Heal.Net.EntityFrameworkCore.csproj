@@ -32,7 +32,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-			<PrivateAssets>compile; contentFiles; build; buildMultitargeting; buildTransitive; analyzers; native</PrivateAssets>
+			<PrivateAssets>compile; build; native; contentfiles; analyzers; buildtransitive</PrivateAssets>
 		</PackageReference>
 	</ItemGroup>
 

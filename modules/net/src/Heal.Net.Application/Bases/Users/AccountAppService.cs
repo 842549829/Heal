@@ -1,9 +1,9 @@
-﻿using Heal.Domain.Shared.Constants;
+﻿using Duende.IdentityModel;
+using Duende.IdentityModel.Client;
+using Heal.Domain.Shared.Constants;
 using Heal.Domain.Shared.Options;
 using Heal.Net.Application.Contracts.Bases.Users;
 using Heal.Net.Application.Contracts.Bases.Users.Dtos;
-using IdentityModel;
-using IdentityModel.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net;
