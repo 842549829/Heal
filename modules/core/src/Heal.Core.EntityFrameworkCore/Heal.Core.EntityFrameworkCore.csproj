@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>$(MicrosoftTargetFramework)</TargetFramework>
+    <RootNamespace>Heal.Core.EntityFrameworkCore</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\src\Heal.EntityFrameworkCore\Heal.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Heal.Core.Domain\Heal.Core.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Dapper" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
+   
+  </ItemGroup>
+</Project>
