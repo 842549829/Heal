@@ -1,17 +1,18 @@
-﻿using Heal.Net.Domain.Bases.Campuses.Entities;
-using Heal.Net.Domain.Bases.Users.Entities;
+﻿using Heal.Core.Domain.Bases.Campuses.Entities;
+using Heal.Core.Domain.Bases.Users.Entities;
+using Heal.Core.EntityFrameworkCore.EntityFrameworkCore;
+using Heal.Core.EntityFrameworkCore.EntityFrameworkCore.Bases.Campuses;
+using Heal.Core.EntityFrameworkCore.EntityFrameworkCore.Bases.Departments;
+using Heal.Core.EntityFrameworkCore.EntityFrameworkCore.Bases.Identities;
+using Heal.Core.EntityFrameworkCore.EntityFrameworkCore.Bases.Users;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.AuditLoggings;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.BackgroundJobs;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.BlobStorings;
-using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Campuses;
-using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Departments;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Features;
-using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Identities;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.OpenIddicts;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Permissions;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Settings;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Tenants;
-using Heal.Net.EntityFrameworkCore.EntityFrameworkCore.Bases.Users;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
@@ -29,6 +30,7 @@ namespace Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
 [ReplaceDbContext(typeof(IIdentityDbContext))]
 [ReplaceDbContext(typeof(ITenantManagementDbContext))]
 [ReplaceDbContext(typeof(IHealNetDbContext))]
+[ReplaceDbContext(typeof(IHealCoreDbContext))]
 [ConnectionStringName("Default")]
 public class HealNetDbContext :
     AbpDbContext<HealNetDbContext>,

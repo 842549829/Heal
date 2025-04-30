@@ -1,4 +1,4 @@
-﻿using Heal.Domain;
+﻿using Heal.Core.Domain;
 using Heal.Net.Domain.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -22,7 +22,7 @@ namespace Heal.Net.Domain;
 /// </summary>
 [DependsOn(
     typeof(HealNetDomainSharedModule),
-    typeof(HealDomainModule),
+    typeof(HealCoreDomainModule),
     typeof(AbpAuditLoggingDomainModule),
     typeof(AbpCachingModule),
     typeof(AbpBackgroundJobsDomainModule),

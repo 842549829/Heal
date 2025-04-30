@@ -1,4 +1,4 @@
-﻿using Heal.Domain.Shared;
+﻿using Heal.Core.Domain.Shared;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.BlobStoring.Database;
@@ -22,7 +22,7 @@ namespace Heal.Net.Domain.Shared;
     typeof(AbpOpenIddictDomainSharedModule),
     typeof(AbpTenantManagementDomainSharedModule),
     typeof(BlobStoringDatabaseDomainSharedModule),
-    typeof(HealDomainSharedModule)
+    typeof(HealCoreDomainSharedModule)
     )]
 public class HealNetDomainSharedModule : AbpModule
 {

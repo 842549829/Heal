@@ -1,8 +1,8 @@
-﻿using Heal.Domain;
+﻿using Heal.Core.Domain;
 
 namespace Heal.Net.Domain;
 
 /// <summary>
 /// 领域服务基类
 /// </summary>
-public abstract class HealNetDomainManager : HealDomainManager;
+public abstract class HealNetDomainManager : HealCoreDomainManager;

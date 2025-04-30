@@ -1,4 +1,4 @@
-﻿using Heal.EntityFrameworkCore;
+﻿using Heal.Core.EntityFrameworkCore.EntityFrameworkCore;
 using Heal.Net.Domain;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -26,7 +26,7 @@ namespace Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
     typeof(AbpOpenIddictEntityFrameworkCoreModule),
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
     typeof(BlobStoringDatabaseEntityFrameworkCoreModule),
-    typeof(HealEntityFrameworkCoreModule)
+    typeof(HealCoreEntityFrameworkCoreModule)
     )]
 public class HealNetEntityFrameworkCoreModule : AbpModule
 {

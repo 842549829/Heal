@@ -1,6 +1,6 @@
-﻿using Heal.Net.Application.Contracts.Bases.Organizations;
+﻿using Heal.Core.Domain.Bases.Organizations.Repositories;
+using Heal.Net.Application.Contracts.Bases.Organizations;
 using Heal.Net.Application.Contracts.Bases.Organizations.Dtos;
-using Heal.Net.Domain.Bases.Organizations.Repositories;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;

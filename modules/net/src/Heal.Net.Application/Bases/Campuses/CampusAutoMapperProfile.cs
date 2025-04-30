@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Heal.Core.Domain.Bases.Campuses.Entities;
 using Heal.Net.Application.Contracts.Bases.Campuses.Dto;
-using Heal.Net.Domain.Bases.Campuses.Entities;
 
 namespace Heal.Net.Application.Bases.Campuses;
 

@@ -11,6 +11,4 @@ namespace Heal.Core.Domain;
     typeof(HealCoreDomainSharedModule),
     typeof(HealDomainModule)
 )]
-public class HealCoreDomainModule : AbpModule
-{
-}
+public class HealCoreDomainModule : AbpModule;

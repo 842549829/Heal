@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\framework\src\Heal.Domain.Shared\Heal.Domain.Shared.csproj" />
+    <ProjectReference Include="..\..\..\core\src\Heal.Core.Domain.Shared\Heal.Core.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>
