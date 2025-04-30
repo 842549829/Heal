@@ -6,6 +6,7 @@ namespace Heal.Net.AuthServer;
 /// <summary>
 /// 程序启动入口
 /// 前端还原 abp install-libs
+/// 查看依赖的所有包(包括顶级包和传递包) dotnet list package --include-transitive
 /// </summary>
 public class Program
 {
