@@ -6,9 +6,4 @@
     <TargetFramework>$(MicrosoftTargetFramework)</TargetFramework>
   </PropertyGroup>
 
-<ItemGroup>
-  <ProjectReference Include="..\..\..\..\framework\src\Heal.Application.Contracts\Heal.Application.Contracts.csproj" />
-  <ProjectReference Include="..\Heal.Dict.Domain.Shared\Heal.Dict.Domain.Shared.csproj" />
-</ItemGroup>
-
 </Project>
