@@ -37,6 +37,10 @@ public static class HealDictDbContextModelBuilderExtensions
                 .IsRequired(false)
                 .HasColumnName(nameof(DictType.ParentId))
                 .HasComment("父级Id");
+
+            b.HasMany(x => x.Items)
+            .WithOne()
+            .HasForeignKey(x => x.DictTypeId);
         });
 
         builder.Entity<DictItem>(b =>
@@ -69,6 +73,13 @@ public static class HealDictDbContextModelBuilderExtensions
                 .HasColumnName(nameof(DictItem.Style))
                 .HasMaxLength(DictItemConsts.MaxStyleLength)
                 .HasComment("样式");
+
+            b.Property(x => x.Key)
+                .IsRequired()
+                .HasColumnName(nameof(DictItem.Key))
+                .HasMaxLength(DictItemConsts.MaxKeyLength)
+                .HasComment("键");
+
         });
     }
 }

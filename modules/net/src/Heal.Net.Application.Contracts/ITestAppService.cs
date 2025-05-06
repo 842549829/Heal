@@ -12,4 +12,10 @@ public interface ITestAppService : IHealNetApplicationService
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns>序列</returns>
     Task<long> GetNextSequenceAsync(string name, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 生成 GUID
+    /// </summary>
+    /// <returns>Guid</returns>
+    Guid Guid();
 }

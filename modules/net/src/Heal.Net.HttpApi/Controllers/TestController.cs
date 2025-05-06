@@ -23,4 +23,14 @@ public class TestController(ITestAppService testAppService) : HealNetController
     {
         return testAppService.GetNextSequenceAsync(name, cancellationToken);
     }
+
+    /// <summary>
+    /// 生成 GUID
+    /// </summary>
+    /// <returns>GUID</returns>
+    [HttpGet("guid")]
+    public Guid Guid()
+    {
+        return testAppService.Guid();
+    }
 }

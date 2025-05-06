@@ -18,4 +18,13 @@ public class TestAppService(ISequenceManager sequenceManager) :HealNetAppService
     {
         return sequenceManager.GetNextSequenceAsync(name, cancellationToken);
     }
+
+    /// <summary>
+    /// 生成 GUID
+    /// </summary>
+    /// <returns>Guid</returns>
+    public Guid Guid()
+    {
+        return GuidGenerator.Create();
+    }
 }

@@ -37,4 +37,9 @@ public class DictType : HealthcareAuditedAggregateRoot<Guid>
     {
         ParentId = parentId;
     }
+
+    /// <summary>
+    /// 字典项集合
+    /// </summary>
+    public ICollection<DictItem>? Items { get; set; }
 }

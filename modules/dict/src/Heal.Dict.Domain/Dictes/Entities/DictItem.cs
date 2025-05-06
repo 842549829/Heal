@@ -12,9 +12,11 @@ public class DictItem : HealthcareAuditedAggregateRoot<Guid>
     /// <param name="dictTypeId">字典类型Id</param>
     /// <param name="name">名称</param>
     /// <param name="code">code</param>
-    public DictItem(Guid id, Guid dictTypeId, string name, string code) : base(id, name, code)
+    /// <param name="key">key</param>
+    public DictItem(Guid id, Guid dictTypeId, string name, string code, string key) : base(id, name, code)
     {
         DictTypeId = dictTypeId;
+        Key = key;
     }
 
     /// <summary>
@@ -35,6 +37,11 @@ public class DictItem : HealthcareAuditedAggregateRoot<Guid>
     /// 字典类型id
     /// </summary>
     public Guid DictTypeId { get; private set; }
+
+    /// <summary>
+    /// 键
+    /// </summary>
+    public string Key { get; private set; }
 
     /// <summary>
     /// 父级id

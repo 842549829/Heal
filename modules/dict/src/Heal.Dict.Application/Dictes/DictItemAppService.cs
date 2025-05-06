@@ -54,7 +54,8 @@ public class DictItemAppService(IDictItemRepository dictItemRepository)
             GuidGenerator.Create(),
             input.DictTypeId,
             input.Name,
-            input.Code
+            input.Code,
+            input.Key
         );
         dictItem.SetTenant(CurrentUser.TenantId);
         dictItem.SetAlias(input.Alias);

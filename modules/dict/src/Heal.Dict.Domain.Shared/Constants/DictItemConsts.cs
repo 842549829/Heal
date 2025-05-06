@@ -19,4 +19,9 @@ public static class DictItemConsts
     /// 字典项样式最大长度
     /// </summary>
     public static int MaxStyleLength { get; set; } = 128;
+
+    /// <summary>
+    /// 字典项键最大长度
+    /// </summary>
+    public static int MaxKeyLength { get; set; } = 95;
 }

@@ -24,7 +24,7 @@ namespace Heal.Dict.EntityFrameworkCore.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Heal.Dict.Domain.Entities.DictItem", b =>
+            modelBuilder.Entity("Heal.Dict.Domain.Dictes.Entities.DictItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)")
@@ -110,6 +110,13 @@ namespace Heal.Dict.EntityFrameworkCore.Migrations
                         .HasColumnName("IsDeleted")
                         .HasComment("删除标记");
 
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasMaxLength(95)
+                        .HasColumnType("varchar(95)")
+                        .HasColumnName("Key")
+                        .HasComment("键");
+
                     b.Property<string>("LastModificationName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
@@ -181,13 +188,15 @@ namespace Heal.Dict.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DictTypeId");
+
                     b.ToTable("AbpDictItem", null, t =>
                         {
                             t.HasComment("字典项");
                         });
                 });
 
-            modelBuilder.Entity("Heal.Dict.Domain.Entities.DictType", b =>
+            modelBuilder.Entity("Heal.Dict.Domain.Dictes.Entities.DictType", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)")
@@ -331,6 +340,20 @@ namespace Heal.Dict.EntityFrameworkCore.Migrations
                         {
                             t.HasComment("字典类型");
                         });
+                });
+
+            modelBuilder.Entity("Heal.Dict.Domain.Dictes.Entities.DictItem", b =>
+                {
+                    b.HasOne("Heal.Dict.Domain.Dictes.Entities.DictType", null)
+                        .WithMany("Items")
+                        .HasForeignKey("DictTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Heal.Dict.Domain.Dictes.Entities.DictType", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

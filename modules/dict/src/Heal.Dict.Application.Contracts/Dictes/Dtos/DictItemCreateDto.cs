@@ -11,6 +11,11 @@ public class DictItemCreateDto : DictItemCreateOrUpdateDtoBase
     public required string Code { get; init; }
 
     /// <summary>
+    /// Key
+    /// </summary>
+    public required string Key { get; init; }
+
+    /// <summary>
     /// 父级Id
     /// </summary>
     public Guid? ParentId { get; init; }
