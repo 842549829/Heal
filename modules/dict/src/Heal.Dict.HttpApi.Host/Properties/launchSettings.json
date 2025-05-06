@@ -1,12 +1,20 @@
-{
+﻿{
   "profiles": {
-    "Heal.Dict.HttpApi.Host": {
+    "Heal.Net.HttpApi.Host": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:60130;http://localhost:60131"
+      "applicationUrl": "https://localhost:62515;http://localhost:62516"
+    },
+    "Heal.Net.HttpApi.Host.Home": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Home"
+      },
+      "applicationUrl": "https://localhost:62515;http://localhost:62516"
     }
   }
 }

@@ -1,6 +1,6 @@
-﻿using Heal.EntityFrameworkCore.EntityFrameworkCore;
-using Heal.Dict.Domain;
+﻿using Heal.Dict.Domain;
 using Heal.EntityFrameworkCore;
+using Heal.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
@@ -17,6 +17,15 @@ namespace Heal.Dict.EntityFrameworkCore.EntityFrameworkCore;
 )]
 public class HealDictEntityFrameworkCoreModule : AbpModule
 {
+    /// <summary>
+    /// PreConfigureServices
+    /// </summary>
+    /// <param name="context">context</param>
+    public override void PreConfigureServices(ServiceConfigurationContext context)
+    {
+        HealDictEfCoreEntityExtensionMappings.Configure();
+    }
+
     /// <summary>
     /// ConfigureServices
     /// </summary>

@@ -24,7 +24,7 @@ public class CampusRepository(IDbContextProvider<IHealCoreDbContext> dbContextPr
     /// <param name="includeDetails">是否启用导航属性查询</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns>院区</returns>
-    public async Task<List<Campus>> GetListAsync(string? sorting = null, int maxResultCount = Int32.MaxValue, int skipCount = 0, string? filter = null,
+    public async Task<List<Campus>> GetListAsync(string? sorting = null, int maxResultCount = int.MaxValue, int skipCount = 0, string? filter = null,
         bool includeDetails = false, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())

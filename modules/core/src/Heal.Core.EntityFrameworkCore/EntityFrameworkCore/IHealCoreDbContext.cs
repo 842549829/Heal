@@ -13,15 +13,15 @@ public interface IHealCoreDbContext : IIdentityDbContext
     /// <summary>
     /// Campus
     /// </summary>
-    public DbSet<Campus> Campuses { get; set; }
+    public DbSet<Campus> Campuses { get; }
 
     /// <summary>
     /// Doctor
     /// </summary>
-    public DbSet<Doctor> Doctors { get; set;}
+    public DbSet<Doctor> Doctors { get; }
 
     /// <summary>
     /// Patient
     /// </summary>
-    public DbSet<Patient> Patients { get; set; }
+    public DbSet<Patient> Patients { get; }
 }

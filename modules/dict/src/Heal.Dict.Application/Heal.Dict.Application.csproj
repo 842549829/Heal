@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\framework\src\Heal.Application\Heal.Application.csproj" />
+    <ProjectReference Include="..\Heal.Dict.Application.Contracts\Heal.Dict.Application.Contracts.csproj" />
     <ProjectReference Include="..\Heal.Dict.Domain\Heal.Dict.Domain.csproj" />
   </ItemGroup>
 </Project>

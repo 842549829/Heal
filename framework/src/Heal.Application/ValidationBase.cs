@@ -69,7 +69,6 @@ public class ValidationBase<T> : AbstractValidator<T>
     /// <summary>
     /// 字段长度安全地格式化本地化字符串。
     /// </summary>
-    /// <param name="localizer">IStringLocalizer 实例。</param>
     /// <param name="key">本地化键。</param>
     /// <param name="start">开始</param>
     /// <param name="end">结束</param>
@@ -161,5 +160,14 @@ public class ValidationBase<T> : AbstractValidator<T>
     protected static bool ValidationEmail(string email)
     {
         return EmailExtension.IsValidEmail(email);
+    }
+
+    /// <summary>
+    /// 排序号验证
+    /// </summary>
+    /// <returns>结果</returns>
+    protected static bool ValidationSortNo(int sortNo)
+    {
+        return sortNo >= 0;
     }
 }

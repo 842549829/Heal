@@ -26,11 +26,12 @@ public class TenantAppService(
     /// 获取租户
     /// </summary>
     /// <param name="id">id</param>
+    /// <param name="cancellationToken">取消令牌</param>
     /// <returns>租户</returns>
-    public async Task<TenantDto> GetAsync(Guid id)
+    public async Task<TenantDto> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return ObjectMapper.Map<Tenant, TenantDto>(
-            await tenantRepository.GetAsync(id)
+            await tenantRepository.GetAsync(id, cancellationToken: cancellationToken)
         );
     }
 
@@ -38,21 +39,21 @@ public class TenantAppService(
     /// 获取租户列表
     /// </summary>
     /// <param name="input">查询条件</param>
+    /// <param name="cancellationToken">取消令牌</param>
     /// <returns>租户列表</returns>
-    public async Task<PagedResultDto<TenantDto>> GetListAsync(GetTenantsInput input)
+    public async Task<PagedResultDto<TenantDto>> GetListAsync(GetTenantsInput input, CancellationToken cancellationToken = default)
     {
         if (input.Sorting.IsNullOrWhiteSpace())
         {
             input.Sorting = nameof(Tenant.Name);
         }
 
-        var count = await tenantRepository.GetCountAsync(input.Filter);
+        var count = await tenantRepository.GetCountAsync(input.Filter, cancellationToken);
         var list = await tenantRepository.GetListAsync(
             input.Sorting,
             input.MaxResultCount,
             input.SkipCount,
-            input.Filter
-        );
+            input.Filter, cancellationToken: cancellationToken);
 
         return new PagedResultDto<TenantDto>(
             count,
@@ -64,15 +65,16 @@ public class TenantAppService(
     /// 创建租户
     /// </summary>
     /// <param name="input">创建信息</param>
+    /// <param name="cancellationToken">取消令牌</param>
     /// <returns>租户实体</returns>
-    public async Task<TenantDto> CreateAsync(TenantCreateDto input)
+    public async Task<TenantDto> CreateAsync(TenantCreateDto input, CancellationToken cancellationToken = default)
     {
         var tenant = await tenantManager.CreateAsync(input.Name);
         input.MapExtraPropertiesTo(tenant);
 
-        await tenantRepository.InsertAsync(tenant);
+        await tenantRepository.InsertAsync(tenant, cancellationToken: cancellationToken);
 
-        await CurrentUnitOfWork?.SaveChangesAsync()!;
+        await CurrentUnitOfWork?.SaveChangesAsync(cancellationToken)!;
 
         await distributedEventBus.PublishAsync(
             new TenantCreatedEto
@@ -103,17 +105,18 @@ public class TenantAppService(
     /// </summary>
     /// <param name="id">id</param>
     /// <param name="input">租户信息</param>
+    /// <param name="cancellationToken">取消令牌</param>
     /// <returns>租户实体</returns>
-    public async Task<TenantDto> UpdateAsync(Guid id, TenantUpdateDto input)
+    public async Task<TenantDto> UpdateAsync(Guid id, TenantUpdateDto input, CancellationToken cancellationToken = default)
     {
-        var tenant = await tenantRepository.GetAsync(id);
+        var tenant = await tenantRepository.GetAsync(id, cancellationToken: cancellationToken);
 
         await tenantManager.ChangeNameAsync(tenant, input.Name);
 
         tenant.SetConcurrencyStampIfNotNull(input.ConcurrencyStamp);
         input.MapExtraPropertiesTo(tenant);
 
-        await tenantRepository.UpdateAsync(tenant);
+        await tenantRepository.UpdateAsync(tenant, cancellationToken: cancellationToken);
 
         return ObjectMapper.Map<Tenant, TenantDto>(tenant);
     }
@@ -122,15 +125,16 @@ public class TenantAppService(
     /// 删除租户
     /// </summary>
     /// <param name="id">租户Id</param>
+    /// <param name="cancellationToken">取消令牌</param>
     /// <returns>Task</returns>
-    public async Task DeleteAsync(Guid id)
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var tenant = await tenantRepository.FindAsync(id);
+        var tenant = await tenantRepository.FindAsync(id, cancellationToken: cancellationToken);
         if (tenant == null)
         {
             return;
         }
 
-        await tenantRepository.DeleteAsync(tenant);
+        await tenantRepository.DeleteAsync(tenant, cancellationToken: cancellationToken);
     }
 }

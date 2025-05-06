@@ -102,6 +102,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heal.Dict.HttpApi", "module
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heal.Dict.HttpApi.Host", "modules\dict\src\Heal.Dict.HttpApi.Host\Heal.Dict.HttpApi.Host.csproj", "{5DA16D68-872F-426C-B133-FF0906611DEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heal.Dict.DbMigrator", "modules\dict\src\Heal.Dict.DbMigrator\Heal.Dict.DbMigrator.csproj", "{2BF08897-ADE6-4AF1-9111-1BB10D48AD59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -228,6 +230,10 @@ Global
 		{5DA16D68-872F-426C-B133-FF0906611DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DA16D68-872F-426C-B133-FF0906611DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DA16D68-872F-426C-B133-FF0906611DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BF08897-ADE6-4AF1-9111-1BB10D48AD59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BF08897-ADE6-4AF1-9111-1BB10D48AD59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BF08897-ADE6-4AF1-9111-1BB10D48AD59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BF08897-ADE6-4AF1-9111-1BB10D48AD59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -272,6 +278,7 @@ Global
 		{4F1AE9F7-C6B3-452F-8934-BEB517B62706} = {69575F90-B2B9-44E1-95E5-3BE796130B48}
 		{01FFFFE2-C378-41ED-9FCF-EAB0676D0393} = {69575F90-B2B9-44E1-95E5-3BE796130B48}
 		{5DA16D68-872F-426C-B133-FF0906611DEE} = {69575F90-B2B9-44E1-95E5-3BE796130B48}
+		{2BF08897-ADE6-4AF1-9111-1BB10D48AD59} = {69575F90-B2B9-44E1-95E5-3BE796130B48}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}

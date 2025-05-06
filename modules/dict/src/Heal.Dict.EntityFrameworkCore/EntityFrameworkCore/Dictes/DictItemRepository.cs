@@ -1,0 +1,44 @@
+﻿using Heal.Dict.Domain.Dictes.Entities;
+using Heal.Dict.Domain.Dictes.Modules;
+using Heal.Dict.Domain.Dictes.Repositories;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
+using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore;
+
+namespace Heal.Dict.EntityFrameworkCore.EntityFrameworkCore.Dictes;
+
+/// <summary>
+/// 字典项仓储
+/// </summary>
+/// <param name="dbContextProvider">IHealDictDbContext</param>
+public class DictItemRepository(IDbContextProvider<IHealDictDbContext> dbContextProvider)
+    : EfCoreRepository<IHealDictDbContext, DictItem, Guid>(dbContextProvider), IDictItemRepository
+{
+    /// <summary>
+    /// 获取列表
+    /// </summary>
+    /// <param name="input">查询条件</param>
+    /// <param name="cancellationToken">取消令牌</param>
+    /// <returns>(总条数,当前页数据)</returns>
+    public async Task<(long, List<DictItem>)> GetListAsync(DictItemInput input, CancellationToken cancellationToken = default)
+    {
+        var db = await GetDbSetAsync();
+
+        var query = db
+            .Where(x => x.DictTypeId == input.DictTypeId)
+            .WhereIf(!input.Filter.IsNullOrWhiteSpace(),
+                x => x.Name.StartsWith(input.Filter!) ||
+                     x.Code.StartsWith(input.Filter!));
+
+        var count = await query
+            .LongCountAsync(GetCancellationToken(cancellationToken));
+
+        var list = await query
+            .OrderBy(input.Sorting.IsNullOrWhiteSpace() ? nameof(DictItem.CreationTime) + " desc" : input.Sorting)
+            .PageBy(input.SkipCount, input.MaxResultCount)
+            .ToListAsync(GetCancellationToken(cancellationToken));
+        
+        return (count, list);
+    }
+}

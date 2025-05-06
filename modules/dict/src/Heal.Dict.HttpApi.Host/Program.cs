@@ -20,7 +20,7 @@ public class Program
 
         try
         {
-            Log.Information("Starting Heal.HttpApi.Host.");
+            Log.Information("Starting Heal.Dict.HttpApi.Host.");
             var builder = WebApplication.CreateBuilder(args);
             builder.Host
                 .AddAppSettingsSecretsJson()
