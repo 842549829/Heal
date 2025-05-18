@@ -19,4 +19,10 @@ public interface INetRolePermissionAppService : IHealNetApplicationService
     /// <param name="moduleName">模块名称</param>
     /// <returns>返回权限树列表</returns>
     Task<List<RouteConfigDto>> GetPermissionTreeListAsync(string moduleName);
+    
+    /// <summary>
+    /// 获取所有权限菜单列表
+    /// </summary>
+    /// <returns>所有权限菜单列表</returns>
+    Task<List<RolePermissionTreeDto>> GetAllRolePermissionTreeListAsync();
 }

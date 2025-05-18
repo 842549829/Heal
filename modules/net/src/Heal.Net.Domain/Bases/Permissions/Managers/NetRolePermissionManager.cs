@@ -183,6 +183,51 @@ public class NetRolePermissionManager(
     }
 
     /// <summary>
+    /// 获取所有的模块菜单按钮权限
+    /// </summary>
+    /// <param name="userId">当前用户Id</param>
+    /// <returns>权限树</returns>
+    public async Task<List<PermissionTree>> GetAllPermissionTreeListAsync(Guid? userId = null)
+    {
+        // 声明一个权限树列表
+        var results = new List<PermissionTree>();
+        
+        // 获取所有模块
+        var modules = await GetModuleListAsync(userId);
+        
+        // 遍历所有模块
+        foreach (var module in modules)
+        {
+            // 根据模块去查询该模块下的所有菜单权限
+            var permissionTrees = await GetPermissionTreeListAsync(userId, module.ParentName);
+            
+            // 将查询到的权限树添加到结果列表中
+            var permissionTree = new PermissionTree(module.PermissionName, 
+                module.Title,
+                module.Path,
+                module.Component, module.ParentName,
+                module.Type, 
+                module.Name, 
+                module.Redirect, 
+                module.Alias, 
+                module.Hidden, 
+                module.AlwaysShow,
+                module.Icon, 
+                module.NoCache,
+                module.Breadcrumb,
+                module.Affix, 
+                module.ActiveMenu,
+                module.NoTagsView,
+                module.CanTo);
+            
+            permissionTree.AddChildPermission(permissionTrees);
+            
+            results.Add(permissionTree);
+        }
+        return results;
+    }
+
+    /// <summary>
     /// 创建权限树
     /// </summary>
     /// <param name="permissionGroupDefinitionRecords">权限分组</param>
@@ -295,46 +340,46 @@ public class NetRolePermissionManager(
     private Permission CreatePermission(string permissionName, string? parentName, string displayName, IHasExtraProperties extra)
     {
         var (
-            Path,
-            Component,
-            PermissionType,
-            Title,
-            Name,
-            Redirect,
-            Alias,
-            Hidden,
-            AlwaysShow,
-            Icon,
-            NoCache,
-            Breadcrumb,
-            Affix,
-            ActiveMenu,
-            NoTagsView,
-            CanTo
+            path,
+            component,
+            permissionType,
+            title,
+            name,
+            redirect,
+            alias,
+            hidden,
+            alwaysShow,
+            icon,
+            noCache,
+            breadcrumb,
+            affix,
+            activeMenu,
+            noTagsView,
+            canTo
             ) = ExtractPermissionProperties(permissionName, displayName,extra);
 
         var permission = new Permission(
             permissionName,
-            Title,
-            Path,
-            Component,
+            title,
+            path,
+            component,
             parentName,
-            PermissionType,
-            Name,
-            Redirect,
-            Alias,
-            Hidden,
-            AlwaysShow,
-            Icon,
-            NoCache,
-            Breadcrumb,
-            Affix,
-            ActiveMenu,
-            NoTagsView,
-            CanTo
+            permissionType,
+            name,
+            redirect,
+            alias,
+            hidden,
+            alwaysShow,
+            icon,
+            noCache,
+            breadcrumb,
+            affix,
+            activeMenu,
+            noTagsView,
+            canTo
         );
-        var path = extra.GetProperty<int?>(PermissionDefinitionConsts.Tag) ?? 0;
-        permission.SetTag(path);
+        var tag = extra.GetProperty<int?>(PermissionDefinitionConsts.Tag) ?? 0;
+        permission.SetTag(tag);
         return permission;
     }
 
@@ -349,46 +394,46 @@ public class NetRolePermissionManager(
     private PermissionTree CreatePermissionTree(string permissionName, string? parentName, string displayName, IHasExtraProperties extra)
     {
         var (
-            Path,
-            Component,
-            PermissionType,
-            Title,
-            Name,
-            Redirect,
-            Alias,
-            Hidden,
-            AlwaysShow,
-            Icon,
-            NoCache,
-            Breadcrumb,
-            Affix,
-            ActiveMenu,
-            NoTagsView,
-            CanTo
+            path,
+            component,
+            permissionType,
+            title,
+            name,
+            redirect,
+            alias,
+            hidden,
+            alwaysShow,
+            icon,
+            noCache,
+            breadcrumb,
+            affix,
+            activeMenu,
+            noTagsView,
+            canTo
             ) = ExtractPermissionProperties(permissionName,displayName, extra);
 
         var permissionTree = new PermissionTree(
             permissionName,
-            Title,
-            Path,
-            Component,
+            title,
+            path,
+            component,
             parentName,
-            PermissionType,
-            Name,
-            Redirect,
-            Alias,
-            Hidden,
-            AlwaysShow,
-            Icon,
-            NoCache,
-            Breadcrumb,
-            Affix,
-            ActiveMenu,
-            NoTagsView,
-            CanTo
+            permissionType,
+            name,
+            redirect,
+            alias,
+            hidden,
+            alwaysShow,
+            icon,
+            noCache,
+            breadcrumb,
+            affix,
+            activeMenu,
+            noTagsView,
+            canTo
         );
-        var path = extra.GetProperty<int?>(PermissionDefinitionConsts.Tag) ?? 0;
-        permissionTree.SetTag(path);
+        var tag = extra.GetProperty<int?>(PermissionDefinitionConsts.Tag) ?? 0;
+        permissionTree.SetTag(tag);
         return permissionTree;
     }
 

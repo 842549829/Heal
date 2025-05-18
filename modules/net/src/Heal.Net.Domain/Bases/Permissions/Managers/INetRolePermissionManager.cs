@@ -53,4 +53,11 @@ public interface INetRolePermissionManager : IHealNetDomainManager
     /// <param name="userId">用户Id</param>
     /// <returns>权限</returns>
     Task<List<Permission>> GetModuleListAsync(Guid? userId = null);
+
+    /// <summary>
+    /// 获取所有的模块菜单按钮权限
+    /// </summary>
+    /// <param name="userId">当前登录用户Id</param>
+    /// <returns>权限树</returns>
+    Task<List<PermissionTree>> GetAllPermissionTreeListAsync(Guid? userId = null);
 }

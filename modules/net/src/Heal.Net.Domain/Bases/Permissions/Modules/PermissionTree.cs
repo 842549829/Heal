@@ -63,6 +63,16 @@ public class PermissionTree : PermissionBase
         ChildPermissions ??= [];
         ChildPermissions.Add(childPermission);
     }
+    
+    /// <summary>
+    /// 添加子权限
+    /// </summary>
+    /// <param name="childPermissions">子权限</param>
+    public void AddChildPermission(List<PermissionTree> childPermissions)
+    {
+        ChildPermissions ??= [];
+        ChildPermissions.AddRange(childPermissions);
+    }
 
     /// <summary>
     /// 克隆

@@ -32,4 +32,14 @@ public class PermissionController(INetRolePermissionAppService permissionAppServ
     {
         return permissionAppService.GetModuleListAsync();
     }
+
+    /// <summary>
+    /// 获取所有权限菜单列表
+    /// </summary>
+    /// <returns>所有权限菜单列表</returns>
+    [HttpGet("role-list")]
+    public Task<List<RolePermissionTreeDto>> GetAllRolePermissionTreeListAsync()
+    {
+        return permissionAppService.GetAllRolePermissionTreeListAsync();
+    }
 }
