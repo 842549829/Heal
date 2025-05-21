@@ -199,13 +199,14 @@ public class NetRolePermissionManager(
         foreach (var module in modules)
         {
             // 根据模块去查询该模块下的所有菜单权限
-            var permissionTrees = await GetPermissionTreeListAsync(userId, module.ParentName);
+            var permissionTrees = await GetPermissionTreeListAsync(userId, module.PermissionName);
             
             // 将查询到的权限树添加到结果列表中
             var permissionTree = new PermissionTree(module.PermissionName, 
                 module.Title,
                 module.Path,
-                module.Component, module.ParentName,
+                module.Component, 
+                module.ParentName,
                 module.Type, 
                 module.Name, 
                 module.Redirect, 

@@ -126,7 +126,7 @@ public class NetRolePermissionAppService(INetRolePermissionManager netRolePermis
     /// <returns>DTO 树节点列表。</returns>
     private static List<RolePermissionTreeDto> MapToMapToRolePermissionTreeDtoList(List<PermissionTree> treeNodes)
     {
-        return !treeNodes.Any() ? [] : treeNodes.Select(MapToRolePermissionTreeDto).ToList();
+        return !treeNodes.Any() ? [] : treeNodes.Where(a => a.Hidden == false).Select(MapToRolePermissionTreeDto).ToList();
     }
 
     /// <summary>
