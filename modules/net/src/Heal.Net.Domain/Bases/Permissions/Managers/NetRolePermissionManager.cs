@@ -480,8 +480,12 @@ public class NetRolePermissionManager(
         var activeMenu = extra.GetProperty<string?>(PermissionDefinitionConsts.ActiveMenu);
         var noTagsView = extra.GetProperty<bool?>(PermissionDefinitionConsts.NoTagsView);
         var canTo = extra.GetProperty<bool?>(PermissionDefinitionConsts.CanTo);
-        var title = extra.GetProperty<string?>(PermissionDefinitionConsts.Title) ?? Deserialize(displayName);
-
+        var t = extra.GetProperty<string?>(PermissionDefinitionConsts.Title);
+        var title = Deserialize(displayName);
+        if (t != null)
+        {
+            title = Deserialize(t);
+        }
         return (
             Path: path,
             Component: component,

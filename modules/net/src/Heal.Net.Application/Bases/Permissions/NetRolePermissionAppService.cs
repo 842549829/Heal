@@ -86,34 +86,10 @@ public class NetRolePermissionAppService(INetRolePermissionManager netRolePermis
             return dtoNode;
         }
 
-        // 处理按钮权限
-        if (treeNode.Type == PermissionType.Menu)
+        foreach (var childDto in treeNode.ChildPermissions.Select(MapToRolePermissionTreeDto))
         {
-            dtoNode.Meta.Permission = []; // 初始化 Permission 列表
-
-            foreach (var child in treeNode.ChildPermissions)
-            {
-                if (child.Type == PermissionType.Button)
-                {
-                    // 收集 Type=2 的节点名称，并跳过递归
-                    dtoNode.Meta.Permission.Add(child.PermissionName);
-                }
-                else
-                {
-                    // 对其他类型的节点进行递归
-                    var childDto = MapToRolePermissionTreeDto(child);
-                    dtoNode.Children ??= [];
-                    dtoNode.Children.Add(childDto);
-                }
-            }
-        }
-        else
-        {
-            foreach (var childDto in treeNode.ChildPermissions.Select(MapToRolePermissionTreeDto))
-            {
-                dtoNode.Children ??= [];
-                dtoNode.Children.Add(childDto);
-            }
+            dtoNode.Children ??= [];
+            dtoNode.Children.Add(childDto);
         }
 
         return dtoNode;
