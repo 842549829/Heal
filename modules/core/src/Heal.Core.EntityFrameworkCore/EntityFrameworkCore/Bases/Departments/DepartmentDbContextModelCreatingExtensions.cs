@@ -25,14 +25,11 @@ public static class DepartmentDbContextModelCreatingExtensions
             return;
         }
 
-        builder.Entity(delegate (EntityTypeBuilder<Department> b)
+        builder.Entity(delegate(EntityTypeBuilder<Department> b)
         {
             b.ToTable(AbpCommonDbProperties.DbTablePrefix + nameof(Department), AbpCommonDbProperties.DbSchema,
-                x =>
-                {
-                    x.HasComment("科室");
-                });
-                
+                x => { x.HasComment("科室"); });
+
             b.ConfigureByConventionByFullHealthcareAuditedAggregateRoot<Guid>();
 
             b.Property(x => x.CampusId)
@@ -133,6 +130,14 @@ public static class DepartmentDbContextModelCreatingExtensions
                 .HasColumnName(nameof(Department.EmergencyPhone))
                 .HasMaxLength(DepartmentConsts.MaxEmergencyPhoneLength)
                 .HasComment("紧急联系人电话");
+
+            b.HasOne(e => e.Campuses)
+                .WithMany()
+                .HasForeignKey(e => e.CampusId);
+
+            b.HasOne(e => e.DepartmentType)
+                .WithMany()
+                .HasForeignKey(e => e.DepartmentTypeId);
         });
     }
 }

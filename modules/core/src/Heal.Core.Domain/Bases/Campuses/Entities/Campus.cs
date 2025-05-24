@@ -1,4 +1,5 @@
 ﻿using Heal.Domain.Entities;
+using Volo.Abp.Identity;
 
 namespace Heal.Core.Domain.Bases.Campuses.Entities;
 
@@ -218,4 +219,9 @@ public class Campus(Guid id, string name, string code) : FullParentHealthcareAud
     {
         EmergencyPhone = emergencyPhone;
     }
+
+    /// <summary>
+    /// 组织机构
+    /// </summary>
+    public virtual OrganizationUnit OrganizationUnit { get; init; } = null!;
 }
