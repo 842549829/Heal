@@ -29,7 +29,7 @@ public class ModuleAppService(IRepository<PermissionGroupDefinitionRecord> permi
     {
         if (await permissionGroupDefinitionRecordRepository.AnyAsync(d => d.Name == input.Name, cancellationToken: cancellationToken))
         {
-            throw new UserFriendlyException(L[LocalizedTextsConsts.ModuleAlreadyExists]);
+            throw new UserFriendlyException(L[LocalizedTextsConstants.ModuleAlreadyExists]);
         }
         var entity = new PermissionGroupDefinitionRecord(GuidGenerator.Create(), input.Name, input.DisplayName);
         SetProperty(entity, input);
@@ -69,7 +69,7 @@ public class ModuleAppService(IRepository<PermissionGroupDefinitionRecord> permi
             Id = item.Id,
             Name = item.Name,
             DislayName = item.DisplayName,
-            Tag = item.GetProperty<ModuleTag?>(PermissionDefinitionConsts.Tag) ?? ModuleTag.Normal
+            Tag = item.GetProperty<ModuleTag?>(PermissionDefinitionConstants.Tag) ?? ModuleTag.Normal
         }).ToList();
 
         return new PagedResultDto<ModuleListDto>(
@@ -89,23 +89,23 @@ public class ModuleAppService(IRepository<PermissionGroupDefinitionRecord> permi
         var entity = await moduleRepository.GetAsync(id, cancellationToken: cancellationToken);
         var moduleDto = new ModuleDto
         {
-            Path = entity.GetProperty<string?>(PermissionDefinitionConsts.Path) ?? entity.Name,
-            ActiveMenu = entity.GetProperty<string?>(PermissionDefinitionConsts.ActiveMenu),
-            Component = entity.GetProperty<string?>(PermissionDefinitionConsts.Component) ?? "#",
+            Path = entity.GetProperty<string?>(PermissionDefinitionConstants.Path) ?? entity.Name,
+            ActiveMenu = entity.GetProperty<string?>(PermissionDefinitionConstants.ActiveMenu),
+            Component = entity.GetProperty<string?>(PermissionDefinitionConstants.Component) ?? "#",
             DisplayName = entity.DisplayName,
-            Tag = entity.GetProperty<ModuleTag?>(PermissionDefinitionConsts.Tag) ?? ModuleTag.Normal,
+            Tag = entity.GetProperty<ModuleTag?>(PermissionDefinitionConstants.Tag) ?? ModuleTag.Normal,
             Name = entity.Name,
             Id = entity.Id,
-            Redirect = entity.GetProperty<string?>(PermissionDefinitionConsts.Redirect),
-            Alias = entity.GetProperty<string?>(PermissionDefinitionConsts.Alias),
-            Hidden = entity.GetProperty<bool?>(PermissionDefinitionConsts.Hidden) ?? true,
-            AlwaysShow = entity.GetProperty<bool?>(PermissionDefinitionConsts.AlwaysShow),
-            Icon = entity.GetProperty<string?>(PermissionDefinitionConsts.Icon),
-            NoCache = entity.GetProperty<bool?>(PermissionDefinitionConsts.NoCache),
-            Breadcrumb = entity.GetProperty<bool?>(PermissionDefinitionConsts.Breadcrumb),
-            Affix = entity.GetProperty<bool?>(PermissionDefinitionConsts.Affix),
-            NoTagsView = entity.GetProperty<bool?>(PermissionDefinitionConsts.NoTagsView),
-            CanTo = entity.GetProperty<bool?>(PermissionDefinitionConsts.CanTo)
+            Redirect = entity.GetProperty<string?>(PermissionDefinitionConstants.Redirect),
+            Alias = entity.GetProperty<string?>(PermissionDefinitionConstants.Alias),
+            Hidden = entity.GetProperty<bool?>(PermissionDefinitionConstants.Hidden) ?? true,
+            AlwaysShow = entity.GetProperty<bool?>(PermissionDefinitionConstants.AlwaysShow),
+            Icon = entity.GetProperty<string?>(PermissionDefinitionConstants.Icon),
+            NoCache = entity.GetProperty<bool?>(PermissionDefinitionConstants.NoCache),
+            Breadcrumb = entity.GetProperty<bool?>(PermissionDefinitionConstants.Breadcrumb),
+            Affix = entity.GetProperty<bool?>(PermissionDefinitionConstants.Affix),
+            NoTagsView = entity.GetProperty<bool?>(PermissionDefinitionConstants.NoTagsView),
+            CanTo = entity.GetProperty<bool?>(PermissionDefinitionConstants.CanTo)
         };
         return moduleDto;
     }
@@ -117,21 +117,21 @@ public class ModuleAppService(IRepository<PermissionGroupDefinitionRecord> permi
     /// <param name="input">input</param>
     private static void SetProperty(PermissionGroupDefinitionRecord entity, IModuleCreateOrUpdateDto input)
     {
-        entity.SetProperty(PermissionDefinitionConsts.Path, input.Path);
-        entity.SetProperty(PermissionDefinitionConsts.Component, input.Component);
-        entity.SetProperty(PermissionDefinitionConsts.Type, PermissionType.Module);
-        entity.SetProperty(PermissionDefinitionConsts.Redirect, input.Redirect);
-        entity.SetProperty(PermissionDefinitionConsts.Alias, input.Alias);
-        entity.SetProperty(PermissionDefinitionConsts.Hidden, input.Hidden);
-        entity.SetProperty(PermissionDefinitionConsts.AlwaysShow, input.AlwaysShow);
-        entity.SetProperty(PermissionDefinitionConsts.Icon, input.Icon);
-        entity.SetProperty(PermissionDefinitionConsts.NoCache, input.NoCache);
-        entity.SetProperty(PermissionDefinitionConsts.Breadcrumb, input.Breadcrumb);
-        entity.SetProperty(PermissionDefinitionConsts.Affix, input.Affix);
-        entity.SetProperty(PermissionDefinitionConsts.ActiveMenu, input.ActiveMenu);
-        entity.SetProperty(PermissionDefinitionConsts.NoTagsView, input.NoTagsView);
-        entity.SetProperty(PermissionDefinitionConsts.CanTo, input.CanTo);
-        entity.SetProperty(PermissionDefinitionConsts.Title, input.DisplayName);
-        entity.SetProperty(PermissionDefinitionConsts.Tag, input.Tag);
+        entity.SetProperty(PermissionDefinitionConstants.Path, input.Path);
+        entity.SetProperty(PermissionDefinitionConstants.Component, input.Component);
+        entity.SetProperty(PermissionDefinitionConstants.Type, PermissionType.Module);
+        entity.SetProperty(PermissionDefinitionConstants.Redirect, input.Redirect);
+        entity.SetProperty(PermissionDefinitionConstants.Alias, input.Alias);
+        entity.SetProperty(PermissionDefinitionConstants.Hidden, input.Hidden);
+        entity.SetProperty(PermissionDefinitionConstants.AlwaysShow, input.AlwaysShow);
+        entity.SetProperty(PermissionDefinitionConstants.Icon, input.Icon);
+        entity.SetProperty(PermissionDefinitionConstants.NoCache, input.NoCache);
+        entity.SetProperty(PermissionDefinitionConstants.Breadcrumb, input.Breadcrumb);
+        entity.SetProperty(PermissionDefinitionConstants.Affix, input.Affix);
+        entity.SetProperty(PermissionDefinitionConstants.ActiveMenu, input.ActiveMenu);
+        entity.SetProperty(PermissionDefinitionConstants.NoTagsView, input.NoTagsView);
+        entity.SetProperty(PermissionDefinitionConstants.CanTo, input.CanTo);
+        entity.SetProperty(PermissionDefinitionConstants.Title, input.DisplayName);
+        entity.SetProperty(PermissionDefinitionConstants.Tag, input.Tag);
     }
 }

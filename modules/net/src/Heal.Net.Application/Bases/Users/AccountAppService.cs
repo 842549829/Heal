@@ -35,7 +35,7 @@ public class AccountAppService(IOptions<AuthServerOptions> authServerOption, IHt
         };
         if (input.TenantId.HasValue && input.TenantId.Value != Guid.Empty)
         {
-            request.Headers.Add(LoginConsts.Tenant, input.TenantId.Value.ToString());
+            request.Headers.Add(LoginConstants.Tenant, input.TenantId.Value.ToString());
         }
         //if (!input.OrganizationCode.IsNullOrWhiteSpace())
         //{
@@ -43,7 +43,7 @@ public class AccountAppService(IOptions<AuthServerOptions> authServerOption, IHt
         //}
         if (input.Remember.HasValue)
         {
-            request.Parameters.Add(LoginConsts.RememberMe, input.Remember.Value.ToString());
+            request.Parameters.Add(LoginConstants.RememberMe, input.Remember.Value.ToString());
         }
 
         request.Parameters.AddRequired(OidcConstants.TokenRequest.GrantType, _authServerOption.GrantType);

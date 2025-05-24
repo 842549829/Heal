@@ -20,13 +20,13 @@ public static class HealEntityTypeBuilderExtensions
     /// <summary>
     /// 配置实体
     /// </summary>
-    /// <typeparam name="Tkey">主键类型</typeparam>
+    /// <typeparam name="TKey">主键类型</typeparam>
     /// <param name="b">EntityTypeBuilder</param>
-    public static void ConfigureByConvention<Tkey>(this EntityTypeBuilder b)
+    public static void ConfigureByConvention<TKey>(this EntityTypeBuilder b)
     {
         b.ConfigureByConvention();
 
-        b.ConfigureByConventionBase<Tkey>();
+        b.ConfigureByConventionBase<TKey>();
 
         b.ApplyObjectExtensionMappings();
     }
@@ -34,11 +34,11 @@ public static class HealEntityTypeBuilderExtensions
     /// <summary>
     /// 配置实体
     /// </summary>
-    /// <typeparam name="Tkey">主键类型</typeparam>
+    /// <typeparam name="TKey">主键类型</typeparam>
     /// <param name="b">EntityTypeBuilder</param>
-    public static void ConfigureByConventionBase<Tkey>(this EntityTypeBuilder b)
+    public static void ConfigureByConventionBase<TKey>(this EntityTypeBuilder b)
     {
-        b.TryConfigureId<Tkey>();
+        b.TryConfigureId<TKey>();
         b.TryConfigureConcurrencyStamp();
         b.TryConfigureCreationTime();
         b.TryConfigureLastModificationTime();
@@ -56,9 +56,9 @@ public static class HealEntityTypeBuilderExtensions
     /// 配置实体
     /// </summary>
     /// <param name="b">EntityTypeBuilder</param>
-    public static void ConfigureByConventionByHealthcareAuditedAggregateRoot<Tkey>(this EntityTypeBuilder b)
+    public static void ConfigureByConventionByHealthcareAuditedAggregateRoot<TKey>(this EntityTypeBuilder b)
     {
-        b.ConfigureByConvention<Tkey>();
+        b.ConfigureByConvention<TKey>();
         b.TryConfigureCode();
         b.TryConfigureCreatorName();
         b.TryConfigureModificationName();
@@ -75,9 +75,9 @@ public static class HealEntityTypeBuilderExtensions
     /// 配置实体
     /// </summary>
     /// <param name="b">EntityTypeBuilder</param>
-    public static void ConfigureByConventionByFullHealthcareAuditedAggregateRoot<Tkey>(this EntityTypeBuilder b)
+    public static void ConfigureByConventionByFullHealthcareAuditedAggregateRoot<TKey>(this EntityTypeBuilder b)
     {
-        b.ConfigureByConventionByHealthcareAuditedAggregateRoot<Tkey>();
+        b.ConfigureByConventionByHealthcareAuditedAggregateRoot<TKey>();
         b.TryConfigureOrganizationId();
         b.TryConfigureOrganizationCode();
         b.TryConfigureParentId();
@@ -100,12 +100,12 @@ public static class HealEntityTypeBuilderExtensions
 
         b.Property(nameof(IHasUserBaseInfo.Name))
             .IsRequired()
-            .HasMaxLength(UserConsts.MaxUserNameLength)
+            .HasMaxLength(UserConstants.MaxUserNameLength)
             .HasComment("名称");
 
         b.Property(nameof(IHasUserBaseInfo.Gender))
             .IsRequired(false)
-            .HasMaxLength(UserConsts.MaxGenderLength)
+            .HasMaxLength(UserConstants.MaxGenderLength)
             .HasComment("性别");
 
         b.Property(nameof(IHasUserBaseInfo.Birthday))
@@ -114,12 +114,12 @@ public static class HealEntityTypeBuilderExtensions
 
         b.Property(nameof(IHasUserBaseInfo.Phone))
             .IsRequired()
-            .HasMaxLength(UserConsts.MaxPhoneLength)
+            .HasMaxLength(UserConstants.MaxPhoneLength)
             .HasComment("手机");
 
         b.Property(nameof(IHasUserBaseInfo.Email))
             .IsRequired()
-            .HasMaxLength(UserConsts.MaxEmailLength)
+            .HasMaxLength(UserConstants.MaxEmailLength)
             .HasComment("邮箱");
     }
 
@@ -136,32 +136,32 @@ public static class HealEntityTypeBuilderExtensions
 
         b.Property(nameof(IMayHaveAddress.NationCode))
             .IsRequired(false)
-            .HasMaxLength(AddressConsts.MaxNationCodeLength)
+            .HasMaxLength(AddressConstants.MaxNationCodeLength)
             .HasComment("国家代码");
 
         b.Property(nameof(IMayHaveAddress.ProvinceCode))
             .IsRequired(false)
-            .HasMaxLength(AddressConsts.MaxProvinceCodeLength)
+            .HasMaxLength(AddressConstants.MaxProvinceCodeLength)
             .HasComment("省份代码");
 
         b.Property(nameof(IMayHaveAddress.CityCode))
             .IsRequired(false)
-            .HasMaxLength(AddressConsts.MaxCityCodeLength)
+            .HasMaxLength(AddressConstants.MaxCityCodeLength)
             .HasComment("城市代码");
 
         b.Property(nameof(IMayHaveAddress.DistrictCode))
             .IsRequired(false)
-            .HasMaxLength(AddressConsts.MaxDistrictCodeLength)
+            .HasMaxLength(AddressConstants.MaxDistrictCodeLength)
             .HasComment("区县代码");
 
         b.Property(nameof(IMayHaveAddress.Street))
             .IsRequired(false)
-            .HasMaxLength(AddressConsts.MaxStreetLength)
+            .HasMaxLength(AddressConstants.MaxStreetLength)
             .HasComment("街道");
 
         b.Property(nameof(IMayHaveAddress.AddressLine))
             .IsRequired(false)
-            .HasMaxLength(AddressConsts.MaxAddressLineLength)
+            .HasMaxLength(AddressConstants.MaxAddressLineLength)
             .HasComment("详细地址");
     }
 
@@ -178,15 +178,15 @@ public static class HealEntityTypeBuilderExtensions
 
         b.Property(nameof(IMayHaveAge.Year))
             .IsRequired()
-            .HasComment(AgeConsts.Year);
+            .HasComment(AgeConstants.Year);
 
         b.Property(nameof(IMayHaveAge.Month))
             .IsRequired()
-            .HasComment(AgeConsts.Month);
+            .HasComment(AgeConstants.Month);
 
         b.Property(nameof(IMayHaveAge.Day))
             .IsRequired()
-            .HasComment(AgeConsts.Day);
+            .HasComment(AgeConstants.Day);
     }
 
     /// <summary>
@@ -202,12 +202,12 @@ public static class HealEntityTypeBuilderExtensions
 
         b.Property(nameof(IHasIdCard.IdCardNo))
             .IsRequired()
-            .HasMaxLength(IdCardConsts.MaxIdCardNoLength)
+            .HasMaxLength(IdCardConstants.MaxIdCardNoLength)
             .HasComment("证件号");
 
         b.Property(nameof(IHasIdCard.IdCardType))
             .IsRequired()
-            .HasMaxLength(IdCardConsts.MaxIdCardTypeLength)
+            .HasMaxLength(IdCardConstants.MaxIdCardTypeLength)
             .HasComment("证件类型");
     }
 
@@ -234,7 +234,7 @@ public static class HealEntityTypeBuilderExtensions
         {
             b.Property(nameof(IHasCode.Code))
                 .IsRequired()
-                .HasMaxLength(CodeConsts.MaxLength)
+                .HasMaxLength(CodeConstants.MaxLength)
                 .HasColumnName(nameof(IHasCode.Code))
                 .HasComment("编码");
         }
@@ -476,7 +476,7 @@ public static class HealEntityTypeBuilderExtensions
     public static void ConfigureNamePinyinFirstLetters<T>(this EntityTypeBuilder<T> b, int? maxLength = null)
         where T : class, IHasNamePinyin
     {
-        b.As<EntityTypeBuilder>().TryConfigureNamePinyinFirstLetters(maxLength ?? PinyinFirstLettersConsts.MaxLength);
+        b.As<EntityTypeBuilder>().TryConfigureNamePinyinFirstLetters(maxLength ?? PinyinFirstLettersConstants.MaxLength);
     }
 
     /// <summary>
@@ -491,7 +491,7 @@ public static class HealEntityTypeBuilderExtensions
             b.Property(nameof(IHasNamePinyin.PinyinFirstLetters))
                 .IsConcurrencyToken()
                 .IsRequired()
-                .HasMaxLength(maxLength ?? PinyinFirstLettersConsts.MaxLength)
+                .HasMaxLength(maxLength ?? PinyinFirstLettersConstants.MaxLength)
                 .HasColumnName(nameof(IHasNamePinyin.PinyinFirstLetters))
                 .HasComment("拼音首字母");
         }
@@ -506,7 +506,7 @@ public static class HealEntityTypeBuilderExtensions
     public static void ConfigureNamePinyin<T>(this EntityTypeBuilder<T> b, int? maxLength = null)
         where T : class, IHasNamePinyin
     {
-        b.As<EntityTypeBuilder>().TryConfigureNamePinyin(maxLength ?? PinyinConsts.MaxLength);
+        b.As<EntityTypeBuilder>().TryConfigureNamePinyin(maxLength ?? PinyinConstants.MaxLength);
     }
 
     /// <summary>
@@ -521,7 +521,7 @@ public static class HealEntityTypeBuilderExtensions
             b.Property(nameof(IHasNamePinyin.Pinyin))
                 .IsConcurrencyToken()
                 .IsRequired()
-                .HasMaxLength(maxLength ?? PinyinConsts.MaxLength)
+                .HasMaxLength(maxLength ?? PinyinConstants.MaxLength)
                 .HasColumnName(nameof(IHasNamePinyin.Pinyin))
                 .HasComment("拼音");
         }
@@ -536,7 +536,7 @@ public static class HealEntityTypeBuilderExtensions
     public static void ConfigureDescribe<T>(this EntityTypeBuilder<T> b, int? maxLength = null)
         where T : class, IMayHaveDescribe
     {
-        b.As<EntityTypeBuilder>().TryConfigureDescribe(maxLength ?? DescribeConsts.MaxLength);
+        b.As<EntityTypeBuilder>().TryConfigureDescribe(maxLength ?? DescribeConstants.MaxLength);
     }
 
     /// <summary>
@@ -551,7 +551,7 @@ public static class HealEntityTypeBuilderExtensions
             b.Property(nameof(IMayHaveDescribe.Describe))
                 .IsConcurrencyToken()
                 .IsRequired(false)
-                .HasMaxLength(maxLength ?? DescribeConsts.MaxLength)
+                .HasMaxLength(maxLength ?? DescribeConstants.MaxLength)
                 .HasColumnName(nameof(IMayHaveDescribe.Describe))
                 .HasComment("描述");
         }
@@ -567,7 +567,7 @@ public static class HealEntityTypeBuilderExtensions
         where T : class, IHasName
     {
 
-        b.As<EntityTypeBuilder>().TryConfigureName(maxLength ?? NameConsts.MaxLength);
+        b.As<EntityTypeBuilder>().TryConfigureName(maxLength ?? NameConstants.MaxLength);
     }
 
     /// <summary>
@@ -582,7 +582,7 @@ public static class HealEntityTypeBuilderExtensions
             b.Property(nameof(IHasName.Name))
                 .IsConcurrencyToken()
                 .IsRequired()
-                .HasMaxLength(maxLength ?? NameConsts.MaxLength)
+                .HasMaxLength(maxLength ?? NameConstants.MaxLength)
                 .HasColumnName(nameof(IHasName.Name))
                 .HasComment("名称");
         }
@@ -610,7 +610,7 @@ public static class HealEntityTypeBuilderExtensions
             b.Property(nameof(IMayHaveCreatorName.CreatorName))
                 .IsConcurrencyToken()
                 .IsRequired(false)
-                .HasMaxLength(CreatorNameConsts.MaxLength)
+                .HasMaxLength(CreatorNameConstants.MaxLength)
                 .HasColumnName(nameof(IMayHaveCreatorName.CreatorName))
                 .HasComment("创建人名称");
         }
@@ -638,7 +638,7 @@ public static class HealEntityTypeBuilderExtensions
             b.Property(nameof(IMayHaveModificationName.LastModificationName))
                 .IsConcurrencyToken()
                 .IsRequired(false)
-                .HasMaxLength(LastModificationNameConsts.MaxLength)
+                .HasMaxLength(LastModificationNameConstants.MaxLength)
                 .HasColumnName(nameof(IMayHaveModificationName.LastModificationName))
                 .HasComment("最后修改人名称");
         }
@@ -666,7 +666,7 @@ public static class HealEntityTypeBuilderExtensions
             b.Property(nameof(IMayHaveDeletionName.DeletionName))
                 .IsConcurrencyToken()
                 .IsRequired(false)
-                .HasMaxLength(DeletionNameConsts.MaxLength)
+                .HasMaxLength(DeletionNameConstants.MaxLength)
                 .HasColumnName(nameof(IMayHaveDeletionName.DeletionName))
                 .HasComment("删除人名称");
         }

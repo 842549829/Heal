@@ -54,209 +54,209 @@ public static class HealNetEfCoreEntityExtensionMappings
             // 用户扩展信息
             ObjectExtensionManager.Instance
                 .MapEfCoreProperty<IdentityUser, string>(
-                    IdentityUserExtensionConsts.OpenId,
+                    IdentityUserExtensionConstants.OpenId,
                     (_, propertyBuilder) =>
                     {
-                        propertyBuilder.HasMaxLength(IdentityUserExtensionConsts.MaxOpenIdLength);
+                        propertyBuilder.HasMaxLength(IdentityUserExtensionConstants.MaxOpenIdLength);
                         propertyBuilder.HasDefaultValue(string.Empty);
                         propertyBuilder.IsRequired();
                         propertyBuilder.HasComment("第三方登录唯一标识");
-                        propertyBuilder.HasColumnName(IdentityUserExtensionConsts.OpenId);
+                        propertyBuilder.HasColumnName(IdentityUserExtensionConstants.OpenId);
                     }
-                ).MapEfCoreProperty<IdentityUser, string>(IdentityUserExtensionConsts.Avatar,
+                ).MapEfCoreProperty<IdentityUser, string>(IdentityUserExtensionConstants.Avatar,
                     (_, propertyBuilder) =>
                     {
-                        propertyBuilder.HasMaxLength(IdentityUserExtensionConsts.MaxAvatarLength);
+                        propertyBuilder.HasMaxLength(IdentityUserExtensionConstants.MaxAvatarLength);
                         propertyBuilder.HasDefaultValue(string.Empty);
                         propertyBuilder.IsRequired();
                         propertyBuilder.HasComment("头像");
-                        propertyBuilder.HasColumnName(IdentityUserExtensionConsts.Avatar);
+                        propertyBuilder.HasColumnName(IdentityUserExtensionConstants.Avatar);
                     })
-                .MapEfCoreProperty<IdentityUser, int>(IdentityUserExtensionConsts.Identity,
+                .MapEfCoreProperty<IdentityUser, int>(IdentityUserExtensionConstants.Identity,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.HasDefaultValue(1);
                         propertyBuilder.IsRequired();
                         propertyBuilder.HasComment("身份标识");
-                        propertyBuilder.HasColumnName(IdentityUserExtensionConsts.Identity);
+                        propertyBuilder.HasColumnName(IdentityUserExtensionConstants.Identity);
                     });
 
             // 角色扩展信息
             ObjectExtensionManager
                 .Instance
-                .MapEfCoreProperty<IdentityRole, int>(IdentityRoleExtensionConsts.DataPermission,
+                .MapEfCoreProperty<IdentityRole, int>(IdentityRoleExtensionConstants.DataPermission,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.HasDefaultValue(0);
                         propertyBuilder.IsRequired();
                         propertyBuilder.HasComment("数据权限");
-                        propertyBuilder.HasColumnName(IdentityRoleExtensionConsts.DataPermission);
+                        propertyBuilder.HasColumnName(IdentityRoleExtensionConstants.DataPermission);
                     })
-                .MapEfCoreProperty<IdentityRole, string>(IdentityRoleExtensionConsts.CustomDataPermission,
+                .MapEfCoreProperty<IdentityRole, string>(IdentityRoleExtensionConstants.CustomDataPermission,
                     (_, propertyBuilder) =>
                     {
-                        propertyBuilder.HasMaxLength(IdentityRoleExtensionConsts.MaxCustomDataPermissionLength);
+                        propertyBuilder.HasMaxLength(IdentityRoleExtensionConstants.MaxCustomDataPermissionLength);
                         propertyBuilder.HasDefaultValue(string.Empty);
                         propertyBuilder.IsRequired();
                         propertyBuilder.HasComment("自定义数据权限");
-                        propertyBuilder.HasColumnName(IdentityRoleExtensionConsts.CustomDataPermission);
+                        propertyBuilder.HasColumnName(IdentityRoleExtensionConstants.CustomDataPermission);
                     });
 
             // 机构扩展信息
             ObjectExtensionManager
                 .Instance
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.Director,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.Director,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("院长");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxDirectorLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.Director);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxDirectorLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Director);
                     })
-                .MapEfCoreProperty<OrganizationUnit, int?>(OrganizationUnitExtensionConsts.Level,
+                .MapEfCoreProperty<OrganizationUnit, int?>(OrganizationUnitExtensionConstants.Level,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("医院等级");
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.Level);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Level);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.Phone,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.Phone,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("联系电话");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxPhoneLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.Phone);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxPhoneLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Phone);
                     })
-                .MapEfCoreProperty<OrganizationUnit, DateTime?>(OrganizationUnitExtensionConsts.EstablishmentDate,
+                .MapEfCoreProperty<OrganizationUnit, DateTime?>(OrganizationUnitExtensionConstants.EstablishmentDate,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("成立时间");
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.EstablishmentDate);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.EstablishmentDate);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.Email,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.Email,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("邮箱");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxEmailLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.Email);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxEmailLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Email);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.WebsiteUrl,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.WebsiteUrl,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("官方网站");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxWebsiteUrlLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.WebsiteUrl);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxWebsiteUrlLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.WebsiteUrl);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.Address,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.Address,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("地址");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxAddressLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.Address);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxAddressLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Address);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.PostalCode,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.PostalCode,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("邮政编码");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxPostalCodeLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.PostalCode);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxPostalCodeLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.PostalCode);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.ServiceHotline,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.ServiceHotline,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("服务热线");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxServiceHotlineLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.ServiceHotline);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxServiceHotlineLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.ServiceHotline);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.Introduction,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.Introduction,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("医院简介");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxIntroductionLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.Introduction);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxIntroductionLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Introduction);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.TrafficGuide,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.TrafficGuide,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("交通指南");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxTrafficGuideLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.TrafficGuide);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxTrafficGuideLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.TrafficGuide);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.ParkingInformation,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.ParkingInformation,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("停车信息");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxParkingInformationLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.ParkingInformation);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxParkingInformationLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.ParkingInformation);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.Describe,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.Describe,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("备注描述");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxDescribeLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.Describe);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxDescribeLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Describe);
                     })
-                .MapEfCoreProperty<OrganizationUnit, decimal?>(OrganizationUnitExtensionConsts.Latitude,
+                .MapEfCoreProperty<OrganizationUnit, decimal?>(OrganizationUnitExtensionConstants.Latitude,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("纬度");
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.Latitude);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Latitude);
                     })
-                .MapEfCoreProperty<OrganizationUnit, decimal?>(OrganizationUnitExtensionConsts.Longitude,
+                .MapEfCoreProperty<OrganizationUnit, decimal?>(OrganizationUnitExtensionConstants.Longitude,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("经度");
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.Longitude);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Longitude);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.CoverImage,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.CoverImage,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("封面图片");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxCoverImageLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.CoverImage);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxCoverImageLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.CoverImage);
                     })
-                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConsts.Facilities,
+                .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.Facilities,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("医院设施");
-                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConsts.MaxFacilitiesLength);
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.Facilities);
+                        propertyBuilder.HasMaxLength(OrganizationUnitExtensionConstants.MaxFacilitiesLength);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Facilities);
                     })
-                .MapEfCoreProperty<OrganizationUnit, DateTime?>(OrganizationUnitExtensionConsts.OperatingHours,
+                .MapEfCoreProperty<OrganizationUnit, DateTime?>(OrganizationUnitExtensionConstants.OperatingHours,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("营业时间");
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.OperatingHours);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.OperatingHours);
                     })
-                .MapEfCoreProperty<OrganizationUnit, bool?>(OrganizationUnitExtensionConsts.IsEmergencyServices,
+                .MapEfCoreProperty<OrganizationUnit, bool?>(OrganizationUnitExtensionConstants.IsEmergencyServices,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("是否提供急诊服务");
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.IsEmergencyServices);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.IsEmergencyServices);
                     })
-                .MapEfCoreProperty<OrganizationUnit, bool?>(OrganizationUnitExtensionConsts.IsInsuranceAccepted,
+                .MapEfCoreProperty<OrganizationUnit, bool?>(OrganizationUnitExtensionConstants.IsInsuranceAccepted,
                     (_, propertyBuilder) =>
                     {
                         propertyBuilder.IsRequired(false);
                         propertyBuilder.HasComment("是否接受医保");
-                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConsts.IsInsuranceAccepted);
+                        propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.IsInsuranceAccepted);
                     });
         });
     }

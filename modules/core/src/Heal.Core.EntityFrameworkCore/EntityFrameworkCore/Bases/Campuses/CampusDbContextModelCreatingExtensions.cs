@@ -36,31 +36,31 @@ public static class CampusDbContextModelCreatingExtensions
             b.Property(x => x.ShortName)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.ShortName))
-                .HasMaxLength(CampusConsts.MaxShortNameLength)
+                .HasMaxLength(CampusConstants.MaxShortNameLength)
                 .HasComment("简称");
 
             b.Property(x => x.Building)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.Building))
-                .HasMaxLength(CampusConsts.MaxBuildingLength)
+                .HasMaxLength(CampusConstants.MaxBuildingLength)
                 .HasComment("所在大楼");
 
             b.Property(x => x.Floor)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.Floor))
-                .HasMaxLength(CampusConsts.MaxFloorLength)
+                .HasMaxLength(CampusConstants.MaxFloorLength)
                 .HasComment("所在楼层");
 
             b.Property(x => x.RoomNumber)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.RoomNumber))
-                .HasMaxLength(CampusConsts.MaxRoomNumberLength)
+                .HasMaxLength(CampusConstants.MaxRoomNumberLength)
                 .HasComment("所在房间");
 
             b.Property(x => x.Address)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.Address))
-                .HasMaxLength(CampusConsts.MaxAddressLength)
+                .HasMaxLength(CampusConstants.MaxAddressLength)
                 .HasComment("所在详细地址");
 
             b.Property(x => x.Capacity)
@@ -71,55 +71,55 @@ public static class CampusDbContextModelCreatingExtensions
             b.Property(x => x.Phone)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.Phone))
-                .HasMaxLength(CampusConsts.MaxPhoneLength)
+                .HasMaxLength(CampusConstants.MaxPhoneLength)
                 .HasComment("联系电话");
 
             b.Property(x => x.Email)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.Email))
-                .HasMaxLength(CampusConsts.MaxEmailLength)
+                .HasMaxLength(CampusConstants.MaxEmailLength)
                 .HasComment("联系邮箱");
 
             b.Property(x => x.HeadOfCampus)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.HeadOfCampus))
-                .HasMaxLength(CampusConsts.MaxHeadOfCampusLength)
+                .HasMaxLength(CampusConstants.MaxHeadOfCampusLength)
                 .HasComment("院区负责人");
 
             b.Property(x => x.HeadOfCampusPhone)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.HeadOfCampusPhone))
-                .HasMaxLength(CampusConsts.MaxHeadOfCampusPhoneLength)
+                .HasMaxLength(CampusConstants.MaxHeadOfCampusPhoneLength)
                 .HasComment("院区负责人电话");
 
             b.Property(x => x.HeadOfCampusEmail)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.HeadOfCampusEmail))
-                .HasMaxLength(CampusConsts.MaxHeadOfCampusEmailLength)
+                .HasMaxLength(CampusConstants.MaxHeadOfCampusEmailLength)
                 .HasComment("院区负责人邮箱");
 
             b.Property(x => x.Website)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.Website))
-                .HasMaxLength(CampusConsts.MaxWebsiteLength)
+                .HasMaxLength(CampusConstants.MaxWebsiteLength)
                 .HasComment("院区网站");
 
             b.Property(x => x.ServicesOffered)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.ServicesOffered))
-                .HasMaxLength(CampusConsts.MaxServicesOfferedLength)
+                .HasMaxLength(CampusConstants.MaxServicesOfferedLength)
                 .HasComment("院区提供的服务");
 
             b.Property(x => x.EmergencyContact)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.EmergencyContact))
-                .HasMaxLength(CampusConsts.MaxEmergencyContactLength)
+                .HasMaxLength(CampusConstants.MaxEmergencyContactLength)
                 .HasComment("紧急联系人名称");
 
             b.Property(x => x.EmergencyPhone)
                 .IsRequired(false)
                 .HasColumnName(nameof(Campus.EmergencyPhone))
-                .HasMaxLength(CampusConsts.MaxEmergencyPhoneLength)
+                .HasMaxLength(CampusConstants.MaxEmergencyPhoneLength)
                 .HasComment("紧急联系人电话");
 
             b.HasOne(e => e.OrganizationUnit)

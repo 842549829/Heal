@@ -29,8 +29,8 @@ public class DepartmentService(
         CancellationToken cancellationToken = default)
     {
         var clockNow = Clock.Now;
-        var code = await sequenceManager.PadNumberWithZerosAsync(DepartmentConsts.Code,
-            OrganizationUnitExtensionConsts.CodeDefaultLength, cancellationToken);
+        var code = await sequenceManager.PadNumberWithZerosAsync(DepartmentConstants.Code,
+            OrganizationUnitExtensionConstants.CodeDefaultLength, cancellationToken);
         var organizationId =
             await organizationManager.GetOrganizationIdAsync(input.OrganizationCode, cancellationToken);
         var entity = new Department(

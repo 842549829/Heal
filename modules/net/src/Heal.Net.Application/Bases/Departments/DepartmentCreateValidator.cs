@@ -20,88 +20,88 @@ public class DepartmentCreateValidator: ValidationBase<DepartmentCreateDto>
         // 验证名称
         RuleFor(x => x.Name)
             .NotNull()
-            .WithMessage(FieldIsRequiredFormatLocalized(LocalizedTextsConsts.Name))
-            .Length(1, NameConsts.MaxLength)
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.Name, 1, NameConsts.MaxLength));
+            .WithMessage(FieldIsRequiredFormatLocalized(LocalizedTextsConstants.Name))
+            .Length(1, NameConstants.MaxLength)
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.Name, 1, NameConstants.MaxLength));
         
           // 验证编码
         RuleFor(x => x.OrganizationCode)
             .NotNull()
-            .WithMessage(FieldIsRequiredFormatLocalized(LocalizedTextsConsts.OrganizationCode))
-            .Length(1, CodeConsts.MaxLength)
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.OrganizationCode, 1, CodeConsts.MaxLength));
+            .WithMessage(FieldIsRequiredFormatLocalized(LocalizedTextsConstants.OrganizationCode))
+            .Length(1, CodeConstants.MaxLength)
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.OrganizationCode, 1, CodeConstants.MaxLength));
 
         // 验证描述
         RuleFor(x => x.Describe)
-            .Length(1, DescribeConsts.MaxLength)
+            .Length(1, DescribeConstants.MaxLength)
             .When(x => !string.IsNullOrEmpty(x.Describe)) // 当字段不为空时才进行长度验证
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.Describe, 1, CodeConsts.MaxLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.Describe, 1, CodeConstants.MaxLength));
 
         // 验证简称
         RuleFor(x => x.ShortName)
-            .Length(1, DepartmentConsts.MaxShortNameLength)
+            .Length(1, DepartmentConstants.MaxShortNameLength)
             .When(x => !string.IsNullOrEmpty(x.ShortName))
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.ShortName, 1, DepartmentConsts.MaxShortNameLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.ShortName, 1, DepartmentConstants.MaxShortNameLength));
 
         // 验证所在大楼
         RuleFor(x => x.Building)
-            .Length(1, DepartmentConsts.MaxBuildingLength)
+            .Length(1, DepartmentConstants.MaxBuildingLength)
             .When(x => !string.IsNullOrEmpty(x.Building)) // 当字段不为空时才进行长度验证
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.Building, 1, DepartmentConsts.MaxBuildingLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.Building, 1, DepartmentConstants.MaxBuildingLength));
 
         // 验证所在楼层
         RuleFor(x => x.Floor)
-            .Length(1, DepartmentConsts.MaxFloorLength)
+            .Length(1, DepartmentConstants.MaxFloorLength)
             .When(x => !string.IsNullOrEmpty(x.Floor))
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.Floor, 1, DepartmentConsts.MaxFloorLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.Floor, 1, DepartmentConstants.MaxFloorLength));
 
         // 验证所在房间号
         RuleFor(x => x.RoomNumber)
-            .Length(1, DepartmentConsts.MaxRoomNumberLength)
+            .Length(1, DepartmentConstants.MaxRoomNumberLength)
             .When(x => !string.IsNullOrEmpty(x.RoomNumber))
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.RoomNumber, 1, DepartmentConsts.MaxRoomNumberLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.RoomNumber, 1, DepartmentConstants.MaxRoomNumberLength));
 
         // 验证地址
         RuleFor(x => x.Address)
-            .Length(1, DepartmentConsts.MaxAddressLength)
+            .Length(1, DepartmentConstants.MaxAddressLength)
             .When(x => !string.IsNullOrEmpty(x.Address))
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.Address, 1, DepartmentConsts.MaxAddressLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.Address, 1, DepartmentConstants.MaxAddressLength));
 
         // 验证联系电话
         RuleFor(x => x.Phone)
-            .Length(1, DepartmentConsts.MaxPhoneLength)
+            .Length(1, DepartmentConstants.MaxPhoneLength)
             .When(x => !string.IsNullOrEmpty(x.Phone))
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.Phone, 1, DepartmentConsts.MaxPhoneLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.Phone, 1, DepartmentConstants.MaxPhoneLength));
 
         // 验证联系邮箱
         RuleFor(x => x.Email)
-            .Length(1, DepartmentConsts.MaxEmailLength)
+            .Length(1, DepartmentConstants.MaxEmailLength)
             .When(x => !string.IsNullOrEmpty(x.Email))
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.Email, 1, DepartmentConsts.MaxEmailLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.Email, 1, DepartmentConstants.MaxEmailLength));
 
         // 验证网站
         RuleFor(x => x.Website)
-            .Length(1, DepartmentConsts.MaxWebsiteLength)
+            .Length(1, DepartmentConstants.MaxWebsiteLength)
             .When(x => !string.IsNullOrEmpty(x.Website))
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.Website, 1, DepartmentConsts.MaxWebsiteLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.Website, 1, DepartmentConstants.MaxWebsiteLength));
 
         // 验证提供的服务
         RuleFor(x => x.ServicesOffered)
-            .Length(1, DepartmentConsts.MaxServicesOfferedLength)
+            .Length(1, DepartmentConstants.MaxServicesOfferedLength)
             .When(x => !string.IsNullOrEmpty(x.ServicesOffered))
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.ServicesOffered, 1, DepartmentConsts.MaxServicesOfferedLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.ServicesOffered, 1, DepartmentConstants.MaxServicesOfferedLength));
 
         // 验证紧急联系人
         RuleFor(x => x.EmergencyContact)
-            .Length(1, DepartmentConsts.MaxEmergencyContactLength)
+            .Length(1, DepartmentConstants.MaxEmergencyContactLength)
             .When(x => !string.IsNullOrEmpty(x.EmergencyContact))
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.EmergencyContact, 1, DepartmentConsts.MaxEmergencyContactLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.EmergencyContact, 1, DepartmentConstants.MaxEmergencyContactLength));
 
         // 验证紧急联系电话
         RuleFor(x => x.EmergencyPhone)
-            .Length(1, DepartmentConsts.MaxEmergencyPhoneLength)
+            .Length(1, DepartmentConstants.MaxEmergencyPhoneLength)
             .When(x => !string.IsNullOrEmpty(x.EmergencyPhone))
-            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConsts.EmergencyPhone, 1, DepartmentConsts.MaxEmergencyPhoneLength));
+            .WithMessage(FieldLengthFormatLocalized(LocalizedTextsConstants.EmergencyPhone, 1, DepartmentConstants.MaxEmergencyPhoneLength));
 
     }
 }

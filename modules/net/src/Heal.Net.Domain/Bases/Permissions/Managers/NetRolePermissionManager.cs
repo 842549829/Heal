@@ -379,7 +379,7 @@ public class NetRolePermissionManager(
             noTagsView,
             canTo
         );
-        var tag = extra.GetProperty<int?>(PermissionDefinitionConsts.Tag) ?? 0;
+        var tag = extra.GetProperty<int?>(PermissionDefinitionConstants.Tag) ?? 0;
         permission.SetTag(tag);
         return permission;
     }
@@ -433,7 +433,7 @@ public class NetRolePermissionManager(
             noTagsView,
             canTo
         );
-        var tag = extra.GetProperty<int?>(PermissionDefinitionConsts.Tag) ?? 0;
+        var tag = extra.GetProperty<int?>(PermissionDefinitionConstants.Tag) ?? 0;
         permissionTree.SetTag(tag);
         return permissionTree;
     }
@@ -464,23 +464,23 @@ public class NetRolePermissionManager(
         bool? CanTo
     ) ExtractPermissionProperties(string permissionName,string displayName, IHasExtraProperties extra)
     {
-        var path = extra.GetProperty<string?>(PermissionDefinitionConsts.Path) ?? permissionName;
-        var component = extra.GetProperty<string?>(PermissionDefinitionConsts.Component) ?? path;
+        var path = extra.GetProperty<string?>(PermissionDefinitionConstants.Path) ?? permissionName;
+        var component = extra.GetProperty<string?>(PermissionDefinitionConstants.Component) ?? path;
 
-        var permissionType = (PermissionType?)extra.GetProperty<int?>(PermissionDefinitionConsts.Type) ?? PermissionType.Menu;
-        var name = extra.GetProperty<string?>(PermissionDefinitionConsts.Name);
-        var redirect = extra.GetProperty<string?>(PermissionDefinitionConsts.Redirect);
-        var alias = extra.GetProperty<string?>(PermissionDefinitionConsts.Alias);
-        var hidden = extra.GetProperty<bool?>(PermissionDefinitionConsts.Hidden);
-        var alwaysShow = extra.GetProperty<bool?>(PermissionDefinitionConsts.AlwaysShow);
-        var icon = extra.GetProperty<string?>(PermissionDefinitionConsts.Icon);
-        var noCache = extra.GetProperty<bool?>(PermissionDefinitionConsts.NoCache);
-        var breadcrumb = extra.GetProperty<bool?>(PermissionDefinitionConsts.Breadcrumb);
-        var affix = extra.GetProperty<bool?>(PermissionDefinitionConsts.Affix);
-        var activeMenu = extra.GetProperty<string?>(PermissionDefinitionConsts.ActiveMenu);
-        var noTagsView = extra.GetProperty<bool?>(PermissionDefinitionConsts.NoTagsView);
-        var canTo = extra.GetProperty<bool?>(PermissionDefinitionConsts.CanTo);
-        var t = extra.GetProperty<string?>(PermissionDefinitionConsts.Title);
+        var permissionType = (PermissionType?)extra.GetProperty<int?>(PermissionDefinitionConstants.Type) ?? PermissionType.Menu;
+        var name = extra.GetProperty<string?>(PermissionDefinitionConstants.Name);
+        var redirect = extra.GetProperty<string?>(PermissionDefinitionConstants.Redirect);
+        var alias = extra.GetProperty<string?>(PermissionDefinitionConstants.Alias);
+        var hidden = extra.GetProperty<bool?>(PermissionDefinitionConstants.Hidden);
+        var alwaysShow = extra.GetProperty<bool?>(PermissionDefinitionConstants.AlwaysShow);
+        var icon = extra.GetProperty<string?>(PermissionDefinitionConstants.Icon);
+        var noCache = extra.GetProperty<bool?>(PermissionDefinitionConstants.NoCache);
+        var breadcrumb = extra.GetProperty<bool?>(PermissionDefinitionConstants.Breadcrumb);
+        var affix = extra.GetProperty<bool?>(PermissionDefinitionConstants.Affix);
+        var activeMenu = extra.GetProperty<string?>(PermissionDefinitionConstants.ActiveMenu);
+        var noTagsView = extra.GetProperty<bool?>(PermissionDefinitionConstants.NoTagsView);
+        var canTo = extra.GetProperty<bool?>(PermissionDefinitionConstants.CanTo);
+        var t = extra.GetProperty<string?>(PermissionDefinitionConstants.Title);
         var title = Deserialize(displayName);
         if (t != null)
         {

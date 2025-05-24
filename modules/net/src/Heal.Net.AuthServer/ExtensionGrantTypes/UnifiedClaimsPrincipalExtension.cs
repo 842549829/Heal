@@ -19,12 +19,12 @@ namespace Heal.Net.AuthServer.ExtensionGrantTypes
         {
             foreach (var claim in context.Principal.Claims)
             {
-                if (claim.Type == HealClaimTypesConsts.DataPermission)
+                if (claim.Type == HealClaimTypesConstants.DataPermission)
                 {
                     claim.SetDestinations(OpenIddictConstants.Destinations.AccessToken, OpenIddictConstants.Destinations.IdentityToken);
                 }
 
-                if (claim.Type == HealClaimTypesConsts.CustomDataPermission)
+                if (claim.Type == HealClaimTypesConstants.CustomDataPermission)
                 {
                     claim.SetDestinations(OpenIddictConstants.Destinations.AccessToken, OpenIddictConstants.Destinations.IdentityToken);
                 }

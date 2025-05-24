@@ -465,16 +465,16 @@ public class HealPatAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
         // will be used to create an id_token, a token or a code.
         var principal = await SignInManager.CreateUserPrincipalAsync(user);
 
-        var rememberMe = request.GetParameter(LoginConsts.RememberMe).ToString();
+        var rememberMe = request.GetParameter(LoginConstants.RememberMe).ToString();
         if (!rememberMe.IsNullOrWhiteSpace() && bool.TryParse(rememberMe, out var rememberMeValue) && rememberMeValue)
         {
             var claim = new Claim(AbpClaimTypes.RememberMe, true.ToString()).SetDestinations(OpenIddictConstants.Destinations.AccessToken);
             principal.Identities.FirstOrDefault()?.AddClaim(claim);
         }
-        var organizationCode = request.GetParameter(LoginConsts.Organization).ToString();
+        var organizationCode = request.GetParameter(LoginConstants.Organization).ToString();
         if (!organizationCode.IsNullOrWhiteSpace())
         {
-            var claim = new Claim(HealClaimTypesConsts.OrganizationCode, organizationCode).SetDestinations(OpenIddictConstants.Destinations.AccessToken);
+            var claim = new Claim(HealClaimTypesConstants.OrganizationCode, organizationCode).SetDestinations(OpenIddictConstants.Destinations.AccessToken);
             principal.Identities.FirstOrDefault()?.AddClaim(claim);
         }
 
@@ -537,5 +537,5 @@ public class HealPatAppExtensionGrant : AbpOpenIdDictControllerBase, ITokenExten
     /// <summary>
     /// 自定义登录方式名称
     /// </summary>
-    public string Name => ApplicationProgramConsts.ApplicationName;
+    public string Name => ApplicationProgramConstants.ApplicationName;
 }

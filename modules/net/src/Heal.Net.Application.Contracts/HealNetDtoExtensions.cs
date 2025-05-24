@@ -47,9 +47,9 @@ public static class HealNetDtoExtensions
                 typeof(UpdateProfileDto) 
             ];
             ObjectExtensionManager.Instance
-                .AddOrUpdateProperty<string>(userTypes, IdentityUserExtensionConsts.OpenId)
-                .AddOrUpdateProperty<string>([.. userTypes, typeof(UserAvatarUpdateDto)], IdentityUserExtensionConsts.Avatar)
-                .AddOrUpdateProperty<int>(userTypes, IdentityUserExtensionConsts.Identity);
+                .AddOrUpdateProperty<string>(userTypes, IdentityUserExtensionConstants.OpenId)
+                .AddOrUpdateProperty<string>([.. userTypes, typeof(UserAvatarUpdateDto)], IdentityUserExtensionConstants.Avatar)
+                .AddOrUpdateProperty<int>(userTypes, IdentityUserExtensionConstants.Identity);
 
             // Role
             Type[] roleTypes = [
@@ -60,8 +60,8 @@ public static class HealNetDtoExtensions
                 typeof(RoleUpdateDto)
             ];
             ObjectExtensionManager.Instance
-                .AddOrUpdateProperty<int>(roleTypes, IdentityRoleExtensionConsts.DataPermission)
-                .AddOrUpdateProperty<string>(roleTypes, IdentityRoleExtensionConsts.CustomDataPermission);
+                .AddOrUpdateProperty<int>(roleTypes, IdentityRoleExtensionConstants.DataPermission)
+                .AddOrUpdateProperty<string>(roleTypes, IdentityRoleExtensionConstants.CustomDataPermission);
 
             // Organization
             Type[] organizationTypes = [ typeof(OrganizationCreateDto),
@@ -69,26 +69,26 @@ public static class HealNetDtoExtensions
                 typeof(OrganizationTreeDto),
                 typeof(OrganizationUpdateDto)];
             ObjectExtensionManager.Instance
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.Director)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.Level)
-                .AddOrUpdateProperty<DateTime?>(organizationTypes, OrganizationUnitExtensionConsts.EstablishmentDate)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.Phone)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.Email)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.WebsiteUrl)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.Address)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.PostalCode)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.ServiceHotline)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.Introduction)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.TrafficGuide)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.ParkingInformation)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.Describe)
-                .AddOrUpdateProperty<decimal?>(organizationTypes, OrganizationUnitExtensionConsts.Latitude)
-                .AddOrUpdateProperty<decimal?>(organizationTypes, OrganizationUnitExtensionConsts.Longitude)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.CoverImage)
-                .AddOrUpdateProperty<DateTime?>(organizationTypes, OrganizationUnitExtensionConsts.OperatingHours)
-                .AddOrUpdateProperty<bool?>(organizationTypes, OrganizationUnitExtensionConsts.IsEmergencyServices)
-                .AddOrUpdateProperty<bool?>(organizationTypes, OrganizationUnitExtensionConsts.IsInsuranceAccepted)
-                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConsts.Facilities);
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.Director)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.Level)
+                .AddOrUpdateProperty<DateTime?>(organizationTypes, OrganizationUnitExtensionConstants.EstablishmentDate)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.Phone)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.Email)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.WebsiteUrl)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.Address)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.PostalCode)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.ServiceHotline)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.Introduction)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.TrafficGuide)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.ParkingInformation)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.Describe)
+                .AddOrUpdateProperty<decimal?>(organizationTypes, OrganizationUnitExtensionConstants.Latitude)
+                .AddOrUpdateProperty<decimal?>(organizationTypes, OrganizationUnitExtensionConstants.Longitude)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.CoverImage)
+                .AddOrUpdateProperty<DateTime?>(organizationTypes, OrganizationUnitExtensionConstants.OperatingHours)
+                .AddOrUpdateProperty<bool?>(organizationTypes, OrganizationUnitExtensionConstants.IsEmergencyServices)
+                .AddOrUpdateProperty<bool?>(organizationTypes, OrganizationUnitExtensionConstants.IsInsuranceAccepted)
+                .AddOrUpdateProperty<string?>(organizationTypes, OrganizationUnitExtensionConstants.Facilities);
         });
     }
 }

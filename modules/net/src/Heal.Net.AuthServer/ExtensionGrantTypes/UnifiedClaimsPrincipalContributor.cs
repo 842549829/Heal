@@ -29,12 +29,12 @@ public class UnifiedClaimsPrincipalContributor : IAbpClaimsPrincipalContributor,
         {
             // 获取数据权限
             var (dataPermission, dataPermissionCode) = await GetDataPermission(context);
-            identity.AddClaim(new Claim(HealClaimTypesConsts.DataPermission, dataPermission.GetHashCode().ToString()));
+            identity.AddClaim(new Claim(HealClaimTypesConstants.DataPermission, dataPermission.GetHashCode().ToString()));
             foreach (var code in dataPermissionCode)
             {
                 if (!string.IsNullOrEmpty(code))
                 {
-                    identity.AddClaim(new Claim(HealClaimTypesConsts.CustomDataPermission, code));
+                    identity.AddClaim(new Claim(HealClaimTypesConstants.CustomDataPermission, code));
                 }
             }
         }

@@ -45,7 +45,7 @@ public class NetDataPermissionManager(IRoleExtensionRepository roleExtensionRepo
         // 按优先级判断数据权限
         foreach (var permission in priorityPermissions)
         {
-            if (roleExtensions.Any(d => d.GetProperty<DataPermission>(IdentityRoleExtensionConsts.DataPermission) == permission))
+            if (roleExtensions.Any(d => d.GetProperty<DataPermission>(IdentityRoleExtensionConstants.DataPermission) == permission))
             {
                 return (permission, []);
             }
@@ -55,9 +55,9 @@ public class NetDataPermissionManager(IRoleExtensionRepository roleExtensionRepo
         var customValuesSet = new HashSet<string>();
         foreach (var role in roleExtensions)
         {
-            if (role.GetProperty<DataPermission>(IdentityRoleExtensionConsts.DataPermission) == DataPermission.Custom)
+            if (role.GetProperty<DataPermission>(IdentityRoleExtensionConstants.DataPermission) == DataPermission.Custom)
             {
-                var customDataPermissions = role.GetProperty<string>(IdentityRoleExtensionConsts.CustomDataPermission);
+                var customDataPermissions = role.GetProperty<string>(IdentityRoleExtensionConstants.CustomDataPermission);
                 if (customDataPermissions == null)
                 {
                     continue;

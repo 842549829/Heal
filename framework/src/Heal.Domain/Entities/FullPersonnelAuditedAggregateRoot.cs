@@ -102,7 +102,7 @@ public abstract class FullPersonnelAuditedAggregateRoot<TKey>(TKey id, string na
         IdCardType = idCardType;
         IdCardNo = idCardNo;
 
-        if (IdCardType != IdCardConsts.IdCardType01)
+        if (IdCardType != IdCardConstants.IdCardType01)
         {
             return;
         }

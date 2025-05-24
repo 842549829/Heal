@@ -108,13 +108,13 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             });
         }
 
-        if (await _openIddictScopeRepository.FindByNameAsync(ApplicationProgramConsts.ApplicationName) == null)
+        if (await _openIddictScopeRepository.FindByNameAsync(ApplicationProgramConstants.ApplicationName) == null)
         {
             await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor
             {
-                Name = ApplicationProgramConsts.ApplicationName,
-                DisplayName = $"{ApplicationProgramConsts.ApplicationName} API",
-                Resources = { ApplicationProgramConsts.ApplicationName }
+                Name = ApplicationProgramConstants.ApplicationName,
+                DisplayName = $"{ApplicationProgramConstants.ApplicationName} API",
+                Resources = { ApplicationProgramConstants.ApplicationName }
             });
         }
     }
@@ -132,10 +132,10 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             OpenIddictConstants.Permissions.Scopes.Profile,
             OpenIddictConstants.Permissions.Scopes.Roles,
             "Heal",
-            ApplicationProgramConsts.ApplicationName,
-            HealClaimTypesConsts.DataPermission,
-            HealClaimTypesConsts.CustomDataPermission,
-            HealClaimTypesConsts.OrganizationCode
+            ApplicationProgramConstants.ApplicationName,
+            HealClaimTypesConstants.DataPermission,
+            HealClaimTypesConstants.CustomDataPermission,
+            HealClaimTypesConstants.OrganizationCode
         };
 
         var configurationSection = _configuration.GetSection("OpenIddict:Applications");
@@ -196,7 +196,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             var healNetAppClientRootUrl = configurationSection["HealNetApp:RootUrl"]!.EnsureEndsWith('/');
             var healNetAppClientScopes = new List<string>();
             healNetAppClientScopes.AddRange(commonScopes);
-            healNetAppClientScopes.Add(ApplicationProgramConsts.ApplicationName);
+            healNetAppClientScopes.Add(ApplicationProgramConstants.ApplicationName);
             await CreateApplicationAsync(
                 applicationType: OpenIddictConstants.ApplicationTypes.Web,
                 name: healNetAppClientId,
@@ -213,9 +213,9 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                     OpenIddictConstants.GrantTypes.ClientCredentials,
                     OpenIddictConstants.GrantTypes.RefreshToken,
                     OpenIddictConstants.GrantTypes.DeviceCode,
-                    TokenRequestGrantTypeConsts.HealNetPassword, // 添加HealNetPassword客户端
-                    TokenRequestGrantTypeConsts.HealPatPassword,
-                    TokenRequestGrantTypeConsts.HealDocPassword
+                    TokenRequestGrantTypeConstants.HealNetPassword, // 添加HealNetPassword客户端
+                    TokenRequestGrantTypeConstants.HealPatPassword,
+                    TokenRequestGrantTypeConstants.HealDocPassword
                 },
                 scopes: healNetAppClientScopes,
                 redirectUri: $"{healNetAppClientRootUrl}signin-oidc",

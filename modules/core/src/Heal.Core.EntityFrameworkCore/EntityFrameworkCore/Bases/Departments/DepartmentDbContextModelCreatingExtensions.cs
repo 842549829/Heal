@@ -40,7 +40,7 @@ public static class DepartmentDbContextModelCreatingExtensions
             b.Property(x => x.ShortName)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.ShortName))
-                .HasMaxLength(DepartmentConsts.MaxShortNameLength)
+                .HasMaxLength(DepartmentConstants.MaxShortNameLength)
                 .HasComment("简称");
 
             b.Property(x => x.DepartmentTypeId)
@@ -51,25 +51,25 @@ public static class DepartmentDbContextModelCreatingExtensions
             b.Property(x => x.Building)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.Building))
-                .HasMaxLength(DepartmentConsts.MaxBuildingLength)
+                .HasMaxLength(DepartmentConstants.MaxBuildingLength)
                 .HasComment("所在大楼");
 
             b.Property(x => x.Floor)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.Floor))
-                .HasMaxLength(DepartmentConsts.MaxFloorLength)
+                .HasMaxLength(DepartmentConstants.MaxFloorLength)
                 .HasComment("所在楼层");
 
             b.Property(x => x.RoomNumber)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.RoomNumber))
-                .HasMaxLength(DepartmentConsts.MaxRoomNumberLength)
+                .HasMaxLength(DepartmentConstants.MaxRoomNumberLength)
                 .HasComment("所在房间");
 
             b.Property(x => x.Address)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.Address))
-                .HasMaxLength(DepartmentConsts.MaxAddressLength)
+                .HasMaxLength(DepartmentConstants.MaxAddressLength)
                 .HasComment("所在详细地址");
 
             b.Property(x => x.Capacity)
@@ -80,55 +80,55 @@ public static class DepartmentDbContextModelCreatingExtensions
             b.Property(x => x.Phone)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.Phone))
-                .HasMaxLength(DepartmentConsts.MaxPhoneLength)
+                .HasMaxLength(DepartmentConstants.MaxPhoneLength)
                 .HasComment("联系电话");
 
             b.Property(x => x.Email)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.Email))
-                .HasMaxLength(DepartmentConsts.MaxEmailLength)
+                .HasMaxLength(DepartmentConstants.MaxEmailLength)
                 .HasComment("联系邮箱");
 
             b.Property(x => x.HeadOfDepartment)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.HeadOfDepartment))
-                .HasMaxLength(DepartmentConsts.MaxHeadOfDepartmentLength)
+                .HasMaxLength(DepartmentConstants.MaxHeadOfDepartmentLength)
                 .HasComment("科室负责人");
 
             b.Property(x => x.HeadOfDepartmentPhone)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.HeadOfDepartmentPhone))
-                .HasMaxLength(DepartmentConsts.MaxHeadOfDepartmentPhoneLength)
+                .HasMaxLength(DepartmentConstants.MaxHeadOfDepartmentPhoneLength)
                 .HasComment("科室负责人电话");
 
             b.Property(x => x.HeadOfDepartmentEmail)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.HeadOfDepartmentEmail))
-                .HasMaxLength(DepartmentConsts.MaxHeadOfDepartmentEmailLength)
+                .HasMaxLength(DepartmentConstants.MaxHeadOfDepartmentEmailLength)
                 .HasComment("科室负责人邮箱");
 
             b.Property(x => x.Website)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.Website))
-                .HasMaxLength(DepartmentConsts.MaxWebsiteLength)
+                .HasMaxLength(DepartmentConstants.MaxWebsiteLength)
                 .HasComment("科室网站");
 
             b.Property(x => x.ServicesOffered)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.ServicesOffered))
-                .HasMaxLength(DepartmentConsts.MaxServicesOfferedLength)
+                .HasMaxLength(DepartmentConstants.MaxServicesOfferedLength)
                 .HasComment("科室提供的服务");
 
             b.Property(x => x.EmergencyContact)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.EmergencyContact))
-                .HasMaxLength(DepartmentConsts.MaxEmergencyContactLength)
+                .HasMaxLength(DepartmentConstants.MaxEmergencyContactLength)
                 .HasComment("紧急联系人名称");
 
             b.Property(x => x.EmergencyPhone)
                 .IsRequired(false)
                 .HasColumnName(nameof(Department.EmergencyPhone))
-                .HasMaxLength(DepartmentConsts.MaxEmergencyPhoneLength)
+                .HasMaxLength(DepartmentConstants.MaxEmergencyPhoneLength)
                 .HasComment("紧急联系人电话");
 
             b.HasOne(e => e.Campuses)

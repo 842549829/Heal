@@ -81,10 +81,10 @@ public class ValidationBase<T> : AbstractValidator<T>
         const string defaultFormat = "The length of field '{0}' is not within the allowed range. The allowed range is {1}-{2}.";
 
         // 获取本地化值
-        var localizedValue = L[LocalizedTextsConsts.FieldLengthValidation].Value;
+        var localizedValue = L[LocalizedTextsConstants.FieldLengthValidation].Value;
 
         // 如果本地化值为空或无效，则使用默认值
-        var format = string.IsNullOrEmpty(localizedValue) || localizedValue == LocalizedTextsConsts.FieldLengthValidation ? defaultFormat : localizedValue;
+        var format = string.IsNullOrEmpty(localizedValue) || localizedValue == LocalizedTextsConstants.FieldLengthValidation ? defaultFormat : localizedValue;
         var keyValue = L[key].Value;
 
         // 格式化字符串
@@ -102,10 +102,10 @@ public class ValidationBase<T> : AbstractValidator<T>
         const string defaultFormat = "The field '{0}' is required.";
 
         // 获取本地化值
-        var localizedValue = L[LocalizedTextsConsts.FieldIsRequired].Value;
+        var localizedValue = L[LocalizedTextsConstants.FieldIsRequired].Value;
 
         // 如果本地化值为空或无效，则使用默认值
-        var format = string.IsNullOrEmpty(localizedValue) || localizedValue == LocalizedTextsConsts.FieldIsRequired ? defaultFormat : localizedValue;
+        var format = string.IsNullOrEmpty(localizedValue) || localizedValue == LocalizedTextsConstants.FieldIsRequired ? defaultFormat : localizedValue;
         var keyValue = L[key].Value;
 
         // 格式化字符串

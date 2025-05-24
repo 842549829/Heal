@@ -28,8 +28,8 @@ public class CampusAppService(
     public async Task<CampusDto> CreateAsync(CampusCreateDto input, CancellationToken cancellationToken = default)
     {
         var clockNow = Clock.Now;
-        var code = await sequenceManager.PadNumberWithZerosAsync(CampusConsts.Code,
-            OrganizationUnitExtensionConsts.CodeDefaultLength, cancellationToken);
+        var code = await sequenceManager.PadNumberWithZerosAsync(CampusConstants.Code,
+            OrganizationUnitExtensionConstants.CodeDefaultLength, cancellationToken);
         var organizationId =
             await organizationManager.GetOrganizationIdAsync(input.OrganizationCode, cancellationToken);
         var entity = new Campus(

@@ -36,19 +36,19 @@ public static class DoctorManagementDbContextModelCreatingExtensions
             b.Property(x => x.Education)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.Education))
-                .HasMaxLength(DoctorConsts.MaxEducationLength)
+                .HasMaxLength(DoctorConstants.MaxEducationLength)
                 .HasComment("学历");
 
             b.Property(x => x.MedicalSchool)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.MedicalSchool))
-                .HasMaxLength(DoctorConsts.MaxMedicalSchoolLength)
+                .HasMaxLength(DoctorConstants.MaxMedicalSchoolLength)
                 .HasComment("毕业院校");
 
             b.Property(x => x.Major)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.Major))
-                .HasMaxLength(DoctorConsts.MaxMajorLength)
+                .HasMaxLength(DoctorConstants.MaxMajorLength)
                 .HasComment("专业");
 
             b.Property(x => x.GraduationDate)
@@ -59,19 +59,19 @@ public static class DoctorManagementDbContextModelCreatingExtensions
             b.Property(x => x.Avatar)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.Avatar))
-                .HasMaxLength(DoctorConsts.MaxAvatarLength)
+                .HasMaxLength(DoctorConstants.MaxAvatarLength)
                 .HasComment("头像");
 
             b.Property(x => x.PracticeLicenseNumber)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.PracticeLicenseNumber))
-                .HasMaxLength(DoctorConsts.MaxPracticeLicenseNumberLength)
+                .HasMaxLength(DoctorConstants.MaxPracticeLicenseNumberLength)
                 .HasComment("执业许可证编号");
 
             b.Property(x => x.PracticeScope)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.PracticeScope))
-                .HasMaxLength(DoctorConsts.MaxPracticeScopeLength)
+                .HasMaxLength(DoctorConstants.MaxPracticeScopeLength)
                 .HasComment("执业范围");
 
             b.Property(x => x.PracticeValidityDate)
@@ -82,67 +82,67 @@ public static class DoctorManagementDbContextModelCreatingExtensions
             b.Property(x => x.PracticeExperience)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.PracticeExperience))
-                .HasMaxLength(DoctorConsts.MaxPracticeExperienceLength)
+                .HasMaxLength(DoctorConstants.MaxPracticeExperienceLength)
                 .HasComment("执业经历");
 
             b.Property(x => x.WorkAgeLimit)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.WorkAgeLimit))
-                .HasMaxLength(DoctorConsts.MaxWorkAgeLimitLength)
+                .HasMaxLength(DoctorConstants.MaxWorkAgeLimitLength)
                 .HasComment("工作年限");
 
             b.Property(x => x.Specialization)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.Specialization))
-                .HasMaxLength(DoctorConsts.MaxSpecializationLength)
+                .HasMaxLength(DoctorConstants.MaxSpecializationLength)
                 .HasComment("专长");
 
             b.Property(x => x.ResearchResult)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.ResearchResult))
-                .HasMaxLength(DoctorConsts.MaxResearchResultLength)
+                .HasMaxLength(DoctorConstants.MaxResearchResultLength)
                 .HasComment("科研成果");
 
             b.Property(x => x.ProfessionalClassify)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.ProfessionalClassify))
-                .HasMaxLength(DoctorConsts.MaxProfessionalClassifyLength)
+                .HasMaxLength(DoctorConstants.MaxProfessionalClassifyLength)
                 .HasComment("专业分类");
 
             b.Property(x => x.EvaluateClassify)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.EvaluateClassify))
-                .HasMaxLength(DoctorConsts.MaxEvaluateClassifyLength)
+                .HasMaxLength(DoctorConstants.MaxEvaluateClassifyLength)
                 .HasComment("评价分类");
 
             b.Property(x => x.WorkClassify)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.WorkClassify))
-                .HasMaxLength(DoctorConsts.MaxWorkClassifyLength)
+                .HasMaxLength(DoctorConstants.MaxWorkClassifyLength)
                 .HasComment("工作分类");
 
             b.Property(x => x.PracticeClassify)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.PracticeClassify))
-                .HasMaxLength(DoctorConsts.MaxPracticeClassifyLength)
+                .HasMaxLength(DoctorConstants.MaxPracticeClassifyLength)
                 .HasComment("执业分类");
 
             b.Property(x => x.PeculiarityClassify)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.PeculiarityClassify))
-                .HasMaxLength(DoctorConsts.MaxPeculiarityClassifyLength)
+                .HasMaxLength(DoctorConstants.MaxPeculiarityClassifyLength)
                 .HasComment("类型(按特质类型分类)");
 
             b.Property(x => x.ScopeClassify)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.ScopeClassify))
-                .HasMaxLength(DoctorConsts.MaxScopeClassifyLength)
+                .HasMaxLength(DoctorConstants.MaxScopeClassifyLength)
                 .HasComment("类型(按范围分类)");
 
             b.Property(x => x.OccupationClassify)
                 .IsRequired(false)
                 .HasColumnName(nameof(Doctor.OccupationClassify))
-                .HasMaxLength(DoctorConsts.MaxOccupationClassifyLength)
+                .HasMaxLength(DoctorConstants.MaxOccupationClassifyLength)
                 .HasComment("类型(按职业分类)");
 
             b.Property(x => x.IsOpenLogin)

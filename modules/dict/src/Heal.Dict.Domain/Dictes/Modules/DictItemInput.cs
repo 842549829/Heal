@@ -10,5 +10,5 @@ public class DictItemInput : PagedAndSortedAndFilterInput
     /// <summary>
     /// 字典类型Id
     /// </summary>
-    public required Guid DictTypeId { get; set; }
+    public required Guid DictTypeId { get; init; }
 }

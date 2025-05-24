@@ -65,19 +65,19 @@ public static class HealDictDbContextModelBuilderExtensions
             b.Property(x => x.Alias)
                 .IsRequired(false)
                 .HasColumnName(nameof(DictItem.Alias))
-                .HasMaxLength(DictItemConsts.MaxAliasLength)
+                .HasMaxLength(DictItemConstants.MaxAliasLength)
                 .HasComment("别名");
 
             b.Property(x => x.Style)
                 .IsRequired(false)
                 .HasColumnName(nameof(DictItem.Style))
-                .HasMaxLength(DictItemConsts.MaxStyleLength)
+                .HasMaxLength(DictItemConstants.MaxStyleLength)
                 .HasComment("样式");
 
             b.Property(x => x.Key)
                 .IsRequired()
                 .HasColumnName(nameof(DictItem.Key))
-                .HasMaxLength(DictItemConsts.MaxKeyLength)
+                .HasMaxLength(DictItemConstants.MaxKeyLength)
                 .HasComment("键");
 
         });
