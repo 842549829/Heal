@@ -1,15 +1,12 @@
-﻿using Heal.Core.Domain.Bases.Campuses.Entities;
-using Heal.Core.Domain.Bases.Departments.Entities;
+﻿using Heal.Core.Domain.Bases.Departments.Entities;
 using Heal.Core.Domain.Bases.Departments.Repositories;
 using Heal.Core.Domain.Bases.Organizations.Managers;
 using Heal.Domain.Managers;
 using Heal.Domain.Shared.Constants;
 using Heal.Domain.Shared.Enums;
 using Heal.Domain.Shared.Extensions;
-using Heal.Net.Application.Contracts.Bases.Campuses.Dto;
 using Heal.Net.Application.Contracts.Bases.Departments;
 using Heal.Net.Application.Contracts.Bases.Departments.Dto;
-using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 
 namespace Heal.Net.Application.Bases.Departments;
