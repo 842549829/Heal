@@ -6,6 +6,11 @@
 public static class DepartmentConsts
 {
     /// <summary>
+    /// 院区标识
+    /// </summary>
+    public const string Code = "Departments";
+    
+    /// <summary>
     /// 简称最大长度
     /// </summary>
     public static int MaxShortNameLength { get; set; } = 32;
