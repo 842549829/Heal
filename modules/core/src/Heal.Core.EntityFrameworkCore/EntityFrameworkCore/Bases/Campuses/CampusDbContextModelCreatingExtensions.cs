@@ -122,9 +122,9 @@ public static class CampusDbContextModelCreatingExtensions
                 .HasMaxLength(CampusConstants.MaxEmergencyPhoneLength)
                 .HasComment("紧急联系人电话");
 
-            //b.HasOne(e => e.OrganizationUnit)
-            //    .WithMany()
-            //    .HasForeignKey(e => e.OrganizationId);
+            b.HasOne(e => e.OrganizationUnit)
+                .WithMany()
+                .HasForeignKey(e => e.OrganizationId);
         });
     }
 }
