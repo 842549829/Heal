@@ -131,9 +131,9 @@ public static class DepartmentDbContextModelCreatingExtensions
                 .HasMaxLength(DepartmentConstants.MaxEmergencyPhoneLength)
                 .HasComment("紧急联系人电话");
 
-            //b.HasOne(e => e.Campus)
-            //    .WithMany()
-            //    .HasForeignKey(e => e.CampusId);
+            b.HasOne(e => e.Campus)
+                .WithMany()
+                .HasForeignKey(e => e.CampusId);
 
             //b.HasOne(e => e.DepartmentType)
             //    .WithMany()

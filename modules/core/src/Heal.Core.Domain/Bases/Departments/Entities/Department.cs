@@ -1,4 +1,5 @@
-﻿using Heal.Domain.Entities;
+﻿using Heal.Core.Domain.Bases.Campuses.Entities;
+using Heal.Domain.Entities;
 
 namespace Heal.Core.Domain.Bases.Departments.Entities;
 
@@ -263,9 +264,9 @@ public class Department(Guid id, string name, string code) : FullParentHealthcar
     ///// 科室类型
     ///// </summary>
     //public DepartmentType DepartmentType { get; init; } = null!;
-    
-    ///// <summary>
-    ///// 所在院区
-    ///// </summary>
-    //public Campus Campus { get; init; } = null!;
+
+    /// <summary>
+    /// 所在院区
+    /// </summary>
+    public Campus Campus { get; init; } = null!;
 }
