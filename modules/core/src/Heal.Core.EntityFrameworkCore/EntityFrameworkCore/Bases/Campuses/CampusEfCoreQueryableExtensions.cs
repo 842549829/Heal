@@ -1,5 +1,4 @@
 ﻿using Heal.Core.Domain.Bases.Campuses.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace Heal.Core.EntityFrameworkCore.EntityFrameworkCore.Bases.Campuses;
 
@@ -16,6 +15,7 @@ public static class CampusEfCoreQueryableExtensions
     /// <returns>Campus</returns>
     public static IQueryable<Campus> IncludeDetails(this IQueryable<Campus> queryable, bool include = true)
     {
-        return include? queryable.Include(x => x.OrganizationUnit) : queryable;
+        return queryable;
+        // return include? queryable.Include(x => x.OrganizationUnit) : queryable;
     }
 }
