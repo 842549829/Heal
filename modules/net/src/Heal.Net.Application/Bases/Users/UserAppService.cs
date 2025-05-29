@@ -1,4 +1,6 @@
-﻿using Heal.Net.Application.Contracts.Bases.Roles.Dtos;
+﻿using Heal.Core.Domain.Bases.Roles.Managers;
+using Heal.Core.Domain.Bases.Users.Managers;
+using Heal.Net.Application.Contracts.Bases.Roles.Dtos;
 using Heal.Net.Application.Contracts.Bases.Users;
 using Heal.Net.Application.Contracts.Bases.Users.Dtos;
 using Microsoft.AspNetCore.Identity;
@@ -15,13 +17,11 @@ namespace Heal.Net.Application.Bases.Users;
 /// 用户服务
 /// </summary>
 /// <param name="userManager">用户管理</param>
-/// <param name="userRepository">用户仓储</param>
-/// <param name="roleRepository">角色仓储</param>
+/// <param name="roleManager">角色管理</param>
 /// <param name="identityOptions">配置</param>
 public class UserAppService(
-    IdentityUserManager userManager,
-    IIdentityUserRepository userRepository,
-    IIdentityRoleRepository roleRepository,
+    HealUserManager userManager,
+    HealRoleManager roleManager,
     IOptions<IdentityOptions> identityOptions)
     : HealNetAppService, IUserAppService
 {
@@ -42,8 +42,12 @@ public class UserAppService(
         input.MapExtraPropertiesTo(user);
         (await userManager.CreateAsync(user, input.Password)).CheckErrors();
         await UpdateUserByInput(user, input);
-        (await userManager.UpdateAsync(user)).CheckErrors();
-        await userManager.AddToOrganizationUnitAsync(user.Id, input.OrganizationId);
+        //(await userManager.UpdateAsync(user)).CheckErrors();
+        //var organizationRelationshipList = input.OrganizationRelationship.GetRelationshipsByType(OrganizationType.Organization);
+        //foreach (var relationship in organizationRelationshipList)
+        //{
+        //    await userManager.AddToOrganizationUnitAsync(user.Id, relationship.Id);
+        //}
         await CurrentUnitOfWork?.SaveChangesAsync()!;
         return ObjectMapper.Map<IdentityUser, IdentityUserDto>(user);
     }
@@ -75,7 +79,7 @@ public class UserAppService(
             (await userManager.AddPasswordAsync(user, input.Password)).CheckErrors();
         }
 
-        await userManager.SetOrganizationUnitsAsync(user.Id, input.OrganizationId);
+        //await userManager.SetOrganizationUnitsAsync(user.Id, input.OrganizationId);
 
         await CurrentUnitOfWork?.SaveChangesAsync()!;
 
@@ -101,8 +105,8 @@ public class UserAppService(
     /// <returns>用户列表</returns>
     public async Task<PagedResultDto<IdentityUserDto>> GetListAsync(GetIdentityUsersInput input)
     {
-        var count = await userRepository.GetCountAsync(input.Filter);
-        var list = await userRepository.GetListAsync(input.Sorting, input.MaxResultCount, input.SkipCount,
+        var count = await userManager.GetCountAsync(input.Filter);
+        var list = await userManager.GetListAsync(input.Sorting, input.MaxResultCount, input.SkipCount,
             input.Filter);
         return new PagedResultDto<IdentityUserDto>(
             count,
@@ -138,7 +142,7 @@ public class UserAppService(
     /// <returns>用户角色</returns>
     public async Task<ListResultDto<IdentityRoleDto>> GetRolesAsync(Guid id)
     {
-        var roles = await userRepository.GetRolesAsync(id);
+        var roles = await userManager.GetRolesAsync(id);
         return new ListResultDto<IdentityRoleDto>(
             ObjectMapper.Map<List<IdentityRole>, List<IdentityRoleDto>>(roles));
     }
@@ -149,7 +153,7 @@ public class UserAppService(
     /// <returns>用户角色</returns>
     public async Task<ListResultDto<IdentityRoleDto>> GetAssignableRolesAsync()
     {
-        var list = await roleRepository.GetListAsync();
+        var list = await roleManager.GetListAsync();
         return new ListResultDto<IdentityRoleDto>(
             ObjectMapper.Map<List<IdentityRole>, List<IdentityRoleDto>>(list));
     }
@@ -164,7 +168,7 @@ public class UserAppService(
     {
         var user = await userManager.GetByIdAsync(id);
         (await userManager.SetRolesAsync(user, input.RoleNames)).CheckErrors();
-        await userRepository.UpdateAsync(user);
+        await userManager.UpdateAsync(user);
     }
 
     /// <summary>
@@ -197,7 +201,7 @@ public class UserAppService(
     /// <param name="id">用户id</param>
     public async Task<IdentityUserDetailDto> GetAsyncDetail(Guid id)
     {
-        var identityUser = await userRepository.GetAsync(id);
+        var identityUser = await userManager.GetAsync(id);
         var detail = ObjectMapper.Map<IdentityUser, IdentityUserDetailDto>(identityUser);
         var organization = await userManager.GetOrganizationUnitsAsync(identityUser);
         detail.OrganizationId = organization.FirstOrDefault()?.Id;
@@ -234,7 +238,7 @@ public class UserAppService(
     /// <returns>用户列表</returns>
     public async Task<IEnumerable<SearchUserOutputDto>> GetUsersAsync(SearchUserListInputDto input)
     {
-        var list = await userRepository.GetListAsync(input.Sorting, input.MaxResultCount, 0,
+        var list = await userManager.GetListAsync(input.Sorting, input.MaxResultCount, 0,
             input.Filter);
         var users = list.Select(u => new SearchUserOutputDto()
         {
@@ -251,7 +255,7 @@ public class UserAppService(
     /// <returns>角色列表</returns>
     public async Task<IEnumerable<RoleDto>> GetRoleAsync()
     {
-        var list = await roleRepository.GetListAsync(null, 999);
+        var list = await roleManager.GetListAsync(null, 999);
         return ObjectMapper.Map<List<IdentityRole>, IEnumerable<RoleDto>>(list);
     }
 

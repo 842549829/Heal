@@ -1,4 +1,5 @@
-﻿using Heal.Net.Application.Contracts.Bases.Roles;
+﻿using Heal.Core.Domain.Bases.Roles.Managers;
+using Heal.Net.Application.Contracts.Bases.Roles;
 using Heal.Net.Application.Contracts.Bases.Roles.Dtos;
 using Heal.Net.Domain.Bases.Permissions.Managers;
 using Heal.Net.Domain.Bases.Permissions.Modules;
@@ -16,11 +17,9 @@ namespace Heal.Net.Application.Bases.Roles;
 /// 角色服务
 /// </summary>
 /// <param name="roleManager">角色管理</param>
-/// <param name="roleRepository">角色仓储</param>
 /// <param name="netPermissionManager">角色权限管理</param>
 public class RoleAppService(
-    IdentityRoleManager roleManager,
-    IIdentityRoleRepository roleRepository,
+    HealRoleManager roleManager,
     INetRolePermissionManager netPermissionManager)
     : HealNetAppService, IRoleAppService
 {
@@ -103,9 +102,9 @@ public class RoleAppService(
     /// <returns>角色列表</returns>
     public async Task<PagedResultDto<IdentityRoleDto>> GetListAsync(GetIdentityRolesInput input)
     {
-        var list = await roleRepository.GetListAsync(input.Sorting, input.MaxResultCount, input.SkipCount,
+        var list = await roleManager.GetListAsync(input.Sorting, input.MaxResultCount, input.SkipCount,
             input.Filter);
-        var totalCount = await roleRepository.GetCountAsync(input.Filter);
+        var totalCount = await roleManager.GetCountAsync(input.Filter);
 
         return new PagedResultDto<IdentityRoleDto>(
             totalCount,
@@ -175,7 +174,7 @@ public class RoleAppService(
     /// <returns>所有角色</returns>
     public async Task<List<string>> GetAllAsync()
     {
-        var roles = await roleRepository.GetListAsync();
+        var roles = await roleManager.GetListAsync();
         return roles.Select(a => a.Name).ToList();
     }
 }

@@ -7,8 +7,8 @@ namespace Heal.Net.Application.Contracts.Bases.Users.Dtos;
 /// </summary>
 public class UserUpdateDto : IdentityUserUpdateDto
 {
-    /// <summary>
-    /// 组织id
-    /// </summary>
-    public Guid OrganizationId { get; set; }
+    ///// <summary>
+    ///// 组织id
+    ///// </summary>
+    //public Guid OrganizationId { get; set; }
 }
