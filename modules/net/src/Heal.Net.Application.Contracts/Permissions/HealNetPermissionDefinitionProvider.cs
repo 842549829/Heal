@@ -35,8 +35,7 @@ public class HealNetPermissionDefinitionProvider : PermissionDefinitionProvider
           .WithProperty(PermissionDefinitionConstants.Title, "router.authorization")
           .WithProperty(PermissionDefinitionConstants.Icon, "vi-eos-icons:role-binding")
           .WithProperty(PermissionDefinitionConstants.AlwaysShow, true);
-        #endregion
-
+        
         #region Role
         var rolesPermission = authorizations.AddChild(HealNetPermissions.Authorizations.Roles.Default, L("DisplayName:RoleManagement"))
             .WithProviders(RolePermissionValueProvider.ProviderName)
@@ -90,7 +89,7 @@ public class HealNetPermissionDefinitionProvider : PermissionDefinitionProvider
             .WithProperty(PermissionDefinitionConstants.Path, "module")
             .WithProperty(PermissionDefinitionConstants.Component, "views/Authorization/Module/Module")
             .WithProperty(PermissionDefinitionConstants.Name, "Module")
-            .WithProperty(PermissionDefinitionConstants.Title, "module.module");
+            .WithProperty(PermissionDefinitionConstants.Title, "router.module");
 
         modulesPermission.AddChild(HealNetPermissions.Authorizations.Modules.Create, L("DisplayName:Create"))
             .WithProviders(RolePermissionValueProvider.ProviderName)
@@ -113,7 +112,7 @@ public class HealNetPermissionDefinitionProvider : PermissionDefinitionProvider
             .WithProperty(PermissionDefinitionConstants.Path, "menu")
             .WithProperty(PermissionDefinitionConstants.Component, "views/Authorization/Menu/Menu")
             .WithProperty(PermissionDefinitionConstants.Name, "Menu")
-            .WithProperty(PermissionDefinitionConstants.Title, "menu.menu");
+            .WithProperty(PermissionDefinitionConstants.Title, "router.menu");
 
         menusPermission.AddChild(HealNetPermissions.Authorizations.Menus.Create, L("DisplayName:Create"))
             .WithProviders(RolePermissionValueProvider.ProviderName)
@@ -127,6 +126,148 @@ public class HealNetPermissionDefinitionProvider : PermissionDefinitionProvider
             .WithProviders(RolePermissionValueProvider.ProviderName)
             .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
             .WithProperty(PermissionDefinitionConstants.Path, "delete");
+        #endregion
+        #endregion
+
+        #region Organizations
+        var organizations = basicsGroup.AddPermission(HealNetPermissions.Organizations.Defaults, L("DisplayName:Organizations"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Menu)
+            .WithProperty(PermissionDefinitionConstants.Path, "/organizations")
+            .WithProperty(PermissionDefinitionConstants.Component, "#")
+            .WithProperty(PermissionDefinitionConstants.Redirect, "/organizations/organization")
+            .WithProperty(PermissionDefinitionConstants.Name, "Organizations")
+            .WithProperty(PermissionDefinitionConstants.Title, "router.organization")
+            .WithProperty(PermissionDefinitionConstants.Icon, "simple-icons--awsorganizations")
+            .WithProperty(PermissionDefinitionConstants.AlwaysShow, true);
+
+        #region Organization
+        var organizationPermission = organizations.AddChild(HealNetPermissions.Organizations.Organization.Default, L("DisplayName:Institutional"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Menu)
+            .WithProperty(PermissionDefinitionConstants.Path, "organization")
+            .WithProperty(PermissionDefinitionConstants.Component, "views/Organizations/Organization/Organization")
+            .WithProperty(PermissionDefinitionConstants.Name, "Organization")
+            .WithProperty(PermissionDefinitionConstants.Title, "router.organization");
+
+        organizationPermission.AddChild(HealNetPermissions.Organizations.Organization.Create, L("DisplayName:Create"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "create");
+        organizationPermission.AddChild(HealNetPermissions.Organizations.Organization.Update, L("DisplayName:Edit"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "edit");
+        organizationPermission.AddChild(HealNetPermissions.Organizations.Organization.Delete, L("DisplayName:Delete"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "delete");
+        #endregion
+
+        #region Campuses
+        var campusesPermission = organizations.AddChild(HealNetPermissions.Organizations.Campuses.Default, L("DisplayName:Campuses"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Menu)
+            .WithProperty(PermissionDefinitionConstants.Path, "campuses")
+            .WithProperty(PermissionDefinitionConstants.Component, "views/Organizations/Campuses/Campuses")
+            .WithProperty(PermissionDefinitionConstants.Name, "Campuses")
+            .WithProperty(PermissionDefinitionConstants.Title, "router.campuses");
+
+        campusesPermission.AddChild(HealNetPermissions.Organizations.Campuses.Create, L("DisplayName:Create"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "create");
+        campusesPermission.AddChild(HealNetPermissions.Organizations.Campuses.Update, L("DisplayName:Edit"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "edit");
+        campusesPermission.AddChild(HealNetPermissions.Organizations.Campuses.Delete, L("DisplayName:Delete"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "delete");
+        #endregion
+
+        #region Department
+        var departmentPermission = organizations.AddChild(HealNetPermissions.Organizations.Department.Default, L("DisplayName:Department"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Menu)
+            .WithProperty(PermissionDefinitionConstants.Path, "department")
+            .WithProperty(PermissionDefinitionConstants.Component, "views/Organizations/Department/Department")
+            .WithProperty(PermissionDefinitionConstants.Name, "Department")
+            .WithProperty(PermissionDefinitionConstants.Title, "router.department");
+
+        departmentPermission.AddChild(HealNetPermissions.Organizations.Department.Create, L("DisplayName:Create"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "create");
+        departmentPermission.AddChild(HealNetPermissions.Organizations.Department.Update, L("DisplayName:Edit"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "edit");
+        departmentPermission.AddChild(HealNetPermissions.Organizations.Department.Delete, L("DisplayName:Delete"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "delete");
+        #endregion
+        #endregion
+
+        #region Personnel
+        var personnels = basicsGroup.AddPermission(HealNetPermissions.Personnel.Defaults, L("DisplayName:Personnel"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Menu)
+            .WithProperty(PermissionDefinitionConstants.Path, "/personnel")
+            .WithProperty(PermissionDefinitionConstants.Component, "#")
+            .WithProperty(PermissionDefinitionConstants.Redirect, "/organizations/personnel")
+            .WithProperty(PermissionDefinitionConstants.Name, "Personnel")
+            .WithProperty(PermissionDefinitionConstants.Title, "router.personnel")
+            .WithProperty(PermissionDefinitionConstants.Icon, "fa--user-md")
+            .WithProperty(PermissionDefinitionConstants.AlwaysShow, true);
+
+        #region Doctors
+        var doctorPermission = personnels.AddChild(HealNetPermissions.Personnel.Doctors.Default, L("DisplayName:Doctor"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Menu)
+            .WithProperty(PermissionDefinitionConstants.Path, "doctor")
+            .WithProperty(PermissionDefinitionConstants.Component, "views/Personnel/Doctor/Doctor")
+            .WithProperty(PermissionDefinitionConstants.Name, "Doctor")
+            .WithProperty(PermissionDefinitionConstants.Title, "router.doctor");
+
+        doctorPermission.AddChild(HealNetPermissions.Personnel.Doctors.Create, L("DisplayName:Create"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "create");
+        doctorPermission.AddChild(HealNetPermissions.Personnel.Doctors.Update, L("DisplayName:Edit"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "edit");
+        doctorPermission.AddChild(HealNetPermissions.Personnel.Doctors.Delete, L("DisplayName:Delete"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "delete");
+        #endregion
+
+        #region Patients
+        var patientPermission = personnels.AddChild(HealNetPermissions.Personnel.Patients.Default, L("DisplayName:Patient"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Menu)
+            .WithProperty(PermissionDefinitionConstants.Path, "patient")
+            .WithProperty(PermissionDefinitionConstants.Component, "views/Personnel/Patient/Patient")
+            .WithProperty(PermissionDefinitionConstants.Name, "Patient")
+            .WithProperty(PermissionDefinitionConstants.Title, "router.patient");
+
+        patientPermission.AddChild(HealNetPermissions.Personnel.Patients.Create, L("DisplayName:Create"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "create");
+        patientPermission.AddChild(HealNetPermissions.Personnel.Patients.Update, L("DisplayName:Edit"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "edit");
+        patientPermission.AddChild(HealNetPermissions.Personnel.Patients.Delete, L("DisplayName:Delete"))
+            .WithProviders(RolePermissionValueProvider.ProviderName)
+            .WithProperty(PermissionDefinitionConstants.Type, PermissionType.Button)
+            .WithProperty(PermissionDefinitionConstants.Path, "delete");
+        #endregion
         #endregion
     }
 

@@ -178,9 +178,9 @@ public static class HealNetPermissions
     }
 
     /// <summary>
-    /// 基础数据管理
+    /// 组织管理
     /// </summary>
-    public static class Basics
+    public static class Organizations
     {
         /// <summary>
         /// 默认权限
@@ -237,6 +237,95 @@ public static class HealNetPermissions
             /// 删除
             /// </summary>
             public const string Delete = Default + ".Delete";
+        }
+
+        /// <summary>
+        /// 科室
+        /// </summary>
+        public static class Department
+        {
+            /// <summary>
+            /// 默认权限
+            /// </summary>
+            public const string Default = Defaults + ".Departments";
+
+            /// <summary>
+            /// 新增
+            /// </summary>
+            public const string Create = Default + ".Create";
+
+            /// <summary>
+            /// 修改
+            /// </summary>
+            public const string Update = Default + ".Update";
+
+            /// <summary>
+            /// 删除
+            /// </summary>
+            public const string Delete = Default + ".Delete";
+        }
+    }
+
+    /// <summary>
+    /// 人员管理
+    /// </summary>
+    public static class Personnel
+    {
+        /// <summary>
+        /// 默认权限
+        /// </summary>
+        public const string Defaults = GroupName + ".Personnel";
+
+        /// <summary>
+        /// 医生
+        /// </summary>
+        public static class Doctors
+        {
+            /// <summary>
+            /// 默认权限
+            /// </summary>
+            public const string Default = Defaults + ".Doctors";
+
+            /// <summary>
+            /// 新增
+            /// </summary>
+            public const string Create = Default + ".Create";
+
+            /// <summary>
+            /// 删除
+            /// </summary>
+            public const string Delete = Default + ".Delete";
+
+            /// <summary>
+            /// 修改
+            /// </summary>
+            public const string Update = Default + ".Update";
+        }
+
+        /// <summary>
+        /// 患者
+        /// </summary>
+        public static class Patients
+        {
+            /// <summary>
+            /// 默认权限
+            /// </summary>
+            public const string Default = Defaults + ".Patients";
+
+            /// <summary>
+            /// 新增
+            /// </summary>
+            public const string Create = Default + ".Create";
+
+            /// <summary>
+            /// 删除
+            /// </summary>
+            public const string Delete = Default + ".Delete";
+
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string Update = Default + ".Update";
         }
     }
 }

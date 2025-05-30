@@ -64,6 +64,13 @@
     "FieldLengthValidation": "The length of field '{0}' is not within the allowed range. The allowed range is {1}-{2}.",
     "FieldIsRequired": "The field '{0}' cannot be empty.",
     "ModuleAlreadyExists": "Module already exists.",
+    "L:Heal,DisplayName:Organizations": "Organizations Management",
+    "L:Heal,DisplayName:Personnel": "Personnel Management",
+    "L:Heal,DisplayName:Institutional": "Institutional Management",
+    "L:Heal,DisplayName:Campuses": "Campuses Management",
+    "L:Heal,DisplayName:Department": "Department Management",
+    "L:Heal,DisplayName:Doctor": "Doctor Management",
+    "L:Heal,DisplayName:Patient": "Patient Management",
     "L:Heal,DisplayName:ModuleManagement": "Module Management",
     "L:Heal,DisplayName:Authorization": "Permission Management",
     "L:Heal,DisplayName:RoleManagement": "Role Management",
@@ -85,7 +92,12 @@
     "router.authorization": "Permission Management",
     "router.role": "Role Management",
     "router.user": "User Management",
-    "module.module": "Module Management",
-    "menu.menu": "Menu Management"
+    "router.module": "Module Management",
+    "router.menu": "Menu Management",
+    "router.organization": "Institutional Management",
+    "router.campuses": "Campuses Management",
+    "router.department": "Department Management",
+    "router.doctor": "Doctor Management",
+    "router.patient": "Patient Management"
   }
 }

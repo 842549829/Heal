@@ -64,6 +64,13 @@
     "FieldLengthValidation": "字段 '{0}' 的长度不在允许范围内，允许范围为 {1}-{2}。",
     "FieldIsRequired": "字段 '{0}' 不能为空",
     "ModuleAlreadyExists": "模块已经存在",
+    "L:Heal,DisplayName:Organizations": "组织管理",
+    "L:Heal,DisplayName:Institutional": "机构管理",
+    "L:Heal,DisplayName:Campuses": "院区管理",
+    "L:Heal,DisplayName:Department": "科室管理",
+    "L:Heal,DisplayName:Personnel": "人员管理",
+    "L:Heal,DisplayName:Doctor": "医生管理",
+    "L:Heal,DisplayName:Patient": "患者管理",
     "L:Heal,DisplayName:Authorization": "权限管理",
     "L:Heal,DisplayName:ModuleManagement": "模块管理",
     "L:Heal,DisplayName:RoleManagement": "角色管理",
@@ -86,6 +93,11 @@
     "router.role": "角色管理",
     "router.user": "用户管理",
     "module.module": "模块管理",
-    "menu.menu": "菜单管理"
+    "menu.menu": "菜单管理",
+    "router.organization": "机构管理",
+    "router.campuses": "院区管理",
+    "router.department": "科室管理",
+    "router.doctor": "医生管理",
+    "router.patient": "患者管理"
   }
 }

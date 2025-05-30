@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Localization\Heal\en.json" />
+    <None Remove="Localization\Heal\en.json~RF11b05eb.TMP" />
     <None Remove="Localization\Heal\zh-Hans.json" />
   </ItemGroup>
 
