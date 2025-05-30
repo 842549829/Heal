@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging.Abstractions;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 
 namespace Heal.Dict.Domain.Data;
@@ -11,6 +12,11 @@ namespace Heal.Dict.Domain.Data;
 /// </summary>
 public class HealDictDbMigrationService : ITransientDependency
 {
+    /// <summary>
+    /// Data seeder
+    /// </summary>
+    private readonly IDataSeeder _dataSeeder;
+
     /// <summary>
     /// Logger
     /// </summary>
@@ -25,10 +31,12 @@ public class HealDictDbMigrationService : ITransientDependency
     /// Tenant repository
     /// </summary>
     /// <param name="dbSchemaMigrators">dbSchemaMigrators</param>
+    /// <param name="dataSeeder">Data seeder</param>
     public HealDictDbMigrationService(
-        IEnumerable<IHealDictDbSchemaMigrator> dbSchemaMigrators)
+        IEnumerable<IHealDictDbSchemaMigrator> dbSchemaMigrators, IDataSeeder dataSeeder)
     {
         _dbSchemaMigrators = dbSchemaMigrators;
+        _dataSeeder = dataSeeder;
 
         Logger = NullLogger<HealDictDbMigrationService>.Instance;
     }
@@ -49,6 +57,7 @@ public class HealDictDbMigrationService : ITransientDependency
         Logger.LogInformation("Started database migrations...");
 
         await MigrateDatabaseSchemaAsync();
+        await SeedDataAsync();
 
         Logger.LogInformation($"Successfully completed host database migrations.");
 
@@ -199,5 +208,14 @@ public class HealDictDbMigrationService : ITransientDependency
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Seed data.
+    /// </summary>
+    /// <returns>Task</returns>
+    private async Task SeedDataAsync()
+    {
+        await _dataSeeder.SeedAsync(new DataSeedContext());
     }
 }

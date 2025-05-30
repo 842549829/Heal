@@ -40,6 +40,7 @@
     "ChoosePhoto": "选择照片",
     "F:Heal": "业务模块管理",
     "L:Heal,F:Net": "基础业务模块",
+    "L:Heal,F:Dict": "字典管理模块",
     "L:AbpIdentity,Permission:IdentityManagement": "用户模块管理",
     "L:AbpSettingManagement,Permission:SettingManagement": "配置模块管理",
     "L:AbpFeatureManagement,Permission:FeatureManagement": "功能模块管理",
@@ -83,6 +84,9 @@
     "L:Heal,DisplayName:WorkFlowCreateManagement": "创建工作流",
     "L:Heal,DisplayName:AgentManagement": "代理商管理",
     "L:Heal,DisplayName:MerchantManagement": "商户管理",
+    "L:Heal,DisplayName:Icd": "ICD管理",
+    "L:Heal,DisplayName:Icd10": "ICD10管理",
+    "L:Heal,DisplayName:Icd9": "ICD9管理",
     "L:Heal,DisplayName:Create": "创建",
     "L:Heal,DisplayName:Edit": "编辑",
     "L:Heal,DisplayName:Start": "发起",
@@ -99,6 +103,9 @@
     "router.department": "科室管理",
     "router.doctor": "医生管理",
     "router.patient": "患者管理",
-    "router.personnel": "人员管理"
+    "router.personnel": "人员管理",
+    "router.icd": "ICD管理",
+    "router.icd10": "ICD10管理",
+    "router.icd9": "ICD9管理"
   }
 }

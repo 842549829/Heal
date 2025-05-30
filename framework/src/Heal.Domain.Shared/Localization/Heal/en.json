@@ -40,6 +40,7 @@
     "ChoosePhoto": "Choose Photo",
     "F:Heal": "Business Module Management",
     "L:Heal,F:Net": "Base Business Module Management",
+    "L:Heal,F:Dict": "Dictionary Module Management",
     "L:AbpIdentity,Permission:IdentityManagement": "User Module Management",
     "L:AbpSettingManagement,Permission:SettingManagement": "Configuration Module Management",
     "L:AbpFeatureManagement,Permission:FeatureManagement": "Feature Module Management",
@@ -83,6 +84,9 @@
     "L:Heal,DisplayName:WorkFlowCreateManagement": "Create Workflow",
     "L:Heal,DisplayName:AgentManagement": "Agent Management",
     "L:Heal,DisplayName:MerchantManagement": "Merchant Management",
+    "L:Heal,DisplayName:Icd": "ICD Management",
+    "L:Heal,DisplayName:Icd10": "ICD10 Management",
+    "L:Heal,DisplayName:Icd9": "ICD9 Management",
     "L:Heal,DisplayName:Create": "Create",
     "L:Heal,DisplayName:Edit": "Edit",
     "L:Heal,DisplayName:Start": "Start",
@@ -99,6 +103,9 @@
     "router.department": "Department Management",
     "router.doctor": "Doctor Management",
     "router.patient": "Patient Management",
-    "router.personnel": "Personnel Management"
+    "router.personnel": "Personnel Management",
+    "router.icd": "ICD Management",
+    "router.icd10": "ICD10 Management",
+    "router.icd9": "ICD9 Management"
   }
 }
