@@ -1,4 +1,5 @@
 ﻿using Heal.Core.Domain.Bases.Campuses.Entities;
+using Heal.Core.Domain.Bases.Departments.Entities;
 using Heal.Core.Domain.Bases.Users.Entities;
 using Heal.Core.EntityFrameworkCore.EntityFrameworkCore;
 using Heal.Core.EntityFrameworkCore.EntityFrameworkCore.Bases.Campuses;
@@ -109,6 +110,11 @@ public class HealNetDbContext :
     public DbSet<Campus> Campuses { get; set; }
 
     /// <summary>
+    /// Department
+    /// </summary>
+    public DbSet<Department> Departments { get; set; }
+
+    /// <summary>
     /// Doctor
     /// </summary>
     public DbSet<Doctor> Doctors { get; set; }
@@ -117,6 +123,16 @@ public class HealNetDbContext :
     /// Patient
     /// </summary>
     public DbSet<Patient> Patients { get; set; }
+
+    /// <summary>
+    /// UserCampus
+    /// </summary>
+    public DbSet<UserCampus> UserCampuses { get; set; }
+
+    /// <summary>
+    /// UserDepartment
+    /// </summary>
+    public DbSet<UserDepartment> UserDepartments { get; set; }
 
     #endregion
 

@@ -126,5 +126,32 @@ public static class CampusDbContextModelCreatingExtensions
                 .WithMany()
                 .HasForeignKey(e => e.OrganizationId);
         });
+
+        builder.Entity<UserCampus>(b =>
+        { 
+            b.ToTable(AbpCommonDbProperties.DbTablePrefix + nameof(UserCampus), AbpCommonDbProperties.DbSchema, x =>
+            {
+                x.HasComment("用户院区");
+            });
+
+            b.ConfigureByConventionByFullHealthcareAuditedAggregateRoot<Guid>();
+
+            b.Property(x => x.UserId)
+                .IsRequired()
+                .HasColumnName(nameof(UserCampus.UserId))
+                .HasComment("用户Id");
+
+            b.Property(x => x.CampusId)
+                .IsRequired()
+                .HasColumnName(nameof(UserCampus.CampusId))
+                .HasComment("院区Id");
+
+            b.Property(x => x.TenantId)
+                .IsRequired(false)
+                .HasColumnName(nameof(UserCampus.TenantId))
+                .HasComment("租户Id");
+
+            b.HasKey(x => new { x.UserId, x.CampusId });
+        });
     }
 }

@@ -139,5 +139,32 @@ public static class DepartmentDbContextModelCreatingExtensions
             //    .WithMany()
             //    .HasForeignKey(e => e.DepartmentTypeId);
         });
+
+        builder.Entity<UserDepartment>(b =>
+        {
+            b.ToTable(AbpCommonDbProperties.DbTablePrefix + nameof(UserDepartment), AbpCommonDbProperties.DbSchema, x =>
+            {
+                x.HasComment("用户科室");
+            });
+
+            b.ConfigureByConventionByFullHealthcareAuditedAggregateRoot<Guid>();
+
+            b.Property(x => x.UserId)
+                .IsRequired()
+                .HasColumnName(nameof(UserDepartment.UserId))
+                .HasComment("用户Id");
+
+            b.Property(x => x.DepartmentId)
+                .IsRequired()
+                .HasColumnName(nameof(UserDepartment.DepartmentId))
+                .HasComment("科室Id");
+
+            b.Property(x => x.TenantId)
+                .IsRequired(false)
+                .HasColumnName(nameof(UserDepartment.TenantId))
+                .HasComment("租户Id");
+
+            b.HasKey(x => new { x.UserId, x.DepartmentId });
+        });
     }
 }
