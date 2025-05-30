@@ -92,12 +92,13 @@
     "router.authorization": "权限管理",
     "router.role": "角色管理",
     "router.user": "用户管理",
-    "module.module": "模块管理",
-    "menu.menu": "菜单管理",
+    "router.module": "模块管理",
+    "router.menu": "菜单管理",
     "router.organization": "机构管理",
     "router.campuses": "院区管理",
     "router.department": "科室管理",
     "router.doctor": "医生管理",
-    "router.patient": "患者管理"
+    "router.patient": "患者管理",
+    "router.personnel": "人员管理"
   }
 }

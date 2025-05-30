@@ -6,6 +6,12 @@ using Volo.Abp.Localization;
 
 namespace Heal.Net.Application.Contracts.Permissions;
 
+/* 图标地址
+ * https://icon-sets.iconify.design/?query=organization
+ * 需要复制 Iconify Icon 的 SVG 源代码
+ * 比如<iconify-icon icon="eos-icons:organization" width="24" height="24"></iconify-icon> 这里的  icon="eos-icons:organization" 就是图标的标识
+ */
+
 /// <summary>
 /// 权限定义
 /// </summary>
@@ -138,7 +144,7 @@ public class HealNetPermissionDefinitionProvider : PermissionDefinitionProvider
             .WithProperty(PermissionDefinitionConstants.Redirect, "/organizations/organization")
             .WithProperty(PermissionDefinitionConstants.Name, "Organizations")
             .WithProperty(PermissionDefinitionConstants.Title, "router.organization")
-            .WithProperty(PermissionDefinitionConstants.Icon, "simple-icons--awsorganizations")
+            .WithProperty(PermissionDefinitionConstants.Icon, "eos-icons:organization")
             .WithProperty(PermissionDefinitionConstants.AlwaysShow, true);
 
         #region Organization
@@ -220,7 +226,7 @@ public class HealNetPermissionDefinitionProvider : PermissionDefinitionProvider
             .WithProperty(PermissionDefinitionConstants.Redirect, "/organizations/personnel")
             .WithProperty(PermissionDefinitionConstants.Name, "Personnel")
             .WithProperty(PermissionDefinitionConstants.Title, "router.personnel")
-            .WithProperty(PermissionDefinitionConstants.Icon, "fa--user-md")
+            .WithProperty(PermissionDefinitionConstants.Icon, "rivet-icons:user-solid")
             .WithProperty(PermissionDefinitionConstants.AlwaysShow, true);
 
         #region Doctors

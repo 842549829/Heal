@@ -98,6 +98,7 @@
     "router.campuses": "Campuses Management",
     "router.department": "Department Management",
     "router.doctor": "Doctor Management",
-    "router.patient": "Patient Management"
+    "router.patient": "Patient Management",
+    "router.personnel": "Personnel Management"
   }
 }

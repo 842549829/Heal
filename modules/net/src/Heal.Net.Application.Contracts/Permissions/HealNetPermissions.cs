@@ -185,7 +185,7 @@ public static class HealNetPermissions
         /// <summary>
         /// 默认权限
         /// </summary>
-        public const string Defaults = GroupName + ".Basics";
+        public const string Defaults = GroupName + ".Organizations";
 
         /// <summary>
         /// 院区
