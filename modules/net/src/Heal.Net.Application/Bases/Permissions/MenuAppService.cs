@@ -74,7 +74,7 @@ public class MenuAppService(IRepository<PermissionDefinitionRecord> permissionDe
         {
             Id = item.Id,
             Name = item.Name,
-            DislayName = item.DisplayName,
+            DislayName = L[item.DisplayName],
             GroupName = item.GroupName
         }).ToList();
 

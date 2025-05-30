@@ -68,7 +68,7 @@ public class ModuleAppService(IRepository<PermissionGroupDefinitionRecord> permi
         {
             Id = item.Id,
             Name = item.Name,
-            DislayName = item.DisplayName,
+            DislayName = L[item.DisplayName],
             Tag = item.GetProperty<ModuleTag?>(PermissionDefinitionConstants.Tag) ?? ModuleTag.Normal
         }).ToList();
 
