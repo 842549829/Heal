@@ -91,7 +91,7 @@ public class HealNetAuthServerModule : AbpModule
                 options.GrantTypes.Add(TokenRequestGrantTypeConstants.HealPatPassword);
             });
 
-            serverBuilder.AddProductionEncryptionAndSigningCertificate("openiddict.pfx", configuration["AuthServer:CertificatePassPhrase"]!);
+            serverBuilder.AddProductionEncryptionAndSigningCertificate("server.pfx", configuration["AuthServer:CertificatePassPhrase"]!);
             serverBuilder.SetIssuer(new Uri(configuration["AuthServer:Authority"]!));
         });
     }
