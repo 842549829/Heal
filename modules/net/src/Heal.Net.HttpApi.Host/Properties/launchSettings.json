@@ -1,4 +1,4 @@
-{
+﻿{
   "profiles": {
     "Heal.Net.HttpApi.Host": {
       "commandName": "Project",
@@ -6,7 +6,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:62513;http://localhost:62514"
+      "applicationUrl": "http://localhost:62513"
     },
     "Heal.Net.HttpApi.Host.Home": {
       "commandName": "Project",
@@ -14,7 +14,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Home"
       },
-      "applicationUrl": "https://localhost:62513;http://localhost:62514"
+      "applicationUrl": "http://localhost:62513"
     }
   }
 }
