@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Heal.Core.Domain.Bases.Organizations.Models;
 using Heal.Core.Domain.Bases.Organizations.Repositories;
+using Heal.Domain.Entities;
 using Heal.Domain.Shared.Constants;
 using System.Data;
 using System.Text;
@@ -195,6 +196,8 @@ public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext>
         foreach (var item in result)
         {
             var organizationUnit = new OrganizationUnit(item.Id, item.DisplayName, item.ParentId, item.TenantId);
+            EntityExtension.TrySetOrganizationCode(organizationUnit, item.Code);
+
             if (item.Phone != null)
             {
                 organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.Phone, item.Phone);
