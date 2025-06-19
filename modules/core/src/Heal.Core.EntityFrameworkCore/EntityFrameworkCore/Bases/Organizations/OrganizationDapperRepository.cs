@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using Heal.Core.Domain.Bases.Organizations.Models;
 using Heal.Core.Domain.Bases.Organizations.Repositories;
+using Heal.Domain.Shared.Constants;
+using System.Data;
 using System.Text;
 using Volo.Abp.Domain.Repositories.Dapper;
 using Volo.Abp.EntityFrameworkCore;
@@ -125,8 +127,7 @@ public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext>
                        )
                        SELECT DISTINCT * FROM _parent WHERE _parent.ParentId IS NULL ORDER BY `Code` LIMIT @skipCount, @maxResultCount;
                        """;
-            return (await connection.QueryAsync<OrganizationUnit>(sql,
-                queryParams, transaction)).ToList();
+            return (await QueryAsync(connection, sql, queryParams, transaction)).ToList();
         }
         else
         {
@@ -134,7 +135,7 @@ public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext>
             SetTenantIdParams(sqlCondition, queryParams);
             var sql =
                 $"SELECT * FROM `AbpOrganizationUnits` WHERE IsDeleted = 0 {sqlCondition} AND ParentId IS NULL ORDER BY `Code` LIMIT @skipCount, @maxResultCount";
-            return (await connection.QueryAsync<OrganizationUnit>(sql, queryParams, transaction)).ToList();
+            return (await QueryAsync(connection, sql, queryParams, transaction)).ToList();
         }
     }
 
@@ -152,7 +153,7 @@ public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext>
         var sqlCondition = new StringBuilder();
         SetTenantIdParams(sqlCondition, queryParams);
         var sql =
-            $"SELECT ParentId AS `Id`, COUNT(0) AS `Count` FROM AbpOrganizationUnits WHERE IsDeleted = 0 {sqlCondition} AND ParentId IN @parentIds GROUP BY ParentId";
+            $"SELECT ParentId AS `id`, COUNT(0) AS `count` FROM AbpOrganizationUnits WHERE IsDeleted = 0 {sqlCondition} AND ParentId IN @parentIds GROUP BY ParentId";
         var connection = await GetDbConnectionAsync();
         var transaction = await GetDbTransactionAsync();
         return (await connection.QueryAsync<OrganizationWithChildCount>(sql, queryParams,
@@ -176,5 +177,116 @@ public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext>
         {
             sqlCondition.Append($" AND {alias}TenantId IS NULL");
         }
+    }
+
+    /// <summary>
+    /// 组织机构Mapper
+    /// </summary>
+    /// <param name="connection">连接</param>
+    /// <param name="sql">sql</param>
+    /// <param name="queryParams">参数</param>
+    /// <param name="transaction">事务</param>
+    /// <returns>结果</returns>
+    private static async Task<IEnumerable<OrganizationUnit>> QueryAsync(IDbConnection connection, string sql, DynamicParameters queryParams, IDbTransaction? transaction)
+    {
+        var result = await connection.QueryAsync<dynamic>(sql, queryParams, transaction);
+
+        var organizationUnitList = new List<OrganizationUnit>();
+        foreach (var item in result)
+        {
+            var organizationUnit = new OrganizationUnit(item.Id, item.DisplayName, item.ParentId, item.TenantId);
+            if (item.Phone != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.Phone, item.Phone);
+            }
+
+            if (item.EstablishmentDate != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.EstablishmentDate, item.EstablishmentDate);
+            }
+
+            if (item.Email != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.Email, item.Email);
+            }
+
+            if (item.WebsiteUrl != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.WebsiteUrl, item.WebsiteUrl);
+            }
+
+            if (item.Address != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.Address, item.Address);
+            }
+
+            if (item.PostalCode != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.PostalCode, item.PostalCode);
+            }
+
+            if (item.ServiceHotline != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.ServiceHotline, item.ServiceHotline);
+            }
+
+            if (item.Introduction != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.Introduction, item.Introduction);
+            }
+
+            if (item.TrafficGuide != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.TrafficGuide, item.TrafficGuide);
+            }
+
+            if (item.ParkingInformation != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.ParkingInformation, item.ParkingInformation);
+            }
+
+            if (item.Describe != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.Describe, item.Describe);
+            }
+
+            if (item.Latitude != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.Latitude, item.Latitude);
+            }
+
+            if (item.Longitude != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.Longitude, item.Longitude);
+            }
+
+            if (item.CoverImage != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.CoverImage, item.CoverImage);
+            }
+
+            if (item.Facilities != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.Facilities, item.Facilities);
+            }
+
+            if (item.OperatingHours != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.OperatingHours, item.OperatingHours);
+            }
+
+            if (item.IsEmergencyServices != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.IsEmergencyServices, item.IsEmergencyServices);
+            }
+
+            if (item.IsInsuranceAccepted != null)
+            {
+                organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.IsInsuranceAccepted, item.IsInsuranceAccepted);
+            }
+
+            organizationUnitList.Add(organizationUnit);
+        }
+        return organizationUnitList;
     }
 }

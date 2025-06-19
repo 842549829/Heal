@@ -5,4 +5,4 @@
 /// </summary>
 /// <param name="Id">Id</param>
 /// <param name="Count">数量</param>
-public record OrganizationWithChildCount(Guid Id, int Count);
+public record OrganizationWithChildCount(Guid Id, long Count);

@@ -209,6 +209,7 @@ namespace Heal.Core.EntityFrameworkCore.EntityFrameworkCore
                             propertyBuilder.IsRequired(false);
                             propertyBuilder.HasComment("纬度");
                             propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Latitude);
+                            propertyBuilder.HasPrecision(9, 6);
                         })
                     .MapEfCoreProperty<OrganizationUnit, decimal?>(OrganizationUnitExtensionConstants.Longitude,
                         (_, propertyBuilder) =>
@@ -216,6 +217,7 @@ namespace Heal.Core.EntityFrameworkCore.EntityFrameworkCore
                             propertyBuilder.IsRequired(false);
                             propertyBuilder.HasComment("经度");
                             propertyBuilder.HasColumnName(OrganizationUnitExtensionConstants.Longitude);
+                            propertyBuilder.HasPrecision(9, 6);
                         })
                     .MapEfCoreProperty<OrganizationUnit, string?>(OrganizationUnitExtensionConstants.CoverImage,
                         (_, propertyBuilder) =>
