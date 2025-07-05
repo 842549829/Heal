@@ -42,12 +42,7 @@ public class UserAppService(
         input.MapExtraPropertiesTo(user);
         (await userManager.CreateAsync(user, input.Password)).CheckErrors();
         await UpdateUserByInput(user, input);
-        //(await userManager.UpdateAsync(user)).CheckErrors();
-        //var organizationRelationshipList = input.OrganizationRelationship.GetRelationshipsByType(OrganizationType.Organization);
-        //foreach (var relationship in organizationRelationshipList)
-        //{
-        //    await userManager.AddToOrganizationUnitAsync(user.Id, relationship.Id);
-        //}
+        await userManager.SetRolesAsync(user, input.RoleNames);
         await CurrentUnitOfWork?.SaveChangesAsync()!;
         return ObjectMapper.Map<IdentityUser, IdentityUserDto>(user);
     }
@@ -79,7 +74,7 @@ public class UserAppService(
             (await userManager.AddPasswordAsync(user, input.Password)).CheckErrors();
         }
 
-        //await userManager.SetOrganizationUnitsAsync(user.Id, input.OrganizationId);
+        await userManager.SetRolesAsync(user, input.RoleNames);
 
         await CurrentUnitOfWork?.SaveChangesAsync()!;
 
@@ -203,8 +198,8 @@ public class UserAppService(
     {
         var identityUser = await userManager.GetAsync(id);
         var detail = ObjectMapper.Map<IdentityUser, IdentityUserDetailDto>(identityUser);
-        var organization = await userManager.GetOrganizationUnitsAsync(identityUser);
-        detail.OrganizationId = organization.FirstOrDefault()?.Id;
+        //var organization = await userManager.GetOrganizationUnitsAsync(identityUser);
+        //detail.OrganizationId = organization.FirstOrDefault()?.Id;
         var roles = await userManager.GetRolesAsync(identityUser);
         detail.RoleNames = roles.ToArray();
         return detail;

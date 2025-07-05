@@ -1,4 +1,5 @@
-﻿using Heal.Net.Application.Contracts.Bases.Roles.Dtos;
+﻿using Heal.Application.Contracts.Dtos;
+using Heal.Net.Application.Contracts.Bases.Roles.Dtos;
 using Heal.Net.Application.Contracts.Bases.Users;
 using Heal.Net.Application.Contracts.Bases.Users.Dtos;
 using Microsoft.AspNetCore.Authorization;
@@ -105,9 +106,14 @@ public class UserController(IUserAppService userAppService) : HealNetController
     /// <returns>用户角色</returns>
     [HttpGet]
     [Route("assignable-roles")]
-    public Task<ListResultDto<IdentityRoleDto>> GetAssignableRolesAsync()
+    public async Task<List<SelectDto>> GetAssignableRolesAsync()
     {
-        return userAppService.GetAssignableRolesAsync();
+        var roles  = await userAppService.GetAssignableRolesAsync();
+        return roles.Items.Select(a => new SelectDto
+        {
+            Label = a.Name,
+            Value = a.Id.ToString()
+        }).ToList();
     }
 
     /// <summary>
