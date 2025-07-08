@@ -112,7 +112,7 @@ public class UserController(IUserAppService userAppService) : HealNetController
         return roles.Items.Select(a => new SelectDto
         {
             Label = a.Name,
-            Value = a.Id.ToString()
+            Value = a.Name
         }).ToList();
     }
 
