@@ -39,6 +39,7 @@ public class MenuAppService(IRepository<PermissionDefinitionRecord> permissionDe
             input.Providers,
             input.StateCheckers);
         SetProperty(entity, input);
+        entity.SetProperty(PermissionDefinitionConstants.Type, input.Type);
         await permissionDefinitionRecordRepository.InsertAsync(entity, cancellationToken: cancellationToken);
         await CurrentUnitOfWork?.SaveChangesAsync(cancellationToken)!;
     }
@@ -67,21 +68,40 @@ public class MenuAppService(IRepository<PermissionDefinitionRecord> permissionDe
     /// <returns>结果</returns>
     public async Task<PagedResultDto<MenuListDto>> GetListAsync(MenuInput input, CancellationToken cancellationToken = default)
     {
-        var list = await menuRepository.GetListAsync(input.Sorting, input.MaxResultCount, input.SkipCount, input.Filter, cancellationToken: cancellationToken);
-        var totalCount = await menuRepository.GetCountAsync(input.Filter, cancellationToken);
-
-        var listDto = list.Select(item => new MenuListDto
-        {
-            Id = item.Id,
-            Name = item.Name,
-            DislayName = L[item.DisplayName],
-            GroupName = item.GroupName
-        }).ToList();
-
+        var list = await menuRepository.GetListAsync(input.ModuleCode, input.Sorting, input.MaxResultCount, input.SkipCount, input.Filter, cancellationToken: cancellationToken);
+        var totalCount = await menuRepository.GetCountAsync(input.ModuleCode, input.Filter, cancellationToken);
+        var menuList = await LoadTreeAsync(list, list.Select(a => a.Name).ToList());
+        var menuListDto = BuildTree(menuList, null);
         return new PagedResultDto<MenuListDto>(
             totalCount,
-            listDto
+            menuListDto
         );
+
+        async Task<List<PermissionDefinitionRecord>> LoadTreeAsync(List<PermissionDefinitionRecord> currentMenuList, List<string> parentCodes)
+        {
+            if (!parentCodes.Any())
+            {
+                return currentMenuList;
+            }
+            var children = await menuRepository.GetListByParentCodeAsync(parentCodes, cancellationToken);
+            currentMenuList.AddRange(children);
+            return await LoadTreeAsync(currentMenuList, children.Select(a => a.Name).ToList());
+        }
+
+        List<MenuListDto> BuildTree(List<PermissionDefinitionRecord> allMenus, string? parentName)
+        {
+            return allMenus
+                .Where(m => m.ParentName == parentName)
+                .Select(menu => new MenuListDto
+                {
+                    Id = menu.Id,
+                    Name = menu.Name,
+                    GroupName = menu.GroupName,
+                    DislayName = L[menu.DisplayName],
+                    Children = BuildTree(allMenus, menu.Name) 
+                })
+                .ToList();
+        }
     }
 
     /// <summary>
@@ -134,7 +154,6 @@ public class MenuAppService(IRepository<PermissionDefinitionRecord> permissionDe
     {
         entity.SetProperty(PermissionDefinitionConstants.Path, input.Path);
         entity.SetProperty(PermissionDefinitionConstants.Component, input.Component);
-        entity.SetProperty(PermissionDefinitionConstants.Type, PermissionType.Module);
         entity.SetProperty(PermissionDefinitionConstants.Redirect, input.Redirect);
         entity.SetProperty(PermissionDefinitionConstants.Alias, input.Alias);
         entity.SetProperty(PermissionDefinitionConstants.Hidden, input.Hidden);

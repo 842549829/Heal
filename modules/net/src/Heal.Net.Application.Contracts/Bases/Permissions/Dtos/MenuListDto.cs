@@ -21,4 +21,9 @@ public class MenuListDto : EntityDto<Guid>
     /// 显示名称
     /// </summary>
     public required string DislayName { get; init; }
+
+    /// <summary>
+    /// 子菜单
+    /// </summary>
+    public List<MenuListDto> Children { get; init; } = [];
 }
