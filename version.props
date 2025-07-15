@@ -7,7 +7,7 @@
 		<!-- All Microsoft TargetFrameworks Packages -->
 		<MicrosoftTargetFramework>net9.0</MicrosoftTargetFramework>
 		<!-- All Abp Version Packages -->
-		<AbpVersion>9.3.0-rc.1</AbpVersion>
+		<AbpVersion>9.3.0-rc.3</AbpVersion>
 		<!-- All Abp Theme Version Packages -->
 		<AbpLeptonXLiteThemeVersion>4.2.0</AbpLeptonXLiteThemeVersion>
 		<!-- All Abp Studio Clien Version Packages -->
