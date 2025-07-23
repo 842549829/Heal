@@ -118,7 +118,8 @@ public class HealNetPermissionDefinitionProvider : PermissionDefinitionProvider
             .WithProperty(PermissionDefinitionConstants.Path, "menu")
             .WithProperty(PermissionDefinitionConstants.Component, "views/Authorization/Menu/Menu")
             .WithProperty(PermissionDefinitionConstants.Name, "Menu")
-            .WithProperty(PermissionDefinitionConstants.Title, "router.menu");
+            .WithProperty(PermissionDefinitionConstants.Title, "router.menu")
+            .WithProperty(PermissionDefinitionConstants.Hidden, true);
 
         menusPermission.AddChild(HealNetPermissions.Authorizations.Menus.Create, L("DisplayName:Create"))
             .WithProviders(RolePermissionValueProvider.ProviderName)
