@@ -197,7 +197,7 @@ public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext>
         {
             var organizationUnit = new OrganizationUnit(item.Id, item.DisplayName, item.ParentId, item.TenantId);
             EntityExtension.TrySetOrganizationCode(organizationUnit, item.Code);
-
+            organizationUnit.ConcurrencyStamp = item.ConcurrencyStamp;
             if (item.Phone != null)
             {
                 organizationUnit.ExtraProperties.Add(OrganizationUnitExtensionConstants.Phone, item.Phone);
