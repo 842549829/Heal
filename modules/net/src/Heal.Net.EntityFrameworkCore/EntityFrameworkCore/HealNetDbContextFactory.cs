@@ -20,7 +20,7 @@ public class HealNetDbContextFactory : IDesignTimeDbContextFactory<HealNetDbCont
         HealNetEfCoreEntityExtensionMappings.Configure();
 
         var builder = new DbContextOptionsBuilder<HealNetDbContext>()
-            .UseMySql(configuration.GetConnectionString("Default")!, MySqlServerVersion.LatestSupportedServerVersion);
+            .UseMySQL(configuration.GetConnectionString("Default")!);
         
         return new HealNetDbContext(builder.Options);
     }

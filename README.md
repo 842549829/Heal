@@ -9,25 +9,25 @@ dotnet tool update --global dotnet-ef
 
 ```bash
 # 生成迁移文件
-dotnet ef migrations add init -c HealNetDbContext
+dotnet ef migrations add Init -c HealNetDbContext
 # 更新数据库
 dotnet ef database update -c HealNetDbContext
 # 生成迁移脚本 ( 用于生成环境 )
-dotnet ef migrations script --verbose -i --project "./" -c HealNetDbContext -o "./Migrations/Script/20250416064948_init.sql"
+dotnet ef migrations script --verbose -i --project "./" -c HealNetDbContext -o "./Migrations/Script/20250416064948_Init.sql"
 # 生成某一次迭代更新的脚本, 从这个迭代 20240329102615_file1 到 20240408082719_announcement 迭代版本之间的差异脚本
-dotnet ef migrations script --verbose -i --project "./" -c HealNetDbContext -o "./Migrations/Script/20250430072903_init2.sql"  20250418013255_init1 20250430072903_init2
+dotnet ef migrations script --verbose -i --project "./" -c HealNetDbContext -o "./Migrations/Script/20250430072903_Init2.sql"  20250418013255_Init1 20250430072903_Init2
 ```
 
 ### Dict数据库还原
 ```bash
 # 生成迁移文件
-dotnet ef migrations add init -c HealDictDbContext
+dotnet ef migrations add Init -c HealDictDbContext
 # 更新数据库
 dotnet ef database update -c HealDictDbContext
 # 生成迁移脚本 ( 用于生成环境 )
-dotnet ef migrations script --verbose -i --project "./" -c HealDictDbContext -o "./Migrations/Script/20250506053754_init.sql"
+dotnet ef migrations script --verbose -i --project "./" -c HealDictDbContext -o "./Migrations/Script/20250506053754_Init.sql"
 # 生成某一次迭代更新的脚本, 从这个迭代 ******** 到 ********** 迭代版本之间的差异脚本
-dotnet ef migrations script --verbose -i --project "./" -c HealDictDbContext -o "./Migrations/Script/20250430072903_init2.sql"  20250418013255_init1 20250430072903_init2
+dotnet ef migrations script --verbose -i --project "./" -c HealDictDbContext -o "./Migrations/Script/20250430072903_Init2.sql"  20250418013255_Init1 20250430072903_Init2
 ```
 
 ### 自签名证书
