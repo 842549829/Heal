@@ -58,8 +58,8 @@ public class HealDomainModule : AbpModule
             // 启用动态权限 启用后不用再去配置了只需要在数据库配置即可
             options.IsDynamicPermissionStoreEnabled = true;
 
-            // 自动同步静态权限到数据库
-            options.SaveStaticPermissionsToDatabase = true;
+            // 自动同步静态权限到数据库 (首次初始化数据后则关闭静态同步后期则直接维护数据库的权限)
+            options.SaveStaticPermissionsToDatabase = false;
         });
     }
 }
