@@ -4,6 +4,7 @@ using Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,19 +13,21 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Heal.Net.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HealNetDbContext))]
-    partial class HealNetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250418013255_init1")]
+    partial class init1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.MySql)
-                .HasAnnotation("ProductVersion", "9.0.6")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Heal.Core.Domain.Bases.Campuses.Entities.Campus", b =>
+            modelBuilder.Entity("Heal.Net.Domain.Bases.Campuses.Entities.Campus", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)")
@@ -268,52 +271,16 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrganizationId");
-
                     b.ToTable("AbpCampus", null, t =>
                         {
                             t.HasComment("院区");
                         });
                 });
 
-            modelBuilder.Entity("Heal.Core.Domain.Bases.Campuses.Entities.UserCampus", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("UserId")
-                        .HasComment("用户Id");
-
-                    b.Property<Guid>("CampusId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("CampusId")
-                        .HasComment("院区Id");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("CreationTime")
-                        .HasComment("创建时间");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("CreatorId")
-                        .HasComment("创建人Id");
-
-                    b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("TenantId")
-                        .HasComment("租户Id");
-
-                    b.HasKey("UserId", "CampusId");
-
-                    b.ToTable("AbpUserCampus", null, t =>
-                        {
-                            t.HasComment("用户院区");
-                        });
-                });
-
-            modelBuilder.Entity("Heal.Core.Domain.Bases.Departments.Entities.Department", b =>
+            modelBuilder.Entity("Heal.Net.Domain.Bases.Departments.Entities.Department", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)")
                         .HasComment("Id");
 
@@ -568,50 +535,13 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CampusId");
-
                     b.ToTable("AbpDepartment", null, t =>
                         {
                             t.HasComment("科室");
                         });
                 });
 
-            modelBuilder.Entity("Heal.Core.Domain.Bases.Departments.Entities.UserDepartment", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("UserId")
-                        .HasComment("用户Id");
-
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("DepartmentId")
-                        .HasComment("科室Id");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("CreationTime")
-                        .HasComment("创建时间");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("CreatorId")
-                        .HasComment("创建人Id");
-
-                    b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("TenantId")
-                        .HasComment("租户Id");
-
-                    b.HasKey("UserId", "DepartmentId");
-
-                    b.ToTable("AbpUserDepartment", null, t =>
-                        {
-                            t.HasComment("用户科室");
-                        });
-                });
-
-            modelBuilder.Entity("Heal.Core.Domain.Bases.Users.Entities.Doctor", b =>
+            modelBuilder.Entity("Heal.Net.Domain.Bases.Users.Entities.Doctor", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)")
@@ -966,7 +896,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Heal.Core.Domain.Bases.Users.Entities.Patient", b =>
+            modelBuilder.Entity("Heal.Net.Domain.Bases.Users.Entities.Patient", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)")
@@ -1734,34 +1664,6 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogExcelFile", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<string>("FileName")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
-                        .HasColumnName("FileName");
-
-                    b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("TenantId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AbpAuditLogExcelFiles", (string)null);
-                });
-
             modelBuilder.Entity("Volo.Abp.AuditLogging.EntityChange", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1880,10 +1782,6 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)")
                         .HasComment("Id");
-
-                    b.Property<string>("ApplicationName")
-                        .HasMaxLength(96)
-                        .HasColumnType("varchar(96)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -3980,26 +3878,6 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         {
                             t.HasComment("租户配置");
                         });
-                });
-
-            modelBuilder.Entity("Heal.Core.Domain.Bases.Campuses.Entities.Campus", b =>
-                {
-                    b.HasOne("Volo.Abp.Identity.OrganizationUnit", "OrganizationUnit")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("OrganizationUnit");
-                });
-
-            modelBuilder.Entity("Heal.Core.Domain.Bases.Departments.Entities.Department", b =>
-                {
-                    b.HasOne("Heal.Core.Domain.Bases.Campuses.Entities.Campus", "Campus")
-                        .WithMany()
-                        .HasForeignKey("CampusId");
-
-                    b.Navigation("Campus");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>

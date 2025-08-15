@@ -132,7 +132,7 @@
     <PackageVersion Include="Oracle.EntityFrameworkCore" Version="9.23.60" />
     <PackageVersion Include="Polly" Version="8.4.2" />
     <PackageVersion Include="Polly.Extensions.Http" Version="3.0.0" />
-    <PackageVersion Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0-preview.3.efcore.9.0.0" />
+    <PackageVersion Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0-rc.1.efcore.9.0.0" />
     <PackageVersion Include="Quartz" Version="3.13.0" />
     <PackageVersion Include="Quartz.Extensions.DependencyInjection" Version="3.13.0" />
     <PackageVersion Include="Quartz.Plugins.TimeZoneConverter" Version="3.13.0" />
@@ -340,6 +340,7 @@
     <PackageVersion Include="Volo.Abp.FluentValidation" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.OpenIddict.AspNetCore" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.EntityFrameworkCore.MySQL" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.EntityFrameworkCore.MySQL.Pomelo" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Ldap.Abstractions" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Account.Web.IdentityServer" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.PermissionManagement.Web" Version="$(AbpVersion)" />
