@@ -109,9 +109,9 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.13.1" />
-    <PackageVersion Include="Microsoft.IdentityModel.Tokens" Version="8.13.1" />
-    <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.13.1" />
+    <PackageVersion Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.14.0" />
+    <PackageVersion Include="Microsoft.IdentityModel.Tokens" Version="8.14.0" />
+    <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.14.0" />
     <PackageVersion Include="Minio" Version="6.0.3" />
     <PackageVersion Include="MongoDB.Driver" Version="2.29.0" />
     <PackageVersion Include="MessagePack" Version="3.1.4" />
@@ -132,7 +132,7 @@
     <PackageVersion Include="Oracle.EntityFrameworkCore" Version="9.23.60" />
     <PackageVersion Include="Polly" Version="8.4.2" />
     <PackageVersion Include="Polly.Extensions.Http" Version="3.0.0" />
-    <PackageVersion Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0-rc.1.efcore.9.0.0" />
+    <PackageVersion Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
     <PackageVersion Include="Quartz" Version="3.13.0" />
     <PackageVersion Include="Quartz.Extensions.DependencyInjection" Version="3.13.0" />
     <PackageVersion Include="Quartz.Plugins.TimeZoneConverter" Version="3.13.0" />
@@ -369,7 +369,7 @@
     <PackageVersion Include="Volo.Abp.SettingManagement.Blazor" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Imaging.Abstractions" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.MailKit" Version="$(AbpVersion)" />
-    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="4.3.1" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="4.3.2" />
     <PackageVersion Include="Volo.Abp.Quartz" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.BlobStoring.FileSystem" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Imaging.ImageSharp" Version="$(AbpVersion)" />
@@ -423,7 +423,7 @@
     <PackageVersion Include="Volo.Abp.MemoryDb" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Studio.ModuleInstaller.Abstractions" Version="$(AbpStudioClientVersion)" />
     <PackageVersion Include="Volo.Abp.Studio.Client.Contracts" Version="$(AbpStudioClientVersion)" />
-    <PackageVersion Include="Volo.Abp.Studio.Client.AspNetCore" Version="1.2.1" />
+    <PackageVersion Include="Volo.Abp.Studio.Client.AspNetCore" Version="1.2.2" />
     <PackageVersion Include="Volo.Abp.EventBus.Rebus" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.EntityFrameworkCore.Oracle.Devart" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme" Version="$(AbpLeptonXLiteThemeVersion)" />
