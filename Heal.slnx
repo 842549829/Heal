@@ -1,0 +1,66 @@
+<!--sln升级slnx命令行 dotnet sln migrate-->
+<Solution>
+  <Folder Name="/01-Solution Items/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="common.props" />
+    <File Path="common.test.props" />
+    <File Path="configureawait.props" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="latest-versions.json" />
+    <File Path="LICENSE" />
+    <File Path="NuGet.Config" />
+    <File Path="README.md" />
+    <File Path="version.props" />
+  </Folder>
+  <Folder Name="/02-framework/" />
+  <Folder Name="/02-framework/src/">
+    <Project Path="framework/src/Heal.Application.Contracts/Heal.Application.Contracts.csproj" />
+    <Project Path="framework/src/Heal.Application/Heal.Application.csproj" />
+    <Project Path="framework/src/Heal.Domain.Shared/Heal.Domain.Shared.csproj" />
+    <Project Path="framework/src/Heal.Domain/Heal.Domain.csproj" />
+    <Project Path="framework/src/Heal.EntityFrameworkCore/Heal.EntityFrameworkCore.csproj" />
+    <Project Path="framework/src/Heal.HttpApi.Client/Heal.HttpApi.Client.csproj" />
+    <Project Path="framework/src/Heal.HttpApi/Heal.HttpApi.csproj" />
+  </Folder>
+  <Folder Name="/02-framework/test/">
+    <Project Path="framework/test/Sharding.Core.Test/Sharding.Core.Test.csproj" />
+  </Folder>
+  <Folder Name="/03-modules/" />
+  <Folder Name="/03-modules/core/" />
+  <Folder Name="/03-modules/core/src/">
+    <Project Path="modules/core/src/Heal.Core.Domain.Shared/Heal.Core.Domain.Shared.csproj" />
+    <Project Path="modules/core/src/Heal.Core.Domain/Heal.Core.Domain.csproj" />
+    <Project Path="modules/core/src/Heal.Core.EntityFrameworkCore/Heal.Core.EntityFrameworkCore.csproj" />
+  </Folder>
+  <Folder Name="/03-modules/dict/" />
+  <Folder Name="/03-modules/dict/src/">
+    <Project Path="modules/dict/src/Heal.Dict.Application.Contracts/Heal.Dict.Application.Contracts.csproj" />
+    <Project Path="modules/dict/src/Heal.Dict.Application/Heal.Dict.Application.csproj" />
+    <Project Path="modules/dict/src/Heal.Dict.DbMigrator/Heal.Dict.DbMigrator.csproj" />
+    <Project Path="modules/dict/src/Heal.Dict.Domain.Shared/Heal.Dict.Domain.Shared.csproj" />
+    <Project Path="modules/dict/src/Heal.Dict.Domain/Heal.Dict.Domain.csproj" />
+    <Project Path="modules/dict/src/Heal.Dict.EntityFrameworkCore/Heal.Dict.EntityFrameworkCore.csproj" />
+    <Project Path="modules/dict/src/Heal.Dict.HttpApi.Host/Heal.Dict.HttpApi.Host.csproj" />
+    <Project Path="modules/dict/src/Heal.Dict.HttpApi/Heal.Dict.HttpApi.csproj" />
+  </Folder>
+  <Folder Name="/03-modules/net/" />
+  <Folder Name="/03-modules/net/src/">
+    <Project Path="modules/net/src/Heal.Net.Application.Contracts/Heal.Net.Application.Contracts.csproj" />
+    <Project Path="modules/net/src/Heal.Net.Application/Heal.Net.Application.csproj" />
+    <Project Path="modules/net/src/Heal.Net.AuthServer.HttpApi/Heal.Net.AuthServer.HttpApi.csproj" />
+    <Project Path="modules/net/src/Heal.Net.AuthServer/Heal.Net.AuthServer.csproj" />
+    <Project Path="modules/net/src/Heal.Net.DbMigrator/Heal.Net.DbMigrator.csproj" />
+    <Project Path="modules/net/src/Heal.Net.Domain.Shared/Heal.Net.Domain.Shared.csproj" />
+    <Project Path="modules/net/src/Heal.Net.Domain/Heal.Net.Domain.csproj" />
+    <Project Path="modules/net/src/Heal.Net.EntityFrameworkCore/Heal.Net.EntityFrameworkCore.csproj" />
+    <Project Path="modules/net/src/Heal.Net.HttpApi.Client/Heal.Net.HttpApi.Client.csproj" />
+    <Project Path="modules/net/src/Heal.Net.HttpApi.Host/Heal.Net.HttpApi.Host.csproj" />
+    <Project Path="modules/net/src/Heal.Net.HttpApi/Heal.Net.HttpApi.csproj" />
+  </Folder>
+  <Folder Name="/03-modules/net/test/">
+    <Project Path="modules/net/test/ConsoleApp.Test/ConsoleApp.Test.csproj" />
+  </Folder>
+</Solution>
