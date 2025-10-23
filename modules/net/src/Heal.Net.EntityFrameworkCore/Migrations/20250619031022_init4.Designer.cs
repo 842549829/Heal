@@ -25,7 +25,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 .HasAnnotation("ProductVersion", "9.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            //MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("Heal.Core.Domain.Bases.Campuses.Entities.Campus", b =>
                 {

@@ -3,7 +3,6 @@ using Heal.Domain.Shared.MultiTenancy;
 using Heal.Net.Application;
 using Heal.Net.Application.Contracts;
 using Heal.Net.AuthServer.ExtensionGrantTypes;
-using Heal.Net.AuthServer.HealthChecks;
 using Heal.Net.AuthServer.HttpApi;
 using Heal.Net.Domain;
 using Heal.Net.Domain.Shared;
@@ -32,7 +31,6 @@ using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
-using static OpenIddict.Server.OpenIddictServerEvents;
 
 namespace Heal.Net.AuthServer;
 
@@ -157,7 +155,7 @@ public class HealNetAuthServerModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
 
-        context.Services.AddHealHealthChecks();
+        //context.Services.AddHealHealthChecks();
     }
 
     /// <summary>
