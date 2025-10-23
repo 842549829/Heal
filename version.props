@@ -3,14 +3,14 @@
 		<!-- CSharp Language Version Packages -->
 		<LangVersion>preview</LangVersion>
 		<!-- Current Version Packages -->
-		<Version>2.0.1</Version>
+		<Version>9.3.6</Version>
 		<!-- All Microsoft TargetFrameworks Packages -->
 		<MicrosoftTargetFramework>net9.0</MicrosoftTargetFramework>
 		<!-- All Abp Version Packages -->
-		<AbpVersion>9.3.3</AbpVersion>
+		<AbpVersion>9.3.6</AbpVersion>
 		<!-- All Abp Theme Version Packages -->
-		<AbpLeptonXLiteThemeVersion>4.3.3</AbpLeptonXLiteThemeVersion>
+		<AbpLeptonXLiteThemeVersion>4.3.6</AbpLeptonXLiteThemeVersion>
 		<!-- All Abp Studio Clien Version Packages -->
-		<AbpStudioClientVersion>1.2.2</AbpStudioClientVersion>
+		<AbpStudioClientVersion>1.4.1</AbpStudioClientVersion>
 	</PropertyGroup>
 </Project>
