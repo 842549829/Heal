@@ -12,5 +12,7 @@
 		<AbpLeptonXLiteThemeVersion>4.3.6</AbpLeptonXLiteThemeVersion>
 		<!-- All Abp Studio Clien Version Packages -->
 		<AbpStudioClientVersion>1.4.1</AbpStudioClientVersion>
+        <!-- All Microsoft Version Packages -->
+		<MicrosoftVersion>9.0.0</MicrosoftVersion>
 	</PropertyGroup>
 </Project>
