@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Dapper" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL.Pomelo" />
     <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
    
   </ItemGroup>

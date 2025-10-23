@@ -20,8 +20,7 @@ public class HealDictDbContextFactory : IDesignTimeDbContextFactory<HealDictDbCo
         HealDictEfCoreEntityExtensionMappings.Configure();
 
         var builder = new DbContextOptionsBuilder<HealDictDbContext>()
-            .UseMySQL(configuration.GetConnectionString("Default")!);
-            //.UseMySql(configuration.GetConnectionString("Default")!, MySqlServerVersion.LatestSupportedServerVersion); 
+            .UseMySql(configuration.GetConnectionString("Default")!, MySqlServerVersion.LatestSupportedServerVersion); 
         
         return new HealDictDbContext(builder.Options);
     }

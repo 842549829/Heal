@@ -16,8 +16,7 @@ namespace Heal.EntityFrameworkCore;
 [DependsOn(
     typeof(HealDomainModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-    //typeof(AbpEntityFrameworkCoreMySQLPomeloModule),
-    typeof(AbpEntityFrameworkCoreMySQLModule),
+    typeof(AbpEntityFrameworkCoreMySQLPomeloModule),
     typeof(AbpIdentityEntityFrameworkCoreModule)
 )]
 public class HealEntityFrameworkCoreModule : AbpModule

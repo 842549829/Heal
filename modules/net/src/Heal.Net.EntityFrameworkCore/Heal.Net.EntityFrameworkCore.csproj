@@ -14,6 +14,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.Dapper" />
+		<PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL.Pomelo" />
 		<PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
 		<PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" />
 		<PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" />
@@ -28,11 +29,11 @@
 		<PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" />
 	</ItemGroup>
 
-	<!--<ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 			<PrivateAssets>compile; build; native; contentfiles; analyzers; buildtransitive</PrivateAssets>
 		</PackageReference>
-	</ItemGroup>-->
+	</ItemGroup>
 
 </Project>
