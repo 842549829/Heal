@@ -8,6 +8,7 @@
 	<ItemGroup>
     <PackageReference Include="Volo.Abp.PermissionManagement.Application" />
     <PackageReference Include="Volo.Abp.Identity.Application" />
+		<PackageReference Include="Volo.Abp.AutoMapper" />
 	</ItemGroup>
 
 	<ItemGroup>
