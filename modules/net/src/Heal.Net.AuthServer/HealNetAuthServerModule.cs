@@ -32,6 +32,7 @@ using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using static OpenIddict.Server.OpenIddictServerEvents;
 
 namespace Heal.Net.AuthServer;
 
@@ -93,6 +94,11 @@ public class HealNetAuthServerModule : AbpModule
 
             serverBuilder.AddProductionEncryptionAndSigningCertificate("server.pfx", configuration["AuthServer:CertificatePassPhrase"]!);
             serverBuilder.SetIssuer(new Uri(configuration["AuthServer:Authority"]!));
+
+            serverBuilder.SetAuthorizationCodeLifetime(TimeSpan.FromMinutes(30));
+            serverBuilder.SetAccessTokenLifetime(TimeSpan.FromMinutes(30));
+            serverBuilder.SetIdentityTokenLifetime(TimeSpan.FromMinutes(30));
+            serverBuilder.SetRefreshTokenLifetime(TimeSpan.FromDays(14));
         });
     }
 
