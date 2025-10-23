@@ -12,8 +12,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" />
 	  <PackageReference Include="ShardingCore" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL.Pomelo" />
 	</ItemGroup>
 
 </Project>
