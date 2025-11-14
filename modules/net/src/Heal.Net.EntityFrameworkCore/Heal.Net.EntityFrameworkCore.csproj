@@ -28,11 +28,11 @@
 		<PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" />
 	</ItemGroup>
 
-	<!--<ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 			<PrivateAssets>compile; build; native; contentfiles; analyzers; buildtransitive</PrivateAssets>
 		</PackageReference>
-	</ItemGroup>-->
+	</ItemGroup>
 
 </Project>

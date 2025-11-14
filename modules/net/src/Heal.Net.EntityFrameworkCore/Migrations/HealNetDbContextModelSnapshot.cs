@@ -3,9 +3,7 @@ using System;
 using Heal.Net.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Volo.Abp.EntityFrameworkCore;
 
 #nullable disable
 
@@ -18,11 +16,8 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.MySql)
-                .HasAnnotation("ProductVersion", "9.0.6")
+                .HasAnnotation("ProductVersion", "10.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            //MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("Heal.Core.Domain.Bases.Campuses.Entities.Campus", b =>
                 {
@@ -2531,8 +2526,8 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("设备");
 
                     b.Property<string>("DeviceInfo")
-                        .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)")
                         .HasComment("设备信息");
 
                     b.Property<string>("ExtraProperties")
@@ -2693,7 +2688,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("最后更新人");
 
                     b.Property<DateTimeOffset?>("LastPasswordChangeTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime")
                         .HasComment("最后修改密码时间");
 
                     b.Property<bool>("LockoutEnabled")
@@ -2704,7 +2699,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("锁定");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime")
                         .HasComment("锁定到期时间");
 
                     b.Property<string>("Name")
@@ -3141,7 +3136,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("最后更新人");
 
                     b.Property<decimal?>("Latitude")
-                        .HasColumnType("decimal(65,30)")
+                        .HasColumnType("decimal(18,2)")
                         .HasColumnName("Latitude")
                         .HasComment("纬度");
 
@@ -3151,7 +3146,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("医院等级");
 
                     b.Property<decimal?>("Longitude")
-                        .HasColumnType("decimal(65,30)")
+                        .HasColumnType("decimal(18,2)")
                         .HasColumnName("Longitude")
                         .HasComment("经度");
 
@@ -3328,6 +3323,10 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
+
+                    b.Property<string>("FrontChannelLogoutUri")
+                        .HasColumnType("longtext")
+                        .HasComment("前通道注销Uri");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -3612,8 +3611,8 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("与当前令牌关联的主体");
 
                     b.Property<string>("Type")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)")
                         .HasComment("当前令牌的类型");
 
                     b.HasKey("Id");

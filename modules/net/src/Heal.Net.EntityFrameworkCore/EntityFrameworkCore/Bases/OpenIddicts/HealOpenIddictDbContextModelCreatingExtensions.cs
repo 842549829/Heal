@@ -46,6 +46,7 @@ public static class HealOpenIddictDbContextModelCreatingExtensions
             b.Property(x => x.Settings).HasComment("设置，序列化为 JSON 对象");
             b.Property(x => x.ClientUri).HasComment("指向客户端更多信息的 URI");
             b.Property(x => x.LogoUri).HasComment("指向客户端标志的 URI");
+            b.Property(x => x.FrontChannelLogoutUri).HasComment("前通道注销Uri");
             b.ConfigureByConventionBase<Guid>();
         });
 

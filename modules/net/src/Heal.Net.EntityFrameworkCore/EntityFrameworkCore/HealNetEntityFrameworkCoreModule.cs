@@ -1,5 +1,6 @@
 ﻿using Heal.Core.EntityFrameworkCore.EntityFrameworkCore;
 using Heal.Net.Domain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -64,7 +65,7 @@ public class HealNetEntityFrameworkCoreModule : AbpModule
 
             options.UseMySQL(builder =>
             {
-                builder.TranslateParameterizedCollectionsToConstants();
+                builder.UseParameterizedCollectionMode(ParameterTranslationMode.MultipleParameters);
             });
 
         });

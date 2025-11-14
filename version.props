@@ -1,17 +1,17 @@
 ﻿<Project>
 	<PropertyGroup>
 		<!-- CSharp Language Version Packages -->
-		<LangVersion>preview</LangVersion>
+		<LangVersion>14</LangVersion>
 		<!-- Current Version Packages -->
-		<Version>10.0.0-rc1</Version>
+		<Version>10.0.0-rc3</Version>
 		<!-- All Microsoft TargetFrameworks Packages -->
 		<MicrosoftTargetFramework>net10.0</MicrosoftTargetFramework>
 		<!-- All Abp Version Packages -->
-		<AbpVersion>10.0.0-rc.1</AbpVersion>
+		<AbpVersion>10.0.0-rc.3</AbpVersion>
 		<!-- All Abp Theme Version Packages -->
 		<AbpLeptonXLiteThemeVersion>4.3.6</AbpLeptonXLiteThemeVersion>
 		<!-- All Abp Studio Clien Version Packages -->
 		<AbpStudioClientVersion>1.4.1</AbpStudioClientVersion>
-		<MicrosoftVersion>10.0.0-rc.2.25502.107</MicrosoftVersion>
+		<MicrosoftVersion>10.0.0</MicrosoftVersion>
 	</PropertyGroup>
 </Project>

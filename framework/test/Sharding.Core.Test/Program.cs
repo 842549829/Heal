@@ -18,11 +18,11 @@ services.AddShardingDbContext<ShardingDbContext>()
     {
         op.UseShardingQuery((conn, options) =>
         {
-            options.UseMySql(conn, ServerVersion.Parse("8.0.39"));
+            options.UseMySQL(conn);
         });
         op.UseShardingTransaction((conn, options) =>
         {
-            options.UseMySql(conn, ServerVersion.Parse("8.0.39"));
+            options.UseMySQL(conn);
         });
         op.AddDefaultDataSource(Guid.NewGuid().ToString("n"), configuration.GetConnectionString("Default"));
     }).AddShardingCore();
