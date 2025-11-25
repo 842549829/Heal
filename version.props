@@ -3,11 +3,11 @@
 		<!-- CSharp Language Version Packages -->
 		<LangVersion>14</LangVersion>
 		<!-- Current Version Packages -->
-		<Version>10.0.0-rc3</Version>
+		<Version>10.0.0</Version>
 		<!-- All Microsoft TargetFrameworks Packages -->
 		<MicrosoftTargetFramework>net10.0</MicrosoftTargetFramework>
 		<!-- All Abp Version Packages -->
-		<AbpVersion>10.0.0-rc.3</AbpVersion>
+		<AbpVersion>10.0.0</AbpVersion>
 		<!-- All Abp Theme Version Packages -->
 		<AbpLeptonXLiteThemeVersion>4.3.6</AbpLeptonXLiteThemeVersion>
 		<!-- All Abp Studio Clien Version Packages -->
