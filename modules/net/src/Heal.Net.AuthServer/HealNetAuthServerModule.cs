@@ -157,7 +157,7 @@ public class HealNetAuthServerModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
 
-        context.Services.AddHealHealthChecks();
+        //context.Services.AddHealHealthChecks();
     }
 
     /// <summary>

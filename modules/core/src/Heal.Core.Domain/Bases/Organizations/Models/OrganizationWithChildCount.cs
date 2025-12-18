@@ -3,6 +3,15 @@
 /// <summary>
 /// 组织机构树节点
 /// </summary>
-/// <param name="Id">Id</param>
-/// <param name="Count">数量</param>
-public record OrganizationWithChildCount(Guid Id, long Count);
+public class OrganizationWithChildCount
+{
+    /// <summary>
+    /// Id
+    /// </summary>
+    public Guid  Id { get; set; }
+
+    /// <summary>
+    /// 数量
+    /// </summary>
+    public long Count { get; set; }
+};

@@ -12,56 +12,56 @@ public class DictItemDto : ExtensibleEntityDto<Guid>, IHasConcurrencyStampDto
     /// <summary>
     /// 字典类型Id
     /// </summary>
-    public required Guid DictTypeId { get; init; }
+    public required Guid DictTypeId { get; set; }
 
     /// <summary>
     /// 乐观并发戳
     /// </summary>
-    public required string ConcurrencyStamp { get; init; }
+    public required string ConcurrencyStamp { get; set; }
 
     /// <summary>
     /// 样式
     /// </summary>
-    public string? Style { get; init; }
+    public string? Style { get; set; }
 
     /// <summary>
     /// 父级Id
     /// </summary>
-    public Guid? ParentId { get; init; }
+    public Guid? ParentId { get; set; }
 
     /// <summary>
     /// 租户Id
     /// </summary>
-    public Guid? TenantId { get; init; }
+    public Guid? TenantId { get; set; }
 
     /// <summary>
     /// 状态
     /// </summary>
-    public required Enable Status { get; init; }
+    public required Enable Status { get; set; }
 
     /// <summary>
     /// 名称
     /// </summary>
-    public required string Name { get; init; }
+    public required string Name { get; set; }
 
     /// <summary>
     /// 描述
     /// </summary>
 
-    public string? Describe { get; init; }
+    public string? Describe { get; set; }
 
     /// <summary>
     /// 编码
     /// </summary>
-    public required string Code { get; init; }
+    public required string Code { get; set; }
 
     /// <summary>
     /// 排序
     /// </summary>
-    public required int Sort { get; init; }
+    public required int Sort { get; set; }
 
     /// <summary>
     /// 别名
     /// </summary>
-    public string? Alias { get; init; }
+    public string? Alias { get; set; }
 }

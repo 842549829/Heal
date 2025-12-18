@@ -7,12 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Entities\Order.cs~RF1046a0.TMP" />
-	  <None Remove="Program.cs~RF5dc0cb.TMP" />
-	</ItemGroup>
-
-	<ItemGroup>
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL.Pomelo" />
+		<PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" />
 	  <PackageReference Include="ShardingCore" />
 	</ItemGroup>
 

@@ -5,8 +5,8 @@ using Heal.Net.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Account;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
+using Volo.Abp.Mapperly;
 using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
@@ -22,6 +22,7 @@ namespace Heal.Net.Application;
     typeof(HealNetApplicationContractsModule),
     typeof(AbpFeatureManagementApplicationModule),
     typeof(AbpAccountApplicationModule),
+    typeof(AbpMapperlyModule),
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpSettingManagementApplicationModule)
     )]
@@ -36,10 +37,7 @@ public class HealNetApplicationModule : AbpModule
         var configuration = context.Services.GetConfiguration();
         var services = context.Services;
 
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<HealNetApplicationModule>();
-        });
+        context.Services.AddMapperlyObjectMapper<HealNetApplicationModule>();
 
         Configure<IdentityOptions>(options =>
         {

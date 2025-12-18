@@ -1,5 +1,6 @@
 ﻿using Heal.Core.EntityFrameworkCore.EntityFrameworkCore;
 using Heal.Net.Domain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -62,9 +63,9 @@ public class HealNetEntityFrameworkCoreModule : AbpModule
             /* The main point to change your DBMS.
              * See also HealDbContextFactory for EF Core tooling. */
 
-            options.UseMySQL(builder =>
+            options.UseSqlServer(builder =>
             {
-                builder.TranslateParameterizedCollectionsToConstants();
+                builder.UseParameterizedCollectionMode(ParameterTranslationMode.Constant);
             });
 
         });

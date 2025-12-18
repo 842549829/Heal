@@ -1,19 +1,19 @@
-﻿using AutoMapper;
-using Heal.Net.Application.Contracts.Bases.Users.Dtos;
+﻿using Heal.Net.Application.Contracts.Bases.Users.Dtos;
+using Riok.Mapperly.Abstractions;
 using Volo.Abp.Identity;
+using Volo.Abp.Mapperly;
 
 namespace Heal.Net.Application.Bases.Users;
 
 /// <summary>
 /// Auto mapper profile for user
 /// </summary>
-public class UserAutoMapper : Profile
+[Mapper]
+[MapExtraProperties]
+public partial class UserAutoMapper : MapperBase<IdentityUser, IdentityUserDetailDto>
 {
-    /// <summary>
-    /// Auto mapper profile for user
-    /// </summary>
-    public UserAutoMapper()
-    {
-        CreateMap<IdentityUser, IdentityUserDetailDto>();
-    }
+    public override partial IdentityUserDetailDto Map(IdentityUser source);
+
+
+    public override partial void Map(IdentityUser source, IdentityUserDetailDto destination);
 }

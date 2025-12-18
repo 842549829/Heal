@@ -1,4 +1,5 @@
-﻿using Volo.Abp.Identity;
+﻿using System.ComponentModel.DataAnnotations;
+using Volo.Abp.Identity;
 
 namespace Heal.Net.Application.Contracts.Bases.Users.Dtos;
 
@@ -10,5 +11,6 @@ public class IdentityUserDetailDto : IdentityUserDto
     /// <summary>
     /// 角色名称
     /// </summary>
-    public required string[] RoleNames { get; set; }
+    [Required]
+    public string[] RoleNames { get; set; } = null!;
 }

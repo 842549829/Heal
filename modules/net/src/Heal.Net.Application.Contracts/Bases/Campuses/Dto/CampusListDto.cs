@@ -17,30 +17,30 @@ public class CampusListDto : EntityDto<Guid>,
     /// <summary>
     /// 名称
     /// </summary>
-    public required string Name { get; init; }
+    public required string Name { get; set; }
 
     /// <summary>
     /// 编码
     /// </summary>
-    public required string Code { get; init; }
+    public required string Code { get; set; }
 
     /// <summary>
     /// 组织Code
     /// </summary>
-    public required string OrganizationCode { get; init; }
+    public required string OrganizationCode { get; set; }
 
     /// <summary>
     /// 排序
     /// </summary>
-    public required int Sort { get; init; }
+    public required int Sort { get; set; }
 
     /// <summary>
     /// 描述
     /// </summary>
-    public string? Describe { get; init; }
+    public string? Describe { get; set; }
 
     /// <summary>
     /// 迸发标记
     /// </summary>
-    public required string ConcurrencyStamp { get; init; }
+    public required string ConcurrencyStamp { get; set; }
 }

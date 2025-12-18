@@ -13,10 +13,6 @@ using Volo.Abp.Users;
 
 namespace Heal.Core.EntityFrameworkCore.EntityFrameworkCore.Bases.Organizations;
 
-/// <summary>
-/// 组织机构数据仓储
-/// </summary>
-/// <param name="dbContextProvider">数据提供集</param>
 public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext> dbContextProvider)
     : DapperRepository<IIdentityDbContext>(dbContextProvider), IOrganizationDapperRepository
 {
@@ -57,14 +53,38 @@ public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext>
             }
 
             var sql = $"""
-                       WITH RECURSIVE _parent AS
+                       -- 使用递归 CTE 查找匹配过滤条件的组织单元及其所有上级父级
+                       WITH _parent(Id,ParentId) -- 显式列出 AbpOrganizationUnits 表的所有列（根据实际情况调整）
+                       AS
                        (
-                        SELECT fun.* FROM `abporganizationunits` fun {sqlCondition}
-                           UNION ALL
-                        SELECT fun.* FROM _parent,`abporganizationunits` fun WHERE fun.IsDeleted = 0 AND fun.Id=_parent.ParentId
+                       -- 锚点成员：查找符合初始条件的组织单元
+                       SELECT 
+                       fun.Id,
+                       fun.ParentId
+                       FROM AbpOrganizationUnits fun  -- 替换为实际的表名
+                       {sqlCondition}
+
+                       UNION ALL
+
+                       -- 递归成员：查找当前层级记录的父级
+                       SELECT 
+                       fun.Id,
+                       fun.ParentId
+                       FROM _parent -- 引用 CTE 自身
+                       INNER JOIN AbpOrganizationUnits fun ON fun.Id = _parent.ParentId -- 显式内连接到父级记录
+                       WHERE 
+                       fun.IsDeleted = 0 
                        )
-                       SELECT COUNT(*) FROM (
-                       SELECT COUNT(*) FROM _parent WHERE _parent.ParentId IS NULL GROUP BY _parent.Id) AS T;
+
+                       -- 最终查询：计算找到的顶级（无父级）组织单元的数量
+                       -- （即，初始匹配项及其祖先链中最顶层的那些）
+                       SELECT COUNT(*) AS TotalTopLevelCount
+                       FROM (
+                       SELECT COUNT(*) AS DummyCount -- 内层 COUNT 实际上是为了分组，外层 COUNT 计算顶级节点数
+                       FROM _parent 
+                       WHERE _parent.ParentId IS NULL 
+                       GROUP BY _parent.Id -- 每个顶级节点分一组
+                       ) AS T; -- 必须给派生表 T 起别名
                        """;
 
             return await connection.QueryFirstOrDefaultAsync<long>(sql, new { filter = $"%{filter}%", parentId },
@@ -75,7 +95,7 @@ public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext>
             var queryParams = new DynamicParameters();
             var sqlCondition = new StringBuilder();
             SetTenantIdParams(sqlCondition, queryParams);
-            var sql = $"SELECT COUNT(*) FROM `AbpOrganizationUnits` WHERE IsDeleted = 0 {sqlCondition} AND ParentId IS NULL";
+            var sql = $"SELECT COUNT(*) FROM [AbpOrganizationUnits] WHERE IsDeleted = 0 {sqlCondition} AND ParentId IS NULL";
             return await connection.QueryFirstOrDefaultAsync<long>(sql, queryParams, transaction);
         }
     }
@@ -120,14 +140,34 @@ public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext>
             }
 
             var sql = $"""
-                       WITH RECURSIVE _parent AS
-                       (
-                        SELECT fun.* FROM `AbpOrganizationUnits` fun {sqlCondition}
-                           UNION ALL
-                        SELECT fun.* FROM _parent,`AbpOrganizationUnits` fun WHERE fun.IsDeleted = 0 AND fun.Id=_parent.ParentId
-                       )
-                       SELECT DISTINCT * FROM _parent WHERE _parent.ParentId IS NULL ORDER BY `Code` LIMIT @skipCount, @maxResultCount;
-                       """;
+                        -- 使用递归 CTE 查找匹配过滤条件的组织单元及其所有上级父级
+                        WITH _parent AS
+                        (
+                          -- 锚点成员：查找符合初始条件的组织单元
+                          SELECT fun.*
+                          FROM [AbpOrganizationUnits] fun
+                          WHERE fun.IsDeleted = 0  
+                            AND fun.TenantId IS NULL 
+                            AND fun.DisplayName LIKE @filter 
+                        
+                          UNION ALL
+                        
+                          -- 递归成员：查找当前层级记录的父级
+                          SELECT fun.*
+                          FROM _parent -- 引用 CTE 自身
+                          INNER JOIN [AbpOrganizationUnits] fun ON fun.Id = _parent.ParentId -- 显式内连接到父级记录
+                          WHERE fun.IsDeleted = 0 -- 检查父级是否被删除
+                        )
+                        
+                        -- 最终查询：选择所有顶级节点（即初始匹配及其祖先链的顶端），去重，按 Code 排序，分页
+                        SELECT DISTINCT * -- 对所有列进行去重
+                        FROM _parent
+                        WHERE _parent.ParentId IS NULL -- 筛选顶级节点
+                        ORDER BY [Code] -- 按 Code 排序
+                        -- 分页 (SQL Server 2012+ 语法)
+                        OFFSET @skipCount ROWS      -- 跳过 @skipCount 行
+                        FETCH NEXT @maxResultCount ROWS ONLY; -- 获取接下来的 @maxResultCount 行
+                        """;
             return (await QueryAsync(connection, sql, queryParams, transaction)).ToList();
         }
         else
@@ -135,7 +175,7 @@ public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext>
             var sqlCondition = new StringBuilder();
             SetTenantIdParams(sqlCondition, queryParams);
             var sql =
-                $"SELECT * FROM `AbpOrganizationUnits` WHERE IsDeleted = 0 {sqlCondition} AND ParentId IS NULL ORDER BY `Code` LIMIT @skipCount, @maxResultCount";
+                $"SELECT * FROM [AbpOrganizationUnits] WHERE IsDeleted = 0 {sqlCondition} AND ParentId IS NULL ORDER BY [Code] OFFSET @skipCount ROWS FETCH NEXT @maxResultCount ROWS ONLY;";
             return (await QueryAsync(connection, sql, queryParams, transaction)).ToList();
         }
     }
@@ -154,7 +194,7 @@ public class OrganizationDapperRepository(IDbContextProvider<IIdentityDbContext>
         var sqlCondition = new StringBuilder();
         SetTenantIdParams(sqlCondition, queryParams);
         var sql =
-            $"SELECT ParentId AS `id`, COUNT(0) AS `count` FROM AbpOrganizationUnits WHERE IsDeleted = 0 {sqlCondition} AND ParentId IN @parentIds GROUP BY ParentId";
+            $"SELECT ParentId AS [Id], COUNT(0) AS [Count] FROM AbpOrganizationUnits WHERE IsDeleted = 0 {sqlCondition} AND ParentId IN @parentIds GROUP BY ParentId";
         var connection = await GetDbConnectionAsync();
         var transaction = await GetDbTransactionAsync();
         return (await connection.QueryAsync<OrganizationWithChildCount>(sql, queryParams,

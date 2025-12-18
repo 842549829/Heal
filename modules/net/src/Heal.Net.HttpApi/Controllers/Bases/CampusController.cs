@@ -9,7 +9,7 @@ namespace Heal.Net.HttpApi.Controllers.Bases;
 /// 院区信息模块
 /// </summary>
 /// <param name="campusAppService">院区应用服务接口</param>
-[Route("api/net/basics/campuses")]
+[Route("api/net/basics/organizations/campus")]
 [ApiController]
 public class CampusController(ICampusAppService campusAppService) : HealNetController
 {

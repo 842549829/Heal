@@ -18,27 +18,27 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.MySql)
-                .HasAnnotation("ProductVersion", "9.0.6")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
+                .HasAnnotation("ProductVersion", "10.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Heal.Core.Domain.Bases.Campuses.Entities.Campus", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("Address")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("Address")
                         .HasComment("所在详细地址");
 
                     b.Property<string>("Building")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("Building")
                         .HasComment("所在大楼");
 
@@ -50,7 +50,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(95)
-                        .HasColumnType("varchar(95)")
+                        .HasColumnType("nvarchar(95)")
                         .HasColumnName("Code")
                         .HasComment("编码");
 
@@ -58,102 +58,102 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<string>("CreatorName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("CreatorName")
                         .HasComment("创建人名称");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("DeleterId")
                         .HasComment("删除人Id");
 
                     b.Property<string>("DeletionName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("DeletionName")
                         .HasComment("删除人名称");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime")
                         .HasComment("删除时间");
 
                     b.Property<string>("Describe")
                         .IsConcurrencyToken()
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("Describe")
                         .HasComment("描述");
 
                     b.Property<string>("Email")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("Email")
                         .HasComment("联系邮箱");
 
                     b.Property<string>("EmergencyContact")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("EmergencyContact")
                         .HasComment("紧急联系人名称");
 
                     b.Property<string>("EmergencyPhone")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("EmergencyPhone")
                         .HasComment("紧急联系人电话");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Floor")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("Floor")
                         .HasComment("所在楼层");
 
                     b.Property<string>("HeadOfCampus")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("HeadOfCampus")
                         .HasComment("院区负责人");
 
                     b.Property<string>("HeadOfCampusEmail")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("HeadOfCampusEmail")
                         .HasComment("院区负责人邮箱");
 
                     b.Property<string>("HeadOfCampusPhone")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("HeadOfCampusPhone")
                         .HasComment("院区负责人电话");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted")
                         .HasComment("删除标记");
@@ -161,17 +161,17 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                     b.Property<string>("LastModificationName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("LastModificationName")
                         .HasComment("最后修改人名称");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime")
                         .HasComment("最后更新时间");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId")
                         .HasComment("最后更新人");
 
@@ -179,7 +179,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("Name")
                         .HasComment("名称");
 
@@ -187,25 +187,25 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(95)
-                        .HasColumnType("varchar(95)")
+                        .HasColumnType("nvarchar(95)")
                         .HasColumnName("OrganizationCode")
                         .HasComment("组织Code");
 
                     b.Property<Guid>("OrganizationId")
                         .IsConcurrencyToken()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("OrganizationId")
                         .HasComment("组织Id");
 
                     b.Property<Guid?>("ParentId")
                         .IsConcurrencyToken()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("ParentId")
                         .HasComment("父级Id");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("Phone")
                         .HasComment("联系电话");
 
@@ -213,7 +213,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("Pinyin")
                         .HasComment("拼音");
 
@@ -221,25 +221,25 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("PinyinFirstLetters")
                         .HasComment("拼音首字母");
 
                     b.Property<string>("RoomNumber")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("RoomNumber")
                         .HasComment("所在房间");
 
                     b.Property<string>("ServicesOffered")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("ServicesOffered")
                         .HasComment("院区提供的服务");
 
                     b.Property<string>("ShortName")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("ShortName")
                         .HasComment("简称");
 
@@ -256,13 +256,13 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("启用状态");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.Property<string>("Website")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("Website")
                         .HasComment("院区网站");
 
@@ -279,27 +279,27 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Heal.Core.Domain.Bases.Campuses.Entities.UserCampus", b =>
                 {
                     b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("UserId")
                         .HasComment("用户Id");
 
                     b.Property<Guid>("CampusId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CampusId")
                         .HasComment("院区Id");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -314,28 +314,28 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Heal.Core.Domain.Bases.Departments.Entities.Department", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("Address")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("Address")
                         .HasComment("所在详细地址");
 
                     b.Property<string>("Building")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("Building")
                         .HasComment("所在大楼");
 
                     b.Property<Guid?>("CampusId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CampusId")
                         .HasComment("所在院区Id");
 
                     b.Property<string>("Campuses")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Capacity")
                         .HasColumnType("int")
@@ -345,7 +345,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(95)
-                        .HasColumnType("varchar(95)")
+                        .HasColumnType("nvarchar(95)")
                         .HasColumnName("Code")
                         .HasComment("编码");
 
@@ -353,107 +353,107 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<string>("CreatorName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("CreatorName")
                         .HasComment("创建人名称");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("DeleterId")
                         .HasComment("删除人Id");
 
                     b.Property<string>("DeletionName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("DeletionName")
                         .HasComment("删除人名称");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime")
                         .HasComment("删除时间");
 
                     b.Property<Guid>("DepartmentTypeId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("DepartmentTypeId")
                         .HasComment("科室类型Id");
 
                     b.Property<string>("Describe")
                         .IsConcurrencyToken()
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("Describe")
                         .HasComment("描述");
 
                     b.Property<string>("Email")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("Email")
                         .HasComment("联系邮箱");
 
                     b.Property<string>("EmergencyContact")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("EmergencyContact")
                         .HasComment("紧急联系人名称");
 
                     b.Property<string>("EmergencyPhone")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("EmergencyPhone")
                         .HasComment("紧急联系人电话");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Floor")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("Floor")
                         .HasComment("所在楼层");
 
                     b.Property<string>("HeadOfDepartment")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("HeadOfDepartment")
                         .HasComment("科室负责人");
 
                     b.Property<string>("HeadOfDepartmentEmail")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("HeadOfDepartmentEmail")
                         .HasComment("科室负责人邮箱");
 
                     b.Property<string>("HeadOfDepartmentPhone")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("HeadOfDepartmentPhone")
                         .HasComment("科室负责人电话");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted")
                         .HasComment("删除标记");
@@ -461,17 +461,17 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                     b.Property<string>("LastModificationName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("LastModificationName")
                         .HasComment("最后修改人名称");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime")
                         .HasComment("最后更新时间");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId")
                         .HasComment("最后更新人");
 
@@ -479,7 +479,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("Name")
                         .HasComment("名称");
 
@@ -487,25 +487,25 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(95)
-                        .HasColumnType("varchar(95)")
+                        .HasColumnType("nvarchar(95)")
                         .HasColumnName("OrganizationCode")
                         .HasComment("组织Code");
 
                     b.Property<Guid>("OrganizationId")
                         .IsConcurrencyToken()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("OrganizationId")
                         .HasComment("组织Id");
 
                     b.Property<Guid?>("ParentId")
                         .IsConcurrencyToken()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("ParentId")
                         .HasComment("父级Id");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("Phone")
                         .HasComment("联系电话");
 
@@ -513,7 +513,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("Pinyin")
                         .HasComment("拼音");
 
@@ -521,25 +521,25 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("PinyinFirstLetters")
                         .HasComment("拼音首字母");
 
                     b.Property<string>("RoomNumber")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("RoomNumber")
                         .HasComment("所在房间");
 
                     b.Property<string>("ServicesOffered")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("ServicesOffered")
                         .HasComment("科室提供的服务");
 
                     b.Property<string>("ShortName")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("ShortName")
                         .HasComment("简称");
 
@@ -556,13 +556,13 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("启用状态");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.Property<string>("Website")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("Website")
                         .HasComment("科室网站");
 
@@ -579,27 +579,27 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Heal.Core.Domain.Bases.Departments.Entities.UserDepartment", b =>
                 {
                     b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("UserId")
                         .HasComment("用户Id");
 
                     b.Property<Guid>("DepartmentId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("DepartmentId")
                         .HasComment("科室Id");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -614,33 +614,33 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Heal.Core.Domain.Bases.Users.Entities.Doctor", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("AddressLine")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("详细地址");
 
                     b.Property<string>("Avatar")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("Avatar")
                         .HasComment("头像");
 
                     b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("生日");
 
                     b.Property<string>("CityCode")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("城市代码");
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(95)
-                        .HasColumnType("varchar(95)")
+                        .HasColumnType("nvarchar(95)")
                         .HasColumnName("Code")
                         .HasComment("编码");
 
@@ -648,24 +648,24 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<string>("CreatorName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("CreatorName")
                         .HasComment("创建人名称");
 
@@ -674,118 +674,118 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("天");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("DeleterId")
                         .HasComment("删除人Id");
 
                     b.Property<string>("DeletionName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("DeletionName")
                         .HasComment("删除人名称");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime")
                         .HasComment("删除时间");
 
                     b.Property<string>("Describe")
                         .IsConcurrencyToken()
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("Describe")
                         .HasComment("描述");
 
                     b.Property<string>("DistrictCode")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("区县代码");
 
                     b.Property<string>("Education")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("Education")
                         .HasComment("学历");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("邮箱");
 
                     b.Property<string>("EvaluateClassify")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("EvaluateClassify")
                         .HasComment("评价分类");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Gender")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("性别");
 
                     b.Property<DateTime?>("GraduationDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("GraduationDate")
                         .HasComment("毕业时间");
 
                     b.Property<string>("IdCardNo")
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasComment("证件号");
 
                     b.Property<string>("IdCardType")
                         .IsRequired()
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("证件类型");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted")
                         .HasComment("删除标记");
 
                     b.Property<bool>("IsOpenLogin")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("IsOpenLogin")
                         .HasComment("是否开放登录");
 
                     b.Property<string>("LastModificationName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("LastModificationName")
                         .HasComment("最后修改人名称");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime")
                         .HasComment("最后更新时间");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId")
                         .HasComment("最后更新人");
 
                     b.Property<string>("Major")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("Major")
                         .HasComment("专业");
 
                     b.Property<string>("MedicalSchool")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("MedicalSchool")
                         .HasComment("毕业院校");
 
@@ -797,18 +797,18 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("Name")
                         .HasComment("名称");
 
                     b.Property<string>("NationCode")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("国家代码");
 
                     b.Property<string>("OccupationClassify")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("OccupationClassify")
                         .HasComment("类型(按职业分类)");
 
@@ -816,33 +816,33 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(95)
-                        .HasColumnType("varchar(95)")
+                        .HasColumnType("nvarchar(95)")
                         .HasColumnName("OrganizationCode")
                         .HasComment("组织Code");
 
                     b.Property<Guid>("OrganizationId")
                         .IsConcurrencyToken()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("OrganizationId")
                         .HasComment("组织Id");
 
                     b.Property<string>("PeculiarityClassify")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("PeculiarityClassify")
                         .HasComment("类型(按特质类型分类)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasComment("手机");
 
                     b.Property<string>("Pinyin")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("Pinyin")
                         .HasComment("拼音");
 
@@ -850,59 +850,59 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("PinyinFirstLetters")
                         .HasComment("拼音首字母");
 
                     b.Property<string>("PracticeClassify")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("PracticeClassify")
                         .HasComment("执业分类");
 
                     b.Property<string>("PracticeExperience")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("PracticeExperience")
                         .HasComment("执业经历");
 
                     b.Property<string>("PracticeLicenseNumber")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("PracticeLicenseNumber")
                         .HasComment("执业许可证编号");
 
                     b.Property<string>("PracticeScope")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("PracticeScope")
                         .HasComment("执业范围");
 
                     b.Property<DateTime?>("PracticeValidityDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("PracticeValidityDate")
                         .HasComment("执业有效期");
 
                     b.Property<string>("ProfessionalClassify")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("ProfessionalClassify")
                         .HasComment("专业分类");
 
                     b.Property<string>("ProvinceCode")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("省份代码");
 
                     b.Property<string>("ResearchResult")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("ResearchResult")
                         .HasComment("科研成果");
 
                     b.Property<string>("ScopeClassify")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("ScopeClassify")
                         .HasComment("类型(按范围分类)");
 
@@ -914,7 +914,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Specialization")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("Specialization")
                         .HasComment("专长");
 
@@ -926,23 +926,23 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Street")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("街道");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.Property<string>("WorkAgeLimit")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("WorkAgeLimit")
                         .HasComment("工作年限");
 
                     b.Property<string>("WorkClassify")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("WorkClassify")
                         .HasComment("工作分类");
 
@@ -969,39 +969,39 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Heal.Core.Domain.Bases.Users.Entities.Patient", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("AddressLine")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("详细地址");
 
                     b.Property<string>("Alias")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("Alias")
                         .HasComment("别名");
 
                     b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("生日");
 
                     b.Property<string>("BloodType")
                         .HasMaxLength(8)
-                        .HasColumnType("varchar(8)")
+                        .HasColumnType("nvarchar(8)")
                         .HasColumnName("BloodType")
                         .HasComment("血型");
 
                     b.Property<string>("CityCode")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("城市代码");
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(95)
-                        .HasColumnType("varchar(95)")
+                        .HasColumnType("nvarchar(95)")
                         .HasColumnName("Code")
                         .HasComment("编码");
 
@@ -1009,30 +1009,30 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<string>("CreatorName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("CreatorName")
                         .HasComment("创建人名称");
 
                     b.Property<string>("CurrentAddress")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("CurrentAddress")
                         .HasComment("现居住地址");
 
@@ -1041,332 +1041,332 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("天");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("DeleterId")
                         .HasComment("删除人Id");
 
                     b.Property<string>("DeletionName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("DeletionName")
                         .HasComment("删除人名称");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime")
                         .HasComment("删除时间");
 
                     b.Property<string>("Describe")
                         .IsConcurrencyToken()
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("Describe")
                         .HasComment("描述");
 
                     b.Property<string>("DistrictCode")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("区县代码");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("邮箱");
 
                     b.Property<string>("EmergencyContact")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("EmergencyContact")
                         .HasComment("紧急联系人");
 
                     b.Property<string>("EmergencyContactAddress")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("EmergencyContactAddress")
                         .HasComment("紧急联系人地址");
 
                     b.Property<string>("EmergencyContactPhone")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("EmergencyContactPhone")
                         .HasComment("紧急联系人电话");
 
                     b.Property<string>("EmergencyContactRelationship")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("EmergencyContactRelationship")
                         .HasComment("紧急联系人关系");
 
                     b.Property<string>("Ethnicity")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("Ethnicity")
                         .HasComment("民族");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Gender")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("性别");
 
                     b.Property<string>("GuardianAddress")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("GuardianAddress")
                         .HasComment("监护人地址");
 
                     b.Property<string>("GuardianBloodType")
                         .HasMaxLength(8)
-                        .HasColumnType("varchar(8)")
+                        .HasColumnType("nvarchar(8)")
                         .HasColumnName("GuardianBloodType")
                         .HasComment("监护人血型");
 
                     b.Property<string>("GuardianCurrentAddress")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("GuardianCurrentAddress")
                         .HasComment("监护人现居住地");
 
                     b.Property<string>("GuardianEthnicity")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("GuardianEthnicity")
                         .HasComment("监护人民族");
 
                     b.Property<string>("GuardianGender")
                         .HasMaxLength(8)
-                        .HasColumnType("varchar(8)")
+                        .HasColumnType("nvarchar(8)")
                         .HasColumnName("GuardianGender")
                         .HasComment("监护人性别");
 
                     b.Property<string>("GuardianHealthStatus")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("GuardianHealthStatus")
                         .HasComment("监护人健康状况");
 
                     b.Property<string>("GuardianHouseholdAddress")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("GuardianHouseholdAddress")
                         .HasComment("监护人户籍地");
 
                     b.Property<string>("GuardianId")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("GuardianId")
                         .HasComment("监护人ID");
 
                     b.Property<string>("GuardianIdCard")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("GuardianIdCard")
                         .HasComment("监护人身份证号");
 
                     b.Property<string>("GuardianIdCardAddress")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("GuardianIdCardAddress")
                         .HasComment("监护人身份证地址");
 
                     b.Property<string>("GuardianIdCardBackPhoto")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("GuardianIdCardBackPhoto")
                         .HasComment("监护人身份证反面照");
 
                     b.Property<string>("GuardianIdCardBackPhotoDuplicate")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("GuardianIdCardBackPhotoDuplicate")
                         .HasComment("监护人身份证反面照");
 
                     b.Property<string>("GuardianIdCardEmblemPhoto")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("GuardianIdCardEmblemPhoto")
                         .HasComment("监护人身份证国徽照");
 
                     b.Property<string>("GuardianIdCardFrontPhoto")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("GuardianIdCardFrontPhoto")
                         .HasComment("监护人身份证正面照");
 
                     b.Property<string>("GuardianIdCardFrontPhotoDuplicate")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GuardianIdCardValidity")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("GuardianIdCardValidity")
                         .HasComment("监护人身份证有效期");
 
                     b.Property<string>("GuardianMaritalStatus")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("GuardianMaritalStatus")
                         .HasComment("监护人婚姻状况");
 
                     b.Property<string>("GuardianName")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("GuardianName")
                         .HasComment("监护人姓名");
 
                     b.Property<string>("GuardianNationality")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("GuardianNationality")
                         .HasComment("监护人国籍");
 
                     b.Property<string>("GuardianNativePlace")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("GuardianNativePlace")
                         .HasComment("监护人籍贯");
 
                     b.Property<string>("GuardianPhone")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("GuardianPhone")
                         .HasComment("监护人电话");
 
                     b.Property<string>("GuardianPoliticalStatus")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("GuardianPoliticalStatus")
                         .HasComment("监护人政治面貌");
 
                     b.Property<string>("GuardianRelationship")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("GuardianRelationship")
                         .HasComment("监护人关系");
 
                     b.Property<string>("GuardianResidencePermitAddress")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("GuardianResidencePermitAddress")
                         .HasComment("监护人居住证地址");
 
                     b.Property<string>("GuardianResidencePermitValidity")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("GuardianResidencePermitValidity")
                         .HasComment("监护人居住证有效期");
 
                     b.Property<string>("HealthStatus")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("HealthStatus")
                         .HasComment("健康状况");
 
                     b.Property<string>("HouseholdAddress")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("HouseholdAddress")
                         .HasComment("户籍地址");
 
                     b.Property<string>("IdCardAddress")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("IdCardAddress")
                         .HasComment("身份证地址");
 
                     b.Property<string>("IdCardBackPhoto")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("IdCardBackPhoto")
                         .HasComment("身份证反面照");
 
                     b.Property<string>("IdCardEmblemPhoto")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("IdCardEmblemPhoto")
                         .HasComment("身份证国徽照");
 
                     b.Property<string>("IdCardFrontPhoto")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("IdCardFrontPhoto")
                         .HasComment("身份证正面照");
 
                     b.Property<string>("IdCardNo")
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasComment("证件号");
 
                     b.Property<string>("IdCardNumber")
                         .HasMaxLength(18)
-                        .HasColumnType("varchar(18)")
+                        .HasColumnType("nvarchar(18)")
                         .HasColumnName("IdCardNumber")
                         .HasComment("身份证编号");
 
                     b.Property<string>("IdCardType")
                         .IsRequired()
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("证件类型");
 
                     b.Property<string>("IdCardValidity")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("IdCardValidity")
                         .HasComment("身份证有效期");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted")
                         .HasComment("删除标记");
 
                     b.Property<bool>("IsOpenLogin")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("IsOpenLogin")
                         .HasComment("是否开通登录功能");
 
                     b.Property<string>("LastModificationName")
                         .IsConcurrencyToken()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("LastModificationName")
                         .HasComment("最后修改人名称");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime")
                         .HasComment("最后更新时间");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId")
                         .HasComment("最后更新人");
 
                     b.Property<string>("MaritalStatus")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("MaritalStatus")
                         .HasComment("婚姻状况");
 
                     b.Property<string>("MedicalCardNumber")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("MedicalCardNumber")
                         .HasComment("医保卡号");
 
                     b.Property<string>("MedicalRecordNumber")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("MedicalRecordNumber")
                         .HasComment("病案号");
 
@@ -1378,24 +1378,24 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("Name")
                         .HasComment("名称");
 
                     b.Property<string>("NationCode")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("国家代码");
 
                     b.Property<string>("Nationality")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("Nationality")
                         .HasComment("国籍");
 
                     b.Property<string>("NativePlace")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("NativePlace")
                         .HasComment("籍贯");
 
@@ -1403,27 +1403,27 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(95)
-                        .HasColumnType("varchar(95)")
+                        .HasColumnType("nvarchar(95)")
                         .HasColumnName("OrganizationCode")
                         .HasComment("组织Code");
 
                     b.Property<Guid>("OrganizationId")
                         .IsConcurrencyToken()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("OrganizationId")
                         .HasComment("组织Id");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasComment("手机");
 
                     b.Property<string>("Pinyin")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("Pinyin")
                         .HasComment("拼音");
 
@@ -1431,30 +1431,30 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("PinyinFirstLetters")
                         .HasComment("拼音首字母");
 
                     b.Property<string>("PoliticalStatus")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("PoliticalStatus")
                         .HasComment("政治面貌");
 
                     b.Property<string>("ProvinceCode")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasComment("省份代码");
 
                     b.Property<string>("ResidencePermitAddress")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("ResidencePermitAddress")
                         .HasComment("居住证地址");
 
                     b.Property<string>("ResidencePermitValidity")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("ResidencePermitValidity")
                         .HasComment("居住证有效期");
 
@@ -1466,7 +1466,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Source")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("Source")
                         .HasComment("来源");
 
@@ -1478,29 +1478,29 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Street")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("街道");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.Property<string>("WorkUnit")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("WorkUnit")
                         .HasComment("工作单位");
 
                     b.Property<string>("WorkUnitAddress")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("WorkUnitAddress")
                         .HasComment("工作单位地址");
 
                     b.Property<string>("WorkUnitPhone")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("WorkUnitPhone")
                         .HasComment("工作单位电话");
 
@@ -1528,42 +1528,42 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ApplicationName")
                         .HasMaxLength(96)
-                        .HasColumnType("varchar(96)")
+                        .HasColumnType("nvarchar(96)")
                         .HasColumnName("ApplicationName")
                         .HasComment("应用程序名称");
 
                     b.Property<string>("BrowserInfo")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("BrowserInfo")
                         .HasComment("浏览器信息");
 
                     b.Property<string>("ClientId")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("ClientId")
                         .HasComment("客户端Id");
 
                     b.Property<string>("ClientIpAddress")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("ClientIpAddress")
                         .HasComment("客户端IP");
 
                     b.Property<string>("ClientName")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("ClientName")
                         .HasComment("客户端名称");
 
                     b.Property<string>("Comments")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("Comments")
                         .HasComment("评论");
 
@@ -1571,18 +1571,18 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<string>("CorrelationId")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("CorrelationId")
                         .HasComment("相关联Id");
 
                     b.Property<string>("Exceptions")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ExecutionDuration")
                         .HasColumnType("int")
@@ -1590,18 +1590,18 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("执行耗时");
 
                     b.Property<DateTime>("ExecutionTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("执行时间");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("HttpMethod")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("HttpMethod")
                         .HasComment("请求方式");
 
@@ -1611,52 +1611,52 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("请求响应状态码");
 
                     b.Property<Guid?>("ImpersonatorTenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("ImpersonatorTenantId")
                         .HasComment("模拟租户Id");
 
                     b.Property<string>("ImpersonatorTenantName")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("ImpersonatorTenantName")
                         .HasComment("模拟租户名称");
 
                     b.Property<Guid?>("ImpersonatorUserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("ImpersonatorUserId")
                         .HasComment("模拟用户Id");
 
                     b.Property<string>("ImpersonatorUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("ImpersonatorUserName")
                         .HasComment("模拟用户名");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.Property<string>("TenantName")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("TenantName")
                         .HasComment("租户名称");
 
                     b.Property<string>("Url")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("Url")
                         .HasComment("请求Url");
 
                     b.Property<Guid?>("UserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("UserId")
                         .HasComment("用户Id");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("UserName")
                         .HasComment("用户名");
 
@@ -1676,11 +1676,11 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<Guid>("AuditLogId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("AuditLogId")
                         .HasComment("AuditLogId");
 
@@ -1690,35 +1690,35 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("执行耗时");
 
                     b.Property<DateTime>("ExecutionTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ExecutionTime")
                         .HasComment("执行时间");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("MethodName")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("MethodName")
                         .HasComment("方法名称");
 
                     b.Property<string>("Parameters")
                         .HasMaxLength(2000)
-                        .HasColumnType("varchar(2000)")
+                        .HasColumnType("nvarchar(2000)")
                         .HasColumnName("Parameters")
                         .HasComment("参数");
 
                     b.Property<string>("ServiceName")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("ServiceName")
                         .HasComment("服务名称");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -1738,23 +1738,23 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId");
 
                     b.Property<string>("FileName")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("FileName");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId");
 
                     b.HasKey("Id");
@@ -1766,48 +1766,48 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<Guid>("AuditLogId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("AuditLogId")
                         .HasComment("AuditLogId");
 
                     b.Property<DateTime>("ChangeTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ChangeTime")
                         .HasComment("变更时间");
 
                     b.Property<byte>("ChangeType")
-                        .HasColumnType("tinyint unsigned")
+                        .HasColumnType("tinyint")
                         .HasColumnName("ChangeType")
                         .HasComment("变更类型");
 
                     b.Property<string>("EntityId")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("EntityId")
                         .HasComment("审计实体Id");
 
                     b.Property<Guid?>("EntityTenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("审计实体租户Id");
 
                     b.Property<string>("EntityTypeFullName")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("EntityTypeFullName")
                         .HasComment("审计实体全称");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -1827,40 +1827,40 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<Guid>("EntityChangeId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NewValue")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("NewValue")
                         .HasComment("新值");
 
                     b.Property<string>("OriginalValue")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("OriginalValue")
                         .HasComment("旧值");
 
                     b.Property<string>("PropertyName")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("PropertyName")
                         .HasComment("属性名称");
 
                     b.Property<string>("PropertyTypeFullName")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("PropertyTypeFullName")
                         .HasComment("属性全称");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -1878,61 +1878,61 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ApplicationName")
                         .HasMaxLength(96)
-                        .HasColumnType("varchar(96)");
+                        .HasColumnType("nvarchar(96)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<bool>("IsAbandoned")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasComment("是否放弃了");
 
                     b.Property<string>("JobArgs")
                         .IsRequired()
                         .HasMaxLength(1048576)
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("任务参数");
 
                     b.Property<string>("JobName")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("任务名称");
 
                     b.Property<DateTime?>("LastTryTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("最后一次运行时间");
 
                     b.Property<DateTime>("NextTryTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("下次运行时间");
 
                     b.Property<byte>("Priority")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint unsigned")
+                        .HasColumnType("tinyint")
                         .HasDefaultValue((byte)15)
                         .HasComment("优先级");
 
@@ -1956,40 +1956,40 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<Guid>("ContainerId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("容器ID");
 
                     b.Property<byte[]>("Content")
                         .HasMaxLength(2147483647)
-                        .HasColumnType("longblob")
+                        .HasColumnType("varbinary(max)")
                         .HasComment("数据");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("名称");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -2009,31 +2009,31 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("名称");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -2051,63 +2051,63 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("AllowedProviders")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("允许供应商");
 
                     b.Property<string>("DefaultValue")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("默认值");
 
                     b.Property<string>("Description")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("描述");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("显示名称");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("GroupName")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("所属分组");
 
                     b.Property<bool>("IsAvailableToHost")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasComment("主机是否可用");
 
                     b.Property<bool>("IsVisibleToClients")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasComment("对客户端可见");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("名称");
 
                     b.Property<string>("ParentName")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("父级名称");
 
                     b.Property<string>("ValueType")
                         .HasMaxLength(2048)
-                        .HasColumnType("varchar(2048)")
+                        .HasColumnType("nvarchar(2048)")
                         .HasComment("值类型");
 
                     b.HasKey("Id");
@@ -2127,24 +2127,24 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("显示名称");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("名称");
 
                     b.HasKey("Id");
@@ -2162,35 +2162,36 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("名称");
 
                     b.Property<string>("ProviderKey")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("提供者Key");
 
                     b.Property<string>("ProviderName")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("提供者名称");
 
                     b.Property<string>("Value")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("值");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name", "ProviderName", "ProviderKey")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ProviderName] IS NOT NULL AND [ProviderKey] IS NOT NULL");
 
                     b.ToTable("AbpFeatureValues", null, t =>
                         {
@@ -2201,55 +2202,55 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityClaimType", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<string>("Description")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("描述");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<bool>("IsStatic")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasComment("是否静态");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("名称");
 
                     b.Property<string>("Regex")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasComment("正则表达式");
 
                     b.Property<string>("RegexDescription")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("正则表达式描述");
 
                     b.Property<bool>("Required")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasComment("是否必填");
 
                     b.Property<int>("ValueType")
@@ -2267,29 +2268,30 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityLinkUser", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<Guid?>("SourceTenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("源租户");
 
                     b.Property<Guid>("SourceUserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("源用户Id");
 
                     b.Property<Guid?>("TargetTenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("目标租户");
 
                     b.Property<Guid>("TargetUserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("目标用户Id");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SourceUserId", "SourceTenantId", "TargetUserId", "TargetTenantId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SourceTenantId] IS NOT NULL AND [TargetTenantId] IS NOT NULL");
 
                     b.ToTable("AbpLinkUsers", null, t =>
                         {
@@ -2300,19 +2302,19 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityRole", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
@@ -2320,7 +2322,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(4096)
-                        .HasColumnType("varchar(4096)")
+                        .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("")
                         .HasColumnName("CustomDataPermission")
                         .HasComment("自定义数据权限");
@@ -2338,39 +2340,39 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<bool>("IsDefault")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("IsDefault")
                         .HasComment("是否默认");
 
                     b.Property<bool>("IsPublic")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("IsPublic")
                         .HasComment("是否公共");
 
                     b.Property<bool>("IsStatic")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("IsStatic")
                         .HasComment("是否静态");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("名称");
 
                     b.Property<string>("NormalizedName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("标准名称");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -2387,26 +2389,26 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityRoleClaim", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ClaimType")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("声明类型");
 
                     b.Property<string>("ClaimValue")
                         .HasMaxLength(1024)
-                        .HasColumnType("varchar(1024)")
+                        .HasColumnType("nvarchar(1024)")
                         .HasComment("声明值");
 
                     b.Property<Guid>("RoleId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("角色Id");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -2423,78 +2425,78 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentitySecurityLog", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("Action")
                         .HasMaxLength(96)
-                        .HasColumnType("varchar(96)")
+                        .HasColumnType("nvarchar(96)")
                         .HasComment("操作Action");
 
                     b.Property<string>("ApplicationName")
                         .HasMaxLength(96)
-                        .HasColumnType("varchar(96)")
+                        .HasColumnType("nvarchar(96)")
                         .HasComment("应用模块名称");
 
                     b.Property<string>("BrowserInfo")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasComment("浏览器信息");
 
                     b.Property<string>("ClientId")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("客户端Id");
 
                     b.Property<string>("ClientIpAddress")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("客户端IP地址");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<string>("CorrelationId")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("相关Id");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Identity")
                         .HasMaxLength(96)
-                        .HasColumnType("varchar(96)")
+                        .HasColumnType("nvarchar(96)")
                         .HasComment("身份信息");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.Property<string>("TenantName")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("租户名称");
 
                     b.Property<Guid?>("UserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("用户Id");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("用户名");
 
                     b.HasKey("Id");
@@ -2516,56 +2518,56 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentitySession", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ClientId")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("客户端Id");
 
                     b.Property<string>("Device")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("设备");
 
                     b.Property<string>("DeviceInfo")
-                        .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("设备信息");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("IpAddresses")
                         .HasMaxLength(2048)
-                        .HasColumnType("varchar(2048)")
+                        .HasColumnType("nvarchar(2048)")
                         .HasComment("Ip地址");
 
                     b.Property<DateTime?>("LastAccessed")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("用户最近一次访问系统的时间");
 
                     b.Property<string>("SessionId")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("会话Id");
 
                     b.Property<DateTime>("SignedIn")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("用户登录的时间");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("用户Id");
 
                     b.HasKey("Id");
@@ -2585,7 +2587,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUser", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<int>("AccessFailedCount")
@@ -2599,7 +2601,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasDefaultValue("")
                         .HasColumnName("Avatar")
                         .HasComment("头像");
@@ -2608,40 +2610,40 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("DeleterId")
                         .HasComment("删除人Id");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime")
                         .HasComment("删除时间");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("Email")
                         .HasComment("邮箱");
 
                     b.Property<bool>("EmailConfirmed")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("EmailConfirmed")
                         .HasComment("邮箱确认");
@@ -2652,7 +2654,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
@@ -2664,66 +2666,66 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("身份标识");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("IsActive")
                         .HasComment("是否活跃");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted")
                         .HasComment("删除标记");
 
                     b.Property<bool>("IsExternal")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("IsExternal")
                         .HasComment("是否外部");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime")
                         .HasComment("最后更新时间");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId")
                         .HasComment("最后更新人");
 
                     b.Property<DateTimeOffset?>("LastPasswordChangeTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetimeoffset")
                         .HasComment("最后修改密码时间");
 
                     b.Property<bool>("LockoutEnabled")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("LockoutEnabled")
                         .HasComment("锁定");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetimeoffset")
                         .HasComment("锁定到期时间");
 
                     b.Property<string>("Name")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("Name")
                         .HasComment("名");
 
                     b.Property<string>("NormalizedEmail")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("NormalizedEmail")
                         .HasComment("邮箱标准名称");
 
                     b.Property<string>("NormalizedUserName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("NormalizedUserName")
                         .HasComment("用户名标准名");
 
@@ -2731,26 +2733,26 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasDefaultValue("")
                         .HasColumnName("OpenId")
                         .HasComment("第三方登录唯一标识");
 
                     b.Property<string>("PasswordHash")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("PasswordHash")
                         .HasComment("密码散列");
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("PhoneNumber")
                         .HasComment("手机号码");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("PhoneNumberConfirmed")
                         .HasComment("手机号码确认");
@@ -2758,28 +2760,28 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                     b.Property<string>("SecurityStamp")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("SecurityStamp")
                         .HasComment("安全票据");
 
                     b.Property<bool>("ShouldChangePasswordOnNextLogin")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasComment("是否需要更改密码");
 
                     b.Property<string>("Surname")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("Surname")
                         .HasComment("姓");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("TwoFactorEnabled")
                         .HasComment("双因素认证");
@@ -2787,7 +2789,7 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("UserName")
                         .HasComment("用户名");
 
@@ -2810,27 +2812,27 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserClaim", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ClaimType")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("声明类型");
 
                     b.Property<string>("ClaimValue")
                         .HasMaxLength(1024)
-                        .HasColumnType("varchar(1024)")
+                        .HasColumnType("nvarchar(1024)")
                         .HasComment("声明值");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("用户Id");
 
                     b.HasKey("Id");
@@ -2846,27 +2848,27 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserDelegation", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("结束时间");
 
                     b.Property<Guid>("SourceUserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("源用户Id");
 
                     b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("开始时间");
 
                     b.Property<Guid>("TargetUserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("目标用户Id");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -2881,27 +2883,27 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserLogin", b =>
                 {
                     b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("用户Id");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("登录提供者");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("登录提供者显示名称");
 
                     b.Property<string>("ProviderKey")
                         .IsRequired()
                         .HasMaxLength(196)
-                        .HasColumnType("varchar(196)")
+                        .HasColumnType("nvarchar(196)")
                         .HasComment("登录提供者Key");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -2918,25 +2920,25 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserOrganizationUnit", b =>
                 {
                     b.Property<Guid>("OrganizationUnitId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("组织机构Id");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("用户Id");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -2953,15 +2955,15 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserRole", b =>
                 {
                     b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("用户Id");
 
                     b.Property<Guid>("RoleId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("角色Id");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -2978,26 +2980,26 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserToken", b =>
                 {
                     b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("用户Id");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("登录提供者");
 
                     b.Property<string>("Name")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("名称");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.Property<string>("Value")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("值");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
@@ -3011,19 +3013,19 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.OrganizationUnit", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("Address")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasColumnName("Address")
                         .HasComment("地址");
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(95)
-                        .HasColumnType("varchar(95)")
+                        .HasColumnType("nvarchar(95)")
                         .HasColumnName("Code")
                         .HasComment("编码");
 
@@ -3031,58 +3033,58 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<string>("CoverImage")
                         .HasMaxLength(1024)
-                        .HasColumnType("varchar(1024)")
+                        .HasColumnType("nvarchar(1024)")
                         .HasColumnName("CoverImage")
                         .HasComment("封面图片");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("DeleterId")
                         .HasComment("删除人Id");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime")
                         .HasComment("删除时间");
 
                     b.Property<string>("Describe")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("Describe")
                         .HasComment("备注描述");
 
                     b.Property<string>("Director")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("Director")
                         .HasComment("院长");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("DisplayName")
                         .HasComment("显示名称");
 
                     b.Property<string>("Email")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasColumnName("Email")
                         .HasComment("邮箱");
 
@@ -3091,57 +3093,57 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("版本");
 
                     b.Property<DateTime?>("EstablishmentDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("EstablishmentDate")
                         .HasComment("成立时间");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Facilities")
                         .HasMaxLength(1024)
-                        .HasColumnType("varchar(1024)")
+                        .HasColumnType("nvarchar(1024)")
                         .HasColumnName("Facilities")
                         .HasComment("医院设施");
 
                     b.Property<string>("Introduction")
                         .HasMaxLength(4096)
-                        .HasColumnType("varchar(4096)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Introduction")
                         .HasComment("医院简介");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted")
                         .HasComment("删除标记");
 
                     b.Property<bool?>("IsEmergencyServices")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("IsEmergencyServices")
                         .HasComment("是否提供急诊服务");
 
                     b.Property<bool?>("IsInsuranceAccepted")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("IsInsuranceAccepted")
                         .HasComment("是否接受医保");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime")
                         .HasComment("最后更新时间");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId")
                         .HasComment("最后更新人");
 
                     b.Property<decimal?>("Latitude")
-                        .HasColumnType("decimal(65,30)")
+                        .HasColumnType("decimal(18,2)")
                         .HasColumnName("Latitude")
                         .HasComment("纬度");
 
@@ -3151,57 +3153,57 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                         .HasComment("医院等级");
 
                     b.Property<decimal?>("Longitude")
-                        .HasColumnType("decimal(65,30)")
+                        .HasColumnType("decimal(18,2)")
                         .HasColumnName("Longitude")
                         .HasComment("经度");
 
                     b.Property<DateTime?>("OperatingHours")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("OperatingHours")
                         .HasComment("营业时间");
 
                     b.Property<Guid?>("ParentId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("父级Id");
 
                     b.Property<string>("ParkingInformation")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("ParkingInformation")
                         .HasComment("停车信息");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("Phone")
                         .HasComment("联系电话");
 
                     b.Property<string>("PostalCode")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)")
+                        .HasColumnType("nvarchar(16)")
                         .HasColumnName("PostalCode")
                         .HasComment("邮政编码");
 
                     b.Property<string>("ServiceHotline")
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("nvarchar(32)")
                         .HasColumnName("ServiceHotline")
                         .HasComment("服务热线");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.Property<string>("TrafficGuide")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasColumnName("TrafficGuide")
                         .HasComment("交通指南");
 
                     b.Property<string>("WebsiteUrl")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasColumnName("WebsiteUrl")
                         .HasComment("官方网站");
 
@@ -3220,25 +3222,25 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.OrganizationUnitRole", b =>
                 {
                     b.Property<Guid>("OrganizationUnitId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("组织机构Id");
 
                     b.Property<Guid>("RoleId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("角色Id");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
@@ -3256,126 +3258,129 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ApplicationType")
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasComment("与应用程序关联的应用程序类型");
 
                     b.Property<string>("ClientId")
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
+                        .HasColumnType("nvarchar(100)")
                         .HasComment("与当前应用程序关联的客户端标识符");
 
                     b.Property<string>("ClientSecret")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前应用程序关联的客户端密钥。注意：根据创建此实例的应用程序管理器，该属性可能出于安全原因被哈希或加密");
 
                     b.Property<string>("ClientType")
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasComment("与应用程序关联的客户端类型");
 
                     b.Property<string>("ClientUri")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("指向客户端更多信息的 URI");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<string>("ConsentType")
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasComment("与当前应用程序关联的同意类型");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("DeleterId")
                         .HasComment("删除人Id");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime")
                         .HasComment("删除时间");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前应用程序关联的显示名称");
 
                     b.Property<string>("DisplayNames")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前应用程序关联的本地化显示名称，序列化为 JSON 对象");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
+                    b.Property<string>("FrontChannelLogoutUri")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted")
                         .HasComment("删除标记");
 
                     b.Property<string>("JsonWebKeySet")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与应用程序关联的 JSON Web Key Set，序列化为 JSON 对象");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime")
                         .HasComment("最后更新时间");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId")
                         .HasComment("最后更新人");
 
                     b.Property<string>("LogoUri")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("指向客户端标志的 URI");
 
                     b.Property<string>("Permissions")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前应用程序关联的权限，序列化为 JSON 数组");
 
                     b.Property<string>("PostLogoutRedirectUris")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前应用程序关联的登出回调 URL，序列化为 JSON 数组");
 
                     b.Property<string>("Properties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("附加属性，序列化为 JSON 对象；如果未与当前应用程序关联任何属性，则为 null");
 
                     b.Property<string>("RedirectUris")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前应用程序关联的回调 URL，序列化为 JSON 数组");
 
                     b.Property<string>("Requirements")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前应用程序关联的要求，序列化为 JSON 数组");
 
                     b.Property<string>("Settings")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("设置，序列化为 JSON 对象");
 
                     b.HasKey("Id");
@@ -3392,52 +3397,52 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<Guid?>("ApplicationId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("与当前授权关联的应用程序的唯一标识符");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("当前授权的 UTC 创建日期");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Properties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("附加属性，序列化为 JSON 对象；如果未与当前授权关联任何属性，则为 null");
 
                     b.Property<string>("Scopes")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前授权关联的作用域，序列化为 JSON 数组");
 
                     b.Property<string>("Status")
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasComment("当前授权的状态");
 
                     b.Property<string>("Subject")
                         .HasMaxLength(400)
-                        .HasColumnType("varchar(400)")
+                        .HasColumnType("nvarchar(400)")
                         .HasComment("与当前授权关联的主体");
 
                     b.Property<string>("Type")
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasComment("当前授权的类型");
 
                     b.HasKey("Id");
@@ -3454,87 +3459,87 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("DeleterId")
                         .HasComment("删除人Id");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime")
                         .HasComment("删除时间");
 
                     b.Property<string>("Description")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前作用域关联的公开描述");
 
                     b.Property<string>("Descriptions")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前作用域关联的本地化公开描述，序列化为 JSON 对象");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前作用域关联的显示名称");
 
                     b.Property<string>("DisplayNames")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前作用域关联的本地化显示名称，序列化为 JSON 对象");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted")
                         .HasComment("删除标记");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime")
                         .HasComment("最后更新时间");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId")
                         .HasComment("最后更新人");
 
                     b.Property<string>("Name")
                         .HasMaxLength(200)
-                        .HasColumnType("varchar(200)")
+                        .HasColumnType("nvarchar(200)")
                         .HasComment("与当前作用域关联的唯一名称");
 
                     b.Property<string>("Properties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("附加属性，序列化为 JSON 对象；如果未与当前作用域关联任何属性，则为 null");
 
                     b.Property<string>("Resources")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("与当前作用域关联的资源，序列化为 JSON 数组");
 
                     b.HasKey("Id");
@@ -3551,69 +3556,69 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<Guid?>("ApplicationId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("与当前令牌关联的应用程序的唯一标识符");
 
                     b.Property<Guid?>("AuthorizationId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("与当前令牌关联的授权的唯一标识符");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("当前令牌的 UTC 创建日期");
 
                     b.Property<DateTime?>("ExpirationDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("当前令牌的 UTC 过期日期");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Payload")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("当前令牌的有效载荷（如果适用）。注意：此属性仅用于引用令牌，可能出于安全原因被加密");
 
                     b.Property<string>("Properties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("附加属性，序列化为 JSON 对象；如果未与当前令牌关联任何属性，则为 null");
 
                     b.Property<DateTime?>("RedemptionDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasComment("当前令牌的 UTC 兑换日期");
 
                     b.Property<string>("ReferenceId")
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
+                        .HasColumnType("nvarchar(100)")
                         .HasComment("与当前令牌关联的引用标识符（如果适用）。注意：此属性仅用于引用令牌，可能出于安全原因被哈希或加密");
 
                     b.Property<string>("Status")
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasComment("当前令牌的状态");
 
                     b.Property<string>("Subject")
                         .HasMaxLength(400)
-                        .HasColumnType("varchar(400)")
+                        .HasColumnType("nvarchar(400)")
                         .HasComment("与当前令牌关联的主体");
 
                     b.Property<string>("Type")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
                         .HasComment("当前令牌的类型");
 
                     b.HasKey("Id");
@@ -3634,53 +3639,53 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("权限显示名称");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("GroupName")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("权限组名称");
 
                     b.Property<bool>("IsEnabled")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasComment("是否启用");
 
                     b.Property<byte>("MultiTenancySide")
-                        .HasColumnType("tinyint unsigned")
+                        .HasColumnType("tinyint")
                         .HasComment("供应商多个,隔开");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("权限名称");
 
                     b.Property<string>("ParentName")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("权限父级名称");
 
                     b.Property<string>("Providers")
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("权限供应者");
 
                     b.Property<string>("StateCheckers")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("权限额外属性");
 
                     b.HasKey("Id");
@@ -3700,36 +3705,37 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("权限名称");
 
                     b.Property<string>("ProviderKey")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("权限提供者Key(如:角色key admin)");
 
                     b.Property<string>("ProviderName")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("权限提供者名称(如:角色R)");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TenantId")
                         .HasComment("租户Id");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TenantId", "Name", "ProviderName", "ProviderKey")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[TenantId] IS NOT NULL");
 
                     b.ToTable("AbpPermissionGrants", null, t =>
                         {
@@ -3741,24 +3747,24 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("权限组显示名称");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("权限组名称");
 
                     b.HasKey("Id");
@@ -3776,35 +3782,36 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("配置名称");
 
                     b.Property<string>("ProviderKey")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("提供者Key");
 
                     b.Property<string>("ProviderName")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("提供者名称");
 
                     b.Property<string>("Value")
                         .IsRequired()
                         .HasMaxLength(2048)
-                        .HasColumnType("varchar(2048)")
+                        .HasColumnType("nvarchar(2048)")
                         .HasComment("配置值");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name", "ProviderName", "ProviderKey")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ProviderName] IS NOT NULL AND [ProviderKey] IS NOT NULL");
 
                     b.ToTable("AbpSettings", null, t =>
                         {
@@ -3816,50 +3823,50 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("DefaultValue")
                         .HasMaxLength(2048)
-                        .HasColumnType("varchar(2048)")
+                        .HasColumnType("nvarchar(2048)")
                         .HasComment("默认值");
 
                     b.Property<string>("Description")
                         .HasMaxLength(512)
-                        .HasColumnType("varchar(512)")
+                        .HasColumnType("nvarchar(512)")
                         .HasComment("描述");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)")
+                        .HasColumnType("nvarchar(256)")
                         .HasComment("显示名称");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<bool>("IsEncrypted")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasComment("此设置是否以加密方式存储在数据源中");
 
                     b.Property<bool>("IsInherited")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasComment("此设置是从父作用域继承的吗");
 
                     b.Property<bool>("IsVisibleToClients")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("varchar(128)")
+                        .HasColumnType("nvarchar(128)")
                         .HasComment("名称");
 
                     b.Property<string>("Providers")
                         .HasMaxLength(1024)
-                        .HasColumnType("varchar(1024)")
+                        .HasColumnType("nvarchar(1024)")
                         .HasComment("提供者多个,隔开");
 
                     b.HasKey("Id");
@@ -3876,34 +3883,34 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.TenantManagement.Tenant", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasComment("Id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp")
                         .HasComment("迸发标记");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreationTime")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId")
                         .HasComment("创建人Id");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("DeleterId")
                         .HasComment("删除人Id");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime")
                         .HasComment("删除时间");
 
@@ -3913,37 +3920,37 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties")
                         .HasComment("扩展字段");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted")
                         .HasComment("删除标记");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime")
                         .HasComment("最后更新时间");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("char(36)")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId")
                         .HasComment("最后更新人");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("名称");
 
                     b.Property<string>("NormalizedName")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("标准化的名称（通常是去除空格、转换为小写等处理后的名称）");
 
                     b.HasKey("Id");
@@ -3961,17 +3968,17 @@ namespace Heal.Net.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Volo.Abp.TenantManagement.TenantConnectionString", b =>
                 {
                     b.Property<Guid>("TenantId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("nvarchar(64)")
                         .HasComment("名称");
 
                     b.Property<string>("Value")
                         .IsRequired()
                         .HasMaxLength(1024)
-                        .HasColumnType("varchar(1024)")
+                        .HasColumnType("nvarchar(1024)")
                         .HasComment("值");
 
                     b.HasKey("TenantId", "Name");

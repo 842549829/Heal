@@ -1,8 +1,9 @@
 ﻿using Heal.Domain;
 using Heal.EntityFrameworkCore.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.MySQL;
+using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace Heal.EntityFrameworkCore;
 [DependsOn(
     typeof(HealDomainModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreMySQLPomeloModule),
+    typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpIdentityEntityFrameworkCoreModule)
 )]
 public class HealEntityFrameworkCoreModule : AbpModule
@@ -44,11 +45,10 @@ public class HealEntityFrameworkCoreModule : AbpModule
             /* The main point to change your DBMS.
              * See also HealDbContextFactory for EF Core tooling. */
 
-            options.UseMySQL(builder =>
+            options.UseSqlServer(builder =>
             {
-                builder.TranslateParameterizedCollectionsToConstants();
+                builder.UseParameterizedCollectionMode(ParameterTranslationMode.Constant);
             });
-
         });
     }
 }

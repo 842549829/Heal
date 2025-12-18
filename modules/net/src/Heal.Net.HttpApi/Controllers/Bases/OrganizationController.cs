@@ -9,7 +9,7 @@ namespace Heal.Net.HttpApi.Controllers.Bases
     /// 组织管理
     /// </summary>
     /// <param name="organizationAppService">组织机构服务接口</param>
-    [Route("api/net/basics/organizations")]
+    [Route("api/net/basics/organizations/organization")]
     [ApiController]
     public class OrganizationController(IOrganizationAppService organizationAppService) : HealNetController
     {
