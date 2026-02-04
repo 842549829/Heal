@@ -61,7 +61,25 @@ public static class HealPermissionManagementDbContextModelBuilderExtensions
                 b.Property(x => x.StateCheckers).HasComment("权限额外属性");
                 b.Property(x => x.IsEnabled).HasComment("是否启用");
                 b.Property(x => x.MultiTenancySide).HasComment("供应商多个,隔开");
+                b.Property(x => x.ManagementPermissionName).HasComment("管理权限名称");
+                b.Property(x => x.ResourceName).HasComment("资源名称");
 
+                b.ConfigureByConventionByFullHealthcareAuditedAggregateRoot<Guid>();
+            });
+
+
+            builder.Entity<ResourcePermissionGrant>(b =>
+            {
+                b.ToTable(x =>
+                {
+                    x.HasComment("资源权限管理");
+                });
+
+                b.Property(x => x.Name).HasComment("权限名称");
+                b.Property(x => x.ProviderName).HasComment("权限提供者名称(如:角色R)");
+                b.Property(x => x.ProviderKey).HasComment("权限提供者Key(如:角色key admin)");
+                b.Property(x => x.ResourceName).HasComment("资源名称");
+                b.Property(x => x.ResourceKey).HasComment("资源Key");
                 b.ConfigureByConventionByFullHealthcareAuditedAggregateRoot<Guid>();
             });
         }

@@ -81,5 +81,18 @@ public static class HealAbpAuditLoggingDbContextModelBuilderExtensions
 
             b.ConfigureByConventionBase<Guid>();
         });
+
+
+        builder.Entity<AuditLogExcelFile>(b =>
+        {
+            b.ToTable(x => { x.HasComment("审计日志-文件"); });
+
+            b.Property(x => x.CreatorId).HasComment("创建人Id");
+            b.Property(x => x.CreationTime).HasComment("创建人时间");
+            b.Property(x => x.TenantId).HasComment("租户Id");
+            b.Property(x => x.FileName).HasComment("文件名称");
+
+            b.ConfigureByConventionBase<Guid>();
+        });
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Heal.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
 
@@ -195,6 +196,27 @@ public static class HealIdentityDbContextModelBuilderExtensions
             b.Property(x => x.IpAddresses).HasComment("Ip地址");
             b.Property(x => x.LastAccessed).HasComment("用户最近一次访问系统的时间");
             b.Property(x => x.SignedIn).HasComment("用户登录的时间");
+            b.ConfigureByConventionBase<Guid>();
+        });
+
+        builder.Entity<IdentityUserPasskey>(b =>
+        {
+            b.ToTable(x => { x.HasComment("用户密码"); });
+            b.Property(x => x.CredentialId).HasComment("凭证ID");
+            b.Property(x => x.TenantId).HasComment("租户Id");
+            b.Property(x => x.UserId).HasComment("用户Id");
+            //b.Property(x => x.Data).HasComment("数据");
+
+            b.ConfigureByConventionBase<Guid>();
+        });
+
+        builder.Entity<IdentityUserPasswordHistory>(b =>
+        {
+            b.ToTable(x => { x.HasComment("用户密码历史记录"); });
+            b.Property(x => x.TenantId).HasComment("租户Id");
+            b.Property(x => x.UserId).HasComment("用户Id");
+            b.Property(x => x.Password).HasComment("密码");
+            b.Property(x => x.CreatedAt).HasComment("创建时间");
             b.ConfigureByConventionBase<Guid>();
         });
     }
