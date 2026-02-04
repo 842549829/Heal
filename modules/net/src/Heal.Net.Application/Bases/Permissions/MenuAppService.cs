@@ -29,9 +29,11 @@ public class MenuAppService(IRepository<PermissionDefinitionRecord> permissionDe
         {
             throw new UserFriendlyException(L[LocalizedTextsConstants.ModuleAlreadyExists]);
         }
-        var entity = new PermissionDefinitionRecord(GuidGenerator.Create(),
-            input.Name,
+        var entity = new PermissionDefinitionRecord( GuidGenerator.Create(),
             input.GroupName,
+            input.Name,
+            string.Empty,
+            input.Name,
             input.ParentName,
             input.DisplayName,
             input.IsEnabled,

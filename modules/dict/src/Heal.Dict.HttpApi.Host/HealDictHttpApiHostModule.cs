@@ -5,7 +5,6 @@ using Heal.Dict.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Heal.Dict.Application.Contracts;
@@ -19,6 +18,7 @@ using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.VirtualFileSystem;
+using Microsoft.OpenApi;
 
 namespace Heal.Dict.HttpApi.Host;
 

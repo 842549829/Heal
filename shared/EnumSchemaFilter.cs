@@ -1,5 +1,4 @@
-﻿using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Xml.XPath;
 
@@ -32,7 +31,7 @@ public class EnumSchemaFilter : ISchemaFilter
     /// </summary>
     /// <param name="schema">schema</param>
     /// <param name="context">context</param>
-    public void Apply(OpenApiSchema schema, SchemaFilterContext context)
+    public void Apply(IOpenApiSchema schema, SchemaFilterContext context)
     {
         if (!context.Type.IsEnum || _xmlDoc == null)
         {
@@ -71,8 +70,9 @@ public class EnumSchemaFilter : ISchemaFilter
             // 拼接格式： "{值} {注释}"
             descriptions.AppendLine($"{fieldValue} {description}");
 
+
             // 添加枚举值到 schema.Enum
-            schema.Enum.Add(new OpenApiInteger(fieldValue));
+            //schema.Enum.Add(new OpenApiParameter(fieldValue));
         }
 
         // 将拼接好的描述赋值给 schema.Description
