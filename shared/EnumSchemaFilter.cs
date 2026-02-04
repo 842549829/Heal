@@ -1,5 +1,6 @@
 ﻿using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Text.Json.Nodes;
 using System.Xml.XPath;
 
 namespace Heal.Net.HttpApi.Host.Filters;
@@ -72,7 +73,7 @@ public class EnumSchemaFilter : ISchemaFilter
 
 
             // 添加枚举值到 schema.Enum
-            //schema.Enum.Add(new OpenApiParameter(fieldValue));
+            schema.Enum.Add(new JsonArray(fieldValue));
         }
 
         // 将拼接好的描述赋值给 schema.Description

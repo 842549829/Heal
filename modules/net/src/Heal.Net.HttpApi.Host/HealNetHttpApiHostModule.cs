@@ -9,7 +9,7 @@ using Heal.Net.HttpApi.Host.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Volo.Abp;

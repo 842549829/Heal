@@ -37,4 +37,8 @@
 	  <ProjectReference Include="..\Heal.Net.HttpApi\Heal.Net.HttpApi.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="logs\" />
+	</ItemGroup>
+
 </Project>
