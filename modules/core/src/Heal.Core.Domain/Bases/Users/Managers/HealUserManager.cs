@@ -2,8 +2,10 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Volo.Abp.Caching;
+using Volo.Abp.Data;
 using Volo.Abp.EventBus.Distributed;
 using Volo.Abp.Identity;
+using Volo.Abp.MultiTenancy;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Settings;
 using Volo.Abp.Threading;
@@ -30,6 +32,9 @@ namespace Heal.Core.Domain.Bases.Users.Managers;
 /// <param name="distributedEventBus">分布式事件</param>
 /// <param name="identityLinkUserRepository">用户连接仓储</param>
 /// <param name="dynamicClaimCache">动态缓存</param>
+/// <param name="multiTenancyOptions">多租户配置</param>
+/// <param name="currentTenant">当前租户</param>
+/// <param name="dataFilter">数据过滤器</param>
 public class HealUserManager(
     IdentityUserStore store,
     IIdentityRoleRepository roleRepository,
@@ -47,10 +52,30 @@ public class HealUserManager(
     ISettingProvider settingProvider,
     IDistributedEventBus distributedEventBus,
     IIdentityLinkUserRepository identityLinkUserRepository,
-    IDistributedCache<AbpDynamicClaimCacheItem> dynamicClaimCache)
-    : IdentityUserManager(store, roleRepository, userRepository, optionsAccessor, passwordHasher, userValidators,
-        passwordValidators, keyNormalizer, errors, services, logger, cancellationTokenProvider,
-        organizationUnitRepository, settingProvider, distributedEventBus, identityLinkUserRepository, dynamicClaimCache)
+    IDistributedCache<AbpDynamicClaimCacheItem> dynamicClaimCache,
+    IOptions<AbpMultiTenancyOptions> multiTenancyOptions,
+    ICurrentTenant currentTenant,
+    IDataFilter dataFilter)
+    : IdentityUserManager(store, 
+        roleRepository,
+        userRepository, 
+        optionsAccessor,
+        passwordHasher, 
+        userValidators,
+        passwordValidators,
+        keyNormalizer, 
+        errors, 
+        services,
+        logger, 
+        cancellationTokenProvider,
+        organizationUnitRepository,
+        settingProvider, 
+        distributedEventBus, 
+        identityLinkUserRepository,
+        dynamicClaimCache,
+        multiTenancyOptions,
+        currentTenant,
+        dataFilter)
 {
     /// <summary>
     /// 获取用户数量

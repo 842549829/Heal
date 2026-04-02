@@ -7,12 +7,12 @@
 		<!-- All Microsoft TargetFrameworks Packages -->
 		<MicrosoftTargetFramework>net10.0</MicrosoftTargetFramework>
 		<!-- All Abp Version Packages -->
-		<AbpVersion>10.1.0-rc.2</AbpVersion>
+		<AbpVersion>10.2.0</AbpVersion>
 		<!-- All Abp Theme Version Packages -->
-		<AbpLeptonXLiteThemeVersion>4.3.6</AbpLeptonXLiteThemeVersion>
+		<AbpLeptonXLiteThemeVersion>5.2.0</AbpLeptonXLiteThemeVersion>
 		<!-- All Abp Studio Clien Version Packages -->
-		<AbpStudioClientVersion>1.4.1</AbpStudioClientVersion>
+		<AbpStudioClientVersion>2.2.4</AbpStudioClientVersion>
         <!-- All Microsoft Version Packages -->
-		<MicrosoftVersion>10.0.0</MicrosoftVersion>
+		<MicrosoftVersion>10.0.5</MicrosoftVersion>
 	</PropertyGroup>
 </Project>
